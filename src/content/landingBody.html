@@ -4,7 +4,7 @@
 <nav>
   <div class="nav-inner">
     <a href="#" class="n-logo" aria-label="Rank It Globally — home">
-      <img src="https://rankitglobally.com/wp-content/uploads/2024/08/Logo.svg" alt="Rank It Globally" style="height:30px;width:auto" onerror="this.outerHTML='&lt;span class=\'n-logo-t\'&gt;Rank It &lt;span&gt;Globally&lt;/span&gt;&lt;/span&gt;'">
+      <img src="/icon.png" alt="Rank It Globally" style="height:30px;width:auto;border-radius:50%" onerror="this.outerHTML='&lt;span class=\'n-logo-t\'&gt;Rank It &lt;span&gt;Globally&lt;/span&gt;&lt;/span&gt;'">
     </a>
     <div class="nv">
       <a href="#audit" class="nk">Free Audit</a>
@@ -1121,6 +1121,14 @@
           <label class="af-label">Email Address</label>
           <input class="af-input" id="af-email" type="email" placeholder="you@company.com">
           <button class="cta-e" id="af-btn" style="width:100%;justify-content:center;font-size:.84rem;padding:.78rem;white-space:normal;line-height:1.4" >Get My Free Audit <span class="ar">→</span></button>
+          <div class="audit-progress" id="audit-progress" aria-live="polite">
+            <div class="audit-progress-top">
+              <span class="audit-progress-dot"></span>
+              <span id="audit-progress-text">Preparing your audit...</span>
+            </div>
+            <div class="audit-progress-bar"><span id="audit-progress-bar"></span></div>
+            <div class="audit-progress-note">Keep this tab open for confirmation. The full report is sent by email.</div>
+          </div>
           <p style="text-align:center;font-size:.65rem;color:var(--muted);margin-top:.55rem">We analyse 50+ ranking factors and email you the full report.</p>
           <div class="audit-result" id="audit-result">
             <div class="ar-score">

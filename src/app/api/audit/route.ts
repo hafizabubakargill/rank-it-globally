@@ -50,55 +50,67 @@ export async function POST(request: Request) {
   }
 
   const email = rawEmail.trim().toLowerCase();
-  const audit = await buildAuditReport({ website, email });
-  const visitorHtml = reportToHtml(audit.report);
-  const adminEmail = process.env.BREVO_ADMIN_EMAIL;
-
-  const [contactResult, visitorEmailResult, adminEmailResult] = await Promise.all([
-    upsertBrevoContact({ email, website }),
-    sendBrevoEmail({
-      to: email,
-      subject: "Your Rank It Globally website audit",
-      text: audit.report,
-      html: visitorHtml,
-    }),
-    adminEmail
-      ? sendBrevoEmail({
-          to: adminEmail,
-          subject: `New site audit lead: ${website}`,
-          text: `New audit lead\n\nWebsite: ${website}\nEmail: ${email}\n\n${audit.report}`,
-          html: reportToHtml(
-            `New audit lead\n\nWebsite: ${website}\nEmail: ${email}\n\n${audit.report}`,
-          ),
-        })
-      : Promise.resolve({
-          ok: false,
-          skipped: true,
-          error: "BREVO_ADMIN_EMAIL is not configured.",
-        }),
-  ]);
+  void processAuditLead({ website, email }).catch((error) => {
+    console.error("Audit background job failed", error);
+  });
 
   return NextResponse.json({
     success: true,
-    message: "Audit request received.",
+    message: "Audit request received. The report is being prepared and emailed.",
     lead: {
       website,
       email,
     },
-    email: {
-      visitor: visitorEmailResult,
-      admin: adminEmailResult,
-      contact: contactResult,
-    },
-    providers: {
-      pageSpeed: {
-        ok: audit.pageSpeed.ok,
-        error: audit.pageSpeed.error,
-      },
-      dataForSeo: {
-        ok: audit.dataForSeo.ok,
-        error: audit.dataForSeo.error,
-      },
-    },
+    queued: true,
   });
+}
+
+async function processAuditLead({ website, email }: { website: string; email: string }) {
+  const audit = await buildAuditReport({ website, email });
+  const adminEmail = process.env.BREVO_ADMIN_EMAIL || "hello@rankitglobally.com";
+
+  const visitorHtml = reportToHtml(audit.report, {
+    title: "Your Website Audit Is Ready",
+    eyebrow: "Rank It Globally Audit",
+    intro:
+      "We checked your website performance, crawlability, on-page SEO signals, and conversion opportunities.",
+    website,
+    email,
+  });
+
+  const adminText = [
+    "New audit lead",
+    "",
+    `Website: ${website}`,
+    `Email: ${email}`,
+    "",
+    "Provider status:",
+    `- ${audit.pageSpeed.source}: ${audit.pageSpeed.ok ? "completed" : audit.pageSpeed.error}`,
+    `- ${audit.dataForSeo.source}: ${audit.dataForSeo.ok ? "completed" : audit.dataForSeo.error}`,
+    "",
+    audit.report,
+  ].join("\n");
+
+  await Promise.all([
+    upsertBrevoContact({ email, website }),
+    sendBrevoEmail({
+      to: email,
+      subject: "Your Rank It Globally website audit is ready",
+      text: audit.report,
+      html: visitorHtml,
+    }),
+    sendBrevoEmail({
+      to: adminEmail,
+      subject: `New audit lead and report: ${website}`,
+      text: adminText,
+      html: reportToHtml(adminText, {
+        title: "New Audit Lead Submitted",
+        eyebrow: "Admin Notification",
+        intro: "A visitor submitted the free audit form. Their generated report is included below.",
+        website,
+        email,
+        admin: true,
+      }),
+    }),
+  ]);
 }
