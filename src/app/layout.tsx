@@ -28,7 +28,7 @@ export const metadata: Metadata = {
     description:
       "We build websites that rank on AI search, dominate Google, and turn clicks into clients. Get your free SEO audit - no obligation.",
     url: "https://rankitglobally.com/",
-    images: ["https://rankitglobally.com/wp-content/uploads/2024/08/Logo.svg"],
+    images: ["/icon.png"],
   },
   twitter: {
     card: "summary_large_image",
@@ -36,10 +36,12 @@ export const metadata: Metadata = {
     title: "Rank It Globally | AI SEO & Web Design Agency",
     description:
       "We build websites that rank on AI search, dominate Google, and turn clicks into clients. Free SEO audit - no obligation.",
-    images: ["https://rankitglobally.com/wp-content/uploads/2024/08/Logo.svg"],
+    images: ["/icon.png"],
   },
   icons: {
-    icon: "https://rankitglobally.com/wp-content/uploads/2024/08/Logo.svg",
+    icon: "/icon.png",
+    shortcut: "/icon.png",
+    apple: "/icon.png",
   },
 };
 
