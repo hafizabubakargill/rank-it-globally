@@ -57,15 +57,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <link rel="preconnect" href="https://fonts.cdnfonts.com" crossOrigin="" />
-        <link rel="dns-prefetch" href="https://fonts.cdnfonts.com" />
-        <link rel="dns-prefetch" href="https://player.vimeo.com" />
         <link rel="dns-prefetch" href="https://assets.calendly.com" />
-        <link
-          href="https://fonts.cdnfonts.com/css/product-sans"
-          rel="stylesheet"
-        />
-        <link href="https://fonts.cdnfonts.com/css/sofia-pro" rel="stylesheet" />
       </head>
       <body>{children}</body>
     </html>
