@@ -1,5 +1,6 @@
 type EmailPayload = {
   to: string;
+  bcc?: string[];
   subject: string;
   html: string;
   text: string;
@@ -38,6 +39,9 @@ export async function sendBrevoEmail(payload: EmailPayload) {
         email: senderEmail,
       },
       to: [{ email: payload.to }],
+      ...(payload.bcc?.length
+        ? { bcc: payload.bcc.map((email) => ({ email })) }
+        : {}),
       subject: payload.subject,
       htmlContent: payload.html,
       textContent: payload.text,

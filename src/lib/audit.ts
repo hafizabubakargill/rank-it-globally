@@ -40,7 +40,14 @@ export async function buildAuditReport(input: AuditInput): Promise<ReportResult>
     fetchDataForSeo(input.website),
   ]);
 
-  const report = await generateClaudeReport(input, pageSpeed, dataForSeo);
+  const dataSnapshot = buildDataSnapshot(input, pageSpeed, dataForSeo);
+  const recommendations = await generateClaudeReport(
+    input,
+    pageSpeed,
+    dataForSeo,
+    dataSnapshot,
+  );
+  const report = `${dataSnapshot}\n\n${recommendations}`.trim();
 
   return {
     report,
@@ -150,21 +157,7 @@ async function fetchDataForSeo(website: string): Promise<ProviderResult> {
       };
     }
 
-    await sleep(4500);
-
-    const [summary, pages] = await Promise.all([
-      fetchJson(`https://api.dataforseo.com/v3/on_page/summary/${taskId}`, {
-        headers: { Authorization: auth },
-      }),
-      fetchJson("https://api.dataforseo.com/v3/on_page/pages", {
-        method: "POST",
-        headers: {
-          Authorization: auth,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify([{ id: taskId, limit: 1 }]),
-      }),
-    ]);
+    const { summary, pages } = await pollDataForSeoTask(taskId, auth);
 
     return {
       ok: true,
@@ -188,28 +181,33 @@ async function generateClaudeReport(
   input: AuditInput,
   pageSpeed: ProviderResult,
   dataForSeo: ProviderResult,
+  dataSnapshot: string,
 ) {
   const apiKey = process.env.ANTHROPIC_API_KEY;
   if (!apiKey) {
     return fallbackReport(input, pageSpeed, dataForSeo);
   }
 
-  const anthropic = new Anthropic({ apiKey });
-  const message = await anthropic.messages.create({
-    model: process.env.ANTHROPIC_MODEL || "claude-sonnet-4-5",
-    max_tokens: 1800,
-    temperature: 0.2,
-    system:
-      "You write concise, practical website audit reports for a web design and SEO agency. Be specific, avoid scare tactics, and format with clear headings and bullets.",
-    messages: [
-      {
-        role: "user",
-        content: [
-          {
-            type: "text",
-            text: `Create a useful website audit report for ${input.website}. The visitor email is ${input.email}.
+  try {
+    const anthropic = new Anthropic({ apiKey });
+    const message = await anthropic.messages.create({
+      model: process.env.ANTHROPIC_MODEL || "claude-sonnet-4-5",
+      max_tokens: 1800,
+      temperature: 0.2,
+      system:
+        "You write concise, practical website audit recommendations for a web design and SEO agency. Be specific, avoid scare tactics, and format with clear headings and bullets. Do not invent metrics. Do not repeat the automated data snapshot verbatim.",
+      messages: [
+        {
+          role: "user",
+          content: [
+            {
+              type: "text",
+              text: `Create useful recommendations for ${input.website}. The visitor email is ${input.email}.
 
-Use the available JSON from Google PageSpeed and DataForSEO. If a data source failed or is missing, say that section is pending and still provide useful next steps.
+Start with "## Recommended Action Plan". Use the available JSON from Google PageSpeed and DataForSEO. If a data source failed or is missing, say what to manually verify next.
+
+Automated data snapshot already included above the recommendations:
+${dataSnapshot}
 
 Google PageSpeed:
 ${JSON.stringify(pageSpeed).slice(0, 12_000)}
@@ -218,16 +216,19 @@ DataForSEO:
 ${JSON.stringify(dataForSeo).slice(0, 12_000)}
 
 Return the report as plain text suitable for an email.`,
-          },
-        ],
-      },
-    ],
-  });
+            },
+          ],
+        },
+      ],
+    });
 
-  return message.content
-    .map((block) => (block.type === "text" ? block.text : ""))
-    .join("\n")
-    .trim();
+    return message.content
+      .map((block) => (block.type === "text" ? block.text : ""))
+      .join("\n")
+      .trim();
+  } catch {
+    return fallbackReport(input, pageSpeed, dataForSeo);
+  }
 }
 
 function fallbackReport(
@@ -252,6 +253,94 @@ Initial recommendations:
 - Make sure service pages include local/industry search terms and structured headings.
 
 Our team will review the data and follow up with clearer priorities.`;
+}
+
+function buildDataSnapshot(
+  input: AuditInput,
+  pageSpeed: ProviderResult,
+  dataForSeo: ProviderResult,
+) {
+  const lines = [
+    "## Automated Data Snapshot",
+    "",
+    `Website: ${input.website}`,
+    `Prepared for: ${input.email}`,
+    `Date: ${new Date().toLocaleDateString("en", {
+      month: "long",
+      day: "numeric",
+      year: "numeric",
+    })}`,
+    "",
+    "## PageSpeed Insights",
+    ...formatPageSpeedSnapshot(pageSpeed),
+    "",
+    "## Technical SEO Crawl",
+    ...formatDataForSeoSnapshot(dataForSeo),
+  ];
+
+  return lines.join("\n");
+}
+
+function formatPageSpeedSnapshot(result: ProviderResult) {
+  if (!result.ok) {
+    return [
+      `Status: Unable to complete`,
+      `Reason: ${result.error || "Unknown error"}`,
+      "Manual next step: run the URL through PageSpeed Insights and confirm the site is publicly reachable.",
+    ];
+  }
+
+  const data = result.data as
+    | {
+        categories?: Record<string, { score?: number }>;
+        audits?: Record<string, { displayValue?: string; score?: number | null }>;
+      }
+    | undefined;
+  const categories = data?.categories ?? {};
+  const audits = data?.audits ?? {};
+
+  return [
+    `Status: Completed`,
+    `Performance: ${formatScore(categories.performance?.score)}`,
+    `Accessibility: ${formatScore(categories.accessibility?.score)}`,
+    `Best Practices: ${formatScore(categories["best-practices"]?.score)}`,
+    `SEO: ${formatScore(categories.seo?.score)}`,
+    `First Contentful Paint: ${audits["first-contentful-paint"]?.displayValue || "n/a"}`,
+    `Largest Contentful Paint: ${audits["largest-contentful-paint"]?.displayValue || "n/a"}`,
+    `Total Blocking Time: ${audits["total-blocking-time"]?.displayValue || "n/a"}`,
+    `Cumulative Layout Shift: ${audits["cumulative-layout-shift"]?.displayValue || "n/a"}`,
+    `Speed Index: ${audits["speed-index"]?.displayValue || "n/a"}`,
+  ];
+}
+
+function formatDataForSeoSnapshot(result: ProviderResult) {
+  if (!result.ok) {
+    return [
+      `Status: Unable to complete`,
+      `Reason: ${result.error || "Unknown error"}`,
+      "Manual next step: confirm the page is crawlable, not blocking bots, and not returning server errors.",
+    ];
+  }
+
+  const data = result.data as { taskId?: string; summary?: unknown; pages?: unknown };
+  const summary = firstDataForSeoResult(data.summary);
+  const page = firstDataForSeoItem(data.pages);
+  const checks = getObject(summary, "checks");
+  const pageChecks = getObject(page, "checks");
+  const meta = getObject(page, "meta");
+
+  return [
+    `Status: Completed`,
+    data.taskId ? `Task ID: ${data.taskId}` : "",
+    `Crawled Pages: ${valueAt(summary, "crawl_progress.pages_in_queue") === 0 ? valueAt(summary, "crawl_progress.pages_crawled") : valueAt(summary, "crawl_progress.pages_crawled") || valueAt(summary, "pages_crawled") || "n/a"}`,
+    `Pages In Queue: ${valueAt(summary, "crawl_progress.pages_in_queue") ?? "n/a"}`,
+    `Broken Links: ${valueAt(summary, "broken_links") ?? valueAt(summary, "checks.broken_links") ?? "n/a"}`,
+    `Duplicate Titles: ${valueAt(checks, "duplicate_title") ?? "n/a"}`,
+    `Duplicate Descriptions: ${valueAt(checks, "duplicate_description") ?? "n/a"}`,
+    `Title: ${valueAt(meta, "title") || valueAt(page, "meta.title") || "n/a"}`,
+    `Meta Description: ${valueAt(meta, "description") || valueAt(page, "meta.description") || "n/a"}`,
+    `H1 Count: ${valueAt(pageChecks, "h1") ?? valueAt(page, "meta.htags.h1.length") ?? "n/a"}`,
+  ].filter(Boolean) as string[];
 }
 
 async function fetchJson(url: string, init?: RequestInit) {
@@ -280,6 +369,45 @@ function extractDataForSeoTaskId(data: Record<string, unknown>) {
   return first?.id;
 }
 
+async function pollDataForSeoTask(taskId: string, auth: string) {
+  let summary: Record<string, unknown> | undefined;
+  let pages: Record<string, unknown> | undefined;
+
+  for (let attempt = 0; attempt < 5; attempt += 1) {
+    if (attempt > 0) await sleep(3500);
+
+    summary = await fetchJson(`https://api.dataforseo.com/v3/on_page/summary/${taskId}`, {
+      headers: { Authorization: auth },
+    });
+
+    const result = firstDataForSeoResult(summary);
+    const crawlProgress = getObject(result, "crawl_progress");
+    const pagesInQueue = valueAt(crawlProgress, "pages_in_queue");
+    const pagesCrawled = valueAt(crawlProgress, "pages_crawled");
+
+    if (
+      pagesInQueue === 0 ||
+      (typeof pagesCrawled === "number" && pagesCrawled > 0) ||
+      attempt === 4
+    ) {
+      pages = await fetchJson("https://api.dataforseo.com/v3/on_page/pages", {
+        method: "POST",
+        headers: {
+          Authorization: auth,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify([{ id: taskId, limit: 1 }]),
+      });
+      break;
+    }
+  }
+
+  return {
+    summary: summary ?? {},
+    pages: pages ?? {},
+  };
+}
+
 function pickRecord<T>(record: Record<string, T>, keys: string[]) {
   return keys.reduce<Record<string, T>>((acc, key) => {
     if (key in record) acc[key] = record[key];
@@ -293,4 +421,36 @@ function sleep(ms: number) {
 
 function getErrorMessage(error: unknown) {
   return error instanceof Error ? error.message : "Unknown error";
+}
+
+function formatScore(score?: number) {
+  if (typeof score !== "number") return "n/a";
+  return `${Math.round(score * 100)}/100`;
+}
+
+function firstDataForSeoResult(data: unknown) {
+  const obj = data as { tasks?: Array<{ result?: unknown[] }> } | undefined;
+  return (obj?.tasks?.[0]?.result?.[0] ?? {}) as Record<string, unknown>;
+}
+
+function firstDataForSeoItem(data: unknown) {
+  const result = firstDataForSeoResult(data);
+  const items = Array.isArray(result.items) ? result.items : [];
+  return (items[0] ?? {}) as Record<string, unknown>;
+}
+
+function getObject(source: unknown, path: string) {
+  const value = valueAt(source, path);
+  return isRecord(value) ? value : {};
+}
+
+function valueAt(source: unknown, path: string) {
+  return path.split(".").reduce<unknown>((current, key) => {
+    if (!isRecord(current)) return undefined;
+    return current[key];
+  }, source);
+}
+
+function isRecord(value: unknown): value is Record<string, unknown> {
+  return typeof value === "object" && value !== null;
 }

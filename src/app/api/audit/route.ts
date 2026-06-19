@@ -53,6 +53,9 @@ export async function POST(request: Request) {
   void processAuditLead({ website, email }).catch((error) => {
     console.error("Audit background job failed", error);
   });
+  void sendAdminLeadReceipt({ website, email }).catch((error) => {
+    console.error("Audit admin lead receipt failed", error);
+  });
 
   return NextResponse.json({
     success: true,
@@ -67,7 +70,7 @@ export async function POST(request: Request) {
 
 async function processAuditLead({ website, email }: { website: string; email: string }) {
   const audit = await buildAuditReport({ website, email });
-  const adminEmail = process.env.BREVO_ADMIN_EMAIL || "hello@rankitglobally.com";
+  const adminRecipients = getAdminRecipients();
 
   const visitorHtml = reportToHtml(audit.report, {
     title: "Your Website Audit Is Ready",
@@ -95,22 +98,72 @@ async function processAuditLead({ website, email }: { website: string; email: st
     upsertBrevoContact({ email, website }),
     sendBrevoEmail({
       to: email,
+      bcc: adminRecipients,
       subject: "Your Rank It Globally website audit is ready",
       text: audit.report,
       html: visitorHtml,
     }),
-    sendBrevoEmail({
-      to: adminEmail,
-      subject: `New audit lead and report: ${website}`,
-      text: adminText,
-      html: reportToHtml(adminText, {
-        title: "New Audit Lead Submitted",
-        eyebrow: "Admin Notification",
-        intro: "A visitor submitted the free audit form. Their generated report is included below.",
-        website,
-        email,
-        admin: true,
+    ...adminRecipients.map((adminEmail) =>
+      sendBrevoEmail({
+        to: adminEmail,
+        subject: `New audit lead and report: ${website}`,
+        text: adminText,
+        html: reportToHtml(adminText, {
+          title: "New Audit Lead Submitted",
+          eyebrow: "Admin Notification",
+          intro:
+            "A visitor submitted the free audit form. Their generated report is included below.",
+          website,
+          email,
+          admin: true,
+        }),
       }),
-    }),
+    ),
   ]);
+}
+
+async function sendAdminLeadReceipt({
+  website,
+  email,
+}: {
+  website: string;
+  email: string;
+}) {
+  const text = [
+    "New audit form submission received.",
+    "",
+    `Website: ${website}`,
+    `Email: ${email}`,
+    "",
+    "The automated report is now being generated. A second email with the full report will follow after PageSpeed, DataForSEO, and AI analysis complete.",
+  ].join("\n");
+
+  await Promise.all(
+    getAdminRecipients().map((adminEmail) =>
+      sendBrevoEmail({
+        to: adminEmail,
+        subject: `New audit form submission: ${website}`,
+        text,
+        html: reportToHtml(text, {
+          title: "New Audit Form Submission",
+          eyebrow: "Lead Received",
+          intro:
+            "A visitor submitted the free audit form. The full automated report is being generated.",
+          website,
+          email,
+          admin: true,
+        }),
+      }),
+    ),
+  );
+}
+
+function getAdminRecipients() {
+  return Array.from(
+    new Set(
+      [process.env.BREVO_ADMIN_EMAIL, "hello@rankitglobally.com"]
+        .map((email) => email?.trim().toLowerCase())
+        .filter(Boolean) as string[],
+    ),
+  );
 }

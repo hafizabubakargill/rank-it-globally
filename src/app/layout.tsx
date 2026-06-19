@@ -58,8 +58,6 @@ export default function RootLayout({
     <html lang="en">
       <head>
         <link rel="preconnect" href="https://fonts.cdnfonts.com" crossOrigin="" />
-        <link rel="preconnect" href="https://player.vimeo.com" crossOrigin="" />
-        <link rel="preconnect" href="https://assets.calendly.com" crossOrigin="" />
         <link rel="dns-prefetch" href="https://fonts.cdnfonts.com" />
         <link rel="dns-prefetch" href="https://player.vimeo.com" />
         <link rel="dns-prefetch" href="https://assets.calendly.com" />
