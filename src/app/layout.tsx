@@ -28,7 +28,7 @@ export const metadata: Metadata = {
     description:
       "We build websites that rank on AI search, dominate Google, and turn clicks into clients. Get your free SEO audit - no obligation.",
     url: "https://rankitglobally.com/",
-    images: ["/icon.png"],
+    images: ["/assets/brand/logo-icon.svg"],
   },
   twitter: {
     card: "summary_large_image",
@@ -36,12 +36,12 @@ export const metadata: Metadata = {
     title: "Rank It Globally | AI SEO & Web Design Agency",
     description:
       "We build websites that rank on AI search, dominate Google, and turn clicks into clients. Free SEO audit - no obligation.",
-    images: ["/icon.png"],
+    images: ["/assets/brand/logo-icon.svg"],
   },
   icons: {
-    icon: "/icon.png",
-    shortcut: "/icon.png",
-    apple: "/icon.png",
+    icon: "/assets/brand/logo-icon.svg",
+    shortcut: "/assets/brand/logo-icon.svg",
+    apple: "/assets/brand/logo-icon.svg",
   },
 };
 
@@ -57,7 +57,6 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <link rel="dns-prefetch" href="https://assets.calendly.com" />
       </head>
       <body>{children}</body>
     </html>

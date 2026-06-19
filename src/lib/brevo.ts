@@ -121,7 +121,9 @@ export function reportToHtml(report: string, options: ReportEmailOptions = {}) {
   const intro =
     options.intro ||
     "Here is your audit report, translated into practical next steps.";
-  const reportHtml = markdownToEmailHtml(report);
+  const reportHtml = options.admin
+    ? markdownToEmailHtml(report)
+    : compactAuditReportHtml(report);
   const metaRows = [
     options.website ? ["Website", options.website] : null,
     options.email ? ["Email", options.email] : null,
@@ -172,6 +174,139 @@ export function reportToHtml(report: string, options: ReportEmailOptions = {}) {
       </table>
     </div>
   `;
+}
+
+function compactAuditReportHtml(report: string) {
+  const summary = parseAuditSummary(report);
+  const scoreCards = [
+    ["Performance", summary.performance, "How fast the site feels"],
+    ["Accessibility", summary.accessibility, "Clarity for users and agents"],
+    ["Best Practices", summary.bestPractices, "Technical browser hygiene"],
+    ["SEO", summary.seo, "Search-ready foundations"],
+  ];
+
+  return `
+    <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="margin:0 0 18px">
+      <tr>
+        <td style="background:#F8F6FF;border:1px solid #E3DFFF;border-radius:12px;padding:18px">
+          <div style="font-size:12px;text-transform:uppercase;letter-spacing:1.5px;color:#6B6880;font-weight:700;margin-bottom:8px">Audit snapshot</div>
+          <div style="font-size:22px;line-height:1.25;color:#1A1630;font-weight:800;margin-bottom:6px">${escapeHtml(summary.headline)}</div>
+          <div style="font-size:14px;line-height:1.7;color:#5B5877">${escapeHtml(summary.subhead)}</div>
+        </td>
+      </tr>
+    </table>
+    <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="margin:0 0 18px">
+      <tr>
+        ${scoreCards
+          .map(
+            ([label, value, hint]) => `
+              <td width="25%" style="padding:0 5px 10px 0;vertical-align:top">
+                <div style="border:1px solid #E3DFFF;border-radius:10px;padding:13px 10px;background:#FFFFFF">
+                  <div style="font-size:11px;color:#6B6880;font-weight:700;text-transform:uppercase;letter-spacing:.8px;margin-bottom:7px">${escapeHtml(label)}</div>
+                  <div style="font-size:24px;color:${scoreColor(value)};font-weight:800;line-height:1">${escapeHtml(value)}</div>
+                  <div style="font-size:11px;color:#8A86A3;line-height:1.45;margin-top:7px">${escapeHtml(hint)}</div>
+                </div>
+              </td>`,
+          )
+          .join("")}
+      </tr>
+    </table>
+    <div style="background:#1A1630;color:#FFFFFF;border-radius:12px;padding:20px;margin:0 0 18px">
+      <div style="font-size:12px;text-transform:uppercase;letter-spacing:1.6px;color:#C9C7FF;font-weight:700;margin-bottom:10px">What to fix first</div>
+      ${summary.priorities
+        .map(
+          (item, index) => `
+          <div style="display:flex;gap:12px;margin:${index === 0 ? "0" : "14px"} 0 0">
+            <div style="width:26px;height:26px;border-radius:50%;background:#6664E4;color:#FFFFFF;font-size:13px;font-weight:800;text-align:center;line-height:26px;flex-shrink:0">${index + 1}</div>
+            <div style="font-size:14px;line-height:1.65;color:#F1F0FF">${formatInline(item)}</div>
+          </div>`,
+        )
+        .join("")}
+    </div>
+    <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="margin:0 0 12px">
+      <tr>
+        <td style="background:#F8F6FF;border:1px solid #E3DFFF;border-radius:12px;padding:18px">
+          <div style="font-size:15px;font-weight:800;color:#1A1630;margin-bottom:10px">Quick wins</div>
+          <ul style="margin:0;padding-left:19px;color:#3F3B5F;font-size:14px;line-height:1.75">
+            ${summary.quickWins.map((item) => `<li style="margin:0 0 6px">${formatInline(item)}</li>`).join("")}
+          </ul>
+        </td>
+      </tr>
+    </table>
+    <p style="font-size:13px;line-height:1.75;color:#6B6880;margin:14px 0 0">
+      The full technical notes are saved with Rank It Globally. Book a call and we will walk through the findings in plain English, prioritize the highest-impact fixes, and explain what is worth doing now versus later.
+    </p>
+  `;
+}
+
+function parseAuditSummary(report: string) {
+  const performance = extractMetric(report, "Performance");
+  const accessibility = extractMetric(report, "Accessibility");
+  const bestPractices = extractMetric(report, "Best Practices");
+  const seo = extractMetric(report, "SEO");
+  const priorities = extractBulletsAfter(report, "Recommended Action Plan", 4);
+  const quickWins = extractBulletsAfter(report, "Quick Wins", 4);
+
+  return {
+    performance,
+    accessibility,
+    bestPractices,
+    seo,
+    headline:
+      performance !== "n/a"
+        ? `Your site scored ${performance} for mobile performance`
+        : "Your audit is ready for review",
+    subhead:
+      "We checked performance, crawlability, on-page SEO signals, and conversion friction. Below are the items most likely to move leads, rankings, and user experience.",
+    priorities:
+      priorities.length > 0
+        ? priorities
+        : [
+            "Improve mobile load speed and Core Web Vitals before scaling paid or organic traffic.",
+            "Confirm titles, meta descriptions, headings, and crawlability on the highest-value pages.",
+            "Review conversion flow above the fold so visitors can understand the offer and take action quickly.",
+          ],
+    quickWins:
+      quickWins.length > 0
+        ? quickWins
+        : [
+            "Compress heavy images and remove scripts that do not need to load immediately.",
+            "Make the main call to action visible on mobile without extra scrolling.",
+            "Check that important pages have unique page titles and meta descriptions.",
+          ],
+  };
+}
+
+function extractMetric(report: string, label: string) {
+  const escaped = label.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  const match = report.match(new RegExp(`${escaped}:\\s*([^\\n]+)`, "i"));
+  return match?.[1]?.trim() || "n/a";
+}
+
+function extractBulletsAfter(report: string, heading: string, limit: number) {
+  const lines = report.replace(/\r\n/g, "\n").split("\n");
+  const start = lines.findIndex((line) =>
+    line.toLowerCase().includes(heading.toLowerCase()),
+  );
+  if (start === -1) return [];
+
+  const bullets: string[] = [];
+  for (const rawLine of lines.slice(start + 1)) {
+    const line = rawLine.trim();
+    if (line.startsWith("## ") && bullets.length > 0) break;
+    const bullet = line.match(/^[-*]\s+(.+)/)?.[1] || line.match(/^\d+\.\s+(.+)/)?.[1];
+    if (bullet && !/^week\s+\d+/i.test(bullet)) bullets.push(bullet);
+    if (bullets.length >= limit) break;
+  }
+  return bullets;
+}
+
+function scoreColor(value: string) {
+  const score = Number.parseInt(value, 10);
+  if (Number.isNaN(score)) return "#6B6880";
+  if (score >= 90) return "#0a7a4a";
+  if (score >= 70) return "#B45309";
+  return "#B42318";
 }
 
 function markdownToEmailHtml(report: string) {

@@ -192,10 +192,10 @@ async function generateClaudeReport(
     const anthropic = new Anthropic({ apiKey });
     const message = await anthropic.messages.create({
       model: process.env.ANTHROPIC_MODEL || "claude-sonnet-4-5",
-      max_tokens: 1800,
+      max_tokens: 900,
       temperature: 0.2,
       system:
-        "You write concise, practical website audit recommendations for a web design and SEO agency. Be specific, avoid scare tactics, and format with clear headings and bullets. Do not invent metrics. Do not repeat the automated data snapshot verbatim.",
+        "You write concise, practical website audit recommendations for a web design and SEO agency. Be specific, avoid scare tactics, and format with short headings and bullets. Do not invent metrics. Do not repeat the automated data snapshot verbatim. Keep the visitor-facing report short enough to scan in under 2 minutes.",
       messages: [
         {
           role: "user",
@@ -204,7 +204,7 @@ async function generateClaudeReport(
               type: "text",
               text: `Create useful recommendations for ${input.website}. The visitor email is ${input.email}.
 
-Start with "## Recommended Action Plan". Use the available JSON from Google PageSpeed and DataForSEO. If a data source failed or is missing, say what to manually verify next.
+Start with "## Recommended Action Plan". Include no more than 4 priority bullets, then "## Quick Wins" with no more than 4 bullets. Use the available JSON from Google PageSpeed and DataForSEO. If a data source failed or is missing, say what to manually verify next.
 
 Automated data snapshot already included above the recommendations:
 ${dataSnapshot}
@@ -215,7 +215,7 @@ ${JSON.stringify(pageSpeed).slice(0, 12_000)}
 DataForSEO:
 ${JSON.stringify(dataForSeo).slice(0, 12_000)}
 
-Return the report as plain text suitable for an email.`,
+Return concise plain text suitable for an email. Do not write a long technical checklist.`,
             },
           ],
         },
