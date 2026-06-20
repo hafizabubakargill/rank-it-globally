@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { PortableText } from "@portabletext/react";
-import { getPost } from "@/sanity/client";
+import BlogNav from "@/components/BlogNav";
+import { getPost, urlForImage } from "@/sanity/client";
 
 type PageProps = {
   params: Promise<{
@@ -35,23 +36,57 @@ export default async function BlogPostPage({ params }: PageProps) {
   if (!post) notFound();
 
   return (
-    <main className="blog-page">
-      <article className="blog-inner blog-article">
-        <Link className="blog-back" href="/blog">
-          Blog
-        </Link>
-        <header className="blog-header">
-          <time>{formatDate(post.publishedAt)}</time>
-          <h1>{post.title}</h1>
-          {post.excerpt ? <p>{post.excerpt}</p> : null}
-        </header>
-        {Array.isArray(post.body) ? (
-          <div className="blog-body">
-            <PortableText value={post.body} />
-          </div>
-        ) : null}
-      </article>
-    </main>
+    <>
+      <BlogNav />
+      <main className="blog-page">
+        <article className="blog-inner blog-article">
+          <Link className="blog-back" href="/blog">
+            Blog
+          </Link>
+          <header className="blog-header">
+            <time>{formatDate(post.publishedAt)}</time>
+            <h1>{post.title}</h1>
+            {post.excerpt ? <p>{post.excerpt}</p> : null}
+          </header>
+          {post.mainImage ? (
+            <img
+              className="blog-hero-image"
+              src={urlForImage(post.mainImage)
+                .width(1400)
+                .height(820)
+                .fit("crop")
+                .auto("format")
+                .url()}
+              alt=""
+            />
+          ) : null}
+          {Array.isArray(post.body) ? (
+            <div className="blog-body">
+              <PortableText
+                value={post.body}
+                components={{
+                  types: {
+                    image: ({ value }) =>
+                      value ? (
+                        <img
+                          className="blog-body-image"
+                          src={urlForImage(value)
+                            .width(1200)
+                            .fit("max")
+                            .auto("format")
+                            .url()}
+                          alt=""
+                          loading="lazy"
+                        />
+                      ) : null,
+                  },
+                }}
+              />
+            </div>
+          ) : null}
+        </article>
+      </main>
+    </>
   );
 }
 

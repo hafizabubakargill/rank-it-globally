@@ -1,4 +1,6 @@
 import { createClient, groq } from "next-sanity";
+import { createImageUrlBuilder } from "@sanity/image-url";
+import type { SanityImageSource } from "@sanity/image-url";
 import type { PortableTextBlock } from "@portabletext/react";
 import { apiVersion, dataset, hasSanityConfig, projectId } from "./env";
 
@@ -10,12 +12,19 @@ export const client = createClient({
   token: process.env.SANITY_API_READ_TOKEN,
 });
 
+const builder = createImageUrlBuilder(client);
+
+export function urlForImage(source: SanityImageSource) {
+  return builder.image(source);
+}
+
 export type BlogPostListItem = {
   _id: string;
   title: string;
   slug: string;
   excerpt?: string;
   publishedAt?: string;
+  mainImage?: SanityImageSource;
 };
 
 export type BlogPost = BlogPostListItem & {
@@ -35,7 +44,8 @@ export async function getPosts() {
       title,
       "slug": slug.current,
       excerpt,
-      publishedAt
+      publishedAt,
+      mainImage
     }`,
     {},
     { next: { revalidate: 60 } },
@@ -52,6 +62,7 @@ export async function getPost(slug: string) {
       "slug": slug.current,
       excerpt,
       publishedAt,
+      mainImage,
       body,
       seo
     }`,
