@@ -22,6 +22,15 @@ type LandingClientProps = {
   scripts: LandingScript[];
 };
 
+type CalendlyMessage = {
+  event?: string;
+  payload?: {
+    invitee?: {
+      uri?: string;
+    };
+  };
+};
+
 const exposedGlobals = [
   "toggleVid",
   "toggleFaq",
@@ -36,6 +45,7 @@ export default function LandingClient({ scripts }: LandingClientProps) {
   useEffect(() => {
     if (window.__rankItGloballyLandingMounted) return;
     window.__rankItGloballyLandingMounted = true;
+    const cleanupCalendlyCapture = bindCalendlyBookingCapture();
 
     for (const item of scripts) {
       const script = document.createElement("script");
@@ -75,10 +85,42 @@ export default function LandingClient({ scripts }: LandingClientProps) {
       );
     }, 0);
 
-    return () => {};
+    return () => {
+      cleanupCalendlyCapture();
+    };
   }, [scripts]);
 
   return null;
+}
+
+function bindCalendlyBookingCapture() {
+  const postedInvitees = new Set<string>();
+
+  function onMessage(event: MessageEvent<CalendlyMessage>) {
+    if (event.origin !== "https://calendly.com") return;
+    if (event.data?.event !== "calendly.event_scheduled") return;
+
+    const inviteeUri = event.data.payload?.invitee?.uri;
+    if (!inviteeUri || postedInvitees.has(inviteeUri)) return;
+
+    postedInvitees.add(inviteeUri);
+
+    void fetch("/api/booking", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify({
+        invitee_uri: inviteeUri,
+      }),
+    }).catch((error) => {
+      postedInvitees.delete(inviteeUri);
+      console.warn("Calendly booking capture failed", error);
+    });
+  }
+
+  window.addEventListener("message", onMessage);
+  return () => window.removeEventListener("message", onMessage);
 }
 
 function wrapInlineScript(content: string) {

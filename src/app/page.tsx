@@ -23,7 +23,8 @@ export default async function Home() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: schemaJson }}
       />
-      <div
+      <main
+        id="main-content"
         suppressHydrationWarning
         dangerouslySetInnerHTML={{ __html: bodyHtml }}
       />

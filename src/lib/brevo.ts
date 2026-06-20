@@ -8,7 +8,9 @@ type EmailPayload = {
 
 type ContactPayload = {
   email: string;
-  website: string;
+  website?: string;
+  source?: string;
+  name?: string;
 };
 
 const BREVO_API = "https://api.brevo.com/v3";
@@ -86,8 +88,14 @@ export async function upsertBrevoContact(payload: ContactPayload) {
       updateEnabled: true,
       listIds: [Number(listId)],
       attributes: {
-        WEBSITE: payload.website,
-        SOURCE: "Free site audit",
+        ...(payload.website ? { WEBSITE: payload.website } : {}),
+        ...(splitName(payload.name).firstName
+          ? { FIRSTNAME: splitName(payload.name).firstName }
+          : {}),
+        ...(splitName(payload.name).lastName
+          ? { LASTNAME: splitName(payload.name).lastName }
+          : {}),
+        SOURCE: payload.source || "Free site audit",
       },
     }),
   });
@@ -103,6 +111,17 @@ export async function upsertBrevoContact(payload: ContactPayload) {
   return {
     ok: true,
     skipped: false,
+  };
+}
+
+function splitName(name?: string) {
+  const clean = name?.trim();
+  if (!clean) return { firstName: "", lastName: "" };
+
+  const [firstName, ...rest] = clean.split(/\s+/);
+  return {
+    firstName,
+    lastName: rest.join(" "),
   };
 }
 
