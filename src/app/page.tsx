@@ -1,8 +1,9 @@
-import { readFile } from "node:fs/promises";
-import path from "node:path";
 import type { Metadata } from "next";
 import LandingClient from "@/components/LandingClient";
 import SmoothScroll from "@/components/SmoothScroll";
+import { homepageFaqs } from "@/content/faqs";
+import landingBodyHtml from "@/content/landingBody";
+import baseSchema from "@/content/schema.json";
 import scripts from "@/content/landingScripts.json";
 
 export const metadata: Metadata = {
@@ -11,22 +12,33 @@ export const metadata: Metadata = {
   },
 };
 
-export default async function Home() {
-  const [bodyHtml, schemaJson] = await Promise.all([
-    readFile(path.join(process.cwd(), "src/content/landingBody.html"), "utf8"),
-    readFile(path.join(process.cwd(), "src/content/schema.json"), "utf8"),
-  ]);
+export default function Home() {
+  const schemaItems = [
+    baseSchema,
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      mainEntity: homepageFaqs.map((faq) => ({
+        "@type": "Question",
+        name: faq.question,
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: faq.answer,
+        },
+      })),
+    },
+  ];
 
   return (
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: schemaJson }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaItems) }}
       />
       <main
         id="main-content"
         suppressHydrationWarning
-        dangerouslySetInnerHTML={{ __html: bodyHtml }}
+        dangerouslySetInnerHTML={{ __html: landingBodyHtml }}
       />
       <SmoothScroll />
       <LandingClient scripts={scripts} />
