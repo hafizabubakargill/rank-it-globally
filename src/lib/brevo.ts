@@ -231,7 +231,7 @@ function compactAuditReportHtml(report: string) {
       </tr>
     </table>
     <div style="background:#1A1630;color:#FFFFFF;border-radius:12px;padding:20px;margin:0 0 18px">
-      <div style="font-size:12px;text-transform:uppercase;letter-spacing:1.6px;color:#C9C7FF;font-weight:700;margin-bottom:10px">What to fix first</div>
+      <div style="font-size:12px;text-transform:uppercase;letter-spacing:1.6px;color:#C9C7FF;font-weight:700;margin-bottom:10px">Top priorities</div>
       ${summary.priorities
         .map(
           (item, index) => `
@@ -242,6 +242,22 @@ function compactAuditReportHtml(report: string) {
         )
         .join("")}
     </div>
+    <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="margin:0 0 18px">
+      <tr>
+        <td style="background:#FFFFFF;border:1px solid #E3DFFF;border-radius:12px;padding:18px">
+          <div style="font-size:12px;text-transform:uppercase;letter-spacing:1.4px;color:#6B6880;font-weight:700;margin-bottom:10px">What we checked</div>
+          ${summary.checks
+            .map(
+              (item) => `
+              <div style="display:flex;gap:10px;margin:0 0 9px">
+                <div style="width:8px;height:8px;border-radius:50%;background:#5552D4;margin-top:8px;flex-shrink:0"></div>
+                <div style="font-size:13px;line-height:1.65;color:#3F3B5F">${formatInline(item)}</div>
+              </div>`,
+            )
+            .join("")}
+        </td>
+      </tr>
+    </table>
     <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="margin:0 0 12px">
       <tr>
         <td style="background:#F8F6FF;border:1px solid #E3DFFF;border-radius:12px;padding:18px">
@@ -265,6 +281,8 @@ function parseAuditSummary(report: string) {
   const seo = extractMetric(report, "SEO");
   const priorities = extractBulletsAfter(report, "Recommended Action Plan", 4);
   const quickWins = extractBulletsAfter(report, "Quick Wins", 4);
+  const checks = extractBulletsAfter(report, "What We Checked", 4);
+  const pageSpeedStatus = extractMetric(report, "Status");
 
   return {
     performance,
@@ -276,7 +294,19 @@ function parseAuditSummary(report: string) {
         ? `Your site scored ${performance} for mobile performance`
         : "Your audit is ready for review",
     subhead:
-      "We checked performance, crawlability, on-page SEO signals, and conversion friction. Below are the items most likely to move leads, rankings, and user experience.",
+      "We checked speed, crawlability, on-page SEO signals, and conversion friction. Here are the actions most likely to improve leads, rankings, and user experience.",
+    checks:
+      checks.length > 0
+        ? checks
+        : [
+            pageSpeedStatus === "Unable to complete"
+              ? "PageSpeed could not complete automatically, so the site should be manually tested for Core Web Vitals and public access."
+              : "PageSpeed Insights completed and supplied mobile performance, accessibility, best-practices, and SEO signals.",
+            report.includes("Technical SEO Crawl")
+              ? "Technical crawl signals were reviewed for titles, descriptions, H1 usage, crawlability, and broken-link indicators."
+              : "On-page SEO and crawlability should be manually verified on the highest-value pages.",
+            "Conversion friction was reviewed from the available page signals, with focus on mobile clarity and call-to-action visibility.",
+          ],
     priorities:
       priorities.length > 0
         ? priorities

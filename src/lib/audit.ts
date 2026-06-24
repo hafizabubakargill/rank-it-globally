@@ -195,7 +195,7 @@ async function generateClaudeReport(
       max_tokens: 900,
       temperature: 0.2,
       system:
-        "You write concise, practical website audit recommendations for a web design and SEO agency. Be specific, avoid scare tactics, and format with short headings and bullets. Do not invent metrics. Do not repeat the automated data snapshot verbatim. Keep the visitor-facing report short enough to scan in under 2 minutes.",
+        "You write concise, practical website audit recommendations for a web design and SEO agency. Be specific, avoid scare tactics, and format with short headings and bullets. Do not invent metrics. Do not repeat the automated data snapshot verbatim. Keep the visitor-facing report short enough to scan in under 2 minutes. Focus on what will improve leads, rankings, speed, and trust.",
       messages: [
         {
           role: "user",
@@ -204,7 +204,17 @@ async function generateClaudeReport(
               type: "text",
               text: `Create useful recommendations for ${input.website}. The visitor email is ${input.email}.
 
-Start with "## Recommended Action Plan". Include no more than 4 priority bullets, then "## Quick Wins" with no more than 4 bullets. Use the available JSON from Google PageSpeed and DataForSEO. If a data source failed or is missing, say what to manually verify next.
+Use this exact structure:
+## Recommended Action Plan
+- Write 3 to 4 priority bullets. Each bullet should name the issue, why it matters, and the next action in one sentence.
+
+## Quick Wins
+- Write 3 to 4 short bullets a business owner can understand.
+
+## What We Checked
+- Mention PageSpeed, crawlability/on-page SEO, mobile UX, and conversion friction. If a source failed or is missing, say what should be manually verified next.
+
+Use the available JSON from Google PageSpeed and DataForSEO. If a data source failed or is missing, be transparent but still useful.
 
 Automated data snapshot already included above the recommendations:
 ${dataSnapshot}

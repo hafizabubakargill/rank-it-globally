@@ -207,11 +207,11 @@ select {
 
 .blog-article-shell {
   display: grid;
-  grid-template-columns: minmax(220px, 280px) minmax(0, 880px);
-  gap: clamp(1.25rem, 3vw, 2.5rem);
+  grid-template-columns: minmax(230px, 300px) minmax(0, 900px);
+  gap: clamp(1.5rem, 3vw, 2.75rem);
   align-items: start;
   width: min(1280px, 100%);
-  margin: 0 auto;
+  margin: clamp(1.5rem, 3vw, 2.5rem) auto 0;
 }
 
 .blog-article-head {
@@ -225,22 +225,38 @@ select {
 
 .blog-toc {
   position: sticky;
-  top: 6.25rem;
-  max-height: calc(100vh - 7.5rem);
-  overflow: auto;
+  top: 6.75rem;
+  z-index: 2;
+  max-height: min(420px, calc(100vh - 8.75rem));
+  overflow: hidden;
   border: 1px solid var(--border-s, rgba(102, 100, 228, 0.18));
   border-radius: 8px;
   background:
     linear-gradient(180deg, rgba(255, 255, 255, 0.94), rgba(255, 255, 255, 0.84)),
     radial-gradient(circle at 20% 0%, rgba(155, 89, 255, 0.16), transparent 14rem);
   box-shadow: 0 24px 70px -52px rgba(26, 22, 48, 0.55);
-  padding: 1rem;
+  padding: 1rem 0.95rem 0.95rem;
 }
 
 .blog-toc nav {
   display: flex;
   flex-direction: column;
   gap: 0.25rem;
+  max-height: min(310px, calc(100vh - 14rem));
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding-right: 0.25rem;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(102, 100, 228, 0.38) transparent;
+}
+
+.blog-toc nav::-webkit-scrollbar {
+  width: 5px;
+}
+
+.blog-toc nav::-webkit-scrollbar-thumb {
+  background: rgba(102, 100, 228, 0.35);
+  border-radius: 999px;
 }
 
 .blog-toc-link {
@@ -490,6 +506,12 @@ select {
   .blog-toc {
     position: static;
     order: 1;
+    max-height: none;
+    overflow: visible;
+  }
+
+  .blog-toc nav {
+    max-height: 260px;
   }
 
   .blog-article {

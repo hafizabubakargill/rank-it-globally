@@ -26,5 +26,15 @@
     "eslint": "^9",
     "eslint-config-next": "16.2.9",
     "typescript": "^5"
+  },
+  "overrides": {
+    "@sanity/uuid": {
+      "uuid": "^11.1.1"
+    },
+    "js-yaml": "^4.2.0",
+    "postcss": "^8.5.10",
+    "typeid-js": {
+      "uuid": "^11.1.1"
+    }
   }
 }
