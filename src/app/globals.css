@@ -24,6 +24,14 @@ html.lenis body {
   pointer-events: none;
 }
 
+.lenis.lenis-smooth .vid-wrap iframe {
+  pointer-events: none !important;
+}
+
+.lenis.lenis-smooth .vid-wrap.is-loaded iframe {
+  pointer-events: auto !important;
+}
+
 button,
 input,
 textarea,
@@ -199,11 +207,16 @@ select {
 
 .blog-article-shell {
   display: grid;
-  grid-template-columns: minmax(220px, 280px) minmax(0, 900px);
+  grid-template-columns: minmax(220px, 280px) minmax(0, 880px);
   gap: clamp(1.25rem, 3vw, 2.5rem);
   align-items: start;
   width: min(1280px, 100%);
   margin: 0 auto;
+}
+
+.blog-article-head {
+  width: min(1280px, 100%);
+  margin: 0 auto clamp(1.4rem, 2vw, 2rem);
 }
 
 .blog-article {
@@ -213,7 +226,8 @@ select {
 .blog-toc {
   position: sticky;
   top: 6.25rem;
-  overflow: hidden;
+  max-height: calc(100vh - 7.5rem);
+  overflow: auto;
   border: 1px solid var(--border-s, rgba(102, 100, 228, 0.18));
   border-radius: 8px;
   background:
@@ -464,6 +478,10 @@ select {
 }
 
 @media (max-width: 860px) {
+  .blog-article-head {
+    width: min(900px, 100%);
+  }
+
   .blog-article-shell {
     grid-template-columns: 1fr;
     width: min(900px, 100%);

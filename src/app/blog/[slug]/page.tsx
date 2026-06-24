@@ -116,6 +116,20 @@ export default async function BlogPostPage({ params }: PageProps) {
       />
       <BlogNav />
       <main className="blog-page">
+        <article className="blog-article-head">
+          <Link className="blog-back" href="/blog">
+            Blog
+          </Link>
+          <header className="blog-header">
+            <time>{formatDate(post.publishedAt)}</time>
+            <h1>{post.title}</h1>
+            {post.excerpt ? <p>{post.excerpt}</p> : null}
+          </header>
+          {post.mainImage ? (
+            <img className="blog-hero-image" src={heroImageUrl} alt="" />
+          ) : null}
+        </article>
+
         <div className="blog-article-shell">
           <aside className="blog-toc" aria-label="Table of contents">
             <p className="blog-kicker">In This Article</p>
@@ -137,17 +151,6 @@ export default async function BlogPostPage({ params }: PageProps) {
           </aside>
 
           <article className="blog-article">
-            <Link className="blog-back" href="/blog">
-              Blog
-            </Link>
-            <header className="blog-header">
-              <time>{formatDate(post.publishedAt)}</time>
-              <h1>{post.title}</h1>
-              {post.excerpt ? <p>{post.excerpt}</p> : null}
-            </header>
-            {post.mainImage ? (
-              <img className="blog-hero-image" src={heroImageUrl} alt="" />
-            ) : null}
             {Array.isArray(post.body) ? (
               <div className="blog-body">
                 <PortableText
