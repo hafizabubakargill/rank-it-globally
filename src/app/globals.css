@@ -250,11 +250,13 @@ select {
 
 .blog-article {
   min-width: 0;
+  justify-self: end;
+  width: 100%;
 }
 
 .blog-toc {
   position: sticky;
-  top: 3rem;
+  top: 4rem;
   z-index: 2;
   max-height: min(420px, calc(100vh - 8.75rem));
   overflow: hidden;

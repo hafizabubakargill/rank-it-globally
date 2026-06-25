@@ -134,7 +134,7 @@ export default async function BlogPostPage({ params }: PageProps) {
           <aside className="blog-toc" aria-label="Table of contents">
             <p className="blog-kicker">In This Article</p>
             {tableOfContents.length ? (
-              <div className="blog-toc-list">
+              <div className="blog-toc-list" data-lenis-prevent>
                 {tableOfContents.map((heading) => (
                   <a
                     className={`blog-toc-link blog-toc-level-${heading.level}`}

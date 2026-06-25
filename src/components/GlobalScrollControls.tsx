@@ -18,7 +18,7 @@ export default function GlobalScrollControls() {
         bar &&
         getComputedStyle(bar).display !== "none" &&
         bar.offsetParent !== null;
-      const nextOffset = (barVisible ? bar.offsetHeight : 0) + 18;
+      const nextOffset = barVisible ? bar.offsetHeight + 18 : 28;
       setBottomOffset(nextOffset);
       document.body.style.paddingBottom = barVisible ? `${bar.offsetHeight}px` : "0";
     }
