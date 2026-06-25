@@ -134,7 +134,7 @@ export default async function BlogPostPage({ params }: PageProps) {
           <aside className="blog-toc" aria-label="Table of contents">
             <p className="blog-kicker">In This Article</p>
             {tableOfContents.length ? (
-              <nav>
+              <div className="blog-toc-list">
                 {tableOfContents.map((heading) => (
                   <a
                     className={`blog-toc-link blog-toc-level-${heading.level}`}
@@ -144,7 +144,7 @@ export default async function BlogPostPage({ params }: PageProps) {
                     {heading.text}
                   </a>
                 ))}
-              </nav>
+              </div>
             ) : (
               <p className="blog-toc-empty">Key sections will appear here.</p>
             )}
