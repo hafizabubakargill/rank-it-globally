@@ -117,8 +117,8 @@ export default async function BlogPostPage({ params }: PageProps) {
       <BlogNav />
       <main className="blog-page">
         <article className="blog-article-head">
-          <Link className="blog-back" href="/blog">
-            Blog
+          <Link className="blog-back" href="/">
+            ← Back To Home
           </Link>
           <header className="blog-header">
             <time>{formatDate(post.publishedAt)}</time>

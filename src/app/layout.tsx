@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import Script from "next/script";
+import GlobalScrollControls from "@/components/GlobalScrollControls";
+import SmoothScroll from "@/components/SmoothScroll";
 import "./globals.css";
 import "../styles/landing.css";
 
@@ -60,6 +62,8 @@ export default function RootLayout({
       <head />
       <body>
         {children}
+        <SmoothScroll />
+        <GlobalScrollControls />
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-G8NJHBTHVL"
           strategy="afterInteractive"

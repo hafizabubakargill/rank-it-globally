@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import LandingClient from "@/components/LandingClient";
-import SmoothScroll from "@/components/SmoothScroll";
 import { homepageFaqs } from "@/content/faqs";
 import landingBodyHtml from "@/content/landingBody";
 import baseSchema from "@/content/schema.json";
@@ -40,7 +39,6 @@ export default function Home() {
         suppressHydrationWarning
         dangerouslySetInnerHTML={{ __html: landingBodyHtml }}
       />
-      <SmoothScroll />
       <LandingClient scripts={scripts} />
     </>
   );
