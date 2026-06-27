@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import BlogNav from "@/components/BlogNav";
 import { getPosts, urlForImage } from "@/sanity/client";
 
 export const metadata: Metadata = {
@@ -13,7 +12,6 @@ export default async function BlogPage() {
 
   return (
     <>
-      <BlogNav />
       <main className="blog-page">
         <div className="blog-inner blog-index-inner">
           <header className="blog-header">

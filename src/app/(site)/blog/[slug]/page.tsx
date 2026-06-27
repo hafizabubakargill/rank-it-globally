@@ -3,7 +3,6 @@ import { PortableText } from "@portabletext/react";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import BlogNav from "@/components/BlogNav";
 import { getPost, getRelatedPosts, urlForImage } from "@/sanity/client";
 
 type PageProps = {
@@ -114,11 +113,10 @@ export default async function BlogPostPage({ params }: PageProps) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaData) }}
       />
-      <BlogNav />
       <main className="blog-page">
         <article className="blog-article-head">
-          <Link className="blog-back" href="/">
-            ← Back To Home
+          <Link className="blog-back" href="/blog">
+            ← Back To Blog
           </Link>
           <header className="blog-header">
             <time>{formatDate(post.publishedAt)}</time>

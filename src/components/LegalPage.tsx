@@ -1,6 +1,4 @@
 import Link from "next/link";
-import BlogNav from "@/components/BlogNav";
-import SiteFooter from "@/components/SiteFooter";
 
 type LegalSection = {
   title: string;
@@ -24,7 +22,6 @@ export default function LegalPage({
 }: LegalPageProps) {
   return (
     <>
-      <BlogNav />
       <main className="legal-page">
         <article className="legal-inner">
           <Link className="blog-back" href="/">
@@ -49,7 +46,6 @@ export default function LegalPage({
           </div>
         </article>
       </main>
-      <SiteFooter />
     </>
   );
 }

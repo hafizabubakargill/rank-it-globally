@@ -11,16 +11,21 @@ export default function GlobalScrollControls() {
   useEffect(() => {
     let lastScrollY = window.scrollY;
     let ticking = false;
+    let resizeObserver: ResizeObserver | undefined;
 
     function syncStickyOffset() {
       const bar = document.querySelector<HTMLElement>(".sticky-bar");
       const barVisible =
         bar &&
         getComputedStyle(bar).display !== "none" &&
-        bar.offsetParent !== null;
-      const nextOffset = barVisible ? bar.offsetHeight + 18 : 28;
+        getComputedStyle(bar).visibility !== "hidden";
+      const nextOffset = barVisible
+        ? Math.max(80, bar.offsetHeight + 18)
+        : 28;
       setBottomOffset(nextOffset);
-      document.body.style.paddingBottom = barVisible ? `${bar.offsetHeight}px` : "0";
+      document.body.style.paddingBottom = barVisible
+        ? `${bar.offsetHeight}px`
+        : "0";
     }
 
     function update() {
@@ -52,12 +57,18 @@ export default function GlobalScrollControls() {
 
     syncStickyOffset();
     update();
+    const bar = document.querySelector<HTMLElement>(".sticky-bar");
+    if (bar && "ResizeObserver" in window) {
+      resizeObserver = new ResizeObserver(syncStickyOffset);
+      resizeObserver.observe(bar);
+    }
     window.addEventListener("scroll", onScroll, { passive: true });
     window.addEventListener("resize", syncStickyOffset);
 
     return () => {
       window.removeEventListener("scroll", onScroll);
       window.removeEventListener("resize", syncStickyOffset);
+      resizeObserver?.disconnect();
       document.body.style.paddingBottom = "0";
     };
   }, [showSticky]);
