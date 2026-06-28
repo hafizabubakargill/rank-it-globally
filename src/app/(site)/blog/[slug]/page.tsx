@@ -66,8 +66,7 @@ export default async function BlogPostPage({ params }: PageProps) {
   const heroImageUrl = post.mainImage
     ? urlForImage(post.mainImage)
         .width(1400)
-        .height(820)
-        .fit("crop")
+        .fit("max")
         .auto("format")
         .url()
     : undefined;

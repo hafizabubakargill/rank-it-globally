@@ -60,7 +60,7 @@ export async function getPosts() {
       "slug": slug.current,
       excerpt,
       publishedAt,
-      mainImage,
+      "mainImage": mainImage {asset},
       author->{name, "slug": slug.current, image, bio},
       categories[]->{_id, title, "slug": slug.current}
     }`,
@@ -79,7 +79,7 @@ export async function getPost(slug: string) {
       "slug": slug.current,
       excerpt,
       publishedAt,
-      mainImage,
+      "mainImage": mainImage {asset},
       author->{name, "slug": slug.current, image, bio},
       categories[]->{_id, title, "slug": slug.current},
       body,
@@ -99,7 +99,7 @@ export async function getRelatedPosts(slug: string, categorySlugs: string[]) {
     "slug": slug.current,
     excerpt,
     publishedAt,
-    mainImage,
+    "mainImage": mainImage {asset},
     author->{name, "slug": slug.current, image, bio},
     categories[]->{_id, title, "slug": slug.current}
   }`;

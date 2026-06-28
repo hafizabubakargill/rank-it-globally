@@ -32,8 +32,7 @@ export default async function BlogPage() {
                       <img
                         src={urlForImage(post.mainImage)
                           .width(900)
-                          .height(520)
-                          .fit("crop")
+                          .fit("max")
                           .auto("format")
                           .url()}
                         alt=""
