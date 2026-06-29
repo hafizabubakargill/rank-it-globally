@@ -403,7 +403,28 @@ footer{border-top:1px solid rgba(102,100,228,.18);background:#EDEAFF}
 
 /* ===== PORTFOLIO SLIDER ===== */
 .port-sec{}
+.landing-html-fragment{display:contents}
+.portfolio-section-glow{position:absolute;top:0;left:50%;transform:translateX(-50%);width:700px;height:300px;background:radial-gradient(ellipse at 50% 0%,rgba(102,100,228,.08) 0%,transparent 70%);pointer-events:none;z-index:0}
 .sl-root{position:relative;margin-top:2.5rem;padding-bottom:3.5rem;overflow:hidden;border-radius:14px;max-width:100%}
+
+/* ===== CLUTCH REVIEWS ===== */
+.clutch-reviews{position:relative;background:#fff}
+.clutch-reviews-inner{display:grid;grid-template-columns:minmax(0,.85fr) minmax(420px,1.15fr);gap:clamp(2rem,5vw,4.5rem);align-items:center}
+.clutch-reviews-copy .sec-sub{margin-bottom:0}
+.clutch-widget-shell{min-width:0;min-height:300px;padding:1.25rem;border:1px solid rgba(102,100,228,.16);border-radius:8px;background:linear-gradient(145deg,#fff 0%,#f6f4ff 100%);box-shadow:0 26px 70px -52px rgba(26,22,48,.6)}
+.clutch-widget-shell .clutch-widget{width:100%;min-height:300px}
+.clutch-widget-shell iframe{display:block!important;width:100%!important;max-width:100%!important;margin:0 auto;border:0}
+.clutch-widget-shell noscript a{display:inline-flex;color:#5552d4;font-family:var(--fh);font-weight:800}
+
+@media(max-width:900px){
+  .clutch-reviews-inner{grid-template-columns:1fr}
+  .clutch-widget-shell{width:100%;min-height:300px}
+}
+
+@media(max-width:560px){
+  .clutch-widget-shell{min-height:320px;padding:.65rem}
+  .clutch-widget-shell .clutch-widget{min-height:300px}
+}
 
 /* Track — width set by JS */
 .sl-track{display:flex;gap:20px;transition:transform .55s cubic-bezier(.22,1,.36,1);will-change:transform;padding:0 0 4px}

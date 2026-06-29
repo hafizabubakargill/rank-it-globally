@@ -1,6 +1,15 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  async redirects() {
+    return [
+      {
+        source: "/blog/website-visible-google-ai-search",
+        destination: "/blog/how-to-get-into-google-ai-overviews",
+        permanent: true,
+      },
+    ];
+  },
   async headers() {
     return [
       {

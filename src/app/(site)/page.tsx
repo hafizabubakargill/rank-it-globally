@@ -1,7 +1,13 @@
 import type { Metadata } from "next";
+import ClutchReviews from "@/components/ClutchReviews";
 import LandingClient from "@/components/LandingClient";
+import PortfolioSection from "@/components/PortfolioSection";
 import { homepageFaqs } from "@/content/faqs";
-import landingBodyHtml from "@/content/landingBody";
+import {
+  landingBodyAfterClutch,
+  landingBodyBeforeClutch,
+  landingBodyBeforePortfolio,
+} from "@/content/landingBody";
 import baseSchema from "@/content/schema.json";
 import scripts from "@/content/landingScripts.json";
 
@@ -34,11 +40,25 @@ export default function Home() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaItems) }}
       />
-      <main
-        id="main-content"
-        suppressHydrationWarning
-        dangerouslySetInnerHTML={{ __html: landingBodyHtml }}
-      />
+      <main id="main-content" suppressHydrationWarning>
+        <div
+          className="landing-html-fragment"
+          suppressHydrationWarning
+          dangerouslySetInnerHTML={{ __html: landingBodyBeforePortfolio }}
+        />
+        <PortfolioSection />
+        <div
+          className="landing-html-fragment"
+          suppressHydrationWarning
+          dangerouslySetInnerHTML={{ __html: landingBodyBeforeClutch }}
+        />
+        <ClutchReviews />
+        <div
+          className="landing-html-fragment"
+          suppressHydrationWarning
+          dangerouslySetInnerHTML={{ __html: landingBodyAfterClutch }}
+        />
+      </main>
       <LandingClient scripts={scripts} />
     </>
   );

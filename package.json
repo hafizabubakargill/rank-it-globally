@@ -9,7 +9,8 @@
     "dev": "next dev",
     "build": "next build --webpack",
     "start": "NODE_ENV=production node server.js",
-    "lint": "eslint"
+    "lint": "eslint",
+    "portfolio:import": "node scripts/import-portfolio.mjs"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.105.0",
