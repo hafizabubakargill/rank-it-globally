@@ -1,3 +1,7 @@
+"use client";
+
+import { useCallback, useEffect, useRef, useState } from "react";
+
 type ClutchReview = {
   company: string;
   reviewer: string;
@@ -36,6 +40,84 @@ const reviews: ClutchReview[] = [
 ];
 
 export default function ClutchReviews() {
+  const sliderRef = useRef<HTMLDivElement>(null);
+  const scrollFrameRef = useRef<number | null>(null);
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
+  const [isPaused, setIsPaused] = useState(false);
+  const [reduceMotion, setReduceMotion] = useState(false);
+
+  const showReview = useCallback((index: number) => {
+    const slider = sliderRef.current;
+    if (!slider) return;
+
+    const nextIndex = (index + reviews.length) % reviews.length;
+    const card = slider.children.item(nextIndex);
+    if (!(card instanceof HTMLElement)) return;
+
+    slider.scrollTo({
+      left: card.offsetLeft - slider.offsetLeft,
+      behavior: "smooth",
+    });
+    setActiveIndex(nextIndex);
+  }, []);
+
+  useEffect(() => {
+    const mobileQuery = window.matchMedia("(max-width: 700px)");
+    const motionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const updatePreferences = () => {
+      setIsMobile(mobileQuery.matches);
+      setReduceMotion(motionQuery.matches);
+    };
+
+    updatePreferences();
+    mobileQuery.addEventListener("change", updatePreferences);
+    motionQuery.addEventListener("change", updatePreferences);
+
+    return () => {
+      mobileQuery.removeEventListener("change", updatePreferences);
+      motionQuery.removeEventListener("change", updatePreferences);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!isMobile || isPaused || reduceMotion) return;
+
+    const timer = window.setInterval(() => {
+      showReview(activeIndex + 1);
+    }, 5000);
+
+    return () => window.clearInterval(timer);
+  }, [activeIndex, isMobile, isPaused, reduceMotion, showReview]);
+
+  const handleScroll = () => {
+    if (scrollFrameRef.current !== null) {
+      window.cancelAnimationFrame(scrollFrameRef.current);
+    }
+
+    scrollFrameRef.current = window.requestAnimationFrame(() => {
+      const slider = sliderRef.current;
+      if (!slider) return;
+
+      const cards = Array.from(slider.children).filter(
+        (card): card is HTMLElement => card instanceof HTMLElement,
+      );
+      const nearestIndex = cards.reduce((nearest, card, index) => {
+        const nearestDistance = Math.abs(
+          cards[nearest].offsetLeft - slider.scrollLeft,
+        );
+        const currentDistance = Math.abs(card.offsetLeft - slider.scrollLeft);
+        return currentDistance < nearestDistance ? index : nearest;
+      }, 0);
+
+      setActiveIndex(nearestIndex);
+    });
+  };
+
+  const resumeAfterInteraction = () => {
+    window.setTimeout(() => setIsPaused(false), 1200);
+  };
+
   return (
     <div className="clutch-reviews" aria-labelledby="clutchReviewsTitle">
       <header className="clutch-reviews-head rev">
@@ -71,8 +153,21 @@ export default function ClutchReviews() {
 
       <div
         className="clutch-review-grid"
+        ref={sliderRef}
         role="list"
         aria-label="Rank It Globally reviews on Clutch"
+        onScroll={handleScroll}
+        onMouseEnter={() => setIsPaused(true)}
+        onMouseLeave={() => setIsPaused(false)}
+        onFocusCapture={() => setIsPaused(true)}
+        onBlurCapture={(event) => {
+          if (!event.currentTarget.contains(event.relatedTarget)) {
+            setIsPaused(false);
+          }
+        }}
+        onPointerDown={() => setIsPaused(true)}
+        onPointerUp={resumeAfterInteraction}
+        onPointerCancel={resumeAfterInteraction}
       >
         {reviews.map((review, index) => (
           <article
@@ -110,8 +205,40 @@ export default function ClutchReviews() {
           </article>
         ))}
       </div>
-      <p className="clutch-slider-hint">Swipe to view all three reviews</p>
 
+      <div
+        className="clutch-slider-controls"
+        aria-label="Clutch review slider controls"
+      >
+        <button
+          className="vsl-btn"
+          type="button"
+          aria-label="Previous Clutch review"
+          onClick={() => showReview(activeIndex - 1)}
+        >
+          <SliderArrow direction="previous" />
+        </button>
+        <div className="vsl-dots">
+          {reviews.map((review, index) => (
+            <button
+              className={`vsl-dot${activeIndex === index ? " on" : ""}`}
+              type="button"
+              aria-label={`Show Clutch review ${index + 1}`}
+              aria-current={activeIndex === index ? "true" : undefined}
+              onClick={() => showReview(index)}
+              key={review.href}
+            />
+          ))}
+        </div>
+        <button
+          className="vsl-btn"
+          type="button"
+          aria-label="Next Clutch review"
+          onClick={() => showReview(activeIndex + 1)}
+        >
+          <SliderArrow direction="next" />
+        </button>
+      </div>
       <div className="clutch-actions rev d2">
         <a className="cta-e cta-e-lg" href="#audit">
           Get My Free Audit <span aria-hidden="true">→</span>
@@ -135,5 +262,30 @@ function Stars() {
     <span className="clutch-stars" aria-label="5 out of 5 stars">
       <span aria-hidden="true">★★★★★</span>
     </span>
+  );
+}
+
+function SliderArrow({
+  direction,
+}: {
+  direction: "previous" | "next";
+}) {
+  const points =
+    direction === "previous" ? "15 18 9 12 15 6" : "9 18 15 12 9 6";
+
+  return (
+    <svg
+      width="18"
+      height="18"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
+      <polyline points={points} />
+    </svg>
   );
 }

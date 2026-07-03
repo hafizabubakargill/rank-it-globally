@@ -430,7 +430,7 @@ footer{border-top:1px solid rgba(102,100,228,.18);background:#EDEAFF}
 .clutch-verified{display:flex;align-items:center;gap:.45rem;margin-top:.7rem;color:#88869a;font-size:.72rem}
 .clutch-verified-icon{display:inline-flex;align-items:center;justify-content:center;width:17px;height:17px;border-radius:50%;background:#2d9bf0;color:#fff;font-size:.65rem;font-weight:900}
 .clutch-review-source-mark{width:10px;height:10px;border-radius:50%;background:#ff3d2e;box-shadow:0 0 0 3px rgba(255,61,46,.12)}
-.clutch-slider-hint{display:none}
+.clutch-slider-controls{display:none}
 .clutch-actions{display:flex;flex-direction:column;align-items:center;gap:1rem;margin-top:2.5rem;padding-bottom:.25rem}
 .clutch-review-link{display:inline-flex;align-items:center;justify-content:center;gap:.45rem;color:#5552d4;font-family:var(--fh);font-size:.82rem;font-weight:750;text-decoration:none;transition:color .25s ease,transform .25s ease}
 .clutch-review-link:hover{color:#32189c;transform:translateY(-2px)}
@@ -438,11 +438,15 @@ footer{border-top:1px solid rgba(102,100,228,.18);background:#EDEAFF}
 
 @media(max-width:700px){
   .clutch-review-grid{grid-template-columns:none;grid-auto-flow:column;grid-auto-columns:86%;gap:1rem;max-width:none;margin:2.25rem -.25rem 0;padding:0 .25rem .75rem;overflow-x:auto;overscroll-behavior-inline:contain;scroll-snap-type:x mandatory;scroll-padding-inline:.25rem;-webkit-overflow-scrolling:touch;scrollbar-width:none}
-  .clutch-review-grid::-webkit-scrollbar{display:none}
+  .clutch-review-grid::-webkit-scrollbar{display:none;width:0;height:0}
   .clutch-review-card{min-height:245px;padding:1.4rem;scroll-snap-align:start;scroll-snap-stop:always}
-  .clutch-slider-hint{display:block;margin:.45rem 0 0;color:var(--muted);font-family:var(--fh);font-size:.72rem;font-weight:650}
+  .clutch-slider-controls{display:flex;align-items:center;justify-content:center;gap:1rem;margin-top:1rem}
   .clutch-actions{width:100%;margin-top:2rem}
   .clutch-review-link{font-size:.78rem;line-height:1.45}
+}
+
+@media(prefers-reduced-motion:reduce){
+  .clutch-review-grid{scroll-behavior:auto}
 }
 
 /* Track — width set by JS */
