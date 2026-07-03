@@ -3,17 +3,27 @@ type ClutchReview = {
   reviewer: string;
   quote: string;
   href: string;
+  verified: boolean;
 };
 
 const CLUTCH_PROFILE_URL = "https://clutch.co/profile/rank-it-globally";
 
 const reviews: ClutchReview[] = [
   {
+    company: "Commercial & Residential Cleaning Company",
+    reviewer: "Owner, Commercial & Residential Cleaning Company",
+    quote:
+      "We found working with them very easy, and they were professional.",
+    href: "https://clutch.co/go-to-review/rank-it-globally/468937",
+    verified: true,
+  },
+  {
     company: "Habeora AI Solutions Private Limited",
     reviewer: "CEO, Habeora AI Solutions Private Limited",
     quote:
       "Their team is responsive, cooperative, and willing to implement our requested changes.",
     href: "https://clutch.co/go-to-review/rank-it-globally/468177",
+    verified: true,
   },
   {
     company: "PRANA BEAUTY TT",
@@ -21,6 +31,7 @@ const reviews: ClutchReview[] = [
     quote:
       "I was impressed by their personal attention and website development updates.",
     href: "https://clutch.co/go-to-review/rank-it-globally/466199",
+    verified: true,
   },
 ];
 
@@ -54,15 +65,20 @@ export default function ClutchReviews() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          2 verified reviews
+          3 Clutch reviews
         </a>
       </header>
 
-      <div className="clutch-review-grid">
+      <div
+        className="clutch-review-grid"
+        role="list"
+        aria-label="Rank It Globally reviews on Clutch"
+      >
         {reviews.map((review, index) => (
           <article
             className={`clutch-review-card rev d${index + 1}`}
             key={review.href}
+            role="listitem"
           >
             <div className="clutch-card-rating">
               <strong>5.0</strong>
@@ -78,15 +94,23 @@ export default function ClutchReviews() {
             >
               {review.reviewer}
             </a>
-            <div className="clutch-verified">
-              <span className="clutch-verified-icon" aria-hidden="true">
-                ✓
-              </span>
-              Verified Review
-            </div>
+            {review.verified ? (
+              <div className="clutch-verified">
+                <span className="clutch-verified-icon" aria-hidden="true">
+                  ✓
+                </span>
+                Verified Review
+              </div>
+            ) : (
+              <div className="clutch-verified">
+                <span className="clutch-review-source-mark" aria-hidden="true" />
+                Review on Clutch
+              </div>
+            )}
           </article>
         ))}
       </div>
+      <p className="clutch-slider-hint">Swipe to view all three reviews</p>
 
       <div className="clutch-actions rev d2">
         <a className="cta-e cta-e-lg" href="#audit">
