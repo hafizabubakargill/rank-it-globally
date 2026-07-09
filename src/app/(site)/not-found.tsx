@@ -15,7 +15,7 @@ export default function NotFound() {
             Back to homepage
           </Link>
           <Link href="/blog">Browse the blog</Link>
-          <Link href="/#audit">Get a free audit</Link>
+          <Link href="/free-audit">Get a free audit</Link>
         </div>
       </div>
     </main>

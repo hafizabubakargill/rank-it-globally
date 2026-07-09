@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { buildAuditReport, isEmail, normalizeWebsite } from "@/lib/audit";
 import { reportToHtml, sendBrevoEmail, upsertBrevoContact } from "@/lib/brevo";
+import { hasSanityWriteConfig, writeClient } from "@/sanity/writeClient";
 
 export const runtime = "nodejs";
 
@@ -8,6 +9,36 @@ type AuditRequest = {
   website?: string;
   url?: string;
   email?: string;
+  fullName?: string;
+  businessEmail?: string;
+  phoneNumber?: string;
+  companyName?: string;
+  businessLocation?: string;
+  industry?: string;
+  auditScope?: string[];
+  biggestProblem?: string;
+  mainGoal?: string;
+  budgetRange?: string;
+  message?: string;
+  sourcePage?: string;
+};
+
+type AuditLeadDetails = {
+  fullName: string;
+  businessEmail: string;
+  phoneNumber: string;
+  companyName: string;
+  websiteUrl: string;
+  normalizedWebsite: string;
+  businessLocation: string;
+  industry: string;
+  auditScope: string[];
+  biggestProblem: string;
+  mainGoal: string;
+  budgetRange: string;
+  message: string;
+  sourcePage: string;
+  submissionType: "full" | "legacy-minimal";
 };
 
 export async function POST(request: Request) {
@@ -23,7 +54,7 @@ export async function POST(request: Request) {
   }
 
   const rawWebsite = payload.website || payload.url || "";
-  const rawEmail = payload.email || "";
+  const rawEmail = payload.businessEmail || payload.email || "";
 
   if (!rawWebsite || !rawEmail) {
     return NextResponse.json(
@@ -50,10 +81,35 @@ export async function POST(request: Request) {
   }
 
   const email = rawEmail.trim().toLowerCase();
-  void processAuditLead({ website, email }).catch((error) => {
-    console.error("Audit background job failed", error);
+  const leadDetails = buildLeadDetails(payload, {
+    email,
+    rawWebsite,
+    normalizedWebsite: website,
   });
-  void sendAdminLeadReceipt({ website, email }).catch((error) => {
+  const missingFields = getMissingRequiredFields(leadDetails);
+
+  if (leadDetails.submissionType === "full" && missingFields.length) {
+    return NextResponse.json(
+      {
+        success: false,
+        message: `Please complete: ${missingFields.join(", ")}.`,
+      },
+      { status: 400 },
+    );
+  }
+
+  const sanityLeadId = await createAuditLead(leadDetails).catch((error) => {
+    console.error("Audit Sanity lead creation failed", error);
+    return undefined;
+  });
+
+  void processAuditLead({ website, email, leadDetails, sanityLeadId }).catch((error) => {
+    console.error("Audit background job failed", error);
+    if (sanityLeadId) {
+      void patchAuditLead(sanityLeadId, { status: "failed" });
+    }
+  });
+  void sendAdminLeadReceipt({ website, email, leadDetails }).catch((error) => {
     console.error("Audit admin lead receipt failed", error);
   });
 
@@ -63,14 +119,30 @@ export async function POST(request: Request) {
     lead: {
       website,
       email,
+      sanityLeadId,
     },
     queued: true,
   });
 }
 
-async function processAuditLead({ website, email }: { website: string; email: string }) {
+async function processAuditLead({
+  website,
+  email,
+  leadDetails,
+  sanityLeadId,
+}: {
+  website: string;
+  email: string;
+  leadDetails: AuditLeadDetails;
+  sanityLeadId?: string;
+}) {
   const audit = await buildAuditReport({ website, email });
   const adminRecipients = getAdminRecipients();
+  const leadText = formatLeadDetails(leadDetails);
+  const providerStatus = [
+    `${audit.pageSpeed.source}: ${audit.pageSpeed.ok ? "completed" : audit.pageSpeed.error}`,
+    `${audit.dataForSeo.source}: ${audit.dataForSeo.ok ? "completed" : audit.dataForSeo.error}`,
+  ].join("\n");
 
   const visitorHtml = reportToHtml(audit.report, {
     title: "Your Website Audit Is Ready",
@@ -84,8 +156,7 @@ async function processAuditLead({ website, email }: { website: string; email: st
   const adminText = [
     "New audit lead",
     "",
-    `Website: ${website}`,
-    `Email: ${email}`,
+    leadText,
     "",
     "Provider status:",
     `- ${audit.pageSpeed.source}: ${audit.pageSpeed.ok ? "completed" : audit.pageSpeed.error}`,
@@ -120,20 +191,29 @@ async function processAuditLead({ website, email }: { website: string; email: st
       }),
     ),
   ]);
+
+  if (sanityLeadId) {
+    await patchAuditLead(sanityLeadId, {
+      status: "email_sent",
+      reportSummary: audit.report.slice(0, 12000),
+      providerStatus,
+    });
+  }
 }
 
 async function sendAdminLeadReceipt({
   website,
   email,
+  leadDetails,
 }: {
   website: string;
   email: string;
+  leadDetails: AuditLeadDetails;
 }) {
   const text = [
     "New audit form submission received.",
     "",
-    `Website: ${website}`,
-    `Email: ${email}`,
+    formatLeadDetails(leadDetails),
     "",
     "The automated report is now being generated. A second email with the full report will follow after PageSpeed, DataForSEO, and AI analysis complete.",
   ].join("\n");
@@ -166,4 +246,131 @@ function getAdminRecipients() {
         .filter(Boolean) as string[],
     ),
   );
+}
+
+function buildLeadDetails(
+  payload: AuditRequest,
+  {
+    email,
+    rawWebsite,
+    normalizedWebsite,
+  }: { email: string; rawWebsite: string; normalizedWebsite: string },
+): AuditLeadDetails {
+  const fullName = clean(payload.fullName);
+  const businessEmail = clean(payload.businessEmail) || email;
+  const phoneNumber = clean(payload.phoneNumber);
+  const companyName = clean(payload.companyName);
+  const businessLocation = clean(payload.businessLocation);
+  const industry = clean(payload.industry);
+  const auditScope = Array.isArray(payload.auditScope)
+    ? payload.auditScope.map(clean).filter(Boolean)
+    : [];
+  const biggestProblem = clean(payload.biggestProblem);
+  const mainGoal = clean(payload.mainGoal);
+  const budgetRange = clean(payload.budgetRange);
+  const message = clean(payload.message);
+  const sourcePage = clean(payload.sourcePage) || "/free-audit";
+  const hasExpandedFields = Boolean(
+    fullName ||
+      phoneNumber ||
+      companyName ||
+      businessLocation ||
+      industry ||
+      auditScope.length ||
+      biggestProblem ||
+      mainGoal ||
+      budgetRange ||
+      message,
+  );
+
+  return {
+    fullName,
+    businessEmail,
+    phoneNumber,
+    companyName,
+    websiteUrl: clean(rawWebsite),
+    normalizedWebsite,
+    businessLocation,
+    industry,
+    auditScope,
+    biggestProblem,
+    mainGoal,
+    budgetRange,
+    message,
+    sourcePage,
+    submissionType: hasExpandedFields ? "full" : "legacy-minimal",
+  };
+}
+
+function getMissingRequiredFields(lead: AuditLeadDetails) {
+  const missing: string[] = [];
+  if (!lead.fullName) missing.push("Full name");
+  if (!lead.businessEmail) missing.push("Business email");
+  if (!lead.phoneNumber) missing.push("Phone number");
+  if (!lead.companyName) missing.push("Business / company name");
+  if (!lead.websiteUrl) missing.push("Website URL");
+  if (!lead.businessLocation) missing.push("Business location");
+  if (!lead.industry) missing.push("Business type / industry");
+  if (!lead.auditScope.length) missing.push("What you want audited");
+  if (!lead.biggestProblem) missing.push("Biggest problem");
+  if (!lead.mainGoal) missing.push("Main goal");
+  if (!lead.budgetRange) missing.push("Monthly budget range");
+  return missing;
+}
+
+async function createAuditLead(lead: AuditLeadDetails) {
+  if (!hasSanityWriteConfig) return undefined;
+
+  const result = await writeClient.create({
+    _type: "auditLead",
+    submittedAt: new Date().toISOString(),
+    status: "received",
+    sourcePage: lead.sourcePage,
+    fullName: lead.fullName,
+    businessEmail: lead.businessEmail,
+    phoneNumber: lead.phoneNumber,
+    companyName: lead.companyName,
+    websiteUrl: lead.normalizedWebsite,
+    normalizedWebsite: lead.normalizedWebsite,
+    businessLocation: lead.businessLocation,
+    industry: lead.industry,
+    auditScope: lead.auditScope,
+    biggestProblem: lead.biggestProblem,
+    mainGoal: lead.mainGoal,
+    budgetRange: lead.budgetRange,
+    message: lead.message,
+  });
+
+  return result._id;
+}
+
+async function patchAuditLead(
+  id: string,
+  patch: { status?: string; reportSummary?: string; providerStatus?: string },
+) {
+  if (!hasSanityWriteConfig) return;
+  await writeClient.patch(id).set(patch).commit();
+}
+
+function formatLeadDetails(lead: AuditLeadDetails) {
+  return [
+    `Submission type: ${lead.submissionType}`,
+    `Full name: ${lead.fullName || "Not provided"}`,
+    `Business email: ${lead.businessEmail}`,
+    `Phone number: ${lead.phoneNumber || "Not provided"}`,
+    `Company: ${lead.companyName || "Not provided"}`,
+    `Website: ${lead.normalizedWebsite}`,
+    `Business location: ${lead.businessLocation || "Not provided"}`,
+    `Industry: ${lead.industry || "Not provided"}`,
+    `Audit scope: ${lead.auditScope.length ? lead.auditScope.join(", ") : "Not provided"}`,
+    `Biggest problem: ${lead.biggestProblem || "Not provided"}`,
+    `Main goal: ${lead.mainGoal || "Not provided"}`,
+    `Monthly budget: ${lead.budgetRange || "Not provided"}`,
+    `Message: ${lead.message || "Not provided"}`,
+    `Source page: ${lead.sourcePage}`,
+  ].join("\n");
+}
+
+function clean(value: unknown) {
+  return typeof value === "string" ? value.trim() : "";
 }

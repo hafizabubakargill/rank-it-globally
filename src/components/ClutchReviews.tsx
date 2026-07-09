@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useCallback, useEffect, useRef, useState } from "react";
 
 type ClutchReview = {
@@ -240,9 +241,9 @@ export default function ClutchReviews() {
         </button>
       </div>
       <div className="clutch-actions rev d2">
-        <a className="cta-e cta-e-lg" href="#audit">
+        <Link className="cta-e cta-e-lg" href="/free-audit">
           Get My Free Audit <span aria-hidden="true">→</span>
-        </a>
+        </Link>
         <a
           className="clutch-review-link"
           href="https://review.clutch.co/review?provider_id=2645951"

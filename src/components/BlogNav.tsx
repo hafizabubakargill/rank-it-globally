@@ -4,9 +4,12 @@ import Link from "next/link";
 import { useState } from "react";
 
 const homeLinks = [
-  { href: "/#audit", label: "Free Audit" },
-  { href: "/#portfolio", label: "Work" },
+  { href: "/free-audit", label: "Free Audit" },
+  { href: "/#portfolio", label: "Portfolio" },
   { href: "/#services", label: "Services" },
+  { href: "/case-studies", label: "Case Studies" },
+  { href: "/about-us", label: "About" },
+  { href: "/contact-us", label: "Contact" },
   { href: "/#estimator", label: "Pricing" },
   { href: "/#faq", label: "FAQ" },
   { href: "/blog", label: "Blog" },
@@ -36,14 +39,14 @@ export default function BlogNav() {
               {link.label}
             </Link>
           ))}
-          <Link className="cta-e" href="/#audit">
+          <Link className="cta-e" href="/free-audit">
             Get My Free Audit <span className="ar">→</span>
           </Link>
         </div>
         <div className="mobile-nav-actions">
           <Link
             className="mobile-nav-cta"
-            href="/#audit"
+            href="/free-audit"
             onClick={() => setMobileOpen(false)}
           >
             Free Audit
@@ -74,7 +77,7 @@ export default function BlogNav() {
         ))}
         <Link
           className="cta-e"
-          href="/#audit"
+          href="/free-audit"
           onClick={() => setMobileOpen(false)}
         >
           Get My Free Audit <span className="ar">→</span>

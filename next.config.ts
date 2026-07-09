@@ -8,6 +8,16 @@ const nextConfig: NextConfig = {
         destination: "/blog/how-to-get-into-google-ai-overviews",
         permanent: true,
       },
+      {
+        source: "/free-consultation",
+        destination: "/free-audit",
+        permanent: true,
+      },
+      {
+        source: "/sitemap_index.xml",
+        destination: "/sitemap.xml",
+        permanent: true,
+      },
     ];
   },
   async headers() {
