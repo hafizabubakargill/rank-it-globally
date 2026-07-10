@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const homeLinks = [
   { href: "/free-audit", label: "Free Audit" },
@@ -17,9 +17,25 @@ const homeLinks = [
 
 export default function BlogNav() {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const navRef = useRef<HTMLElement | null>(null);
+
+  useEffect(() => {
+    if (!mobileOpen) return;
+
+    function onPointerDown(event: PointerEvent) {
+      const target = event.target;
+      if (!(target instanceof Node)) return;
+      if (!navRef.current?.contains(target)) {
+        setMobileOpen(false);
+      }
+    }
+
+    document.addEventListener("pointerdown", onPointerDown);
+    return () => document.removeEventListener("pointerdown", onPointerDown);
+  }, [mobileOpen]);
 
   return (
-    <nav className={mobileOpen ? "mobile-open" : ""}>
+    <nav ref={navRef} className={mobileOpen ? "mobile-open" : ""}>
       <div className="nav-inner">
         <Link className="n-logo" href="/" aria-label="Rank It Globally home">
           <img
@@ -75,13 +91,6 @@ export default function BlogNav() {
             {link.label}
           </Link>
         ))}
-        <Link
-          className="cta-e"
-          href="/free-audit"
-          onClick={() => setMobileOpen(false)}
-        >
-          Get My Free Audit <span className="ar">→</span>
-        </Link>
       </div>
     </nav>
   );

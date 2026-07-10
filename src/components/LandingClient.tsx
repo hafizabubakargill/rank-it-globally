@@ -46,6 +46,7 @@ export default function LandingClient({ scripts }: LandingClientProps) {
     if (window.__rankItGloballyLandingMounted) return;
     window.__rankItGloballyLandingMounted = true;
     const cleanupCalendlyCapture = bindCalendlyBookingCapture();
+    const cleanupMobileMenuOutsideClick = bindMobileMenuOutsideClick();
 
     for (const item of scripts) {
       const script = document.createElement("script");
@@ -87,6 +88,7 @@ export default function LandingClient({ scripts }: LandingClientProps) {
 
     return () => {
       cleanupCalendlyCapture();
+      cleanupMobileMenuOutsideClick();
     };
   }, [scripts]);
 
@@ -121,6 +123,24 @@ function bindCalendlyBookingCapture() {
 
   window.addEventListener("message", onMessage);
   return () => window.removeEventListener("message", onMessage);
+}
+
+function bindMobileMenuOutsideClick() {
+  function onPointerDown(event: PointerEvent) {
+    const nav = document.querySelector("nav.mobile-open");
+    const target = event.target;
+
+    if (!nav || !(target instanceof Node) || nav.contains(target)) return;
+
+    nav.classList.remove("mobile-open");
+
+    const toggle = nav.querySelector<HTMLButtonElement>(".mobile-menu-toggle");
+    toggle?.setAttribute("aria-expanded", "false");
+    toggle?.setAttribute("aria-label", "Open menu");
+  }
+
+  document.addEventListener("pointerdown", onPointerDown);
+  return () => document.removeEventListener("pointerdown", onPointerDown);
 }
 
 function wrapInlineScript(content: string) {

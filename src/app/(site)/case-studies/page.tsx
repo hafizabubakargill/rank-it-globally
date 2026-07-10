@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { publicProjects } from "@/content/publicPages";
+import { publicProjects, type ProjectCard } from "@/content/publicPages";
 
 export const metadata: Metadata = {
   title: "Case Studies | Rank It Globally",
@@ -11,8 +11,70 @@ export const metadata: Metadata = {
   },
 };
 
-const featured = publicProjects.slice(0, 6);
-const categories = Array.from(new Set(publicProjects.map((project) => project.category)));
+const workCategories = [
+  "Web Portfolio",
+  "SEO",
+  "Social Media",
+  "Ads",
+  "E-Commerce",
+  "Local Services",
+];
+
+function getWorkTags(project: ProjectCard) {
+  const searchable = [
+    project.slug,
+    project.name,
+    project.category,
+    project.platform,
+    project.result,
+  ]
+    .join(" ")
+    .toLowerCase();
+  const tags = ["Web Portfolio"];
+
+  if (
+    project.category === "Local Service" ||
+    /dental|paint|cleaning|auto|forklift|salon|law|real estate|local/.test(
+      searchable,
+    )
+  ) {
+    tags.push("SEO");
+  }
+
+  if (/prana|beauty|habeora|moxe|newtiful|fortune|nail|social/.test(searchable)) {
+    tags.push("Social Media");
+  }
+
+  if (/landing|lead|conversion|finance|loan|ads|ppc|shopify/.test(searchable)) {
+    tags.push("Ads");
+  }
+
+  if (
+    project.category === "E-Commerce" ||
+    /shopify|woocommerce|store|retail|product|dtc|e-commerce/.test(searchable)
+  ) {
+    tags.push("E-Commerce");
+  }
+
+  if (project.category === "Local Service") {
+    tags.push("Local Services");
+  }
+
+  return Array.from(new Set(tags));
+}
+
+function getCardSize(index: number) {
+  if (index % 9 === 0) return "large";
+  if (index % 5 === 0) return "wide";
+  if (index % 4 === 0) return "tall";
+  return "standard";
+}
+
+const masonryProjects = publicProjects.map((project, index) => ({
+  ...project,
+  tags: getWorkTags(project),
+  cardSize: getCardSize(index),
+}));
 
 export default function CaseStudiesPage() {
   return (
@@ -35,22 +97,33 @@ export default function CaseStudiesPage() {
         </div>
       </section>
 
-      <section className="case-category-row" aria-label="Project categories">
-        {categories.map((category) => (
-          <span key={category}>{category}</span>
+      <section
+        className="case-category-row case-category-row-featured"
+        aria-label="Case study categories"
+      >
+        {workCategories.map((category) => (
+          <span key={category}>
+            <strong>{category}</strong>
+          </span>
         ))}
       </section>
 
-      <section className="case-feature-grid">
-        {featured.map((project) => (
+      <section className="case-masonry-section" aria-label="Rank It Globally work">
+        <div className="case-list-head">
+          <p className="marketing-eyebrow">Work wall</p>
+          <h2>Browse projects by website, SEO, social, ads, and conversion work.</h2>
+        </div>
+        <div className="case-masonry-grid">
+          {masonryProjects.map((project) => (
           <a
-            className="case-feature-card"
+            className="case-masonry-card"
+            data-size={project.cardSize}
             href={project.url}
             key={project.slug}
             target="_blank"
             rel="noreferrer"
           >
-            <div className="case-feature-image">
+            <div className="case-masonry-image">
               <img
                 src={project.screenshot}
                 alt={`${project.name} website preview`}
@@ -58,8 +131,12 @@ export default function CaseStudiesPage() {
                 decoding="async"
               />
             </div>
-            <div className="case-feature-copy">
-              <span>{project.category}</span>
+            <div className="case-masonry-copy">
+              <div className="case-masonry-tags">
+                {project.tags.slice(0, 3).map((tag) => (
+                  <span key={tag}>{tag}</span>
+                ))}
+              </div>
               <h2>{project.name}</h2>
               <p>
                 {project.platform} · {project.location}
@@ -67,29 +144,6 @@ export default function CaseStudiesPage() {
               <strong>{project.result}</strong>
             </div>
           </a>
-        ))}
-      </section>
-
-      <section className="case-list-section">
-        <div className="case-list-head">
-          <p className="marketing-eyebrow">Project library</p>
-          <h2>More live builds and optimization work</h2>
-        </div>
-        <div className="case-mini-grid">
-          {publicProjects.slice(6).map((project) => (
-            <a
-              className="case-mini-card"
-              href={project.url}
-              key={project.slug}
-              target="_blank"
-              rel="noreferrer"
-            >
-              <span>{project.category}</span>
-              <strong>{project.name}</strong>
-              <small>
-                {project.platform} · {project.country}
-              </small>
-            </a>
           ))}
         </div>
       </section>

@@ -1,26 +1,18 @@
 "use client";
 
-import { FormEvent, useEffect, useMemo, useState } from "react";
-import Link from "next/link";
+import { FormEvent, useEffect, useMemo, useRef, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { calendlyUrl } from "@/content/publicPages";
 
-const progressSteps = [
-  "Checking page speed signals...",
-  "Reviewing on-page SEO structure...",
-  "Looking for crawlability blockers...",
-  "Preparing your report email...",
-];
+const MIN_PROGRESS_MS = 8000;
+const SLOW_PROGRESS_MS = 10000;
 
-const industries = [
-  "Ecommerce",
-  "Local Business",
-  "Healthcare",
-  "Law Firm",
-  "Home Services",
-  "Real Estate",
-  "SaaS / Tech",
-  "Other",
+const progressSteps = [
+  "Connecting to your website",
+  "Running Google PageSpeed check",
+  "Reviewing SEO structure",
+  "Checking conversion friction",
+  "Preparing your audit call",
 ];
 
 const auditOptions = [
@@ -43,15 +35,6 @@ const problemOptions = [
   "Not sure",
 ];
 
-const goalOptions = [
-  "More calls",
-  "More form submissions",
-  "More sales",
-  "Better Google rankings",
-  "Better website performance",
-  "Full growth plan",
-];
-
 const budgetOptions = [
   "Under $500",
   "$500-$1,000",
@@ -66,64 +49,159 @@ type AuditFormValues = {
   fullName: string;
   businessEmail: string;
   phoneNumber: string;
-  companyName: string;
   website: string;
-  businessLocation: string;
-  industry: string;
   auditScope: string[];
   biggestProblem: string;
-  mainGoal: string;
   budgetRange: string;
   message: string;
 };
+
+type CalendlyWidgetOptions = {
+  url: string;
+  parentElement: HTMLElement;
+  prefill?: {
+    name?: string;
+    email?: string;
+    customAnswers?: Record<string, string>;
+  };
+};
+
+type CalendlyMessage = {
+  event?: string;
+  payload?: {
+    invitee?: {
+      uri?: string;
+    };
+  };
+};
+
+declare global {
+  interface Window {
+    Calendly?: {
+      initInlineWidget?: (options: CalendlyWidgetOptions) => void;
+    };
+  }
+}
 
 const emptyForm: AuditFormValues = {
   fullName: "",
   businessEmail: "",
   phoneNumber: "",
-  companyName: "",
   website: "",
-  businessLocation: "",
-  industry: "",
   auditScope: [],
   biggestProblem: "",
-  mainGoal: "",
   budgetRange: "",
   message: "",
 };
 
 export default function FreeAuditForm() {
   const searchParams = useSearchParams();
+  const calendlyContainerRef = useRef<HTMLDivElement | null>(null);
+  const postedInviteesRef = useRef<Set<string>>(new Set());
   const [form, setForm] = useState<AuditFormValues>(() => ({
     ...emptyForm,
     website: searchParams.get("website") || "",
     businessEmail: searchParams.get("email") || "",
   }));
+  const [submittedForm, setSubmittedForm] = useState<AuditFormValues | null>(
+    null,
+  );
   const [state, setState] = useState<AuditState>("idle");
   const [message, setMessage] = useState("");
   const [stepIndex, setStepIndex] = useState(0);
+  const [isSlow, setIsSlow] = useState(false);
 
   useEffect(() => {
     if (state !== "loading") return;
 
-    const timer = window.setInterval(() => {
-      setStepIndex((current) => (current + 1) % progressSteps.length);
-    }, 1200);
+    const stepTimer = window.setInterval(() => {
+      setStepIndex((current) =>
+        Math.min(current + 1, progressSteps.length - 1),
+      );
+    }, MIN_PROGRESS_MS / progressSteps.length);
+    const slowTimer = window.setTimeout(() => {
+      setIsSlow(true);
+    }, SLOW_PROGRESS_MS);
 
-    return () => window.clearInterval(timer);
+    return () => {
+      window.clearInterval(stepTimer);
+      window.clearTimeout(slowTimer);
+    };
   }, [state]);
+
+  useEffect(() => {
+    function handleCalendlyMessage(event: MessageEvent<CalendlyMessage>) {
+      if (event.origin !== "https://calendly.com") return;
+      if (event.data?.event !== "calendly.event_scheduled") return;
+
+      const inviteeUri = event.data.payload?.invitee?.uri;
+      if (!inviteeUri || postedInviteesRef.current.has(inviteeUri)) return;
+
+      postedInviteesRef.current.add(inviteeUri);
+      void fetch("/api/booking", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ invitee_uri: inviteeUri }),
+      }).catch((error) => {
+        console.error("Calendly booking capture failed", error);
+      });
+    }
+
+    window.addEventListener("message", handleCalendlyMessage);
+    return () => window.removeEventListener("message", handleCalendlyMessage);
+  }, []);
+
+  useEffect(() => {
+    if (state !== "success" || !submittedForm || !calendlyContainerRef.current) {
+      return;
+    }
+
+    let cancelled = false;
+
+    loadCalendlyWidget()
+      .then(() => {
+        if (
+          cancelled ||
+          !window.Calendly?.initInlineWidget ||
+          !calendlyContainerRef.current
+        ) {
+          return;
+        }
+
+        calendlyContainerRef.current.innerHTML = "";
+        window.Calendly.initInlineWidget({
+          url: calendlyUrl,
+          parentElement: calendlyContainerRef.current,
+          prefill: {
+            name: submittedForm.fullName,
+            email: submittedForm.businessEmail,
+            customAnswers: {
+              a1: submittedForm.phoneNumber,
+              a2: submittedForm.website,
+              a3: submittedForm.auditScope.join(", "),
+              a4: submittedForm.biggestProblem,
+              a5: submittedForm.budgetRange,
+              a6: submittedForm.message,
+            },
+          },
+        });
+      })
+      .catch((error) => {
+        console.error("Calendly widget failed to load", error);
+      });
+
+    return () => {
+      cancelled = true;
+    };
+  }, [state, submittedForm]);
 
   const completedRequiredCount = useMemo(() => {
     const requiredValues = [
       form.fullName,
       form.businessEmail,
       form.phoneNumber,
-      form.companyName,
       form.website,
-      form.businessLocation,
-      form.industry,
       form.biggestProblem,
-      form.mainGoal,
       form.budgetRange,
     ];
     return (
@@ -149,12 +227,21 @@ export default function FreeAuditForm() {
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    const missingFields = getClientMissingFields(form);
+    if (missingFields.length) {
+      setState("error");
+      setMessage(`Please complete: ${missingFields.join(", ")}.`);
+      return;
+    }
+
     setState("loading");
     setMessage("");
     setStepIndex(0);
+    setIsSlow(false);
+    setSubmittedForm(null);
 
     try {
-      const response = await fetch("/api/audit", {
+      const apiRequest = fetch("/api/audit", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -163,6 +250,11 @@ export default function FreeAuditForm() {
           sourcePage: "/free-audit",
         }),
       });
+
+      const [response] = await Promise.all([
+        apiRequest,
+        wait(MIN_PROGRESS_MS),
+      ]);
       const data = (await response.json()) as { message?: string };
 
       if (!response.ok) {
@@ -170,9 +262,10 @@ export default function FreeAuditForm() {
       }
 
       setState("success");
+      setSubmittedForm(form);
       setMessage(
         data.message ||
-          "Audit request received. Your report is being prepared and emailed.",
+          "Audit request received. Pick a time below and we will walk through the findings together.",
       );
     } catch (error) {
       setState("error");
@@ -190,16 +283,16 @@ export default function FreeAuditForm() {
     <form className="standalone-audit-form" onSubmit={handleSubmit}>
       <div className="audit-form-intro">
         <div>
-          <strong>{completedRequiredCount}/11 required fields complete</strong>
+          <strong>{completedRequiredCount}/7 required fields complete</strong>
           <span>
-            This helps us send a useful audit, not a generic checklist.
+            This helps us review the right things before you choose a time.
           </span>
         </div>
       </div>
 
       <fieldset className="audit-fieldset">
         <legend>Contact details</legend>
-        <div className="audit-form-grid">
+        <div className="audit-form-grid audit-form-grid-contact">
           <TextField
             id="auditFullName"
             label="Full Name"
@@ -233,17 +326,8 @@ export default function FreeAuditForm() {
       </fieldset>
 
       <fieldset className="audit-fieldset">
-        <legend>Business profile</legend>
-        <div className="audit-form-grid">
-          <TextField
-            id="auditCompany"
-            label="Business / Company Name"
-            name="companyName"
-            value={form.companyName}
-            onChange={updateField}
-            autoComplete="organization"
-            required
-          />
+        <legend>Website audit priorities</legend>
+        <div className="audit-form-grid audit-form-grid-single">
           <TextField
             id="auditWebsite"
             label="Website URL"
@@ -255,30 +339,7 @@ export default function FreeAuditForm() {
             placeholder="https://yourwebsite.com"
             required
           />
-          <TextField
-            id="auditLocation"
-            label="Business Location"
-            name="businessLocation"
-            value={form.businessLocation}
-            onChange={updateField}
-            autoComplete="address-level2"
-            placeholder="City, State"
-            required
-          />
-          <SelectField
-            id="auditIndustry"
-            label="Business Type / Industry"
-            name="industry"
-            value={form.industry}
-            options={industries}
-            onChange={updateField}
-            required
-          />
         </div>
-      </fieldset>
-
-      <fieldset className="audit-fieldset">
-        <legend>Audit priorities</legend>
         <div>
           <span className="audit-form-label">What do you want audited?</span>
           <div className="audit-chip-grid">
@@ -305,15 +366,6 @@ export default function FreeAuditForm() {
             required
           />
           <SelectField
-            id="auditGoal"
-            label="Main Goal"
-            name="mainGoal"
-            value={form.mainGoal}
-            options={goalOptions}
-            onChange={updateField}
-            required
-          />
-          <SelectField
             id="auditBudget"
             label="Monthly Budget Range"
             name="budgetRange"
@@ -326,13 +378,13 @@ export default function FreeAuditForm() {
       </fieldset>
 
       <fieldset className="audit-fieldset">
-        <legend>Context</legend>
+        <legend>Budget and notes</legend>
         <div>
           <label htmlFor="auditMessage">Message / Notes</label>
           <textarea
             id="auditMessage"
             name="message"
-            placeholder="Tell us anything important about your website, goals, current marketing, or deadlines."
+            placeholder="Tell us anything important about your website, current marketing, or deadlines."
             value={form.message}
             onChange={(event) => updateField("message", event.target.value)}
             rows={5}
@@ -341,28 +393,55 @@ export default function FreeAuditForm() {
       </fieldset>
 
       <button className="cta-e cta-e-lg" type="submit" disabled={isLoading}>
-        {isLoading ? progressSteps[stepIndex] : "Get My Free Audit"}
+        {isLoading
+          ? isSlow
+            ? "Still preparing your audit..."
+            : progressSteps[stepIndex]
+          : "Get My Free Audit"}
         <span className="ar">→</span>
       </button>
 
       {isLoading ? (
         <div className="standalone-audit-progress" aria-live="polite">
-          <span />
-          <p>{progressSteps[stepIndex]}</p>
+          <div className="audit-progress-heading">
+            <strong>
+              {isSlow ? "Still preparing your audit..." : "Analysing your site"}
+            </strong>
+            <span>{form.website || "Your website"}</span>
+          </div>
+          <ol className="audit-progress-list">
+            {progressSteps.map((step, index) => {
+              const status =
+                index < stepIndex
+                  ? "done"
+                  : index === stepIndex
+                    ? "current"
+                    : "pending";
+              return (
+                <li className={`audit-progress-step ${status}`} key={step}>
+                  <span aria-hidden="true">{index < stepIndex ? "✓" : ""}</span>
+                  <p>{step}</p>
+                </li>
+              );
+            })}
+          </ol>
           <small>
-            Keep this tab open for confirmation. The full report is sent by
-            email.
+            Keep this tab open. We will show the calendar after the audit
+            request is accepted.
           </small>
         </div>
       ) : null}
 
       {state === "success" ? (
         <div className="standalone-audit-result success" aria-live="polite">
-          <strong>Audit started.</strong>
+          <strong>Audit started. Book your walkthrough below.</strong>
           <p>{message}</p>
-          <Link href={calendlyUrl} target="_blank" rel="noreferrer">
-            Book a call to walk through it
-          </Link>
+          <div className="standalone-calendly-panel">
+            <div
+              ref={calendlyContainerRef}
+              className="standalone-calendly-embed"
+            />
+          </div>
         </div>
       ) : null}
 
@@ -431,23 +510,163 @@ function SelectField({
   required?: boolean;
   onChange: (name: keyof AuditFormValues, value: string) => void;
 }) {
+  const wrapperRef = useRef<HTMLDivElement | null>(null);
+  const [isOpen, setIsOpen] = useState(false);
+  const buttonId = `${id}Button`;
+  const labelId = `${id}Label`;
+  const listboxId = `${id}Listbox`;
+
+  useEffect(() => {
+    if (!isOpen) return;
+
+    function handlePointerDown(event: PointerEvent) {
+      if (!wrapperRef.current?.contains(event.target as Node)) {
+        setIsOpen(false);
+      }
+    }
+
+    function handleKeyDown(event: KeyboardEvent) {
+      if (event.key === "Escape") {
+        setIsOpen(false);
+      }
+    }
+
+    document.addEventListener("pointerdown", handlePointerDown);
+    document.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      document.removeEventListener("pointerdown", handlePointerDown);
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [isOpen]);
+
+  function chooseOption(option: string) {
+    onChange(name, option);
+    setIsOpen(false);
+  }
+
   return (
-    <div>
-      <label htmlFor={id}>{label}</label>
-      <select
-        id={id}
+    <div className="audit-select-field" ref={wrapperRef}>
+      <label id={labelId} htmlFor={buttonId}>
+        {label}
+      </label>
+      <input
+        aria-hidden="true"
+        className="audit-select-hidden"
         name={name}
+        tabIndex={-1}
         value={value}
-        onChange={(event) => onChange(name, event.target.value)}
-        required={required}
+        readOnly
+      />
+      <button
+        aria-controls={isOpen ? listboxId : undefined}
+        aria-expanded={isOpen}
+        aria-haspopup="listbox"
+        aria-labelledby={`${labelId} ${buttonId}`}
+        className={`audit-select-trigger${value ? "" : " is-placeholder"}`}
+        id={buttonId}
+        onClick={() => setIsOpen((current) => !current)}
+        onKeyDown={(event) => {
+          if (event.key === "ArrowDown" || event.key === "Enter") {
+            event.preventDefault();
+            setIsOpen(true);
+          }
+        }}
+        type="button"
       >
-        <option value="">Choose one</option>
-        {options.map((option) => (
-          <option key={option} value={option}>
-            {option}
-          </option>
-        ))}
-      </select>
+        <span>{value || "Choose one"}</span>
+        <span className="audit-select-chevron" aria-hidden="true">
+          ↓
+        </span>
+      </button>
+      {required && !value ? (
+        <span className="audit-select-required" aria-hidden="true" />
+      ) : null}
+      {isOpen ? (
+        <div
+          className="audit-select-menu"
+          data-lenis-prevent
+          id={listboxId}
+          onTouchMove={(event) => event.stopPropagation()}
+          onWheel={(event) => event.stopPropagation()}
+          role="listbox"
+          aria-labelledby={labelId}
+        >
+          {options.map((option) => (
+            <button
+              aria-selected={value === option}
+              className="audit-select-option"
+              key={option}
+              onClick={() => chooseOption(option)}
+              role="option"
+              type="button"
+            >
+              {option}
+            </button>
+          ))}
+        </div>
+      ) : null}
     </div>
   );
+}
+
+function getClientMissingFields(form: AuditFormValues) {
+  const missingFields: string[] = [];
+
+  if (!form.fullName.trim()) missingFields.push("Full Name");
+  if (!form.businessEmail.trim()) missingFields.push("Business Email");
+  if (!form.phoneNumber.trim()) missingFields.push("Phone Number");
+  if (!form.website.trim()) missingFields.push("Website URL");
+  if (!form.auditScope.length) missingFields.push("What do you want audited?");
+  if (!form.biggestProblem.trim()) {
+    missingFields.push("Biggest Problem Right Now");
+  }
+  if (!form.budgetRange.trim()) missingFields.push("Monthly Budget Range");
+
+  return missingFields;
+}
+
+function wait(ms: number) {
+  return new Promise((resolve) => window.setTimeout(resolve, ms));
+}
+
+function loadCalendlyWidget() {
+  if (typeof window === "undefined") return Promise.resolve();
+  if (window.Calendly?.initInlineWidget) return Promise.resolve();
+
+  return new Promise<void>((resolve, reject) => {
+    if (!document.getElementById("calendly-widget-css")) {
+      const link = document.createElement("link");
+      link.id = "calendly-widget-css";
+      link.rel = "stylesheet";
+      link.href = "https://assets.calendly.com/assets/external/widget.css";
+      document.head.appendChild(link);
+    }
+
+    const existingScript = document.getElementById(
+      "calendly-widget-script",
+    ) as HTMLScriptElement | null;
+
+    if (existingScript) {
+      existingScript.addEventListener("load", () => resolve(), { once: true });
+      existingScript.addEventListener(
+        "error",
+        () => reject(new Error("Calendly script failed to load.")),
+        { once: true },
+      );
+      return;
+    }
+
+    const script = document.createElement("script");
+    script.id = "calendly-widget-script";
+    script.src = "https://assets.calendly.com/assets/external/widget.js";
+    script.async = true;
+    script.addEventListener("load", () => resolve(), { once: true });
+    script.addEventListener(
+      "error",
+      () => reject(new Error("Calendly script failed to load.")),
+      { once: true },
+    );
+    document.body.appendChild(script);
+  });
 }

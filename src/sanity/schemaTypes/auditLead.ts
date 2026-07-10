@@ -1,16 +1,5 @@
 import { defineField, defineType } from "sanity";
 
-const industryOptions = [
-  "Ecommerce",
-  "Local Business",
-  "Healthcare",
-  "Law Firm",
-  "Home Services",
-  "Real Estate",
-  "SaaS / Tech",
-  "Other",
-];
-
 const auditScopeOptions = [
   "Website Design",
   "SEO",
@@ -29,15 +18,6 @@ const problemOptions = [
   "Website looks outdated",
   "Ads not converting",
   "Not sure",
-];
-
-const goalOptions = [
-  "More calls",
-  "More form submissions",
-  "More sales",
-  "Better Google rankings",
-  "Better website performance",
-  "Full growth plan",
 ];
 
 const budgetOptions = [
@@ -78,31 +58,12 @@ export const auditLead = defineType({
       validation: (rule) => rule.email(),
     }),
     defineField({ name: "phoneNumber", title: "Phone Number", type: "string" }),
-    defineField({
-      name: "companyName",
-      title: "Business / Company Name",
-      type: "string",
-    }),
     defineField({ name: "websiteUrl", title: "Website URL", type: "url" }),
     defineField({
       name: "normalizedWebsite",
       title: "Normalized Website",
       type: "url",
       readOnly: true,
-    }),
-    defineField({
-      name: "businessLocation",
-      title: "Business Location",
-      type: "string",
-      description: "City, State",
-    }),
-    defineField({
-      name: "industry",
-      title: "Business Type / Industry",
-      type: "string",
-      options: {
-        list: industryOptions,
-      },
     }),
     defineField({
       name: "auditScope",
@@ -122,14 +83,6 @@ export const auditLead = defineType({
       },
     }),
     defineField({
-      name: "mainGoal",
-      title: "Main Goal",
-      type: "string",
-      options: {
-        list: goalOptions,
-      },
-    }),
-    defineField({
       name: "budgetRange",
       title: "Monthly Budget Range",
       type: "string",
@@ -142,6 +95,22 @@ export const auditLead = defineType({
       title: "Message / Notes",
       type: "text",
       rows: 4,
+    }),
+    defineField({
+      name: "adminLeadEmailStatus",
+      title: "Admin Lead Email Status",
+      type: "string",
+      readOnly: true,
+      options: {
+        list: ["pending", "sent", "failed"],
+      },
+    }),
+    defineField({
+      name: "adminEmailError",
+      title: "Admin Email Error",
+      type: "text",
+      rows: 3,
+      readOnly: true,
     }),
     defineField({
       name: "reportSummary",
@@ -167,14 +136,13 @@ export const auditLead = defineType({
   ],
   preview: {
     select: {
-      company: "companyName",
       name: "fullName",
       website: "websiteUrl",
       submittedAt: "submittedAt",
       status: "status",
     },
     prepare(selection) {
-      const title = selection.company || selection.name || "Audit Lead";
+      const title = selection.name || selection.website || "Audit Lead";
       const date = selection.submittedAt
         ? new Date(selection.submittedAt).toLocaleString()
         : "No date";

@@ -12,12 +12,8 @@ type AuditRequest = {
   fullName?: string;
   businessEmail?: string;
   phoneNumber?: string;
-  companyName?: string;
-  businessLocation?: string;
-  industry?: string;
   auditScope?: string[];
   biggestProblem?: string;
-  mainGoal?: string;
   budgetRange?: string;
   message?: string;
   sourcePage?: string;
@@ -27,18 +23,19 @@ type AuditLeadDetails = {
   fullName: string;
   businessEmail: string;
   phoneNumber: string;
-  companyName: string;
   websiteUrl: string;
   normalizedWebsite: string;
-  businessLocation: string;
-  industry: string;
   auditScope: string[];
   biggestProblem: string;
-  mainGoal: string;
   budgetRange: string;
   message: string;
   sourcePage: string;
   submissionType: "full" | "legacy-minimal";
+};
+
+type EmailStatusPatch = {
+  adminLeadEmailStatus?: "pending" | "sent" | "failed";
+  adminEmailError?: string;
 };
 
 export async function POST(request: Request) {
@@ -109,8 +106,15 @@ export async function POST(request: Request) {
       void patchAuditLead(sanityLeadId, { status: "failed" });
     }
   });
-  void sendAdminLeadReceipt({ website, email, leadDetails }).catch((error) => {
+  void sendAdminLeadReceipt({ website, email, leadDetails, sanityLeadId }).catch((error) => {
     console.error("Audit admin lead receipt failed", error);
+    if (sanityLeadId) {
+      void patchAuditLead(sanityLeadId, {
+        adminLeadEmailStatus: "failed",
+        adminEmailError:
+          error instanceof Error ? error.message : "Admin notification failed.",
+      });
+    }
   });
 
   return NextResponse.json({
@@ -137,8 +141,6 @@ async function processAuditLead({
   sanityLeadId?: string;
 }) {
   const audit = await buildAuditReport({ website, email });
-  const adminRecipients = getAdminRecipients();
-  const leadText = formatLeadDetails(leadDetails);
   const providerStatus = [
     `${audit.pageSpeed.source}: ${audit.pageSpeed.ok ? "completed" : audit.pageSpeed.error}`,
     `${audit.dataForSeo.source}: ${audit.dataForSeo.ok ? "completed" : audit.dataForSeo.error}`,
@@ -153,44 +155,25 @@ async function processAuditLead({
     email,
   });
 
-  const adminText = [
-    "New audit lead",
-    "",
-    leadText,
-    "",
-    "Provider status:",
-    `- ${audit.pageSpeed.source}: ${audit.pageSpeed.ok ? "completed" : audit.pageSpeed.error}`,
-    `- ${audit.dataForSeo.source}: ${audit.dataForSeo.ok ? "completed" : audit.dataForSeo.error}`,
-    "",
-    audit.report,
-  ].join("\n");
+  await upsertBrevoContact({
+    email,
+    website,
+    name: leadDetails.fullName,
+    source: "Free site audit",
+  });
 
-  await Promise.all([
-    upsertBrevoContact({ email, website }),
-    sendBrevoEmail({
-      to: email,
-      bcc: adminRecipients,
-      subject: "Your Rank It Globally website audit is ready",
-      text: audit.report,
-      html: visitorHtml,
-    }),
-    ...adminRecipients.map((adminEmail) =>
-      sendBrevoEmail({
-        to: adminEmail,
-        subject: `New audit lead and report: ${website}`,
-        text: adminText,
-        html: reportToHtml(adminText, {
-          title: "New Audit Lead Submitted",
-          eyebrow: "Admin Notification",
-          intro:
-            "A visitor submitted the free audit form. Their generated report is included below.",
-          website,
-          email,
-          admin: true,
-        }),
-      }),
-    ),
-  ]);
+  const visitorEmailResult = await sendBrevoEmail({
+    to: email,
+    subject: "Your Rank It Globally website audit is ready",
+    text: audit.report,
+    html: visitorHtml,
+  });
+
+  if (!visitorEmailResult.ok) {
+    throw new Error(
+      `Visitor audit email failed: ${String(visitorEmailResult.error)}`,
+    );
+  }
 
   if (sanityLeadId) {
     await patchAuditLead(sanityLeadId, {
@@ -205,21 +188,24 @@ async function sendAdminLeadReceipt({
   website,
   email,
   leadDetails,
+  sanityLeadId,
 }: {
   website: string;
   email: string;
   leadDetails: AuditLeadDetails;
+  sanityLeadId?: string;
 }) {
   const text = [
     "New audit form submission received.",
     "",
     formatLeadDetails(leadDetails),
     "",
-    "The automated report is now being generated. A second email with the full report will follow after PageSpeed, DataForSEO, and AI analysis complete.",
+    "The automated report is now being generated for the visitor. This is the admin lead notification.",
   ].join("\n");
 
-  await Promise.all(
-    getAdminRecipients().map((adminEmail) =>
+  const adminRecipients = getAdminRecipients();
+  const results = await Promise.all(
+    adminRecipients.map((adminEmail) =>
       sendBrevoEmail({
         to: adminEmail,
         subject: `New audit form submission: ${website}`,
@@ -236,6 +222,18 @@ async function sendAdminLeadReceipt({
       }),
     ),
   );
+  const errors = collectEmailErrors(results, adminRecipients);
+
+  if (sanityLeadId) {
+    await patchAuditLead(sanityLeadId, {
+      adminLeadEmailStatus: errors.length ? "failed" : "sent",
+      ...(errors.length ? { adminEmailError: errors.join("\n") } : {}),
+    });
+  }
+
+  if (errors.length) {
+    console.error("Audit admin lead receipt failed", errors);
+  }
 }
 
 function getAdminRecipients() {
@@ -259,26 +257,18 @@ function buildLeadDetails(
   const fullName = clean(payload.fullName);
   const businessEmail = clean(payload.businessEmail) || email;
   const phoneNumber = clean(payload.phoneNumber);
-  const companyName = clean(payload.companyName);
-  const businessLocation = clean(payload.businessLocation);
-  const industry = clean(payload.industry);
   const auditScope = Array.isArray(payload.auditScope)
     ? payload.auditScope.map(clean).filter(Boolean)
     : [];
   const biggestProblem = clean(payload.biggestProblem);
-  const mainGoal = clean(payload.mainGoal);
   const budgetRange = clean(payload.budgetRange);
   const message = clean(payload.message);
   const sourcePage = clean(payload.sourcePage) || "/free-audit";
   const hasExpandedFields = Boolean(
     fullName ||
       phoneNumber ||
-      companyName ||
-      businessLocation ||
-      industry ||
       auditScope.length ||
       biggestProblem ||
-      mainGoal ||
       budgetRange ||
       message,
   );
@@ -287,14 +277,10 @@ function buildLeadDetails(
     fullName,
     businessEmail,
     phoneNumber,
-    companyName,
     websiteUrl: clean(rawWebsite),
     normalizedWebsite,
-    businessLocation,
-    industry,
     auditScope,
     biggestProblem,
-    mainGoal,
     budgetRange,
     message,
     sourcePage,
@@ -307,13 +293,9 @@ function getMissingRequiredFields(lead: AuditLeadDetails) {
   if (!lead.fullName) missing.push("Full name");
   if (!lead.businessEmail) missing.push("Business email");
   if (!lead.phoneNumber) missing.push("Phone number");
-  if (!lead.companyName) missing.push("Business / company name");
   if (!lead.websiteUrl) missing.push("Website URL");
-  if (!lead.businessLocation) missing.push("Business location");
-  if (!lead.industry) missing.push("Business type / industry");
   if (!lead.auditScope.length) missing.push("What you want audited");
   if (!lead.biggestProblem) missing.push("Biggest problem");
-  if (!lead.mainGoal) missing.push("Main goal");
   if (!lead.budgetRange) missing.push("Monthly budget range");
   return missing;
 }
@@ -329,16 +311,13 @@ async function createAuditLead(lead: AuditLeadDetails) {
     fullName: lead.fullName,
     businessEmail: lead.businessEmail,
     phoneNumber: lead.phoneNumber,
-    companyName: lead.companyName,
     websiteUrl: lead.normalizedWebsite,
     normalizedWebsite: lead.normalizedWebsite,
-    businessLocation: lead.businessLocation,
-    industry: lead.industry,
     auditScope: lead.auditScope,
     biggestProblem: lead.biggestProblem,
-    mainGoal: lead.mainGoal,
     budgetRange: lead.budgetRange,
     message: lead.message,
+    adminLeadEmailStatus: "pending",
   });
 
   return result._id;
@@ -346,7 +325,11 @@ async function createAuditLead(lead: AuditLeadDetails) {
 
 async function patchAuditLead(
   id: string,
-  patch: { status?: string; reportSummary?: string; providerStatus?: string },
+  patch: {
+    status?: string;
+    reportSummary?: string;
+    providerStatus?: string;
+  } & EmailStatusPatch,
 ) {
   if (!hasSanityWriteConfig) return;
   await writeClient.patch(id).set(patch).commit();
@@ -358,17 +341,24 @@ function formatLeadDetails(lead: AuditLeadDetails) {
     `Full name: ${lead.fullName || "Not provided"}`,
     `Business email: ${lead.businessEmail}`,
     `Phone number: ${lead.phoneNumber || "Not provided"}`,
-    `Company: ${lead.companyName || "Not provided"}`,
     `Website: ${lead.normalizedWebsite}`,
-    `Business location: ${lead.businessLocation || "Not provided"}`,
-    `Industry: ${lead.industry || "Not provided"}`,
     `Audit scope: ${lead.auditScope.length ? lead.auditScope.join(", ") : "Not provided"}`,
     `Biggest problem: ${lead.biggestProblem || "Not provided"}`,
-    `Main goal: ${lead.mainGoal || "Not provided"}`,
     `Monthly budget: ${lead.budgetRange || "Not provided"}`,
     `Message: ${lead.message || "Not provided"}`,
     `Source page: ${lead.sourcePage}`,
   ].join("\n");
+}
+
+function collectEmailErrors(
+  results: Awaited<ReturnType<typeof sendBrevoEmail>>[],
+  recipients: string[],
+) {
+  return results
+    .map((result, index) =>
+      result.ok ? "" : `${recipients[index]}: ${String(result.error)}`,
+    )
+    .filter(Boolean);
 }
 
 function clean(value: unknown) {

@@ -11,9 +11,54 @@ export const metadata: Metadata = {
   },
 };
 
+const aboutFaqs = [
+  {
+    question: "Do you only build websites, or do you also help with SEO?",
+    answer:
+      "We do both. The website is built with technical SEO, AI-search structure, speed, and conversion flow in mind so design and rankings support the same business goal.",
+  },
+  {
+    question: "Can you improve an existing website instead of rebuilding it?",
+    answer:
+      "Yes. We start with an audit to see whether a focused optimization pass, landing page refresh, or full redesign will create the biggest improvement.",
+  },
+  {
+    question: "What types of businesses do you work with?",
+    answer:
+      "We work with local service businesses, e-commerce brands, clinics, SaaS and tech teams, law firms, real estate teams, and growth-focused small businesses.",
+  },
+  {
+    question: "What makes Rank It Globally different?",
+    answer:
+      "We combine UI/UX, SEO, AI-search readiness, and conversion strategy in one build. The goal is not just a prettier website, but a clearer path to more qualified leads.",
+  },
+  {
+    question: "What happens after I request a free audit?",
+    answer:
+      "We review the website, check the biggest visibility and conversion issues, email the audit summary, and invite you to book a call to walk through practical next steps.",
+  },
+];
+
+const aboutFaqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: aboutFaqs.map((faq) => ({
+    "@type": "Question",
+    name: faq.question,
+    acceptedAnswer: {
+      "@type": "Answer",
+      text: faq.answer,
+    },
+  })),
+};
+
 export default function AboutUsPage() {
   return (
     <main className="marketing-page">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(aboutFaqSchema) }}
+      />
       <section className="marketing-hero">
         <div className="marketing-eyebrow">About Rank It Globally</div>
         <h1>
@@ -82,6 +127,21 @@ export default function AboutUsPage() {
             <li key={step}>{step}</li>
           ))}
         </ol>
+      </section>
+
+      <section className="about-faq-section" id="faq">
+        <div className="case-list-head">
+          <p className="marketing-eyebrow">FAQs</p>
+          <h2>Common questions before working with us</h2>
+        </div>
+        <div className="about-faq-grid">
+          {aboutFaqs.map((faq) => (
+            <article className="about-faq-card" key={faq.question}>
+              <h3>{faq.question}</h3>
+              <p>{faq.answer}</p>
+            </article>
+          ))}
+        </div>
       </section>
     </main>
   );
