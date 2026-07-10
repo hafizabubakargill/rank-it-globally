@@ -21,13 +21,65 @@ const nextConfig: NextConfig = {
     ];
   },
   async headers() {
+    const documentHeaders = [
+      {
+        key: "Cache-Control",
+        value: "public, max-age=0, must-revalidate",
+      },
+    ];
+
     return [
+      {
+        source: "/",
+        headers: documentHeaders,
+      },
+      {
+        source: "/about-us",
+        headers: documentHeaders,
+      },
+      {
+        source: "/case-studies",
+        headers: documentHeaders,
+      },
+      {
+        source: "/contact-us",
+        headers: documentHeaders,
+      },
+      {
+        source: "/free-audit",
+        headers: documentHeaders,
+      },
+      {
+        source: "/blog",
+        headers: documentHeaders,
+      },
+      {
+        source: "/blog/:slug*",
+        headers: documentHeaders,
+      },
+      {
+        source: "/privacy-policy",
+        headers: documentHeaders,
+      },
+      {
+        source: "/terms",
+        headers: documentHeaders,
+      },
       {
         source: "/assets/:path*",
         headers: [
           {
             key: "Cache-Control",
             value: "public, max-age=31536000, immutable",
+          },
+        ],
+      },
+      {
+        source: "/favicon.ico",
+        headers: [
+          {
+            key: "Cache-Control",
+            value: "public, max-age=86400, stale-while-revalidate=604800",
           },
         ],
       },

@@ -3,6 +3,9 @@ import Script from "next/script";
 import "./globals.css";
 import "../styles/landing.css";
 
+const brandIcon = "/assets/brand/favicon.png";
+const appleIcon = "/assets/brand/apple-touch-icon.png";
+
 export const metadata: Metadata = {
   metadataBase: new URL("https://rankitglobally.com"),
   title:
@@ -29,7 +32,7 @@ export const metadata: Metadata = {
     description:
       "We build websites that rank on AI search, dominate Google, and turn clicks into clients. Get your free SEO audit - no obligation.",
     url: "https://rankitglobally.com/",
-    images: ["/assets/brand/logo-icon.svg"],
+    images: [brandIcon],
   },
   twitter: {
     card: "summary_large_image",
@@ -37,12 +40,15 @@ export const metadata: Metadata = {
     title: "Rank It Globally | AI SEO & Web Design Agency",
     description:
       "We build websites that rank on AI search, dominate Google, and turn clicks into clients. Free SEO audit - no obligation.",
-    images: ["/assets/brand/logo-icon.svg"],
+    images: [brandIcon],
   },
   icons: {
-    icon: "/assets/brand/logo-icon.svg",
-    shortcut: "/assets/brand/logo-icon.svg",
-    apple: "/assets/brand/logo-icon.svg",
+    icon: [
+      { url: "/favicon.ico", sizes: "64x64", type: "image/x-icon" },
+      { url: brandIcon, sizes: "512x512", type: "image/png" },
+    ],
+    shortcut: "/favicon.ico",
+    apple: [{ url: appleIcon, sizes: "180x180", type: "image/png" }],
   },
 };
 
