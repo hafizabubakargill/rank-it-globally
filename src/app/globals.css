@@ -1073,6 +1073,18 @@ select {
     box-shadow 0.3s var(--ease, cubic-bezier(0.22, 1, 0.36, 1));
 }
 
+.marketing-card:not(.contact-card) {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+
+.marketing-card:not(.contact-card) > h2,
+.marketing-card:not(.contact-card) > h3,
+.marketing-card:not(.contact-card) > p {
+  margin: 0;
+}
+
 a.marketing-card:hover {
   transform: translateY(-5px);
   border-color: rgba(102, 100, 228, 0.34);

@@ -87,7 +87,7 @@ export default function CaseStudiesPage() {
             Audit my website <span className="ar">→</span>
           </Link>
           <Link className="marketing-link" href="/#portfolio">
-            View homepage portfolio
+            See the work in action
           </Link>
         </div>
       </section>
