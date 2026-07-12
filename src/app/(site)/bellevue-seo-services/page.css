@@ -1,0 +1,717 @@
+.bellevue-page {
+  --bellevue-border: rgba(91, 73, 214, 0.16);
+  --bellevue-surface: rgba(255, 255, 255, 0.82);
+  color: #17142f;
+}
+
+.bellevue-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(390px, 0.88fr);
+  gap: clamp(2rem, 5vw, 5rem);
+  align-items: center;
+}
+
+.bellevue-hero-copy {
+  max-width: 690px;
+}
+
+.bellevue-hero-copy h1 {
+  max-width: 760px;
+}
+
+.bellevue-process-panel {
+  position: relative;
+  overflow: hidden;
+  padding: clamp(1.4rem, 3vw, 2.25rem);
+  border: 1px solid var(--bellevue-border);
+  border-radius: 8px;
+  background:
+    linear-gradient(145deg, rgba(49, 29, 143, 0.98), rgba(18, 12, 56, 0.98)),
+    #181039;
+  box-shadow: 0 24px 60px rgba(33, 20, 91, 0.2);
+  color: #fff;
+}
+
+.bellevue-process-panel::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.055) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.055) 1px, transparent 1px);
+  background-size: 52px 52px;
+  pointer-events: none;
+}
+
+.bellevue-panel-label,
+.bellevue-process-list,
+.bellevue-panel-footer {
+  position: relative;
+}
+
+.bellevue-process-panel .bellevue-panel-label {
+  margin: 0 0 1.1rem;
+  color: #fff !important;
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.bellevue-process-list {
+  display: grid;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.bellevue-process-list li {
+  display: grid;
+  grid-template-columns: 34px minmax(0, 1fr) auto;
+  gap: 0.75rem;
+  align-items: center;
+  min-height: 56px;
+  border-top: 1px solid rgba(255, 255, 255, 0.11);
+}
+
+.bellevue-process-list li:last-child {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.11);
+}
+
+.bellevue-process-list li > span:nth-child(2) {
+  font-size: 0.98rem;
+  font-weight: 700;
+}
+
+.bellevue-process-list small {
+  color: #aaa0d6;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+}
+
+.bellevue-process-number {
+  display: grid;
+  width: 28px;
+  height: 28px;
+  place-items: center;
+  border: 1px solid rgba(255, 255, 255, 0.24);
+  border-radius: 50%;
+  color: #bcaaff;
+  font-size: 0.72rem;
+  font-weight: 700;
+}
+
+.bellevue-panel-footer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  margin-top: 1.25rem;
+}
+
+.bellevue-panel-footer span {
+  padding: 0.42rem 0.62rem;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.07);
+  color: #ded8fa;
+  font-size: 0.72rem;
+}
+
+.bellevue-section {
+  width: 100%;
+  max-width: 1200px;
+  margin-inline: auto;
+  padding-block: clamp(3.5rem, 7vw, 6.5rem);
+}
+
+.bellevue-section-heading {
+  max-width: 850px;
+  margin-bottom: clamp(1.8rem, 4vw, 3.25rem);
+}
+
+.bellevue-section-heading h2,
+.bellevue-final-cta h2 {
+  margin: 0;
+  color: #17142f;
+  font-size: clamp(1.9rem, 3.25vw, 3.2rem);
+  font-weight: 700;
+  line-height: 1.08;
+}
+
+.bellevue-section-heading > p:last-child,
+.bellevue-final-cta > p:not(.marketing-eyebrow) {
+  max-width: 760px;
+  margin: 1rem 0 0;
+  color: #66617e;
+  font-size: clamp(1rem, 1.25vw, 1.12rem);
+  line-height: 1.75;
+}
+
+.bellevue-service-stack {
+  display: grid;
+  gap: 1rem;
+}
+
+.bellevue-service-card {
+  display: grid;
+  grid-template-columns: minmax(220px, 0.7fr) minmax(0, 1.7fr);
+  gap: clamp(1.5rem, 4vw, 4rem);
+  padding: clamp(1.4rem, 3vw, 2.4rem);
+  border: 1px solid var(--bellevue-border);
+  border-radius: 8px;
+  background: var(--bellevue-surface);
+  box-shadow: 0 14px 36px rgba(46, 33, 111, 0.055);
+}
+
+.bellevue-service-identity {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.bellevue-service-identity h3 {
+  margin: 1rem 0 0.6rem;
+  color: #17142f;
+  font-size: clamp(1.25rem, 2vw, 1.65rem);
+  line-height: 1.2;
+}
+
+.bellevue-service-icon {
+  display: grid;
+  width: 50px;
+  height: 50px;
+  place-items: center;
+  border: 1px solid rgba(101, 77, 231, 0.2);
+  border-radius: 8px;
+  background: #f2efff;
+  color: #5c48dc;
+}
+
+.bellevue-service-icon svg {
+  width: 25px;
+  height: 25px;
+}
+
+.bellevue-stage {
+  color: #765ee8;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+
+.bellevue-service-body p {
+  margin: 0 0 0.8rem;
+  color: #625e76;
+  line-height: 1.75;
+}
+
+.bellevue-service-body ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 1.25rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.bellevue-service-body li,
+.bellevue-industry-list li {
+  padding: 0.48rem 0.68rem;
+  border: 1px solid rgba(99, 75, 226, 0.16);
+  border-radius: 999px;
+  background: #f7f5ff;
+  color: #4d476a;
+  font-size: 0.78rem;
+  font-weight: 600;
+}
+
+.bellevue-market-section,
+.bellevue-proof-section {
+  position: relative;
+}
+
+.bellevue-market-grid,
+.bellevue-proof-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.bellevue-market-grid article,
+.bellevue-proof-grid article {
+  position: relative;
+  overflow: hidden;
+  min-height: 210px;
+  padding: clamp(1.25rem, 2.5vw, 2rem);
+  border: 1px solid var(--bellevue-border);
+  border-radius: 8px;
+  background: var(--bellevue-surface);
+}
+
+.bellevue-market-grid article {
+  display: flex;
+  flex-direction: column;
+  min-height: 250px;
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, 0.98), rgba(243, 240, 255, 0.9));
+  box-shadow: 0 16px 38px rgba(46, 33, 111, 0.07);
+}
+
+.bellevue-market-grid article::after {
+  content: "";
+  position: absolute;
+  right: -30px;
+  bottom: -52px;
+  width: 130px;
+  height: 130px;
+  border: 22px solid rgba(111, 83, 230, 0.06);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.bellevue-market-card-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+}
+
+.bellevue-market-icon {
+  display: grid;
+  width: 48px;
+  height: 48px;
+  place-items: center;
+  border: 1px solid rgba(103, 77, 225, 0.2);
+  border-radius: 8px;
+  background: #ece7ff;
+  color: #5c48dc;
+}
+
+.bellevue-market-icon svg {
+  width: 24px;
+  height: 24px;
+}
+
+.bellevue-market-number {
+  color: rgba(80, 62, 172, 0.45);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+}
+
+.bellevue-market-signal {
+  align-self: flex-start;
+  margin-top: auto;
+  padding-top: 1.35rem;
+  color: #674fe0;
+  font-size: 0.75rem;
+  font-weight: 750;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.bellevue-market-grid strong,
+.bellevue-proof-grid strong {
+  display: block;
+  color: #17142f;
+  font-size: 1.05rem;
+}
+
+.bellevue-market-grid p,
+.bellevue-proof-grid p,
+.bellevue-timeline p {
+  margin: 0.75rem 0 0;
+  color: #68637e;
+  line-height: 1.65;
+}
+
+.bellevue-timeline {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.bellevue-timeline li {
+  position: relative;
+  display: flex;
+  gap: 0.8rem;
+  padding: 1.45rem 1.25rem 1.45rem 0;
+  border-top: 1px solid var(--bellevue-border);
+}
+
+.bellevue-timeline li:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  top: -4px;
+  right: 1rem;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #765ee8;
+}
+
+.bellevue-proof-grid small {
+  color: #806be8;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.bellevue-timeline-marker {
+  display: flex;
+  width: 78px;
+  min-width: 78px;
+  height: 78px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  background: #ece7ff;
+  color: #543ec7;
+}
+
+.bellevue-timeline-marker small {
+  color: #7766c7;
+  font-size: 0.55rem;
+  font-weight: 800;
+  letter-spacing: 0.025em;
+  white-space: nowrap;
+  text-transform: uppercase;
+}
+
+.bellevue-timeline-marker strong {
+  margin-top: 0.2rem;
+  font-size: 1.45rem;
+  line-height: 1;
+}
+
+.bellevue-timeline h3,
+.bellevue-proof-grid h3 {
+  margin: 0.45rem 0 0;
+  color: #17142f;
+  font-size: 1.12rem;
+  line-height: 1.3;
+}
+
+.bellevue-proof-grid {
+  margin-bottom: 1.5rem;
+}
+
+.bellevue-proof-grid article {
+  display: flex;
+  flex-direction: column;
+  padding-top: 1rem;
+}
+
+.bellevue-proof-brand {
+  position: relative;
+  width: 100%;
+  height: 92px;
+  margin-bottom: 1.25rem;
+  overflow: hidden;
+  border: 1px solid rgba(89, 72, 177, 0.12);
+  border-radius: 6px;
+  background: #fff;
+}
+
+.bellevue-proof-brand img {
+  object-fit: cover;
+  object-position: top center;
+}
+
+.bellevue-proof-grid strong {
+  margin-top: 0.7rem;
+}
+
+.bellevue-industry-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.bellevue-cost-note {
+  margin: 1.75rem 0 0;
+  color: #68637e;
+}
+
+.bellevue-cost-note a {
+  color: #5e49dc;
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+.bellevue-faq-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.8rem;
+}
+
+.bellevue-faq-list article {
+  align-self: start;
+  border: 1px solid var(--bellevue-border);
+  border-radius: 8px;
+  background: var(--bellevue-surface);
+}
+
+.bellevue-faq-list h3 {
+  margin: 0;
+}
+
+.bellevue-faq-list button {
+  display: flex;
+  width: 100%;
+  min-height: 64px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem 1.2rem;
+  border: 0;
+  background: transparent;
+  color: #17142f;
+  font: inherit;
+  font-weight: 700;
+  text-align: left;
+  line-height: 1.35;
+  cursor: pointer;
+}
+
+.bellevue-faq-list button:focus-visible {
+  outline: 3px solid rgba(115, 86, 237, 0.35);
+  outline-offset: 2px;
+}
+
+.bellevue-faq-list article > div > p {
+  margin: 0;
+  padding: 0 1.2rem 1.2rem;
+  color: #68637e;
+  line-height: 1.7;
+}
+
+.bellevue-faq-icon {
+  flex: 0 0 auto;
+  color: #6b53e3;
+  font-size: 1.25rem;
+  transition: transform 180ms ease;
+}
+
+.bellevue-faq-list article.is-open .bellevue-faq-icon {
+  transform: rotate(45deg);
+}
+
+.bellevue-final-cta {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  max-width: 1200px;
+  margin: clamp(2rem, 5vw, 4rem) auto 0;
+  padding: clamp(2rem, 5vw, 4.25rem);
+  border-radius: 8px;
+  background:
+    linear-gradient(135deg, rgba(26, 17, 77, 0.98), rgba(70, 43, 151, 0.96)),
+    #1a114d;
+  color: #fff;
+  text-align: center;
+}
+
+.bellevue-final-cta > *:not(.bellevue-cta-graphic) {
+  position: relative;
+  z-index: 1;
+}
+
+.bellevue-cta-graphic {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.bellevue-cta-ring {
+  position: absolute;
+  width: 180px;
+  height: 180px;
+  border: 28px solid rgba(203, 188, 255, 0.07);
+  border-radius: 50%;
+}
+
+.bellevue-cta-ring::after {
+  content: "";
+  position: absolute;
+  inset: 20px;
+  border: 1px solid rgba(222, 212, 255, 0.13);
+  border-radius: inherit;
+}
+
+.bellevue-cta-ring-left {
+  top: -100px;
+  left: -70px;
+}
+
+.bellevue-cta-ring-right {
+  right: -75px;
+  bottom: -110px;
+}
+
+.bellevue-cta-tile {
+  position: absolute;
+  display: grid;
+  width: 54px;
+  height: 54px;
+  place-items: center;
+  border: 1px solid rgba(222, 212, 255, 0.16);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.055);
+  color: rgba(222, 212, 255, 0.28);
+  transform: rotate(-8deg);
+}
+
+.bellevue-cta-tile svg {
+  width: 26px;
+  height: 26px;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.bellevue-cta-tile-search {
+  top: 28px;
+  left: 8%;
+}
+
+.bellevue-cta-tile-growth {
+  right: 8%;
+  bottom: 30px;
+  transform: rotate(8deg);
+}
+
+.bellevue-final-cta h2 {
+  max-width: 850px;
+  margin-inline: auto;
+  color: #fff;
+}
+
+.bellevue-final-cta .marketing-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  min-height: 30px;
+  margin-bottom: 1rem;
+  padding: 0.35rem 0.7rem;
+  border: 1px solid rgba(222, 212, 255, 0.2);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.075);
+  color: #e5dcff;
+  letter-spacing: 0.1em;
+}
+
+.bellevue-final-cta .gtext {
+  background: linear-gradient(100deg, #d3c1ff 0%, #ffffff 55%, #bd9cff 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+
+.bellevue-final-cta > p:not(.marketing-eyebrow) {
+  margin-inline: auto;
+  color: #d7d0ef;
+}
+
+.bellevue-final-cta .marketing-actions {
+  justify-content: center;
+}
+
+.bellevue-final-cta .marketing-link {
+  color: #fff;
+}
+
+@media (max-width: 960px) {
+  .bellevue-hero,
+  .bellevue-service-card {
+    grid-template-columns: 1fr;
+  }
+
+  .bellevue-hero-copy {
+    max-width: 800px;
+  }
+
+  .bellevue-timeline {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+  }
+
+  .bellevue-timeline li {
+    border: 1px solid var(--bellevue-border);
+    border-radius: 8px;
+    padding: 1.25rem;
+    background: var(--bellevue-surface);
+  }
+
+  .bellevue-timeline li::after {
+    display: none;
+  }
+}
+
+@media (max-width: 700px) {
+  .bellevue-process-panel {
+    padding: 1.2rem;
+  }
+
+  .bellevue-process-list li {
+    grid-template-columns: 30px minmax(0, 1fr);
+    min-height: 60px;
+  }
+
+  .bellevue-process-list small {
+    display: none;
+  }
+
+  .bellevue-market-grid,
+  .bellevue-proof-grid,
+  .bellevue-faq-list,
+  .bellevue-timeline {
+    grid-template-columns: 1fr;
+  }
+
+  .bellevue-market-grid article,
+  .bellevue-proof-grid article {
+    min-height: 0;
+  }
+
+  .bellevue-section {
+    padding-block: 3.5rem;
+  }
+
+  .bellevue-final-cta {
+    padding: 1.6rem;
+  }
+
+  .bellevue-cta-tile {
+    width: 44px;
+    height: 44px;
+    opacity: 0.7;
+  }
+
+  .bellevue-cta-tile-search {
+    top: 14px;
+    left: 14px;
+  }
+
+  .bellevue-cta-tile-growth {
+    right: 14px;
+    bottom: 14px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bellevue-faq-icon {
+    transition: none;
+  }
+}
