@@ -1,1 +1,121 @@
-{"@context":"https://schema.org","@type":"ProfessionalService","name":"Rank It Globally","description":"AI-powered web design and SEO agency helping businesses get found on Google and AI search.","url":"https://rankitglobally.com","priceRange":"$$","areaServed":"Worldwide","serviceType":["SEO","Web Design","AI Search Optimization","Local SEO"],"aggregateRating":{"@type":"AggregateRating","ratingValue":"4.9","reviewCount":"150"}}
+{
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  "@id": "https://rankitglobally.com/#professional-service",
+  "name": "Rank It Globally",
+  "description": "AI-powered web design and SEO agency helping businesses get found on Google and AI search.",
+  "url": "https://rankitglobally.com/",
+  "priceRange": "$$",
+  "areaServed": "Worldwide",
+  "makesOffer": [
+    {
+      "@type": "Offer",
+      "itemOffered": {
+        "@type": "Service",
+        "name": "Landing Pages",
+        "description": "High-converting landing pages for campaigns, launches, and lead generation."
+      }
+    },
+    {
+      "@type": "Offer",
+      "itemOffered": {
+        "@type": "Service",
+        "name": "UI/UX Design",
+        "description": "User-focused website design systems built for trust, clarity, and conversion."
+      }
+    },
+    {
+      "@type": "Offer",
+      "itemOffered": {
+        "@type": "Service",
+        "name": "Web Development",
+        "description": "Fast, responsive, SEO-ready website development for modern business websites."
+      }
+    },
+    {
+      "@type": "Offer",
+      "itemOffered": {
+        "@type": "Service",
+        "name": "E-Commerce",
+        "description": "Shopify, WooCommerce, and custom e-commerce experiences designed to sell."
+      }
+    },
+    {
+      "@type": "Offer",
+      "itemOffered": {
+        "@type": "Service",
+        "name": "CRO Strategy",
+        "description": "Conversion rate optimization strategy for turning more visitors into leads and sales."
+      }
+    },
+    {
+      "@type": "Offer",
+      "itemOffered": {
+        "@type": "Service",
+        "name": "Social Media",
+        "description": "Social media campaign planning and creative direction for growth-focused brands."
+      }
+    },
+    {
+      "@type": "Offer",
+      "itemOffered": {
+        "@type": "Service",
+        "name": "PPC Ads",
+        "description": "Paid advertising and landing page support for Google, Meta, and conversion campaigns."
+      }
+    },
+    {
+      "@type": "Offer",
+      "itemOffered": {
+        "@type": "Service",
+        "name": "App Development",
+        "description": "Application interface planning and development support for web and mobile products."
+      }
+    },
+    {
+      "@type": "Offer",
+      "itemOffered": {
+        "@type": "Service",
+        "name": "SEO",
+        "description": "Technical and on-page SEO foundations that help websites become easier to crawl and rank."
+      }
+    },
+    {
+      "@type": "Offer",
+      "itemOffered": {
+        "@type": "Service",
+        "name": "Local SEO / Google Business Profile",
+        "description": "Local visibility improvements for maps, service-area pages, citations, and Google Business Profile signals."
+      }
+    },
+    {
+      "@type": "Offer",
+      "itemOffered": {
+        "@type": "Service",
+        "name": "AI Search Optimization",
+        "description": "Answer engine and AI search optimization for Google AI Overviews, ChatGPT search, Gemini, and Perplexity visibility."
+      }
+    },
+    {
+      "@type": "Offer",
+      "itemOffered": {
+        "@type": "Service",
+        "name": "Website Speed Optimization",
+        "description": "Performance improvements for Core Web Vitals, mobile speed, script loading, and user experience."
+      }
+    },
+    {
+      "@type": "Offer",
+      "itemOffered": {
+        "@type": "Service",
+        "name": "Free Website Audit",
+        "description": "A free website audit covering speed, SEO, local visibility, conversion friction, and growth opportunities."
+      }
+    }
+  ],
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "4.9",
+    "reviewCount": "150"
+  }
+}

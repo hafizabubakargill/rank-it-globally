@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { MarketingIcon } from "@/components/MarketingVisuals";
 import { calendlyUrl, emailAddress, whatsappUrl } from "@/content/publicPages";
 
 export const metadata: Metadata = {
@@ -13,21 +14,27 @@ export const metadata: Metadata = {
 
 const contactOptions = [
   {
+    icon: "email",
     label: "Email",
     title: emailAddress,
-    body: "Best for project questions, audit follow-ups, and proposals.",
+    body: "Project questions, audit follow-ups, and proposals.",
+    action: "Send an email",
     href: `mailto:${emailAddress}`,
   },
   {
+    icon: "whatsapp",
     label: "WhatsApp",
     title: "Message us directly",
-    body: "Useful when you want a faster answer or want to share a website link.",
+    body: "Get a faster answer or share your website link with us.",
+    action: "Open WhatsApp",
     href: whatsappUrl,
   },
   {
+    icon: "calendar",
     label: "Calendar",
     title: "Book a free consultation",
-    body: "Choose a time and we will walk through your website, goals, and next steps.",
+    body: "Choose a time to discuss your website and the clearest next step.",
+    action: "Choose a time",
     href: calendlyUrl,
   },
 ];
@@ -37,7 +44,10 @@ export default function ContactUsPage() {
     <main className="marketing-page">
       <section className="marketing-hero compact">
         <div className="marketing-eyebrow">Contact Us</div>
-        <h1>Tell us what you want the website to do.</h1>
+        <h1>
+          Tell us what you want the website to{" "}
+          <span className="gtext">do.</span>
+        </h1>
         <p>
           Send a website, a problem, or a goal. We will point you toward the
           clearest next move: audit, rebuild, SEO, ads, CRO, or a simple fix.
@@ -66,9 +76,17 @@ export default function ContactUsPage() {
             target={option.href.startsWith("http") ? "_blank" : undefined}
             rel={option.href.startsWith("http") ? "noreferrer" : undefined}
           >
-            <span>{option.label}</span>
-            <h2>{option.title}</h2>
+            <div className="contact-card-head">
+              <span className="contact-icon" aria-hidden="true">
+                <MarketingIcon name={option.icon as "email" | "whatsapp" | "calendar"} />
+              </span>
+              <span>{option.label}</span>
+            </div>
+            <h3>{option.title}</h3>
             <p>{option.body}</p>
+            <strong className="contact-card-action">
+              {option.action} <span aria-hidden="true">→</span>
+            </strong>
           </a>
         ))}
       </section>
@@ -76,7 +94,9 @@ export default function ContactUsPage() {
       <section className="marketing-split">
         <div>
           <p className="marketing-eyebrow">Before you reach out</p>
-          <h2>A website URL is enough to start.</h2>
+          <h2>
+            A website URL is <span className="gtext">enough to start.</span>
+          </h2>
         </div>
         <div className="marketing-copy">
           <p>

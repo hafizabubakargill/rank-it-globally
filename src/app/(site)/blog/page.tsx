@@ -12,11 +12,13 @@ export default async function BlogPage() {
 
   return (
     <>
-      <main className="blog-page">
+      <main className="marketing-page blog-page">
         <div className="blog-inner blog-index-inner">
-          <header className="blog-header">
-            <p className="sec-label">Blog</p>
-            <h1>Insights for Better Search and Conversion</h1>
+          <header className="marketing-hero blog-header">
+            <p className="marketing-eyebrow">Blog</p>
+            <h1>
+              Insights for Better <span className="gtext">Search and Conversion.</span>
+            </h1>
             <p>
               Practical guides on AI search visibility, technical SEO, website
               performance, and conversion-focused web design.

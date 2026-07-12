@@ -37,7 +37,10 @@ export default function FreeAuditPage() {
       <section className="audit-hero">
         <div className="audit-hero-copy">
           <div className="marketing-eyebrow">Free Website Audit</div>
-          <h1>Find the leaks costing you rankings, leads, and sales.</h1>
+          <h1>
+            Find the leaks costing you{" "}
+            <span className="gtext">rankings, leads, and sales.</span>
+          </h1>
           <p>
             Tell us about your business and what feels stuck. We will check
             speed, crawlability, on-page SEO, AI search readiness, and
@@ -59,7 +62,9 @@ export default function FreeAuditPage() {
       <section className="marketing-split">
         <div>
           <p className="marketing-eyebrow">What you get</p>
-          <h2>A plain-English report, not a mystery spreadsheet.</h2>
+          <h2>
+            A plain-English report, <span className="gtext">not a mystery spreadsheet.</span>
+          </h2>
         </div>
         <div className="marketing-copy">
           <p>

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import CaseStudyGallery from "@/components/CaseStudyGallery";
 import { publicProjects, type ProjectCard } from "@/content/publicPages";
 
 export const metadata: Metadata = {
@@ -10,15 +11,6 @@ export const metadata: Metadata = {
     canonical: "https://rankitglobally.com/case-studies",
   },
 };
-
-const workCategories = [
-  "Web Portfolio",
-  "SEO",
-  "Social Media",
-  "Ads",
-  "E-Commerce",
-  "Local Services",
-];
 
 function getWorkTags(project: ProjectCard) {
   const searchable = [
@@ -81,7 +73,10 @@ export default function CaseStudiesPage() {
     <main className="marketing-page case-page">
       <section className="marketing-hero">
         <div className="marketing-eyebrow">Case Studies</div>
-        <h1>Websites built to make the next click easier.</h1>
+        <h1>
+          Websites built to make the{" "}
+          <span className="gtext">next click easier.</span>
+        </h1>
         <p>
           A growing library of live websites we have designed, developed, or
           optimized across e-commerce, local services, health, SaaS, nonprofits,
@@ -97,56 +92,7 @@ export default function CaseStudiesPage() {
         </div>
       </section>
 
-      <section
-        className="case-category-row case-category-row-featured"
-        aria-label="Case study categories"
-      >
-        {workCategories.map((category) => (
-          <span key={category}>
-            <strong>{category}</strong>
-          </span>
-        ))}
-      </section>
-
-      <section className="case-masonry-section" aria-label="Rank It Globally work">
-        <div className="case-list-head">
-          <p className="marketing-eyebrow">Work wall</p>
-          <h2>Browse projects by website, SEO, social, ads, and conversion work.</h2>
-        </div>
-        <div className="case-masonry-grid">
-          {masonryProjects.map((project) => (
-          <a
-            className="case-masonry-card"
-            data-size={project.cardSize}
-            href={project.url}
-            key={project.slug}
-            target="_blank"
-            rel="noreferrer"
-          >
-            <div className="case-masonry-image">
-              <img
-                src={project.screenshot}
-                alt={`${project.name} website preview`}
-                loading="lazy"
-                decoding="async"
-              />
-            </div>
-            <div className="case-masonry-copy">
-              <div className="case-masonry-tags">
-                {project.tags.slice(0, 3).map((tag) => (
-                  <span key={tag}>{tag}</span>
-                ))}
-              </div>
-              <h2>{project.name}</h2>
-              <p>
-                {project.platform} · {project.location}
-              </p>
-              <strong>{project.result}</strong>
-            </div>
-          </a>
-          ))}
-        </div>
-      </section>
+      <CaseStudyGallery projects={masonryProjects} />
     </main>
   );
 }

@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
-import { buildAuditReport, isEmail, normalizeWebsite } from "@/lib/audit";
+import { buildAuditReport, isEmail } from "@/lib/audit";
+import { normalizeWebsite } from "@/lib/website";
 import { reportToHtml, sendBrevoEmail, upsertBrevoContact } from "@/lib/brevo";
 import { hasSanityWriteConfig, writeClient } from "@/sanity/writeClient";
 

@@ -79,4 +79,9 @@ export const homepageFaqs: FaqItem[] = [
     answer:
       "For law firms, we focus on practice-area pages, local authority, attorney trust signals, consultation CTAs, structured data, and content that clearly answers client questions. We do not guarantee rankings, but we build the technical and content foundation search engines need.",
   },
+  {
+    question: "Can you improve my existing website without rebuilding everything?",
+    answer:
+      "Yes. We audit the current site first, then recommend the smallest high-impact path: speed fixes, content updates, conversion improvements, technical SEO, or a full rebuild only if it is truly the better investment.",
+  },
 ];

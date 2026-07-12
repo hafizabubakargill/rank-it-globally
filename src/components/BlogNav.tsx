@@ -4,15 +4,10 @@ import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 
 const homeLinks = [
-  { href: "/free-audit", label: "Free Audit" },
-  { href: "/#portfolio", label: "Portfolio" },
-  { href: "/#services", label: "Services" },
-  { href: "/case-studies", label: "Case Studies" },
   { href: "/about-us", label: "About" },
-  { href: "/contact-us", label: "Contact" },
-  { href: "/#estimator", label: "Pricing" },
-  { href: "/#faq", label: "FAQ" },
+  { href: "/case-studies", label: "Case Studies" },
   { href: "/blog", label: "Blog" },
+  { href: "/contact-us", label: "Contact" },
 ];
 
 export default function BlogNav() {

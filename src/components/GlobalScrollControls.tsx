@@ -9,6 +9,72 @@ export default function GlobalScrollControls() {
   const [bottomOffset, setBottomOffset] = useState(28);
 
   useEffect(() => {
+    const supportsFinePointer =
+      window.matchMedia?.("(pointer: fine)").matches ?? false;
+    const prefersReducedMotion =
+      window.matchMedia?.("(prefers-reduced-motion: reduce)").matches ?? false;
+
+    if (!supportsFinePointer || prefersReducedMotion) return;
+
+    const dot = document.getElementById("dot");
+    if (!dot) return;
+    const cursorDot = dot;
+
+    const hoverSelector =
+      "a,button,input,textarea,select,[role='button'],.ba-card,.mg-i,.vid-card,.pr-step,.svc,.ti,.marketing-card,.case-masonry-card,.contact-card,.audit-select-trigger,.audit-select-option";
+    const darkSelector =
+      ".statsx-panel,.scale-panel,.cta-sec,.vid-wrap,.vid-section,.clutch-review-card";
+
+    function onPointerMove(event: PointerEvent) {
+      cursorDot.style.left = `${event.clientX}px`;
+      cursorDot.style.top = `${event.clientY}px`;
+    }
+
+    function onPointerOver(event: PointerEvent) {
+      const target = event.target;
+      if (!(target instanceof Element)) return;
+      if (target.closest(hoverSelector)) document.body.classList.add("hov");
+      if (target.closest(darkSelector)) {
+        document.body.classList.add("dark-cursor");
+      }
+    }
+
+    function onPointerOut(event: PointerEvent) {
+      const target = event.target;
+      const related = event.relatedTarget;
+      if (!(target instanceof Element)) return;
+
+      const hoverElement = target.closest(hoverSelector);
+      const darkElement = target.closest(darkSelector);
+
+      if (hoverElement) {
+        if (related instanceof Element && hoverElement.contains(related)) {
+          return;
+        }
+        document.body.classList.remove("hov");
+      }
+
+      if (darkElement) {
+        if (related instanceof Element && darkElement.contains(related)) {
+          return;
+        }
+        document.body.classList.remove("dark-cursor");
+      }
+    }
+
+    document.addEventListener("pointermove", onPointerMove, { passive: true });
+    document.addEventListener("pointerover", onPointerOver);
+    document.addEventListener("pointerout", onPointerOut);
+
+    return () => {
+      document.removeEventListener("pointermove", onPointerMove);
+      document.removeEventListener("pointerover", onPointerOver);
+      document.removeEventListener("pointerout", onPointerOut);
+      document.body.classList.remove("hov", "dark-cursor");
+    };
+  }, []);
+
+  useEffect(() => {
     let lastScrollY = window.scrollY;
     let ticking = false;
     let resizeObserver: ResizeObserver | undefined;
@@ -84,6 +150,7 @@ export default function GlobalScrollControls() {
 
   return (
     <>
+      <div id="dot" aria-hidden="true" />
       {showSticky ? (
         <div className="sticky-bar" id="stickyBar">
           <div className="sticky-bar-inner">

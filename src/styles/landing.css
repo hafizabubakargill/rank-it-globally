@@ -1100,6 +1100,16 @@ a.cta-e[style*="width:100%"] {
 .footer-legal-links a{display:inline-flex;align-items:center;min-height:34px;color:#4A4870;text-decoration:none;font-family:var(--fh);font-size:.76rem;font-weight:700}
 .footer-legal-links a:hover,.footer-legal-links a:focus-visible{color:#5552D4;outline:none}
 
+@media(min-width:1280px){
+  .nav-inner,
+  .inner,
+  .hero-inner,
+  .site-footer .footer-inner{
+    padding-left:0;
+    padding-right:0;
+  }
+}
+
 @media(max-width:960px){
   .site-footer .footer-inner{grid-template-columns:1.2fr 1fr 1fr;gap:1.65rem}
   .footer-brand{grid-column:1/-1;max-width:560px}

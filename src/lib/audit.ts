@@ -20,16 +20,6 @@ type ReportResult = {
 
 const REQUEST_TIMEOUT_MS = 35_000;
 
-export function normalizeWebsite(value: string) {
-  const trimmed = value.trim();
-  const withProtocol = /^https?:\/\//i.test(trimmed)
-    ? trimmed
-    : `https://${trimmed}`;
-  const url = new URL(withProtocol);
-  url.hash = "";
-  return url.toString();
-}
-
 export function isEmail(value: string) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
 }

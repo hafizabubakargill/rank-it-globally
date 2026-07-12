@@ -3,6 +3,7 @@
 import { FormEvent, useEffect, useMemo, useRef, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { calendlyUrl } from "@/content/publicPages";
+import { normalizeWebsite } from "@/lib/website";
 
 const MIN_PROGRESS_MS = 8000;
 const SLOW_PROGRESS_MS = 10000;
@@ -234,6 +235,20 @@ export default function FreeAuditForm() {
       return;
     }
 
+    let normalizedWebsite: string;
+    try {
+      normalizedWebsite = normalizeWebsite(form.website);
+    } catch {
+      setState("error");
+      setMessage(
+        "Enter a complete website domain, such as example.com, example.net, or www.example.co.uk.",
+      );
+      return;
+    }
+
+    const normalizedForm = { ...form, website: normalizedWebsite };
+    setForm(normalizedForm);
+
     setState("loading");
     setMessage("");
     setStepIndex(0);
@@ -245,8 +260,8 @@ export default function FreeAuditForm() {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          ...form,
-          email: form.businessEmail,
+          ...normalizedForm,
+          email: normalizedForm.businessEmail,
           sourcePage: "/free-audit",
         }),
       });
@@ -262,7 +277,7 @@ export default function FreeAuditForm() {
       }
 
       setState("success");
-      setSubmittedForm(form);
+      setSubmittedForm(normalizedForm);
       setMessage(
         data.message ||
           "Audit request received. Pick a time below and we will walk through the findings together.",
@@ -332,11 +347,13 @@ export default function FreeAuditForm() {
             id="auditWebsite"
             label="Website URL"
             name="website"
-            type="url"
+            type="text"
+            inputMode="url"
             value={form.website}
             onChange={updateField}
             autoComplete="url"
-            placeholder="https://yourwebsite.com"
+            placeholder="yourwebsite.com"
+            helper="A full URL is not required. You can enter example.com, example.net, or www.example.co.uk."
             required
           />
         </div>
@@ -460,8 +477,10 @@ function TextField({
   label,
   name,
   type = "text",
+  inputMode,
   value,
   placeholder,
+  helper,
   autoComplete,
   required,
   onChange,
@@ -470,8 +489,10 @@ function TextField({
   label: string;
   name: keyof AuditFormValues;
   type?: string;
+  inputMode?: "url" | "email" | "tel" | "text";
   value: string;
   placeholder?: string;
+  helper?: string;
   autoComplete?: string;
   required?: boolean;
   onChange: (name: keyof AuditFormValues, value: string) => void;
@@ -480,7 +501,9 @@ function TextField({
     <div>
       <label htmlFor={id}>{label}</label>
       <input
+        aria-describedby={helper ? `${id}Helper` : undefined}
         id={id}
+        inputMode={inputMode}
         name={name}
         type={type}
         placeholder={placeholder}
@@ -488,7 +511,13 @@ function TextField({
         autoComplete={autoComplete}
         onChange={(event) => onChange(name, event.target.value)}
         required={required}
+        spellCheck={inputMode === "url" ? false : undefined}
       />
+      {helper ? (
+        <small className="audit-field-helper" id={`${id}Helper`}>
+          {helper}
+        </small>
+      ) : null}
     </div>
   );
 }
@@ -583,15 +612,12 @@ function SelectField({
         <span className="audit-select-required" aria-hidden="true" />
       ) : null}
       {isOpen ? (
-        <div
-          className="audit-select-menu"
-          data-lenis-prevent
-          id={listboxId}
-          onTouchMove={(event) => event.stopPropagation()}
-          onWheel={(event) => event.stopPropagation()}
-          role="listbox"
-          aria-labelledby={labelId}
-        >
+          <div
+            className="audit-select-menu"
+            id={listboxId}
+            role="listbox"
+            aria-labelledby={labelId}
+          >
           {options.map((option) => (
             <button
               aria-selected={value === option}
