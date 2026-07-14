@@ -124,6 +124,87 @@
   padding-block: clamp(3.5rem, 7vw, 6.5rem);
 }
 
+.bellevue-section--dark,
+.bellevue-section--soft {
+  width: 100vw;
+  max-width: none;
+  margin-inline: calc(50% - 50vw);
+  padding-inline: max(1.25rem, calc((100vw - 1200px) / 2));
+}
+
+.bellevue-section--dark {
+  background:
+    linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+    linear-gradient(135deg, #17103f, #2f1b72 64%, #211251);
+  background-size: 56px 56px, 56px 56px, auto;
+  color: #fff;
+}
+
+.bellevue-section--soft {
+  background: rgba(255, 255, 255, 0.72);
+  box-shadow:
+    inset 0 1px 0 rgba(91, 73, 214, 0.08),
+    inset 0 -1px 0 rgba(91, 73, 214, 0.08);
+}
+
+.bellevue-section--dark .bellevue-section-heading h2 {
+  color: #fff;
+}
+
+.bellevue-section--dark .bellevue-section-heading h2 .gtext {
+  color: #d6caff;
+  font-family: Georgia, serif;
+  font-style: italic;
+  -webkit-text-fill-color: #d6caff;
+}
+
+.bellevue-section--dark .marketing-eyebrow {
+  background: none;
+  color: #cbbdff;
+}
+
+.bellevue-section--dark .bellevue-section-heading > p:last-child,
+.bellevue-section--dark .bellevue-cost-note {
+  color: #d7d0ed;
+}
+
+.bellevue-section--dark .bellevue-cost-note a,
+.bellevue-section--dark > .marketing-link {
+  color: #d6caff;
+}
+
+.bellevue-section--dark .bellevue-timeline {
+  gap: 0.75rem;
+}
+
+.bellevue-section--dark .bellevue-timeline li {
+  min-height: 250px;
+  padding: 1.2rem;
+  border: 1px solid rgba(219, 208, 255, 0.16);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.075);
+}
+
+.bellevue-section--dark .bellevue-timeline li:not(:last-child)::after {
+  display: none;
+}
+
+.bellevue-section--dark .bellevue-timeline-marker {
+  border: 1px solid rgba(219, 208, 255, 0.22);
+  background: rgba(219, 208, 255, 0.1);
+  color: #fff;
+}
+
+.bellevue-section--dark .bellevue-timeline-marker small,
+.bellevue-section--dark .bellevue-timeline h3 {
+  color: #fff;
+}
+
+.bellevue-section--dark .bellevue-timeline p {
+  color: #d2cae7;
+}
+
 .bellevue-section-heading {
   max-width: 850px;
   margin-bottom: clamp(1.8rem, 4vw, 3.25rem);

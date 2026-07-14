@@ -3,6 +3,7 @@ import Link from "next/link";
 import {
   EastsideFinalCta,
   EastsideIcon,
+  EastsideRelatedLinks,
   EastsideSectionHeading,
 } from "@/components/bellevue-services/BellevueServiceShared";
 import {
@@ -71,6 +72,24 @@ const workflow = [
   ["03", "Optimize the core assets", "Improve the Google Business Profile, website signals, service information, and conversion path."],
   ["04", "Build local trust", "Strengthen reviews, local references, useful content, and supporting evidence across the Eastside."],
   ["05", "Measure and refine", "Track qualified visibility and actions, then expand what is creating meaningful business outcomes."],
+] as const;
+
+const industryCoverage = [
+  { icon: "profile", title: "Healthcare", body: "Appointments, practitioner trust, location accuracy, and a calm path to care." },
+  { icon: "search", title: "Law firms", body: "Practice-area intent, credible expertise, and qualified consultation journeys." },
+  { icon: "reviews", title: "Home services", body: "Service areas, urgent search intent, reputation, and direct call actions." },
+  { icon: "content", title: "Real estate", body: "Neighborhood expertise, listings, local authority, and lead-ready pages." },
+  { icon: "reviews", title: "Restaurants", body: "Discovery, hours, menus, reviews, reservations, and directions." },
+  { icon: "strategy", title: "Professional services", body: "Specialist fit, evidence, and clear consultation pathways." },
+  { icon: "profile", title: "Retail", body: "Store discovery, product context, local availability, and visits." },
+  { icon: "citations", title: "Automotive", body: "Services, availability, reputation, location signals, and calls." },
+] as const;
+
+const relatedLinks = [
+  { href: "/bellevue-seo-services", label: "Bellevue SEO services", description: "Build the broader technical, content, and authority foundation." },
+  { href: "/bellevue-social-media-marketing", label: "Bellevue social media marketing", description: "Create demand and connect campaign learning with search." },
+  { href: "/blog/how-much-does-seo-cost", label: "SEO pricing guide", description: "Understand common scopes, tiers, and practical budget tradeoffs." },
+  { href: "/case-studies", label: "Case studies", description: "See how websites and growth systems come together in practice." },
 ] as const;
 
 const faqs: BellevueFaqItem[] = [
@@ -164,7 +183,7 @@ export default function LocalSeoBellevuePage() {
         </div>
       </section>
 
-      <section className="eastside-section">
+      <section className="eastside-section eastside-section--dark">
         <EastsideSectionHeading eyebrow="What we optimize" title="Every signal should tell the" accent="same local story.">
           Local visibility becomes stronger when the listing, website, reviews, and third-party references reinforce one another.
         </EastsideSectionHeading>
@@ -179,7 +198,7 @@ export default function LocalSeoBellevuePage() {
         </div>
       </section>
 
-      <section className="eastside-section local-area-section">
+      <section className="eastside-section eastside-section--soft local-area-section">
         <EastsideSectionHeading eyebrow="Bellevue market context" title="Build locally, then expand across the" accent="Eastside with purpose.">
           We use one strong business foundation and add market-specific detail only where it improves relevance and the customer experience.
         </EastsideSectionHeading>
@@ -190,7 +209,7 @@ export default function LocalSeoBellevuePage() {
         </div>
       </section>
 
-      <section className="eastside-section">
+      <section className="eastside-section eastside-section--dark">
         <EastsideSectionHeading eyebrow="How the work moves" title="A local SEO system that improves" accent="in deliberate stages.">
           The sequence adapts to the current bottleneck, but the foundation always comes before expansion.
         </EastsideSectionHeading>
@@ -199,7 +218,7 @@ export default function LocalSeoBellevuePage() {
         </ol>
       </section>
 
-      <section className="eastside-section">
+      <section className="eastside-section eastside-section--soft">
         <EastsideSectionHeading eyebrow="Local and organic search" title="Different surfaces. One" accent="connected strategy.">
           Local SEO wins the nearby decision moment; organic SEO builds the wider authority that supports it.
         </EastsideSectionHeading>
@@ -210,14 +229,22 @@ export default function LocalSeoBellevuePage() {
         </div>
       </section>
 
-      <section className="eastside-section">
+      <section className="eastside-section eastside-section--dark local-industry-section">
         <EastsideSectionHeading eyebrow="Where local SEO matters" title="Built for businesses with a" accent="real service footprint.">
           We tailor the local strategy to how customers choose, contact, visit, or book each type of business.
         </EastsideSectionHeading>
-        <ul className="eastside-chip-list">{["Healthcare", "Law firms", "Home services", "Real estate", "Restaurants", "Professional services", "Retail", "Automotive"].map((item) => <li key={item}>{item}</li>)}</ul>
+        <div className="local-industry-grid">
+          {industryCoverage.map((industry) => (
+            <article key={industry.title}>
+              <span className="local-industry-icon"><EastsideIcon name={industry.icon} /></span>
+              <h3>{industry.title}</h3>
+              <p>{industry.body}</p>
+            </article>
+          ))}
+        </div>
       </section>
 
-      <section className="eastside-section">
+      <section className="eastside-section eastside-section--soft">
         <EastsideSectionHeading eyebrow="Proof over promises" title="Local growth needs a clearer path" accent="from search to action.">
           Our work joins discoverability with practical website journeys instead of treating rankings as the finish line.
         </EastsideSectionHeading>
@@ -228,17 +255,16 @@ export default function LocalSeoBellevuePage() {
         </div>
       </section>
 
-      <section className="eastside-section">
+      <section className="eastside-section eastside-section--dark">
         <EastsideSectionHeading eyebrow="Common questions" title="Local SEO in Bellevue," accent="explained clearly." />
         <BellevueServiceFaqs items={faqs} idPrefix="local-seo" />
       </section>
 
-      <section className="eastside-section eastside-related-links" aria-label="Related resources">
-        <Link href="/bellevue-seo-services">Bellevue SEO services</Link>
-        <Link href="/bellevue-social-media-marketing">Bellevue social media marketing</Link>
-        <Link href="/blog/how-much-does-seo-cost">SEO pricing guide</Link>
-        <Link href="/case-studies">Case studies</Link>
-      </section>
+      <EastsideRelatedLinks
+        title="Choose the next"
+        accent="useful step."
+        links={[...relatedLinks]}
+      />
 
       <EastsideFinalCta eyebrow="Start with local clarity" title="See what is limiting your" accent="Bellevue visibility." body="Request a free audit and we will identify the profile, website, review, and local search opportunities worth addressing first." />
     </main>

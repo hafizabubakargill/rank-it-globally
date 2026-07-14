@@ -383,7 +383,7 @@ export default function BellevueSeoServicesPage() {
         </div>
       </section>
 
-      <section className="bellevue-section">
+      <section className="bellevue-section bellevue-section--dark">
         <SectionHeading
           eyebrow="What is included"
           title="What our Bellevue SEO services"
@@ -417,7 +417,7 @@ export default function BellevueSeoServicesPage() {
         </div>
       </section>
 
-      <section className="bellevue-section bellevue-market-section">
+      <section className="bellevue-section bellevue-section--soft bellevue-market-section">
         <SectionHeading
           eyebrow="The Bellevue market"
           title="Search visibility for a"
@@ -445,7 +445,7 @@ export default function BellevueSeoServicesPage() {
         </div>
       </section>
 
-      <section className="bellevue-section">
+      <section className="bellevue-section bellevue-section--dark">
         <SectionHeading
           eyebrow="How we work"
           title="From audit to"
@@ -467,7 +467,7 @@ export default function BellevueSeoServicesPage() {
         </ol>
       </section>
 
-      <section className="bellevue-section bellevue-proof-section">
+      <section className="bellevue-section bellevue-section--soft bellevue-proof-section">
         <SectionHeading
           eyebrow="Proof, not promises"
           title="SEO connected to the"
@@ -499,7 +499,7 @@ export default function BellevueSeoServicesPage() {
         </Link>
       </section>
 
-      <section className="bellevue-section">
+      <section className="bellevue-section bellevue-section--dark">
         <SectionHeading
           eyebrow="Industry experience"
           title="Bellevue SEO shaped around"
@@ -520,7 +520,7 @@ export default function BellevueSeoServicesPage() {
         </p>
       </section>
 
-      <section className="bellevue-section bellevue-faq-section">
+      <section className="bellevue-section bellevue-section--soft bellevue-faq-section">
         <SectionHeading
           eyebrow="Common questions"
           title="Frequently asked questions about"

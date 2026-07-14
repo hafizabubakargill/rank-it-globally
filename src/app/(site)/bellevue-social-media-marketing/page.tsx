@@ -3,6 +3,7 @@ import Link from "next/link";
 import {
   EastsideFinalCta,
   EastsideIcon,
+  EastsideRelatedLinks,
   EastsideSectionHeading,
 } from "@/components/bellevue-services/BellevueServiceShared";
 import {
@@ -59,7 +60,21 @@ const faqs: BellevueFaqItem[] = [
   { question: "How quickly can social media marketing produce results?", answer: "Paid campaigns can generate early learning once they have enough delivery, while organic content usually builds familiarity and trust over a longer period. Timing varies by creative quality, offer, audience, budget, and conversion experience." },
   { question: "How do social media and SEO work together?", answer: "Social media creates demand, distributes expertise, reveals audience questions, and supplies content that can be developed into useful search assets. SEO captures active demand. Shared planning makes both channels more coherent." },
   { question: "What should social media reporting include?", answer: "Useful reporting explains reach and engagement in context, then connects them to traffic, enquiries, sales, lead quality, creative performance, and the next decisions. It should not stop at follower counts or isolated impressions." },
+  { question: "Can social media insights improve our website content?", answer: "Yes. Repeated audience questions, objections, comments, and winning creative themes can inform service pages, FAQs, articles, offers, and conversion copy. Social learning is a useful research input, not a replacement for search and customer data." },
 ];
+
+const searchOutcomes = [
+  { icon: "community", title: "Listen for real questions", body: "Comments, replies, sales conversations, and creative response reveal the language people actually use." },
+  { icon: "content", title: "Turn signals into assets", body: "Strong questions become useful service-page sections, FAQs, articles, campaign angles, and conversion copy." },
+  { icon: "analytics", title: "Feed results back in", body: "Search behavior and campaign response guide the next content cycle instead of leaving each channel isolated." },
+] as const;
+
+const relatedLinks = [
+  { href: "/bellevue-seo-services", label: "Bellevue SEO services", description: "Turn audience demand into durable organic visibility." },
+  { href: "/local-seo-bellevue", label: "Bellevue local SEO", description: "Strengthen Maps, profile, review, and nearby search signals." },
+  { href: "/case-studies", label: "Case studies", description: "Explore connected website, content, and campaign work." },
+  { href: "/free-audit", label: "Free website audit", description: "Find the most important gaps before choosing a channel plan." },
+] as const;
 
 const provider = { "@type": "Organization", name: "Rank It Globally", url: "https://rankitglobally.com/" };
 const schema = [
@@ -101,7 +116,7 @@ export default function BellevueSocialMediaMarketingPage() {
         </div>
       </section>
 
-      <section className="eastside-section">
+      <section className="eastside-section eastside-section--dark">
         <EastsideSectionHeading eyebrow="Connected social delivery" title="From strategy to reporting," accent="without the channel silos.">
           Every piece of work has a job: build familiarity, answer a question, create demand, support a campaign, or help someone take the next step.
         </EastsideSectionHeading>
@@ -113,7 +128,7 @@ export default function BellevueSocialMediaMarketingPage() {
         </div>
       </section>
 
-      <section className="eastside-section social-platform-section">
+      <section className="eastside-section eastside-section--soft social-platform-section">
         <EastsideSectionHeading eyebrow="Channel decisions" title="Use each platform for" accent="what it does best.">
           Platform choice follows audience behavior and business fit, not whichever channel is currently loudest.
         </EastsideSectionHeading>
@@ -122,7 +137,7 @@ export default function BellevueSocialMediaMarketingPage() {
         </div>
       </section>
 
-      <section className="eastside-section">
+      <section className="eastside-section eastside-section--dark">
         <EastsideSectionHeading eyebrow="Bellevue audience context" title="Content should match a market that" accent="researches before it responds.">
           Eastside audiences often compare options carefully. Useful expertise, credible proof, and a clear offer matter more than constant posting.
         </EastsideSectionHeading>
@@ -133,7 +148,7 @@ export default function BellevueSocialMediaMarketingPage() {
         </div>
       </section>
 
-      <section className="eastside-section">
+      <section className="eastside-section eastside-section--soft">
         <EastsideSectionHeading eyebrow="Content-to-campaign workflow" title="A production rhythm that keeps" accent="learning every cycle.">
           The work moves forward in a clear sequence, with organic and paid insights informing one another.
         </EastsideSectionHeading>
@@ -142,7 +157,7 @@ export default function BellevueSocialMediaMarketingPage() {
         </ol>
       </section>
 
-      <section className="eastside-section">
+      <section className="eastside-section eastside-section--dark">
         <EastsideSectionHeading eyebrow="Organic and paid social" title="Build familiarity and accelerate" accent="the strongest messages.">
           The right balance depends on available creative, audience size, sales cycle, and how quickly the business needs reliable campaign learning.
         </EastsideSectionHeading>
@@ -153,7 +168,7 @@ export default function BellevueSocialMediaMarketingPage() {
         </div>
       </section>
 
-      <section className="eastside-section social-proof-section">
+      <section className="eastside-section eastside-section--soft social-proof-section">
         <EastsideSectionHeading eyebrow="Multi-channel proof" title="The campaign is only as strong as" accent="the journey after the click.">
           We connect social creative with the website, message, conversion path, and measurement needed to turn attention into useful action.
         </EastsideSectionHeading>
@@ -164,23 +179,42 @@ export default function BellevueSocialMediaMarketingPage() {
         </div>
       </section>
 
-      <section className="eastside-section">
+      <section className="eastside-section eastside-section--dark social-search-section">
         <EastsideSectionHeading eyebrow="Social plus search" title="Create demand, then capture it" accent="when people start searching.">
           Social reveals the language and questions that audiences respond to. Search turns those insights into durable pages and answers.
         </EastsideSectionHeading>
-        <div className="social-search-loop" aria-label="Social and search integration workflow">
-          <span>Audience questions</span><span>Social content</span><span>Search demand</span><span>Useful website content</span><span>Campaign learning</span>
+        <div className="social-search-system">
+          <div className="social-search-core">
+            <span className="social-search-core-icon"><EastsideIcon name="search" /></span>
+            <span className="eastside-card-kicker">Shared learning loop</span>
+            <strong>One audience. Two discovery moments.</strong>
+            <p>Social earns attention before intent is fully formed. Search captures the moment that interest turns into active research.</p>
+          </div>
+          <div className="social-search-loop" aria-label="Social and search integration workflow">
+            <span>Audience questions</span><span>Social content</span><span>Search demand</span><span>Useful website content</span><span>Campaign learning</span>
+          </div>
+        </div>
+        <div className="social-search-outcomes">
+          {searchOutcomes.map((item) => (
+            <article key={item.title}>
+              <span><EastsideIcon name={item.icon} /></span>
+              <h3>{item.title}</h3>
+              <p>{item.body}</p>
+            </article>
+          ))}
         </div>
       </section>
 
-      <section className="eastside-section">
+      <section className="eastside-section eastside-section--soft">
         <EastsideSectionHeading eyebrow="Common questions" title="Bellevue social media marketing," accent="without the guesswork." />
         <BellevueServiceFaqs items={faqs} idPrefix="social-media" />
       </section>
 
-      <section className="eastside-section eastside-related-links" aria-label="Related resources">
-        <Link href="/bellevue-seo-services">Bellevue SEO services</Link><Link href="/local-seo-bellevue">Bellevue local SEO</Link><Link href="/case-studies">Case studies</Link><Link href="/free-audit">Free website audit</Link>
-      </section>
+      <EastsideRelatedLinks
+        title="Connect the next"
+        accent="part of the journey."
+        links={[...relatedLinks]}
+      />
 
       <EastsideFinalCta eyebrow="Build a clearer campaign system" title="Find the gaps between attention" accent="and conversion." body="Request a free audit and we will review the message, creative journey, website experience, and measurement opportunities worth prioritizing." />
     </main>

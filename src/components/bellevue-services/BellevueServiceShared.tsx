@@ -63,6 +63,48 @@ export function EastsideFinalCta({
   );
 }
 
+export type EastsideRelatedLink = {
+  href: string;
+  label: string;
+  description: string;
+};
+
+export function EastsideRelatedLinks({
+  eyebrow = "Continue exploring",
+  title,
+  accent,
+  links,
+}: {
+  eyebrow?: string;
+  title: string;
+  accent: string;
+  links: EastsideRelatedLink[];
+}) {
+  return (
+    <section className="eastside-related-panel" aria-labelledby="eastside-related-title">
+      <div className="eastside-related-intro">
+        <p className="marketing-eyebrow">{eyebrow}</p>
+        <h2 id="eastside-related-title">
+          {title} <span className="gtext">{accent}</span>
+        </h2>
+        <p>Move from the current opportunity to the service, proof, or planning resource that helps you decide what comes next.</p>
+      </div>
+      <div className="eastside-related-grid" role="navigation" aria-label="Related Bellevue resources">
+        {links.map((link, index) => (
+          <Link href={link.href} key={link.href}>
+            <span className="eastside-related-index">{String(index + 1).padStart(2, "0")}</span>
+            <span>
+              <strong>{link.label}</strong>
+              <small>{link.description}</small>
+            </span>
+            <span className="eastside-related-arrow" aria-hidden="true">→</span>
+          </Link>
+        ))}
+      </div>
+    </section>
+  );
+}
+
 export function EastsideIcon({ name }: { name: string }) {
   const paths: Record<string, React.ReactNode> = {
     profile: (

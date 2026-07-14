@@ -22,8 +22,101 @@
 .social-platform-mark { position: relative; z-index: 1; display: grid; width: 46px; height: 46px; place-items: center; border: 1px solid color-mix(in srgb, var(--platform-color) 22%, transparent); border-radius: 8px; background: color-mix(in srgb, var(--platform-color) 9%, white); color: var(--platform-color); font-size: .78rem; font-weight: 800; text-transform: uppercase; }
 .social-platform-grid h3 { margin: 1rem 0 .55rem; font-size: 1.05rem; }
 .social-platform-grid p { position: relative; z-index: 1; margin: 0; color: #66617e; font-size: .88rem; line-height: 1.65; }
-.social-search-loop { display: grid; grid-template-columns: repeat(5,minmax(0,1fr)); gap: 1px; overflow: hidden; border: 1px solid rgba(91,73,214,.16); border-radius: 8px; background: rgba(91,73,214,.16); }
-.social-search-loop span { position: relative; padding: 1.35rem 1rem; background: #fff; color: #393451; font-size: .85rem; font-weight: 700; text-align: center; }
-.social-search-loop span:not(:last-child)::after { content: "→"; position: absolute; top: 50%; right: -.55rem; z-index: 1; display: grid; width: 1.1rem; height: 1.1rem; place-items: center; border-radius: 50%; background: #765ee8; color: #fff; transform: translateY(-50%); }
-@media (max-width: 980px) { .social-platform-grid { grid-template-columns: repeat(3,minmax(0,1fr)); } }
-@media (max-width: 720px) { .social-pipeline-panel { min-height: 430px; } .social-platform-grid { grid-template-columns: 1fr; } .social-search-loop { grid-template-columns: 1fr; } .social-search-loop span:not(:last-child)::after { top: auto; right: 50%; bottom: -.55rem; transform: translateX(50%) rotate(90deg); } }
+.social-search-system {
+  display: grid;
+  grid-template-columns: minmax(250px, 0.72fr) minmax(0, 1.28fr);
+  gap: 0.8rem;
+}
+
+.social-search-core {
+  position: relative;
+  overflow: hidden;
+  min-height: 100%;
+  padding: 1.5rem;
+  border: 1px solid rgba(213, 201, 255, 0.18);
+  border-radius: 8px;
+  background: linear-gradient(145deg, rgba(143, 112, 255, 0.23), rgba(255, 255, 255, 0.055));
+}
+
+.social-search-core-icon {
+  display: grid;
+  width: 48px;
+  height: 48px;
+  margin-bottom: 2rem;
+  place-items: center;
+  border: 1px solid rgba(218, 207, 255, 0.24);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.08);
+  color: #d8ccff;
+}
+
+.social-search-core-icon svg { width: 24px; height: 24px; }
+.social-search-core .eastside-card-kicker { color: #bfaeff; }
+.social-search-core strong { display: block; margin-top: 0.65rem; color: #fff; font-size: 1.35rem; line-height: 1.2; }
+.social-search-core p { margin: 0.85rem 0 0; color: #d2cae7; font-size: 0.9rem; line-height: 1.7; }
+
+.social-search-loop {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 1px;
+  overflow: hidden;
+  border: 1px solid rgba(213, 201, 255, 0.16);
+  border-radius: 8px;
+  background: rgba(213, 201, 255, 0.16);
+}
+
+.social-search-loop span {
+  position: relative;
+  display: grid;
+  min-height: 100%;
+  place-items: center;
+  padding: 1.35rem 0.9rem;
+  background: rgba(255, 255, 255, 0.075);
+  color: #f2efff;
+  font-size: 0.82rem;
+  font-weight: 700;
+  line-height: 1.4;
+  text-align: center;
+}
+
+.social-search-loop span:not(:last-child)::after { content: "→"; position: absolute; top: 50%; right: -.55rem; z-index: 1; display: grid; width: 1.1rem; height: 1.1rem; place-items: center; border-radius: 50%; background: #9b82ff; color: #fff; transform: translateY(-50%); }
+
+.social-search-outcomes {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.8rem;
+  margin-top: 0.8rem;
+}
+
+.social-search-outcomes article {
+  padding: 1.15rem;
+  border: 1px solid rgba(213, 201, 255, 0.15);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.065);
+}
+
+.social-search-outcomes article > span {
+  display: grid;
+  width: 38px;
+  height: 38px;
+  place-items: center;
+  border-radius: 8px;
+  background: rgba(203, 187, 255, 0.1);
+  color: #d8ccff;
+}
+
+.social-search-outcomes svg { width: 19px; height: 19px; }
+.social-search-outcomes h3 { margin: 0.9rem 0 0.4rem; color: #fff; font-size: 0.98rem; }
+.social-search-outcomes p { margin: 0; color: #d2cae7; font-size: 0.82rem; line-height: 1.6; }
+@media (max-width: 980px) {
+  .social-platform-grid { grid-template-columns: repeat(3,minmax(0,1fr)); }
+  .social-search-system { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 720px) {
+  .social-pipeline-panel { min-height: 430px; }
+  .social-platform-grid { grid-template-columns: 1fr; }
+  .social-search-loop { grid-template-columns: 1fr; }
+  .social-search-loop span:not(:last-child)::after { top: auto; right: 50%; bottom: -.55rem; transform: translateX(50%) rotate(90deg); }
+  .social-search-outcomes { grid-template-columns: 1fr; }
+}
