@@ -71,7 +71,7 @@ const searchOutcomes = [
 
 const relatedLinks = [
   { href: "/bellevue-seo-services", label: "Bellevue SEO services", description: "Turn audience demand into durable organic visibility." },
-  { href: "/local-seo-bellevue", label: "Bellevue local SEO", description: "Strengthen Maps, profile, review, and nearby search signals." },
+  { href: "/blog/how-much-does-seo-cost", label: "SEO pricing guide", description: "Understand common investment levels and what each tier should deliver." },
   { href: "/case-studies", label: "Case studies", description: "Explore connected website, content, and campaign work." },
   { href: "/free-audit", label: "Free website audit", description: "Find the most important gaps before choosing a channel plan." },
 ] as const;

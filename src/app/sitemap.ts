@@ -14,11 +14,6 @@ const staticRoutes: MetadataRoute.Sitemap = [
     priority: 0.8,
   },
   {
-    url: `${siteUrl}/local-seo-bellevue`,
-    changeFrequency: "monthly",
-    priority: 0.8,
-  },
-  {
     url: `${siteUrl}/bellevue-social-media-marketing`,
     changeFrequency: "monthly",
     priority: 0.8,
