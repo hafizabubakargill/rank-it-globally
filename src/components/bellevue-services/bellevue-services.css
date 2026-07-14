@@ -1,0 +1,613 @@
+.eastside-page {
+  --eastside-border: rgba(91, 73, 214, 0.16);
+  --eastside-surface: rgba(255, 255, 255, 0.86);
+  --eastside-ink: #17142f;
+  --eastside-muted: #67627d;
+  color: var(--eastside-ink);
+}
+
+.eastside-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(390px, 0.88fr);
+  gap: clamp(2rem, 5vw, 5rem);
+  align-items: center;
+}
+
+.eastside-hero-copy {
+  max-width: 700px;
+}
+
+.eastside-hero-copy > p:not(.marketing-eyebrow) {
+  max-width: 660px;
+}
+
+.eastside-hero-panel {
+  position: relative;
+  overflow: hidden;
+  min-height: 480px;
+  padding: clamp(1.35rem, 3vw, 2.2rem);
+  border: 1px solid rgba(154, 132, 255, 0.24);
+  border-radius: 8px;
+  background: linear-gradient(145deg, #291878, #130d3d);
+  box-shadow: 0 24px 60px rgba(33, 20, 91, 0.22);
+  color: #fff;
+}
+
+.eastside-hero-panel::before {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.055) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.055) 1px, transparent 1px);
+  background-size: 48px 48px;
+  content: "";
+  pointer-events: none;
+}
+
+.eastside-panel-label,
+.eastside-hero-panel > * {
+  position: relative;
+}
+
+.eastside-hero-panel .eastside-panel-label {
+  margin: 0 0 1.25rem;
+  color: #fff !important;
+  font-size: 0.74rem;
+  font-weight: 750;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.eastside-section {
+  width: 100%;
+  max-width: 1200px;
+  margin-inline: auto;
+  padding-block: clamp(3.5rem, 7vw, 6.5rem);
+}
+
+.eastside-section-heading {
+  max-width: 850px;
+  margin-bottom: clamp(1.8rem, 4vw, 3.25rem);
+}
+
+.eastside-section-heading h2,
+.eastside-final-cta h2 {
+  margin: 0;
+  color: var(--eastside-ink);
+  font-size: clamp(1.9rem, 3.25vw, 3.2rem);
+  font-weight: 700;
+  line-height: 1.08;
+}
+
+.eastside-section-heading > p:last-child {
+  max-width: 760px;
+  margin: 1rem 0 0;
+  color: var(--eastside-muted);
+  font-size: clamp(1rem, 1.25vw, 1.12rem);
+  line-height: 1.75;
+}
+
+.eastside-service-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.eastside-service-card {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  min-height: 330px;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: clamp(1.35rem, 2.5vw, 2rem);
+  border: 1px solid var(--eastside-border);
+  border-radius: 8px;
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, 0.98), rgba(247, 245, 255, 0.9));
+  box-shadow: 0 14px 36px rgba(46, 33, 111, 0.07);
+  transition:
+    border-color 180ms ease,
+    box-shadow 180ms ease,
+    transform 180ms ease;
+}
+
+.eastside-service-card::before {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #4d35c6, #9877ff 62%, transparent);
+  content: "";
+}
+
+.eastside-service-card::after {
+  position: absolute;
+  top: -52px;
+  right: -56px;
+  width: 142px;
+  height: 142px;
+  border: 22px solid rgba(105, 78, 225, 0.055);
+  border-radius: 50%;
+  content: "";
+  pointer-events: none;
+}
+
+.eastside-service-card:hover,
+.eastside-service-card:focus-within {
+  border-color: rgba(91, 68, 211, 0.34);
+  box-shadow: 0 22px 48px rgba(46, 33, 111, 0.11);
+  transform: translateY(-3px);
+}
+
+.eastside-service-icon {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  width: 50px;
+  height: 50px;
+  place-items: center;
+  border: 1px solid rgba(101, 77, 231, 0.2);
+  border-radius: 8px;
+  background: linear-gradient(145deg, #f4f1ff, #e8e1ff);
+  color: #5c48dc;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.9);
+}
+
+.eastside-service-icon svg {
+  width: 25px;
+  height: 25px;
+}
+
+.eastside-service-card h3 {
+  margin: 1.15rem 0 0.7rem;
+  font-size: clamp(1.2rem, 1.7vw, 1.5rem);
+  line-height: 1.2;
+}
+
+.eastside-service-card p {
+  margin: 0;
+  color: var(--eastside-muted);
+  line-height: 1.68;
+}
+
+.eastside-tag-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  margin: auto 0 0;
+  padding: 1.2rem 0 0;
+  list-style: none;
+}
+
+.eastside-tag-list li,
+.eastside-chip-list li {
+  padding: 0.45rem 0.62rem;
+  border: 1px solid rgba(99, 75, 226, 0.16);
+  border-radius: 999px;
+  background: #f7f5ff;
+  color: #4d476a;
+  font-size: 0.74rem;
+  font-weight: 650;
+}
+
+.eastside-signal-grid,
+.eastside-proof-grid,
+.eastside-comparison-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.eastside-signal-card,
+.eastside-proof-card,
+.eastside-comparison-card {
+  position: relative;
+  overflow: hidden;
+  min-height: 260px;
+  padding: clamp(1.25rem, 2.5vw, 2rem);
+  border: 1px solid var(--eastside-border);
+  border-radius: 8px;
+  background: linear-gradient(145deg, #fff, #f4f1ff);
+  box-shadow: 0 16px 38px rgba(46, 33, 111, 0.065);
+}
+
+.eastside-signal-card::after {
+  position: absolute;
+  right: -38px;
+  bottom: -58px;
+  width: 145px;
+  height: 145px;
+  border: 24px solid rgba(111, 83, 230, 0.06);
+  border-radius: 50%;
+  content: "";
+}
+
+.eastside-signal-card::before {
+  position: absolute;
+  top: 1.35rem;
+  right: 1.35rem;
+  display: grid;
+  width: 38px;
+  height: 38px;
+  place-items: center;
+  border: 1px solid rgba(101, 77, 231, 0.18);
+  border-radius: 8px;
+  background: rgba(236, 231, 255, 0.8);
+  color: #674fe0;
+  content: "01";
+  font-size: 0.66rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+}
+
+.eastside-signal-card:nth-child(2)::before { content: "02"; }
+.eastside-signal-card:nth-child(3)::before { content: "03"; }
+
+.eastside-card-kicker {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  min-height: 28px;
+  align-items: center;
+  margin-bottom: 1.1rem;
+  padding: 0.3rem 0.55rem;
+  border: 1px solid rgba(101, 77, 231, 0.14);
+  border-radius: 999px;
+  background: rgba(243, 239, 255, 0.85);
+  color: #735de3;
+  font-size: 0.72rem;
+  font-weight: 750;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+
+.eastside-signal-card strong,
+.eastside-proof-card strong,
+.eastside-comparison-card h3 {
+  display: block;
+  margin: 0;
+  color: var(--eastside-ink);
+  font-size: 1.15rem;
+  line-height: 1.3;
+}
+
+.eastside-signal-card p,
+.eastside-proof-card p,
+.eastside-comparison-card p {
+  margin: 0.75rem 0 0;
+  color: var(--eastside-muted);
+  line-height: 1.68;
+}
+
+.eastside-workflow {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 0.75rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.eastside-workflow li {
+  position: relative;
+  min-height: 270px;
+  padding: 1.25rem;
+  border: 1px solid var(--eastside-border);
+  border-radius: 8px;
+  background: linear-gradient(150deg, #fff, #f8f6ff);
+  box-shadow: 0 14px 32px rgba(46, 33, 111, 0.055);
+}
+
+.eastside-workflow li:not(:last-child)::after {
+  position: absolute;
+  top: 29px;
+  right: -0.62rem;
+  z-index: 1;
+  color: #8069e9;
+  content: "→";
+  font-weight: 800;
+}
+
+.eastside-workflow-number {
+  display: flex;
+  width: 70px;
+  height: 70px;
+  margin-bottom: 1rem;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(101, 77, 231, 0.12);
+  border-radius: 8px;
+  background: linear-gradient(145deg, #f0ecff, #e6deff);
+  color: #5b43d4;
+  font-size: 1.35rem;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.eastside-workflow-number::before {
+  margin-bottom: 0.28rem;
+  color: #7a68ca;
+  content: "Stage";
+  font-size: 0.52rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.eastside-workflow h3 {
+  margin: 0;
+  font-size: 1.08rem;
+  line-height: 1.3;
+}
+
+.eastside-workflow p {
+  margin: 0.65rem 0 0;
+  color: var(--eastside-muted);
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+.eastside-chip-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.eastside-related-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem 1.35rem;
+  margin-top: 1.5rem;
+}
+
+.eastside-related-links a {
+  color: #5e49dc;
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+.eastside-proof-card {
+  display: flex;
+  flex-direction: column;
+  padding-top: 7.5rem;
+}
+
+.eastside-proof-card::before {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  height: 84px;
+  background:
+    linear-gradient(120deg, rgba(47, 28, 139, 0.97), rgba(99, 72, 211, 0.9)),
+    #2f1c8b;
+  content: "";
+}
+
+.eastside-proof-card::after {
+  position: absolute;
+  top: 25px;
+  left: 1.8rem;
+  width: 28px;
+  height: 28px;
+  border: 2px solid rgba(255, 255, 255, 0.8);
+  border-radius: 50%;
+  box-shadow:
+    18px 0 0 -8px rgba(255, 255, 255, 0.36),
+    36px 0 0 -8px rgba(255, 255, 255, 0.18);
+  content: "";
+}
+
+.eastside-comparison-card {
+  border-top: 3px solid #755de5;
+}
+
+.eastside-faq-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.8rem;
+}
+
+.eastside-faq-list article {
+  align-self: start;
+  border: 1px solid var(--eastside-border);
+  border-radius: 8px;
+  background: var(--eastside-surface);
+}
+
+.eastside-faq-list h3 {
+  margin: 0;
+}
+
+.eastside-faq-list button {
+  display: flex;
+  width: 100%;
+  min-height: 66px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem 1.2rem;
+  border: 0;
+  background: transparent;
+  color: var(--eastside-ink);
+  font: inherit;
+  font-weight: 700;
+  text-align: left;
+  line-height: 1.35;
+  cursor: pointer;
+}
+
+.eastside-faq-list button:focus-visible {
+  outline: 3px solid rgba(115, 86, 237, 0.35);
+  outline-offset: 2px;
+}
+
+.eastside-faq-list article > div > p {
+  margin: 0;
+  padding: 0 1.2rem 1.2rem;
+  color: var(--eastside-muted);
+  line-height: 1.7;
+}
+
+.eastside-faq-icon {
+  flex: 0 0 auto;
+  color: #6b53e3;
+  font-size: 1.25rem;
+  transition: transform 180ms ease;
+}
+
+.eastside-faq-list article.is-open .eastside-faq-icon {
+  transform: rotate(45deg);
+}
+
+.eastside-final-cta {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  max-width: 1200px;
+  margin: clamp(2rem, 5vw, 4rem) auto 0;
+  padding: clamp(2.5rem, 5vw, 4.5rem);
+  border-radius: 8px;
+  background: linear-gradient(135deg, #1b104f, #472a98);
+  color: #fff;
+  text-align: center;
+}
+
+.eastside-final-cta > *:not(.eastside-cta-map) {
+  position: relative;
+  z-index: 1;
+}
+
+.eastside-final-cta .marketing-eyebrow,
+.eastside-final-cta h2,
+.eastside-final-cta h2 span,
+.eastside-final-cta .marketing-link {
+  color: #fff;
+}
+
+.eastside-final-cta h2 span {
+  font-family: Georgia, serif;
+  font-style: italic;
+}
+
+.eastside-final-cta > p:not(.marketing-eyebrow) {
+  max-width: 720px;
+  margin: 1rem auto 0;
+  color: #d9d2f5;
+  line-height: 1.7;
+}
+
+.eastside-final-cta .marketing-actions {
+  justify-content: center;
+}
+
+.eastside-cta-map {
+  position: absolute;
+  inset: 0;
+  opacity: 0.55;
+  pointer-events: none;
+}
+
+.eastside-cta-route {
+  position: absolute;
+  width: 44%;
+  height: 90%;
+  border: 1px solid rgba(220, 210, 255, 0.22);
+  border-radius: 50%;
+}
+
+.eastside-cta-route-one {
+  top: -58%;
+  left: -8%;
+}
+
+.eastside-cta-route-two {
+  right: -12%;
+  bottom: -62%;
+}
+
+.eastside-cta-pin {
+  position: absolute;
+  width: 9px;
+  height: 9px;
+  border: 2px solid rgba(255, 255, 255, 0.72);
+  border-radius: 50%;
+  box-shadow: 0 0 0 7px rgba(255, 255, 255, 0.06);
+}
+
+.eastside-cta-pin-one { top: 22%; left: 12%; }
+.eastside-cta-pin-two { right: 17%; bottom: 24%; }
+.eastside-cta-pin-three { top: 17%; right: 35%; }
+
+@media (max-width: 980px) {
+  .eastside-hero {
+    grid-template-columns: 1fr;
+  }
+
+  .eastside-hero-copy {
+    max-width: 760px;
+  }
+
+  .eastside-service-grid,
+  .eastside-signal-grid,
+  .eastside-proof-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .eastside-workflow {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .eastside-workflow li::after {
+    display: none;
+  }
+}
+
+@media (max-width: 700px) {
+  .eastside-hero-panel {
+    min-height: 420px;
+  }
+
+  .eastside-service-grid,
+  .eastside-signal-grid,
+  .eastside-proof-grid,
+  .eastside-comparison-grid,
+  .eastside-faq-list,
+  .eastside-workflow {
+    grid-template-columns: 1fr;
+  }
+
+  .eastside-service-card {
+    min-height: 0;
+  }
+
+  .eastside-workflow li {
+    min-height: 0;
+  }
+
+  .eastside-section {
+    padding-block: 3.5rem;
+  }
+
+  .eastside-final-cta {
+    padding-inline: 1.25rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .eastside-faq-icon,
+  .eastside-service-card {
+    transition: none;
+  }
+
+  .eastside-service-card:hover,
+  .eastside-service-card:focus-within {
+    transform: none;
+  }
+}
