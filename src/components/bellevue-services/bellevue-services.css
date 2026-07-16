@@ -204,7 +204,8 @@
   height: 25px;
 }
 
-.eastside-service-card h3 {
+.eastside-service-card h3,
+.eastside-section--dark .eastside-service-card h3 {
   margin: 1.15rem 0 0.7rem;
   color: var(--eastside-ink);
   font-size: clamp(1.2rem, 1.7vw, 1.5rem);
