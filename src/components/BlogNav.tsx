@@ -31,29 +31,28 @@ type MenuIcon =
 type MegaMenuLink = {
   label: string;
   href: string;
-  pathLabel: string;
   icon: MenuIcon;
   available: boolean;
 };
 
 const serviceLinks: MegaMenuLink[] = [
-  { label: "SEO services", href: "/seo-services", pathLabel: "/seo-services/", icon: "search", available: true },
-  { label: "Local SEO", href: "#", pathLabel: "/local-seo-services/", icon: "pin", available: false },
-  { label: "Social media marketing", href: "/social-media-marketing", pathLabel: "/social-media-marketing/", icon: "social", available: true },
-  { label: "PPC / Google Ads", href: "#", pathLabel: "/ppc-management/", icon: "ads", available: false },
-  { label: "Web development", href: "/web-development", pathLabel: "/web-development/", icon: "code", available: true },
-  { label: "E-commerce development", href: "#", pathLabel: "/ecommerce-development/", icon: "cart", available: false },
-  { label: "UI/UX design", href: "/ui-ux-design", pathLabel: "/ui-ux-design/", icon: "design", available: true },
-  { label: "CRO strategy", href: "/cro-strategy", pathLabel: "/cro-strategy/", icon: "cro", available: true },
+  { label: "SEO services", href: "/seo-services", icon: "search", available: true },
+  { label: "Local SEO", href: "#", icon: "pin", available: false },
+  { label: "Social media marketing", href: "/social-media-marketing", icon: "social", available: true },
+  { label: "PPC / Google Ads", href: "#", icon: "ads", available: false },
+  { label: "Web development", href: "/web-development", icon: "code", available: true },
+  { label: "E-commerce development", href: "#", icon: "cart", available: false },
+  { label: "UI/UX design", href: "/ui-ux-design", icon: "design", available: true },
+  { label: "CRO strategy", href: "/cro-strategy", icon: "cro", available: true },
 ];
 
 const industryLinks: MegaMenuLink[] = [
-  { label: "Law firm marketing", href: "#", pathLabel: "/law-firm-seo/", icon: "law", available: false },
-  { label: "Dental & medical marketing", href: "#", pathLabel: "/dental-seo/", icon: "medical", available: false },
-  { label: "Tech startup marketing", href: "#", pathLabel: "/tech-startup-seo/", icon: "tech", available: false },
-  { label: "Real estate marketing", href: "#", pathLabel: "/real-estate-seo/", icon: "home", available: false },
-  { label: "E-commerce marketing", href: "#", pathLabel: "/ecommerce-seo/", icon: "store", available: false },
-  { label: "Home services marketing", href: "#", pathLabel: "/home-services-seo/", icon: "tools", available: false },
+  { label: "Law firm marketing", href: "#", icon: "law", available: false },
+  { label: "Dental & medical marketing", href: "#", icon: "medical", available: false },
+  { label: "Tech startup marketing", href: "#", icon: "tech", available: false },
+  { label: "Real estate marketing", href: "#", icon: "home", available: false },
+  { label: "E-commerce marketing", href: "#", icon: "store", available: false },
+  { label: "Home services marketing", href: "#", icon: "tools", available: false },
 ];
 
 function ServiceMenuIcon({ name }: { name: MenuIcon }) {
@@ -84,7 +83,7 @@ function ServiceMenuIcon({ name }: { name: MenuIcon }) {
 }
 
 function MegaMenuItem({ item, onNavigate }: { item: MegaMenuLink; onNavigate: () => void }) {
-  const content = <><span className="mega-menu-icon"><ServiceMenuIcon name={item.icon} /></span><strong>{item.label}</strong><small>{item.pathLabel}</small></>;
+  const content = <><span className="mega-menu-icon"><ServiceMenuIcon name={item.icon} /></span><strong>{item.label}</strong></>;
 
   if (!item.available) {
     return <a className="mega-menu-link is-coming-soon" href="#" aria-disabled="true" onClick={(event) => event.preventDefault()}>{content}</a>;
@@ -136,6 +135,17 @@ export default function BlogNav() {
     };
   }, []);
 
+  useEffect(() => {
+    if (!mobileOpen) return;
+
+    const previousBodyOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+
+    return () => {
+      document.body.style.overflow = previousBodyOverflow;
+    };
+  }, [mobileOpen]);
+
   return (
     <nav ref={navRef} className={mobileOpen ? "mobile-open" : ""}>
       <div className="nav-inner">
@@ -155,14 +165,14 @@ export default function BlogNav() {
                 <div className="mega-menu-list">
                   {serviceLinks.map((item) => <MegaMenuItem item={item} key={item.label} onNavigate={closeMenus} />)}
                 </div>
-                <Link className="mega-menu-featured mega-menu-featured-purple" href="/about-us" onClick={closeMenus}><span aria-hidden="true">☆</span> Why choose us? <span aria-hidden="true">→</span></Link>
+                <Link className="mega-menu-featured mega-menu-featured-purple" href="/about-us" onClick={closeMenus}><span aria-hidden="true">☆</span> Why choose us? <span className="mega-menu-featured-arrow" aria-hidden="true">→</span></Link>
               </div>
               <div className="mega-menu-column mega-menu-column-industries">
                 <p className="mega-menu-heading"><span><ServiceMenuIcon name="building" /></span> By industry</p>
                 <div className="mega-menu-list">
                   {industryLinks.map((item) => <MegaMenuItem item={item} key={item.label} onNavigate={closeMenus} />)}
                 </div>
-                <a className="mega-menu-featured mega-menu-featured-green" href="#" onClick={(event) => event.preventDefault()}><span aria-hidden="true">→</span> View all industries <span aria-hidden="true">→</span></a>
+                <a className="mega-menu-featured mega-menu-featured-green" href="#" aria-disabled="true" onClick={(event) => event.preventDefault()}><span aria-hidden="true">⌂</span> View all industries <span className="mega-menu-featured-arrow" aria-hidden="true">→</span></a>
               </div>
             </div>
           </div>
@@ -176,13 +186,20 @@ export default function BlogNav() {
           </button>
         </div>
       </div>
-      <div className="mobile-menu-panel" id="blogMobileMenuPanel">
+      <div className="mobile-menu-panel" id="blogMobileMenuPanel" data-lenis-prevent data-lenis-prevent-wheel data-lenis-prevent-touch>
         <Link href="/about-us" onClick={closeMenus}>About</Link>
         <button className="mobile-services-toggle" type="button" aria-expanded={mobileServicesOpen} aria-controls="mobileServicesList" onClick={() => setMobileServicesOpen((value) => !value)}>
           Services <span aria-hidden="true">+</span>
         </button>
         <div className={mobileServicesOpen ? "mobile-services-list is-open" : "mobile-services-list"} id="mobileServicesList">
+          <p className="mobile-services-heading">By service</p>
           {serviceLinks.map((item) => item.available ? <Link key={item.label} href={item.href} onClick={closeMenus}><span className="mobile-service-icon"><ServiceMenuIcon name={item.icon} /></span>{item.label}</Link> : <a key={item.label} href="#" aria-disabled="true" onClick={(event) => event.preventDefault()}><span className="mobile-service-icon"><ServiceMenuIcon name={item.icon} /></span>{item.label}</a>)}
+          <p className="mobile-services-heading mobile-industries-heading">By industry</p>
+          {industryLinks.map((item) => <a key={item.label} href="#" aria-disabled="true" onClick={(event) => event.preventDefault()}><span className="mobile-service-icon mobile-industry-icon"><ServiceMenuIcon name={item.icon} /></span>{item.label}</a>)}
+          <div className="mobile-mega-actions">
+            <Link href="/about-us" onClick={closeMenus}>Why choose us? <span aria-hidden="true">→</span></Link>
+            <a href="#" aria-disabled="true" onClick={(event) => event.preventDefault()}>View all industries <span aria-hidden="true">→</span></a>
+          </div>
         </div>
         {homeLinks.slice(1).map((link) => <Link key={link.href} href={link.href} onClick={closeMenus}>{link.label}</Link>)}
       </div>

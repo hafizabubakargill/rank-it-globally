@@ -1,5 +1,6 @@
 import Link from "next/link";
 import type { ServicePageConfig } from "@/content/servicePages";
+import { TrustMarquee } from "@/components/TrustMarquee";
 import { BellevueServiceFaqs } from "@/components/bellevue-services/BellevueServiceFaqs";
 import {
   EastsideFinalCta,
@@ -122,6 +123,8 @@ export function ServicePage({ config }: { config: ServicePageConfig }) {
         </div>
         <ServiceHeroVisual config={config} />
       </section>
+
+      {config.theme === "web" ? <TrustMarquee /> : null}
 
       <section className="eastside-section eastside-section--dark service-page-services">
         <EastsideSectionHeading eyebrow={config.servicesEyebrow} title={config.servicesTitle} accent={config.servicesAccent}>

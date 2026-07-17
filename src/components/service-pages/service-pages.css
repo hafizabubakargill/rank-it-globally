@@ -10,6 +10,11 @@
 
 .service-page-hero { min-height: min(760px, 78vh); }
 
+.service-page-trust {
+  width: 100vw;
+  margin-inline: calc(50% - 50vw);
+}
+
 .service-page-visual {
   position: relative;
   overflow: hidden;
