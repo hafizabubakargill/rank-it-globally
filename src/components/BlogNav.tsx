@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
+import HardHomeLink from "@/components/HardHomeLink";
 
 const homeLinks = [
   { href: "/about-us", label: "About" },
@@ -37,7 +38,6 @@ type MegaMenuLink = {
 
 const serviceLinks: MegaMenuLink[] = [
   { label: "SEO services", href: "/seo-services", icon: "search", available: true },
-  { label: "Local SEO", href: "#", icon: "pin", available: false },
   { label: "Social media marketing", href: "/social-media-marketing", icon: "social", available: true },
   { label: "PPC / Google Ads", href: "#", icon: "ads", available: false },
   { label: "Web development", href: "/web-development", icon: "code", available: true },
@@ -149,10 +149,10 @@ export default function BlogNav() {
   return (
     <nav ref={navRef} className={mobileOpen ? "mobile-open" : ""}>
       <div className="nav-inner">
-        <Link className="n-logo" href="/" aria-label="Rank It Globally home">
+        <HardHomeLink className="n-logo" aria-label="Rank It Globally home">
           <img className="n-logo-img" src="/assets/brand/logo-icon.svg" alt="" width="72" height="30" />
           <span className="n-logo-t">Rank It <span>Globally</span></span>
-        </Link>
+        </HardHomeLink>
         <div className="nv" aria-label="Primary navigation">
           <Link className="nk" href="/about-us">About</Link>
           <div className={servicesOpen ? "services-nav-item is-open" : "services-nav-item"} onMouseEnter={openServices} onMouseLeave={queueServicesClose} onFocus={openServices} onBlur={(event) => { if (!event.currentTarget.contains(event.relatedTarget)) setServicesOpen(false); }}>

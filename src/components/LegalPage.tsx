@@ -1,4 +1,4 @@
-import Link from "next/link";
+import HardHomeLink from "@/components/HardHomeLink";
 
 type LegalSection = {
   title: string;
@@ -24,9 +24,9 @@ export default function LegalPage({
     <>
       <main className="legal-page">
         <article className="legal-inner">
-          <Link className="blog-back" href="/">
+          <HardHomeLink className="blog-back">
             ← Back To Home
-          </Link>
+          </HardHomeLink>
           <header className="legal-header">
             <p className="sec-label">{eyebrow}</p>
             <h1>{title}</h1>

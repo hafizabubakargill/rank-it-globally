@@ -1,4 +1,5 @@
 import Link from "next/link";
+import HardHomeLink from "@/components/HardHomeLink";
 
 export default function NotFound() {
   return (
@@ -11,9 +12,9 @@ export default function NotFound() {
           home, explore the blog, or request a free website audit.
         </p>
         <div className="not-found-actions">
-          <Link className="not-found-primary" href="/">
+          <HardHomeLink className="not-found-primary">
             Back to homepage
-          </Link>
+          </HardHomeLink>
           <Link href="/blog">Browse the blog</Link>
           <Link href="/free-audit">Get a free audit</Link>
         </div>

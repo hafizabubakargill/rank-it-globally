@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import HardHomeLink from "@/components/HardHomeLink";
 
 const companyLinks = [
   { href: "/about-us", label: "About Us" },
@@ -124,7 +125,7 @@ export default function SiteFooter() {
     <footer className="site-footer">
       <div className="footer-inner">
         <div className="footer-brand">
-          <Link className="footer-brand-lockup" href="/" aria-label="Rank It Globally home">
+          <HardHomeLink className="footer-brand-lockup" aria-label="Rank It Globally home">
             <Image
               src="/assets/brand/logo-icon.svg"
               alt=""
@@ -135,7 +136,7 @@ export default function SiteFooter() {
             <span>
               Rank It <strong>Globally</strong>
             </span>
-          </Link>
+          </HardHomeLink>
           <p>
             Websites, SEO, and growth systems built for AI search, Google, and
             conversion-focused customer journeys.
