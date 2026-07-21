@@ -45,5 +45,8 @@ export const blockContent = defineType({
         hotspot: true,
       },
     },
+    {
+      type: "responsiveTable",
+    },
   ],
 });

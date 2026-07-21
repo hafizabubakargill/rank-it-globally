@@ -3,6 +3,10 @@ import { PortableText } from "@portabletext/react";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import {
+  ResponsiveBlogTable,
+  type ResponsiveTableValue,
+} from "@/components/ResponsiveBlogTable";
 import { getPost, getRelatedPosts, urlForImage } from "@/sanity/client";
 
 type PageProps = {
@@ -166,6 +170,11 @@ export default async function BlogPostPage({ params }: PageProps) {
                       ),
                     },
                     types: {
+                      responsiveTable: ({ value }) => (
+                        <ResponsiveBlogTable
+                          value={value as ResponsiveTableValue}
+                        />
+                      ),
                       image: ({ value }) =>
                         value ? (
                           <img
@@ -287,7 +296,9 @@ function formatDate(value?: string) {
   }).format(new Date(value));
 }
 
-function extractHeadings(body?: PortableTextBlock[]): TableOfContentsItem[] {
+function extractHeadings(
+  body?: Array<PortableTextBlock | ResponsiveTableValue>,
+): TableOfContentsItem[] {
   if (!Array.isArray(body)) return [];
 
   const usedIds = new Map<string, number>();

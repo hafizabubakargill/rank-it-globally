@@ -2,6 +2,7 @@ import { createClient, groq } from "next-sanity";
 import { createImageUrlBuilder } from "@sanity/image-url";
 import type { SanityImageSource } from "@sanity/image-url";
 import type { PortableTextBlock } from "@portabletext/react";
+import type { ResponsiveTableValue } from "@/components/ResponsiveBlogTable";
 import { apiVersion, dataset, hasSanityConfig, projectId } from "./env";
 
 export const client = createClient({
@@ -43,7 +44,7 @@ export type BlogCategory = {
 };
 
 export type BlogPost = BlogPostListItem & {
-  body?: PortableTextBlock[];
+  body?: Array<PortableTextBlock | ResponsiveTableValue>;
   seo?: {
     title?: string;
     description?: string;
