@@ -59,6 +59,37 @@ export const post = defineType({
       type: "blockContent",
     }),
     defineField({
+      name: "faqs",
+      title: "Article FAQs",
+      description: "Optional FAQs shown below the article and included in FAQ structured data.",
+      type: "array",
+      of: [
+        {
+          type: "object",
+          name: "articleFaq",
+          title: "FAQ",
+          fields: [
+            defineField({
+              name: "question",
+              title: "Question",
+              type: "string",
+              validation: (rule) => rule.required(),
+            }),
+            defineField({
+              name: "answer",
+              title: "Answer",
+              type: "text",
+              rows: 4,
+              validation: (rule) => rule.required(),
+            }),
+          ],
+          preview: {
+            select: { title: "question", subtitle: "answer" },
+          },
+        },
+      ],
+    }),
+    defineField({
       name: "seo",
       title: "SEO",
       type: "seo",

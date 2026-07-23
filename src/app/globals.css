@@ -74,7 +74,7 @@ select {
 }
 
 .blog-page:not(.marketing-page) {
-  padding: 6rem 0;
+  padding: 3.5rem var(--pad, 3.5rem) 5rem;
 }
 
 .blog-page.marketing-page .blog-index-inner {
@@ -100,7 +100,7 @@ select {
 }
 
 .blog-header {
-  margin-bottom: 0;
+  margin-bottom: 20px;
 }
 
 .blog-header h1 {
@@ -254,7 +254,7 @@ select {
   width: min(var(--max, 1200px), 100%);
   margin-right: auto;
   margin-left: auto;
-  padding-inline: var(--pad, 3.5rem);
+  padding-inline: 0;
 }
 
 .blog-article-shell {
@@ -347,7 +347,7 @@ select {
 
 .blog-hero-image {
   height: auto;
-  margin: -0.5rem 0 2rem;
+  margin: 0 0 2rem;
   border: 1px solid var(--border-s, rgba(102, 100, 228, 0.18));
   border-radius: 8px;
   box-shadow: 0 26px 70px -46px rgba(26, 22, 48, 0.5);
@@ -397,6 +397,87 @@ select {
   height: auto;
   margin: 1.5rem 0;
   border-radius: 8px;
+}
+
+.blog-post-faqs {
+  margin-top: 1.25rem;
+  padding: clamp(1.25rem, 3vw, 2rem);
+  border: 1px solid var(--border-s, rgba(102, 100, 228, 0.18));
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: 0 22px 64px -52px rgba(26, 22, 48, 0.45);
+}
+
+.blog-post-faq-heading {
+  margin-bottom: 1.1rem;
+}
+
+.blog-post-faq-heading .blog-kicker {
+  margin-bottom: 0.45rem;
+}
+
+.blog-post-faq-heading h2 {
+  margin: 0;
+  color: var(--white, #1a1630);
+  font-family: var(--fh, Arial, sans-serif);
+  font-size: clamp(1.65rem, 2.8vw, 2.25rem);
+  line-height: 1.1;
+}
+
+.blog-post-faq-list {
+  display: grid;
+  gap: 0.65rem;
+}
+
+.blog-post-faq-item {
+  overflow: hidden;
+  border: 1px solid rgba(102, 100, 228, 0.16);
+  border-radius: 6px;
+  background: #f8f7ff;
+}
+
+.blog-post-faq-item button {
+  width: 100%;
+  min-height: 54px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.95rem 1rem;
+  border: 0;
+  background: transparent;
+  color: var(--white, #1a1630);
+  font: inherit;
+  font-weight: 750;
+  text-align: left;
+  cursor: pointer;
+}
+
+.blog-post-faq-item button:focus-visible {
+  outline: 3px solid rgba(102, 100, 228, 0.34);
+  outline-offset: -3px;
+}
+
+.blog-post-faq-icon {
+  flex: 0 0 auto;
+  color: var(--p, #5552d4);
+  font-size: 1.35rem;
+  line-height: 1;
+  transition: transform 0.25s ease;
+}
+
+.blog-post-faq-item.is-open .blog-post-faq-icon {
+  transform: rotate(45deg);
+}
+
+.blog-post-faq-item [role="region"] {
+  padding: 0 1rem 1rem;
+  color: var(--muted, #6b6880);
+  line-height: 1.7;
+}
+
+.blog-post-faq-item [role="region"] p {
+  margin: 0;
 }
 
 .blog-table-figure {

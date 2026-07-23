@@ -34,6 +34,12 @@ export const author = defineType({
       type: "array",
       of: [{ type: "block" }],
     }),
+    defineField({
+      name: "url",
+      title: "Profile URL",
+      description: "Optional public profile or biography URL used in article structured data.",
+      type: "url",
+    }),
   ],
   preview: {
     select: {

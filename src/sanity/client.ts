@@ -21,6 +21,7 @@ export function urlForImage(source: SanityImageSource) {
 
 export type BlogPostListItem = {
   _id: string;
+  _updatedAt?: string;
   title: string;
   slug: string;
   excerpt?: string;
@@ -33,6 +34,7 @@ export type BlogPostListItem = {
 export type BlogAuthor = {
   name?: string;
   slug?: string;
+  url?: string;
   image?: SanityImageSource;
   bio?: PortableTextBlock[];
 };
@@ -45,6 +47,11 @@ export type BlogCategory = {
 
 export type BlogPost = BlogPostListItem & {
   body?: Array<PortableTextBlock | ResponsiveTableValue>;
+  faqs?: Array<{
+    _key?: string;
+    question?: string;
+    answer?: string;
+  }>;
   seo?: {
     title?: string;
     description?: string;
@@ -62,7 +69,7 @@ export async function getPosts() {
       excerpt,
       publishedAt,
       "mainImage": mainImage {asset},
-      author->{name, "slug": slug.current, image, bio},
+      author->{name, "slug": slug.current, url, image, bio},
       categories[]->{_id, title, "slug": slug.current}
     }`,
     {},
@@ -76,14 +83,16 @@ export async function getPost(slug: string) {
   return client.fetch<BlogPost | null>(
     groq`*[_type == "post" && slug.current == $slug][0] {
       _id,
+      _updatedAt,
       title,
       "slug": slug.current,
       excerpt,
       publishedAt,
       "mainImage": mainImage {asset},
-      author->{name, "slug": slug.current, image, bio},
+      author->{name, "slug": slug.current, url, image, bio},
       categories[]->{_id, title, "slug": slug.current},
       body,
+      faqs[]{_key, question, answer},
       seo
     }`,
     { slug },
@@ -101,7 +110,7 @@ export async function getRelatedPosts(slug: string, categorySlugs: string[]) {
     excerpt,
     publishedAt,
     "mainImage": mainImage {asset},
-    author->{name, "slug": slug.current, image, bio},
+    author->{name, "slug": slug.current, url, image, bio},
     categories[]->{_id, title, "slug": slug.current}
   }`;
 

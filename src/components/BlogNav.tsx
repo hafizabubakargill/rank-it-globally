@@ -47,12 +47,12 @@ const serviceLinks: MegaMenuLink[] = [
 ];
 
 const industryLinks: MegaMenuLink[] = [
-  { label: "Law firm marketing", href: "#", icon: "law", available: false },
-  { label: "Dental & medical marketing", href: "#", icon: "medical", available: false },
-  { label: "Tech startup marketing", href: "#", icon: "tech", available: false },
-  { label: "Real estate marketing", href: "#", icon: "home", available: false },
-  { label: "E-commerce marketing", href: "#", icon: "store", available: false },
-  { label: "Home services marketing", href: "#", icon: "tools", available: false },
+  { label: "Law firm marketing", href: "/industries/law-firm-marketing", icon: "law", available: true },
+  { label: "Dental & medical marketing", href: "/industries/dental-medical-marketing", icon: "medical", available: true },
+  { label: "Tech startup marketing", href: "/industries/tech-startup-marketing", icon: "tech", available: true },
+  { label: "Real estate marketing", href: "/industries/real-estate-marketing", icon: "home", available: true },
+  { label: "E-commerce marketing", href: "/industries/ecommerce-marketing", icon: "store", available: true },
+  { label: "Home services marketing", href: "/industries/home-services-marketing", icon: "tools", available: true },
 ];
 
 function ServiceMenuIcon({ name }: { name: MenuIcon }) {
@@ -172,7 +172,7 @@ export default function BlogNav() {
                 <div className="mega-menu-list">
                   {industryLinks.map((item) => <MegaMenuItem item={item} key={item.label} onNavigate={closeMenus} />)}
                 </div>
-                <a className="mega-menu-featured mega-menu-featured-green" href="#" aria-disabled="true" onClick={(event) => event.preventDefault()}><span aria-hidden="true">⌂</span> View all industries <span className="mega-menu-featured-arrow" aria-hidden="true">→</span></a>
+                <Link className="mega-menu-featured mega-menu-featured-green" href="/industries" onClick={closeMenus}><span aria-hidden="true">⌂</span> View all industries <span className="mega-menu-featured-arrow" aria-hidden="true">→</span></Link>
               </div>
             </div>
           </div>
@@ -195,10 +195,10 @@ export default function BlogNav() {
           <p className="mobile-services-heading">By service</p>
           {serviceLinks.map((item) => item.available ? <Link key={item.label} href={item.href} onClick={closeMenus}><span className="mobile-service-icon"><ServiceMenuIcon name={item.icon} /></span>{item.label}</Link> : <a key={item.label} href="#" aria-disabled="true" onClick={(event) => event.preventDefault()}><span className="mobile-service-icon"><ServiceMenuIcon name={item.icon} /></span>{item.label}</a>)}
           <p className="mobile-services-heading mobile-industries-heading">By industry</p>
-          {industryLinks.map((item) => <a key={item.label} href="#" aria-disabled="true" onClick={(event) => event.preventDefault()}><span className="mobile-service-icon mobile-industry-icon"><ServiceMenuIcon name={item.icon} /></span>{item.label}</a>)}
+          {industryLinks.map((item) => <Link key={item.label} href={item.href} onClick={closeMenus}><span className="mobile-service-icon mobile-industry-icon"><ServiceMenuIcon name={item.icon} /></span>{item.label}</Link>)}
           <div className="mobile-mega-actions">
             <Link href="/about-us" onClick={closeMenus}>Why choose us? <span aria-hidden="true">→</span></Link>
-            <a href="#" aria-disabled="true" onClick={(event) => event.preventDefault()}>View all industries <span aria-hidden="true">→</span></a>
+            <Link href="/industries" onClick={closeMenus}>View all industries <span aria-hidden="true">→</span></Link>
           </div>
         </div>
         {homeLinks.slice(1).map((link) => <Link key={link.href} href={link.href} onClick={closeMenus}>{link.label}</Link>)}

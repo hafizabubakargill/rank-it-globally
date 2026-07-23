@@ -33,6 +33,37 @@ const staticRoutes: MetadataRoute.Sitemap = [
   },
   { url: `${siteUrl}/ui-ux-design`, changeFrequency: "monthly", priority: 0.8 },
   { url: `${siteUrl}/cro-strategy`, changeFrequency: "monthly", priority: 0.8 },
+  { url: `${siteUrl}/industries`, changeFrequency: "monthly", priority: 0.8 },
+  {
+    url: `${siteUrl}/industries/dental-medical-marketing`,
+    changeFrequency: "monthly",
+    priority: 0.8,
+  },
+  {
+    url: `${siteUrl}/industries/ecommerce-marketing`,
+    changeFrequency: "monthly",
+    priority: 0.8,
+  },
+  {
+    url: `${siteUrl}/industries/home-services-marketing`,
+    changeFrequency: "monthly",
+    priority: 0.8,
+  },
+  {
+    url: `${siteUrl}/industries/law-firm-marketing`,
+    changeFrequency: "monthly",
+    priority: 0.8,
+  },
+  {
+    url: `${siteUrl}/industries/real-estate-marketing`,
+    changeFrequency: "monthly",
+    priority: 0.8,
+  },
+  {
+    url: `${siteUrl}/industries/tech-startup-marketing`,
+    changeFrequency: "monthly",
+    priority: 0.8,
+  },
   { url: `${siteUrl}/case-studies`, changeFrequency: "monthly", priority: 0.8 },
   { url: `${siteUrl}/about-us`, changeFrequency: "monthly", priority: 0.7 },
   { url: `${siteUrl}/contact-us`, changeFrequency: "monthly", priority: 0.7 },

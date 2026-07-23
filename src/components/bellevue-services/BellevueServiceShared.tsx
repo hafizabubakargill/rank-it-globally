@@ -74,11 +74,13 @@ export function EastsideRelatedLinks({
   title,
   accent,
   links,
+  ariaLabel = "Related resources",
 }: {
   eyebrow?: string;
   title: string;
   accent: string;
   links: EastsideRelatedLink[];
+  ariaLabel?: string;
 }) {
   return (
     <section className="eastside-related-panel" aria-labelledby="eastside-related-title">
@@ -89,7 +91,7 @@ export function EastsideRelatedLinks({
         </h2>
         <p>Move from the current opportunity to the service, proof, or planning resource that helps you decide what comes next.</p>
       </div>
-      <div className="eastside-related-grid" role="navigation" aria-label="Related Bellevue resources">
+      <div className="eastside-related-grid" role="navigation" aria-label={ariaLabel}>
         {links.map((link, index) => (
           <Link href={link.href} key={link.href}>
             <span className="eastside-related-index">{String(index + 1).padStart(2, "0")}</span>
@@ -177,6 +179,37 @@ export function EastsideIcon({ name }: { name: string }) {
       <>
         <circle cx="10.5" cy="10.5" r="6" />
         <path d="m15 15 5 5" />
+      </>
+    ),
+    pin: (
+      <>
+        <path d="M20 10c0 5-8 11-8 11S4 15 4 10a8 8 0 1 1 16 0Z" />
+        <circle cx="12" cy="10" r="2.5" />
+      </>
+    ),
+    mobile: (
+      <>
+        <rect x="6.5" y="2" width="11" height="20" rx="2.5" />
+        <path d="M10 5h4M10 19h4" />
+      </>
+    ),
+    shield: (
+      <>
+        <path d="M12 3 20 6v5c0 5-3.4 8.4-8 10-4.6-1.6-8-5-8-10V6l8-3Z" />
+        <path d="m9 12 2 2 4-4" />
+      </>
+    ),
+    cart: (
+      <>
+        <path d="M3 4h2l2.2 10.2a2 2 0 0 0 2 1.6h7.9a2 2 0 0 0 1.9-1.4L21 8H7" />
+        <circle cx="10" cy="20" r="1" />
+        <circle cx="18" cy="20" r="1" />
+      </>
+    ),
+    cro: (
+      <>
+        <path d="M4 5h16M4 12h16M4 19h16" />
+        <path d="m8 2 3 3-3 3M16 9l-3 3 3 3M8 16l3 3-3 3" />
       </>
     ),
   };

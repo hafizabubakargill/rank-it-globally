@@ -3,6 +3,7 @@ import { PortableText } from "@portabletext/react";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { BlogPostFaqs, type BlogPostFaq } from "@/components/BlogPostFaqs";
 import {
   ResponsiveBlogTable,
   type ResponsiveTableValue,
@@ -49,9 +50,30 @@ export async function generateMetadata({
     };
   }
 
+  const postUrl = `https://rankitglobally.com/blog/${post.slug}`;
+  const heroImageUrl = post.mainImage
+    ? urlForImage(post.mainImage).width(1400).fit("max").auto("format").url()
+    : undefined;
+
   return {
     title: post.seo?.title || `${post.title} | Rank It Globally`,
     description: post.seo?.description || post.excerpt,
+    alternates: { canonical: postUrl },
+    openGraph: {
+      type: "article",
+      url: postUrl,
+      title: post.seo?.title || post.title,
+      description: post.seo?.description || post.excerpt,
+      publishedTime: post.publishedAt,
+      modifiedTime: post._updatedAt || post.publishedAt,
+      images: heroImageUrl ? [{ url: heroImageUrl }] : undefined,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: post.seo?.title || post.title,
+      description: post.seo?.description || post.excerpt,
+      images: heroImageUrl ? [heroImageUrl] : undefined,
+    },
   };
 }
 
@@ -67,6 +89,7 @@ export default async function BlogPostPage({ params }: PageProps) {
   const relatedPosts = await getRelatedPosts(post.slug, categorySlugs);
   const postUrl = `https://rankitglobally.com/blog/${post.slug}`;
   const description = post.seo?.description || post.excerpt;
+  const authorUrl = post.author?.url || `${postUrl}#author`;
   const heroImageUrl = post.mainImage
     ? urlForImage(post.mainImage)
         .width(1400)
@@ -78,18 +101,23 @@ export default async function BlogPostPage({ params }: PageProps) {
   const headingIds = new Map(
     tableOfContents.map((heading) => [heading.key, heading.id]),
   );
+  const visibleFaqs = (post.faqs || []).filter(
+    (faq): faq is BlogPostFaq => Boolean(faq.question?.trim() && faq.answer?.trim()),
+  );
   const schemaData = {
-    "@context": "https://schema.org",
     "@type": "BlogPosting",
+    "@id": `${postUrl}#article`,
+    url: postUrl,
     headline: post.title,
     description,
     image: heroImageUrl ? [heroImageUrl] : undefined,
     datePublished: post.publishedAt,
-    dateModified: post.publishedAt,
+    dateModified: post._updatedAt || post.publishedAt,
     author: post.author?.name
       ? {
           "@type": "Person",
           name: post.author.name,
+          url: authorUrl,
         }
       : {
           "@type": "Organization",
@@ -100,7 +128,7 @@ export default async function BlogPostPage({ params }: PageProps) {
       name: "Rank It Globally",
       logo: {
         "@type": "ImageObject",
-        url: "https://rankitglobally.com/assets/brand/logo-icon.svg",
+        url: "https://rankitglobally.com/assets/brand/favicon.png",
       },
     },
     mainEntityOfPage: {
@@ -108,13 +136,39 @@ export default async function BlogPostPage({ params }: PageProps) {
       "@id": postUrl,
     },
   };
+  const breadcrumbSchema = {
+    "@type": "BreadcrumbList",
+    "@id": `${postUrl}#breadcrumbs`,
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: "https://rankitglobally.com/" },
+      { "@type": "ListItem", position: 2, name: "Blog", item: "https://rankitglobally.com/blog" },
+      { "@type": "ListItem", position: 3, name: post.title, item: postUrl },
+    ],
+  };
+  const faqSchema = visibleFaqs.length
+    ? {
+        "@type": "FAQPage",
+        "@id": `${postUrl}#faqs`,
+        mainEntity: visibleFaqs.map((faq) => ({
+          "@type": "Question",
+          name: faq.question,
+          acceptedAnswer: { "@type": "Answer", text: faq.answer },
+        })),
+      }
+    : null;
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@graph": [schemaData, breadcrumbSchema, ...(faqSchema ? [faqSchema] : [])],
+  };
   const shareLinks = buildShareLinks(postUrl, post.title);
 
   return (
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaData) }}
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(structuredData).replace(/</g, "\\u003c"),
+        }}
       />
       <main className="blog-page">
         <article className="blog-article-head">
@@ -193,8 +247,9 @@ export default async function BlogPostPage({ params }: PageProps) {
                 />
               </div>
             ) : null}
+            {visibleFaqs.length ? <BlogPostFaqs faqs={visibleFaqs} /> : null}
             {post.author?.name ? (
-              <section className="blog-author" aria-label="Author">
+              <section className="blog-author" id="author" aria-label="Author">
                 {post.author.image ? (
                   <img
                     src={urlForImage(post.author.image)
