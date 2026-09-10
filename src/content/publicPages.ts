@@ -14,6 +14,10 @@ export type ProjectCard = {
 };
 
 export const calendlyUrl = "https://calendly.com/rankitglobally/free-consultation";
+// Duplicated Calendly event dedicated to the /conversion-upside ad landing
+// page, so its wording matches the product-page CRO pitch that page makes
+// instead of the generic "Website Audit" framing the main site's event uses.
+export const conversionUpsideCalendlyUrl = "https://calendly.com/rankitglobally/conversion-upside";
 export const whatsappUrl = "https://wa.me/17865917846";
 export const emailAddress = "hello@rankitglobally.com";
 

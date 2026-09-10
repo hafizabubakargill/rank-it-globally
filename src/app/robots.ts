@@ -5,7 +5,7 @@ export default function robots(): MetadataRoute.Robots {
     rules: {
       userAgent: "*",
       allow: "/",
-      disallow: ["/studio"],
+      disallow: ["/studio", "/conversion-upside"],
     },
     sitemap: "https://rankitglobally.com/sitemap.xml",
   };

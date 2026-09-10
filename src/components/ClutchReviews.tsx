@@ -1,7 +1,7 @@
 "use client";
 
-import Link from "next/link";
 import { useCallback, useEffect, useRef, useState } from "react";
+import { trackMetaLead } from "@/lib/metaPixel";
 
 type ClutchReview = {
   company: string;
@@ -40,7 +40,14 @@ const reviews: ClutchReview[] = [
   },
 ];
 
-export default function ClutchReviews() {
+export default function ClutchReviews({
+  ctaHref = "/growth-audit",
+  ctaLabel = "Get My Growth Audit",
+}: {
+  ctaHref?: string;
+  ctaLabel?: string;
+}) {
+  const ctaIsExternal = ctaHref.startsWith("http");
   const sliderRef = useRef<HTMLDivElement>(null);
   const scrollFrameRef = useRef<number | null>(null);
   const [activeIndex, setActiveIndex] = useState(0);
@@ -241,9 +248,15 @@ export default function ClutchReviews() {
         </button>
       </div>
       <div className="clutch-actions rev d2">
-        <Link className="cta-e cta-e-lg" href="/growth-audit">
-          Get My Growth Audit <span aria-hidden="true">→</span>
-        </Link>
+        <a
+          className="cta-e cta-e-lg"
+          href={ctaHref}
+          target={ctaIsExternal ? "_blank" : undefined}
+          rel={ctaIsExternal ? "noreferrer" : undefined}
+          onClick={ctaIsExternal ? trackMetaLead : undefined}
+        >
+          {ctaLabel} <span aria-hidden="true">→</span>
+        </a>
         <a
           className="clutch-review-link"
           href="https://review.clutch.co/review?provider_id=2645951"
