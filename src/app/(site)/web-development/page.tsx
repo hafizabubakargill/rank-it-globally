@@ -1,19 +1,8 @@
-import type { Metadata } from "next";
-import { ServicePage } from "@/components/service-pages/ServicePage";
-import { servicePages } from "@/content/servicePages";
+import { createServiceMetadata, ServiceDetailPage } from "@/components/service-pages/ServiceDetailPage";
+import { webDesignPage } from "@/content/services/webDesign";
 
-const config = servicePages.web;
-const canonical = "https://rankitglobally.com/web-development";
-
-export const metadata: Metadata = {
-  title: config.title,
-  description: config.description,
-  alternates: { canonical },
-  robots: { index: true, follow: true },
-  openGraph: { type: "website", url: canonical, title: config.title, description: config.description, siteName: "Rank It Globally" },
-  twitter: { card: "summary", title: config.title, description: config.description },
-};
+export const metadata = createServiceMetadata(webDesignPage);
 
 export default function WebDevelopmentPage() {
-  return <ServicePage config={config} />;
+  return <ServiceDetailPage page={webDesignPage} />;
 }
