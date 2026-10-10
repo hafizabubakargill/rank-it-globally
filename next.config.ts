@@ -10,8 +10,23 @@ const nextConfig: NextConfig = {
       },
       {
         source: "/bellevue-social-media-marketing",
-        destination: "/social-media-marketing",
+        destination: "/",
         permanent: true,
+      },
+      {
+        source: "/ppc-management",
+        destination: "/seo-services",
+        statusCode: 301,
+      },
+      {
+        source: "/social-media-marketing",
+        destination: "/",
+        statusCode: 301,
+      },
+      {
+        source: "/ui-ux-design",
+        destination: "/web-development#ui-ux",
+        statusCode: 301,
       },
       {
         source: "/bellevue-seo-services",
@@ -95,13 +110,13 @@ const nextConfig: NextConfig = {
       "/terms",
       "/industries",
       "/industries/:slug*",
+      "/ai-seo-services",
       "/seo-services",
-      "/social-media-marketing",
+      "/local-seo-services",
       "/web-development",
-      "/ui-ux-design",
-      "/cro-strategy",
-      "/ppc-management",
       "/ecommerce-development",
+      "/cro-strategy",
+      "/reputation-management",
       "/conversion-upside",
       "/conversion-upside/whats-next",
     ];

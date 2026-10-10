@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import HardHomeLink from "@/components/HardHomeLink";
+import { serviceNavLinks } from "@/content/siteNav";
 
 const companyLinks = [
   { href: "/about-us", label: "About Us" },
@@ -11,7 +12,7 @@ const companyLinks = [
 const growthLinks = [
   { href: "/growth-audit", label: "Growth Audit" },
   { href: "/#portfolio", label: "Portfolio" },
-  { href: "/#services", label: "Services" },
+  { href: "/industries", label: "Industries" },
 ];
 
 const resourceLinks = [
@@ -163,6 +164,7 @@ export default function SiteFooter() {
           </a>
         </div>
 
+        <FooterNav title="Services" links={serviceNavLinks} />
         <FooterNav title="Company" links={companyLinks} />
         <FooterNav title="Growth" links={growthLinks} />
         <FooterNav title="Resources" links={resourceLinks} />

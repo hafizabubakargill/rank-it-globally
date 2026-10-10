@@ -48,9 +48,9 @@ export type IndustryPageConfig = {
 };
 
 const sharedRelated = [
-  { href: "/seo-services", label: "SEO services", description: "Build durable visibility across Google and AI search." },
-  { href: "/ppc-management", label: "PPC management", description: "Capture demand while organic visibility develops." },
-  { href: "/web-development", label: "Web development", description: "Turn the website into a faster conversion system." },
+  { href: "/seo-services", label: "SEO Services", description: "Build durable visibility across Google and AI search." },
+  { href: "/local-seo-services", label: "Local SEO & Google Business Profile", description: "Show up in the Map Pack when nearby customers search." },
+  { href: "/web-development", label: "Web Design & Development", description: "Turn the website into a faster conversion system." },
   { href: "/case-studies", label: "Case studies", description: "Review the work behind our recommendations." },
 ];
 
