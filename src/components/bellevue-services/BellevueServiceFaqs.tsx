@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, type ReactNode } from "react";
 
 export type BellevueFaqItem = {
   question: string;
@@ -10,9 +10,11 @@ export type BellevueFaqItem = {
 export function BellevueServiceFaqs({
   items,
   idPrefix,
+  renderedAnswers,
 }: {
   items: BellevueFaqItem[];
   idPrefix: string;
+  renderedAnswers?: ReactNode[];
 }) {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
@@ -38,7 +40,7 @@ export function BellevueServiceFaqs({
               </button>
             </h3>
             <div id={panelId} hidden={!isOpen}>
-              <p>{item.answer}</p>
+              <p>{renderedAnswers?.[index] ?? item.answer}</p>
             </div>
           </article>
         );
