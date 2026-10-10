@@ -25,9 +25,9 @@ export const homepageFaqs: FaqItem[] = [
       "Every project is scoped to the specific outcome you need, so pricing depends on scope, complexity, and timeline. Book a short call and we will give you a clear, tailored quote after understanding your goals.",
   },
   {
-    question: "Is it worth running Google Ads for a small business?",
+    question: "Should I invest in SEO or Google Ads?",
     answer:
-      "Yes, when the landing page converts. Most small businesses waste ad spend by sending paid traffic to a generic homepage. We pair Google Ads management with high-converting landing pages so every click has the best chance of becoming a customer.",
+      "It depends on how quickly you need leads and how long you plan to grow. Google Ads stop sending traffic the moment you stop paying, while SEO builds visibility that keeps working. We focus on SEO, AI search and conversion: if you already run ads, we can build landing pages that turn more of those paid clicks into customers.",
   },
   {
     question: "What does a website redesign actually improve?",
@@ -52,7 +52,7 @@ export const homepageFaqs: FaqItem[] = [
   {
     question: "Do I need to sign a long-term contract?",
     answer:
-      "No. One-off projects are flat-rate and delivered in full. Monthly SEO and ads management runs month to month, with cancellation available with 30 days notice.",
+      "No. One-off projects are flat-rate and delivered in full. Monthly SEO runs month to month, with cancellation available with 30 days notice.",
   },
   {
     question: "Can you help health and wellness businesses get more booked appointments?",
