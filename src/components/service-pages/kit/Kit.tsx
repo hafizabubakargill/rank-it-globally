@@ -311,6 +311,7 @@ export function ProjectGrid({ slugs }: { slugs: string[] }) {
 export function Scenarios({ items }: { items: Scenario[] }) {
   return (
     <>
+      <p className="sv-swipe-hint" aria-hidden="true">Swipe to see more examples →</p>
       <div className="sv-scenarios">
         {items.map((item) => (
           <article className="sv-card sv-scenario" key={item.business}>
@@ -469,6 +470,18 @@ export function Guides({ page, tone = "mesh" }: { page: ServiceCore; tone?: "tin
 
 /* ---------- Final CTA with the real audit form ---------- */
 
+// Pre-selects the matching "What do you want help with?" option so each lead
+// arrives tagged with the service it came from.
+const auditScopeByTheme: Record<ServiceCore["theme"], string[]> = {
+  ai: ["SEO"],
+  seo: ["SEO"],
+  local: ["Local SEO / Google Business Profile"],
+  web: ["Website Design"],
+  ecommerce: ["Ecommerce Performance"],
+  cro: ["Leads / Conversions"],
+  reputation: ["Local SEO / Google Business Profile"],
+};
+
 export function FinalCta({ page }: { page: ServiceCore }) {
   return (
     <Section tone="ink" id="audit" className="sv-final" labelledBy={`${page.slug}-final`}>
@@ -488,8 +501,8 @@ export function FinalCta({ page }: { page: ServiceCore }) {
           </a>
         </div>
         <div className="sv-form-card">
-          <Suspense fallback={<div className="standalone-audit-form" />}>
-            <FreeAuditForm />
+          <Suspense fallback={<div className="standalone-audit-form audit-form-compact" />}>
+            <FreeAuditForm compact sourcePage={`/${page.slug}`} defaultScope={auditScopeByTheme[page.theme]} submitLabel={page.ctaLabel} />
           </Suspense>
         </div>
       </div>

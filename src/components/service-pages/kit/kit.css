@@ -70,7 +70,7 @@ body:has(.sv-sticky.is-visible) .global-scroll-top { bottom: 96px !important; }
 .sv-sec {
   position: relative;
   isolation: isolate;
-  padding-block: clamp(4rem, 8vw, 7rem);
+  padding-block: clamp(2.75rem, 5vw, 4.5rem);
 }
 
 .sv-sec--ink {
@@ -131,7 +131,7 @@ body:has(.sv-sticky.is-visible) .global-scroll-top { bottom: 96px !important; }
   color: color-mix(in srgb, var(--sv-accent-2) 70%, #fff);
 }
 
-.sv-head { max-width: 780px; margin-bottom: clamp(2rem, 4vw, 3.25rem); }
+.sv-head { max-width: 780px; margin-bottom: clamp(1.5rem, 3vw, 2.25rem); }
 .sv-head--center { margin-inline: auto; text-align: center; }
 
 .sv-head h2,
@@ -239,7 +239,7 @@ body:has(.sv-sticky.is-visible) .global-scroll-top { bottom: 96px !important; }
   position: relative;
   isolation: isolate;
   overflow: hidden;
-  padding: clamp(2.5rem, 5vw, 4rem) 0 clamp(3.5rem, 7vw, 6rem);
+  padding: clamp(2rem, 4vw, 3rem) 0 clamp(2.5rem, 5vw, 4rem);
   background: var(--sv-ink);
   color: var(--sv-on-dark);
 }
@@ -289,7 +289,7 @@ body:has(.sv-sticky.is-visible) .global-scroll-top { bottom: 96px !important; }
   display: flex;
   flex-wrap: wrap;
   gap: 0.6rem;
-  margin: 2rem 0 0;
+  margin: 1.5rem 0 0;
   padding: 0;
   list-style: none;
 }
@@ -341,16 +341,15 @@ body:has(.sv-sticky.is-visible) .global-scroll-top { bottom: 96px !important; }
 
 .sv-card {
   position: relative;
-  border: 1px solid color-mix(in srgb, var(--sv-accent-ink) 14%, transparent);
+  border: 1px solid color-mix(in srgb, var(--sv-ink) 10%, transparent);
   border-radius: var(--sv-radius);
-  background: color-mix(in srgb, #fff 82%, transparent);
-  box-shadow: 0 18px 44px color-mix(in srgb, var(--sv-ink) 9%, transparent);
-  backdrop-filter: blur(8px);
+  background: #fff;
+  box-shadow: 0 12px 30px color-mix(in srgb, var(--sv-ink) 7%, transparent);
 }
 
 .sv-sec--ink .sv-card {
   border-color: rgba(255, 255, 255, 0.12);
-  background: rgba(255, 255, 255, 0.06);
+  background: var(--sv-ink-2);
   box-shadow: none;
 }
 
@@ -514,7 +513,7 @@ body:has(.sv-sticky.is-visible) .global-scroll-top { bottom: 96px !important; }
 
 .sv-band h2 { margin: 0; font-family: var(--fh); font-size: clamp(1.45rem, 2.6vw, 2.1rem); line-height: 1.15; }
 .sv-band p { margin: 0.6rem 0 0; color: rgba(255, 255, 255, 0.82); line-height: 1.6; }
-.sv-band-wrap { padding-block: clamp(2rem, 4vw, 3rem); }
+.sv-band-wrap { padding-block: clamp(1.25rem, 3vw, 2rem); }
 
 /* ---------- Proof data cards ---------- */
 .sv-data {
@@ -769,6 +768,16 @@ body:has(.sv-sticky.is-visible) .global-scroll-top { bottom: 96px !important; }
   color: #1a1630;
 }
 
+/* Compact audit form */
+.sv-form-card .audit-form-compact { gap: 0.85rem; padding: clamp(1rem, 2.5vw, 1.5rem); }
+.audit-compact-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.85rem; }
+.sv-form-card .standalone-audit-form label,
+.sv-form-card .audit-form-label { margin-bottom: 0.35rem; color: var(--p-charcoal-700); font-size: 0.875rem; letter-spacing: 0.04em; }
+.sv-form-card .standalone-audit-form input { padding: 0.75rem 0.9rem; font-size: 1rem; }
+.sv-form-card .cta-e { width: 100%; justify-content: center; min-height: 52px; border-radius: 12px; background: var(--sv-btn-bg); color: var(--sv-btn-text) !important; font-size: 1rem; }
+.sv-form-card .cta-e::before, .sv-form-card .cta-e::after { display: none; }
+.audit-compact-note { margin: 0; color: var(--sv-muted); font-size: 0.9375rem; text-align: center; }
+
 /* ---------- Sticky CTA ---------- */
 .sv-sticky {
   position: fixed;
@@ -889,8 +898,11 @@ body:has(.sv-sticky.is-visible) .global-scroll-top { bottom: 96px !important; }
   .sv-pain-grid, .sv-bento, .sv-scenarios, .sv-industries, .sv-guides, .sv-track, .sv-projects { grid-template-columns: 1fr; }
   .sv-track::before { top: 8%; bottom: 8%; left: calc(1.4rem + 19px); right: auto; width: 2px; height: auto; background: var(--sv-accent); }
   .sv-track li { padding: 1.2rem 1.2rem 1.2rem 4.4rem; }
+  .sv-sec { padding-block: 2.5rem; }
+  .sv-hero { padding: 1.5rem 0 2.5rem; }
   .sv-track-dot { top: 1.2rem; left: 1.2rem; }
   .sv-band { grid-template-columns: 1fr; }
+  .audit-compact-grid { grid-template-columns: 1fr; }
   .sv-actions .sv-btn, .sv-actions .sv-btn-ghost { width: 100%; }
   .sv-sticky-text small { display: none; }
   .sv-sticky .sv-btn-ghost { display: none; }
@@ -915,3 +927,44 @@ body:has(.sv-sticky.is-visible) .global-scroll-top { bottom: 96px !important; }
 @media (prefers-reduced-motion: reduce) {
   .sv-page *, .sv-page *::before, .sv-page *::after { animation: none !important; transition: none !important; }
 }
+
+.sv-faq-grid .eastside-faq-list article > div > p { color: var(--sv-muted); }
+.sv-faq-grid .eastside-faq-list button { min-height: 60px; }
+
+/* Card titles: clearly larger and bolder than the 18px body copy. */
+.sv-page .sv-card h3,
+.sv-page .sv-card .sv-pain-quote { font-size: 1.25rem; font-weight: 700; line-height: 1.3; }
+.sv-page .sv-industries strong,
+.sv-page .sv-guides strong,
+.sv-page .sv-project-meta strong { font-size: 1.125rem; font-weight: 700; }
+
+/* Mobile: swipeable rows and compact grids keep pages shorter. */
+@media (max-width: 700px) {
+  .sv-scenarios,
+  .sv-guides {
+    display: flex;
+    gap: 0.75rem;
+    margin-inline: -1rem;
+    padding: 0 1rem 0.75rem;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-padding-inline: 1rem;
+    -webkit-overflow-scrolling: touch;
+  }
+  .sv-scenarios > *,
+  .sv-guides > li { flex: 0 0 86%; scroll-snap-align: start; }
+  .sv-scenarios::after,
+  .sv-guides::after { flex: 0 0 1px; content: ""; }
+  .sv-swipe-hint { display: block; }
+
+  .sv-industries { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.5rem; }
+  .sv-industries a { gap: 0.55rem; padding: 0.8rem 0.8rem; }
+  .sv-industries a::after { display: none; }
+  .sv-industries small { display: none; }
+  .sv-industries strong { font-size: 1rem !important; line-height: 1.3; }
+  .sv-industries svg { width: 18px; height: 18px; flex-basis: 18px; }
+
+  .sv-pain { padding: 1.2rem; }
+  .sv-head { margin-bottom: 1.25rem; }
+}
+.sv-swipe-hint { display: none; margin: 0 0 0.75rem; color: var(--sv-muted); font-size: 0.9375rem; font-weight: 600; }

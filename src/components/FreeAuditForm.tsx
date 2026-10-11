@@ -72,7 +72,21 @@ const emptyForm: AuditFormValues = {
   message: "",
 };
 
-export default function FreeAuditForm() {
+type FreeAuditFormProps = {
+  // Compact layout for embedding at the end of service pages: required
+  // fields only, no progress box, fieldsets or optional extras.
+  compact?: boolean;
+  sourcePage?: string;
+  defaultScope?: string[];
+  submitLabel?: string;
+};
+
+export default function FreeAuditForm({
+  compact = false,
+  sourcePage = "/growth-audit",
+  defaultScope = [],
+  submitLabel = "Get My Growth Audit",
+}: FreeAuditFormProps = {}) {
   const searchParams = useSearchParams();
   const calendlyContainerRef = useRef<HTMLDivElement | null>(null);
   const postedInviteesRef = useRef<Set<string>>(new Set());
@@ -80,6 +94,7 @@ export default function FreeAuditForm() {
     ...emptyForm,
     website: searchParams.get("website") || "",
     businessEmail: searchParams.get("email") || "",
+    auditScope: defaultScope,
   }));
   const [submittedForm, setSubmittedForm] = useState<AuditFormValues | null>(
     null,
@@ -213,7 +228,7 @@ export default function FreeAuditForm() {
         body: JSON.stringify({
           ...normalizedForm,
           email: normalizedForm.businessEmail,
-          sourcePage: "/growth-audit",
+          sourcePage,
         }),
       });
       const data = (await response.json()) as { message?: string };
@@ -238,6 +253,50 @@ export default function FreeAuditForm() {
   }
 
   const isLoading = state === "loading";
+
+  const results = (
+    <>
+      {state === "success" ? (
+        <div className="standalone-audit-result success" aria-live="polite">
+          <strong>Request received. Book your call below.</strong>
+          <p>{message}</p>
+          <div className="standalone-calendly-panel">
+            <div
+              ref={calendlyContainerRef}
+              className="standalone-calendly-embed"
+            />
+          </div>
+        </div>
+      ) : null}
+
+      {state === "error" ? (
+        <div className="standalone-audit-result error" aria-live="polite">
+          <strong>Could not submit yet.</strong>
+          <p>{message}</p>
+        </div>
+      ) : null}
+    </>
+  );
+
+  if (compact) {
+    return (
+      <form className="standalone-audit-form audit-form-compact" onSubmit={handleSubmit}>
+        <div className="audit-compact-grid">
+          <TextField id="auditFullName" label="Full Name" name="fullName" value={form.fullName} onChange={updateField} autoComplete="name" required />
+          <TextField id="auditEmail" label="Business Email" name="businessEmail" type="email" value={form.businessEmail} onChange={updateField} autoComplete="email" required />
+          <TextField id="auditPhone" label="Phone Number" name="phoneNumber" type="tel" value={form.phoneNumber} onChange={updateField} autoComplete="tel" required />
+          <TextField id="auditWebsite" label="Website" name="website" type="text" inputMode="url" value={form.website} onChange={updateField} autoComplete="url" placeholder="yourwebsite.com" required />
+        </div>
+        <SelectField id="auditBudget" label="Monthly Budget Range" name="budgetRange" value={form.budgetRange} options={budgetOptions} onChange={updateField} required />
+        <button className="cta-e cta-e-lg" type="submit" disabled={isLoading}>
+          {isLoading ? "Sending..." : submitLabel}
+          <span className="ar">→</span>
+        </button>
+        <p className="audit-compact-note">Free, no obligation. After you submit, pick a time for your call.</p>
+        {results}
+      </form>
+    );
+  }
 
   return (
     <form className="standalone-audit-form" onSubmit={handleSubmit}>
@@ -346,29 +405,11 @@ export default function FreeAuditForm() {
       </fieldset>
 
       <button className="cta-e cta-e-lg" type="submit" disabled={isLoading}>
-        {isLoading ? "Sending..." : "Get My Growth Audit"}
+        {isLoading ? "Sending..." : submitLabel}
         <span className="ar">→</span>
       </button>
 
-      {state === "success" ? (
-        <div className="standalone-audit-result success" aria-live="polite">
-          <strong>Request received. Book your call below.</strong>
-          <p>{message}</p>
-          <div className="standalone-calendly-panel">
-            <div
-              ref={calendlyContainerRef}
-              className="standalone-calendly-embed"
-            />
-          </div>
-        </div>
-      ) : null}
-
-      {state === "error" ? (
-        <div className="standalone-audit-result error" aria-live="polite">
-          <strong>Could not submit yet.</strong>
-          <p>{message}</p>
-        </div>
-      ) : null}
+      {results}
     </form>
   );
 }
