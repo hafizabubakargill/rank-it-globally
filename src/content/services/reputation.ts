@@ -1,7 +1,7 @@
 import { denverShop, guides } from "./shared";
-import type { ServicePageContent } from "./types";
+import type { SectionHeading, ServiceCore } from "./types";
 
-export const reputationPage: ServicePageContent = {
+export const reputationPage: ServiceCore = {
   slug: "reputation-management",
   name: "Review & Reputation Management",
   serviceType: "Online review and reputation management",
@@ -15,11 +15,8 @@ export const reputationPage: ServicePageContent = {
   heroIntro:
     "Review and reputation management helps US local businesses earn more genuine Google reviews, respond to every one of them and handle negative feedback the right way. We set up automated review requests, write responses in your voice and monitor your profiles, so your reputation brings in more calls and bookings.",
   ctaLabel: "Get My Free Review Audit",
-  heroPanel: {
-    label: "Reputation program",
-    steps: ["Ask every customer", "Respond", "Monitor", "Showcase"],
-    outcome: "A steady stream of genuine reviews that win more calls",
-  },
+  ctaMicro: "We compare your rating, review count, recency and response rate with your top local competitors.",
+  sticky: "Competitors have more reviews than you?",
   proofStrip: [
     { value: "384 Google reviews", label: "at 4.9★ for a Denver auto shop" },
   ],
@@ -27,121 +24,82 @@ export const reputationPage: ServicePageContent = {
     eyebrow: "Sound familiar?",
     title: "Your customers love you.",
     accent: "Google doesn't know it yet.",
-    intro:
-      "Most customers check reviews before they call, and many decide in seconds based on the star rating and how recent the reviews are. If your reviews don't reflect the quality of your work, you lose customers you should be winning.",
+    intro: "Most customers check reviews before they call, and many decide in seconds from the star rating and how recent the reviews are. If your reviews don't reflect your work, you lose customers you should win.",
     points: [
-      {
-        title: "\"Happy customers almost never leave reviews.\"",
-        body: "Satisfied customers mean to leave a review, then forget. Unhappy ones are more motivated to write. Without a simple, consistent way to ask, your reviews end up skewed toward the few people who had a bad day.",
-      },
-      {
-        title: "\"One bad review seems to undo ten good ones.\"",
-        body: "A single harsh review near the top of your profile can scare off new customers, especially if it sits there with no reply. How you respond matters almost as much as the review itself.",
-      },
-      {
-        title: "\"I don't have time to reply to reviews.\"",
-        body: "You're running a business. Writing thoughtful replies to every review, good and bad, falls to the bottom of the list. But unanswered reviews make a business look like no one is paying attention.",
-      },
-      {
-        title: "\"Competitors have more reviews, and newer ones.\"",
-        body: "Customers compare businesses side by side on the map. When a competitor has hundreds of recent reviews and you have a few dozen old ones, the choice looks easy, even if your work is better.",
-      },
+      { quote: "Happy customers almost never leave reviews.", body: "They mean to, then forget. Unhappy customers are more motivated, so your profile skews toward the few who had a bad day.", fix: "An automatic ask after every job, so happy customers actually post." },
+      { quote: "One bad review seems to undo ten good ones.", body: "A harsh review near the top, with no reply, scares off new customers. How you respond matters almost as much as the review itself.", fix: "Calm, professional replies that reassure future customers." },
+      { quote: "I don't have time to reply to reviews.", body: "Thoughtful replies fall to the bottom of the list. Unanswered reviews make a business look like nobody's paying attention.", fix: "Responses written for you, in your voice." },
+      { quote: "The competitor down the street has 400 reviews.", body: "On the map, customers compare side by side. Hundreds of recent reviews beat a few dozen old ones, even if your work is better.", fix: "A steady stream of fresh reviews that closes the gap." },
     ],
   },
   included: {
     eyebrow: "What's included",
     title: "A complete review system,",
     accent: "run for you.",
-    intro:
-      "Good reputation management isn't about gaming ratings. It's about asking every customer consistently, responding well and keeping an eye on what people say. Here's what every plan includes.",
+    intro: "Reputation management isn't about gaming ratings. It's about asking every customer, responding well and watching what people say. Every plan includes:",
     items: [
-      {
-        icon: "community",
-        title: "Review request system (SMS and email)",
-        body: "We set up automated SMS and email requests that go to every customer after a job or visit, with a direct link to your Google review form.",
-      },
-      {
-        icon: "content",
-        title: "Review responses",
-        body: "We write thoughtful replies to your reviews in your voice, thanking happy customers and addressing complaints calmly and professionally. You approve the approach.",
-      },
-      {
-        icon: "profile",
-        title: "Google Business Profile Q&A management",
-        body: "We add and answer common questions on your profile and keep an eye on new ones, so customers get accurate answers instead of guesses from strangers.",
-      },
-      {
-        icon: "analytics",
-        title: "Review monitoring and alerts",
-        body: "We monitor your reviews and alert you quickly to new negative feedback, so nothing sits unanswered and urgent issues reach you fast.",
-      },
-      {
-        icon: "shield",
-        title: "Policy-safe handling of negative reviews",
-        body: "We respond to genuine complaints professionally and flag reviews that break Google's policies, such as spam or fake reviews, for Google to assess.",
-      },
-      {
-        icon: "reviews",
-        title: "Review widgets on your website",
-        body: "We display your real Google reviews on your website, so visitors see the same social proof there that they'd find on the map.",
-      },
+      { icon: "community", title: "Review request system (SMS and email)", body: "Automated requests to every customer after a job or visit, with a direct link to your Google review form." },
+      { icon: "content", title: "Review responses", body: "Thoughtful replies in your voice: thanks for happy customers, calm answers to complaints." },
+      { icon: "profile", title: "Google Business Profile Q&A management", body: "Common questions added and answered, and new ones monitored, so customers get accurate answers." },
+      { icon: "analytics", title: "Review monitoring and alerts", body: "Fast alerts on new negative feedback, so nothing sits unanswered." },
+      { icon: "shield", title: "Policy-safe handling of negative reviews", body: "Professional replies to genuine complaints; reviews that break Google's policies flagged for Google to assess." },
+      { icon: "reviews", title: "Review widgets on your website", body: "Your real Google reviews displayed on your site, so visitors see the same proof they'd find on the map." },
     ],
   },
   timeline: {
     eyebrow: "How it works",
     title: "Your first 90 days",
     accent: "of reputation management.",
-    intro:
-      "The review request system goes live first, because every week without it is a week of missed reviews. Responses and monitoring follow, and by month three you get a clear report on how your reputation is changing.",
+    intro: "The request system goes live first, because every week without it is a week of missed reviews.",
     steps: [
-      {
-        period: "Days 1–30",
-        title: "Review request system live",
-        body: "We audit your current reviews, set up automated SMS and email requests, and connect them to your customer list or booking system.",
-      },
-      {
-        period: "Days 31–60",
-        title: "Response workflow",
-        body: "We agree on your tone of voice, reply to your backlog of unanswered reviews and set up an ongoing response process.",
-      },
-      {
-        period: "Days 61–90",
-        title: "Monitoring and monthly report",
-        body: "We switch on monitoring and alerts, add review widgets to your website and deliver your first monthly reputation report.",
-      },
+      { period: "Days 1–30", title: "Review request system live", body: "Current reviews audited, automated SMS and email requests set up and connected to your customer list or booking system." },
+      { period: "Days 31–60", title: "Response workflow", body: "Tone of voice agreed, the backlog of unanswered reviews replied to, and an ongoing response process in place." },
+      { period: "Days 61–90", title: "Monitoring and monthly report", body: "Monitoring and alerts switched on, review widgets added to your site and your first monthly reputation report." },
     ],
   },
   proof: {
     eyebrow: "Proof",
     title: "384 Google reviews",
     accent: "at 4.9 stars.",
-    intro:
-      "Here's what a strong local reputation looks like. This client is unnamed until we have written permission to share it.",
+    intro: "What a strong local reputation looks like. This client is unnamed until we have written permission to share it.",
     items: [
       {
         ...denverShop,
         body: [
-          "This auto dent, hail and detail shop in Denver, Colorado holds a 4.9-star average from 384 Google reviews, with a \"Book Online\" button right on its Google Business Profile.",
-          "That volume of reviews, paired with a near-perfect rating and an easy way to book, gives new customers the confidence to choose quickly.",
+          "This auto dent, hail and detail shop in Denver, Colorado holds a 4.9-star average from 384 Google reviews, with a \"Book Online\" button right on its Google Business Profile. That volume, rating and easy booking path let new customers choose quickly.",
           // TODO(owner): describe the work done for the Denver shop if you want it shown.
         ],
       },
     ],
-    closing: "Reviews are one part of local visibility. See our [Local SEO & Google Business Profile](/local-seo-services) service.",
+    closing: "Reviews are one part of local visibility. See [Local SEO & Google Business Profile](/local-seo-services).",
+  },
+  scenarios: {
+    eyebrow: "Who this is for",
+    title: "Trust-driven businesses",
+    accent: "that live on reviews.",
+    intro: "Reviews carry the most weight where customers trust you with their health, home, car or money. A few typical examples:",
+    items: [
+      { icon: "profile", business: "A pediatric dental office", where: "Raleigh, NC", situation: "Parents love the team, but the profile has 40 reviews and the newest is eight months old.", goal: "A steady flow of recent reviews from happy parents.", plan: "SMS requests after each visit, replies to every review and a reviews widget on the new-patient page." },
+      { icon: "pin", business: "An auto repair shop", where: "Phoenix, AZ", situation: "Two angry reviews from the same week sit at the top with no reply.", goal: "Recover trust without arguing in public.", plan: "Professional responses, a policy check on both reviews and a request system to rebuild recent volume." },
+      { icon: "media", business: "A boutique fitness studio", where: "Austin, TX", situation: "Members rave in class but rarely post; a new competitor opened with a review blitz.", goal: "Show the community's real love on Google.", plan: "Automated asks after a member's third class, Q&A management and monthly monitoring." },
+      { icon: "shield", business: "A roofing company", where: "Oklahoma City, OK", situation: "Storm-season jobs bring in hundreds of customers, but reviews come in bursts and then stop.", goal: "Consistent reviews year-round, tied to completed jobs.", plan: "Requests triggered when a job is marked complete, photo prompts and response templates for common questions." },
+    ],
+  },
+  midCta: {
+    title: "How do your reviews stack up against the competition?",
+    body: "Our free review audit compares your rating, volume, recency and response rate with the businesses beating you on the map.",
   },
   industries: {
     eyebrow: "Industries we do this for",
     title: "Reputation management for",
     accent: "trust-driven businesses.",
-    intro:
-      "Reviews carry the most weight where customers are choosing someone to trust with their health, home, money or legal matters. Explore how we work with each industry.",
+    intro: "Reviews matter most where customers trust you with their health, home, money or legal matters. Explore how we work with each industry.",
   },
   comparison: {
     eyebrow: "Why Rank It Globally",
     title: "Reputation management",
     accent: "that follows the rules.",
-    intro:
-      "We never buy reviews, incentivize them or only ask happy customers. Our founder delivered 150+ client engagements as a freelance SEO before founding the agency, and we've seen how shortcuts can get a profile penalized.",
+    intro: "We never buy reviews, incentivize them or only ask happy customers. Our founder delivered 150+ client engagements as a freelance SEO before founding the agency, and we've seen how shortcuts can get a profile penalized.",
     rows: [
       { label: "Policy-safe review requests", rig: "Every customer asked, no incentives, no gating", agency: "Varies by agency", freelancer: "Varies", diy: "Easy to break the rules by mistake" },
       { label: "Responses written for you", rig: "In your voice, approved by you", agency: "Sometimes templated", freelancer: "Varies", diy: "You write every reply" },
@@ -184,12 +142,48 @@ export const reputationPage: ServicePageContent = {
         "Reviews are one of the prominence signals Google uses to rank businesses in the Map Pack. They also affect clicks: a higher rating and more recent reviews make people more likely to choose you over the competitor next to you. That's why we report reviews alongside your [local SEO](/local-seo-services) results.",
     },
   ],
-  guides: [guides.notShowingUp],
+  guides: [guides.notShowingUp, guides.aiOverviews],
   relatedServices: ["/local-seo-services", "/seo-services"],
   finalCta: {
-    eyebrow: "Free review audit",
     title: "See how your reviews",
     accent: "stack up.",
     body: "We'll compare your reviews, rating and response rate with your top local competitors, and show you how to close the gap within Google's rules.",
+    bullets: [
+      "Rating, volume and recency vs. your top 3 competitors",
+      "Unanswered reviews and response quality check",
+      "A policy-safe plan to grow reviews every month",
+    ],
   },
+};
+
+export const reviewRules: SectionHeading & { allowed: string[]; banned: string[] } = {
+  eyebrow: "Google's review rules in 30 seconds",
+  title: "What's allowed,",
+  accent: "and what gets you in trouble.",
+  intro: "Google's policies are clear, and breaking them can get reviews removed or a profile restricted. Every request system we set up stays on the right side of this line.",
+  allowed: [
+    "Asking every customer for an honest review",
+    "Sending a direct review link by text or email",
+    "Replying to every review, good or bad",
+    "Flagging reviews that break Google's policies",
+  ],
+  banned: [
+    "Offering discounts, gifts or payment for reviews",
+    "\"Review gating\": only asking customers you know are happy",
+    "Writing reviews yourself or buying them",
+    "Asking staff or family to post reviews",
+  ],
+};
+
+export const reviewFlywheel: SectionHeading & { steps: { title: string; body: string }[] } = {
+  eyebrow: "Why reviews compound",
+  title: "Reviews feed rankings.",
+  accent: "Rankings feed reviews.",
+  intro: "More recent reviews make you more prominent on the map and more clickable in results. More customers means more reviews. Once the loop is running, it keeps turning.",
+  steps: [
+    { title: "Ask", body: "Every customer gets a quick, friendly request." },
+    { title: "Review", body: "Happy customers post, often with detail and photos." },
+    { title: "Respond", body: "Every review gets a reply, showing you care." },
+    { title: "Rank & win", body: "Prominence and clicks rise, bringing new customers to ask." },
+  ],
 };

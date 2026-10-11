@@ -31,29 +31,26 @@ export type SectionHeading = {
 
 export type ProofStat = { value: string; label: string };
 
-export type ProofScreenshot = {
-  src: string;
-  width: number;
-  height: number;
-};
+export type ProofScreenshot = { src: string; width: number; height: number };
 
 export type ProofItem = {
   title: string;
   source: string;
   stats: ProofStat[];
   body: string[];
-  // Descriptive alt text for the screenshot, also used for the placeholder
-  // while the real screenshot is missing.
+  // Descriptive alt text for the screenshot once it exists.
   alt: string;
   screenshot?: ProofScreenshot;
   footnote?: string;
 };
 
-export type ServiceFeatureBlock = {
-  id: string;
-  title: string;
-  paragraphs: string[];
-  bullets: string[];
+export type Scenario = {
+  icon: ServiceIcon;
+  business: string;
+  where: string;
+  situation: string;
+  goal: string;
+  plan: string;
 };
 
 export type ComparisonRow = {
@@ -64,7 +61,15 @@ export type ComparisonRow = {
   diy: string;
 };
 
-export type ServicePageContent = {
+export type FeatureBlock = {
+  id: string;
+  title: string;
+  paragraphs: string[];
+  bullets: string[];
+};
+
+// Fields every service page has, regardless of its layout.
+export type ServiceCore = {
   slug: string;
   name: string;
   serviceType: string;
@@ -76,25 +81,20 @@ export type ServicePageContent = {
   heroPromise: string;
   heroIntro: string;
   ctaLabel: string;
-  heroPanel: { label: string; steps: string[]; outcome: string };
+  ctaMicro: string;
+  sticky: string;
   proofStrip: ProofStat[];
-  problem: SectionHeading & { points: { title: string; body: string }[] };
-  included: SectionHeading & {
-    items: { icon: ServiceIcon; title: string; body: string }[];
-    features?: ServiceFeatureBlock[];
-  };
+  problem: SectionHeading & { points: { quote: string; body: string; fix: string }[] };
+  included: SectionHeading & { items: { icon: ServiceIcon; title: string; body: string }[] };
   timeline: SectionHeading & { steps: { period: string; title: string; body: string }[] };
-  proof: SectionHeading & {
-    items: ProofItem[];
-    projectSlugs?: string[];
-    checklist?: { title: string; intro: string; items: { title: string; body: string }[] };
-    closing?: string;
-  };
+  proof: SectionHeading & { items: ProofItem[]; closing?: string };
+  scenarios: SectionHeading & { items: Scenario[] };
+  midCta: { title: string; body: string };
   industries: SectionHeading;
   comparison: SectionHeading & { rows: ComparisonRow[] };
   faqIntro: string;
   faqs: { question: string; answer: string }[];
   guides: { href: string; label: string; description: string }[];
   relatedServices: string[];
-  finalCta: { eyebrow: string; title: string; accent: string; body: string };
+  finalCta: { title: string; accent: string; body: string; bullets: string[] };
 };

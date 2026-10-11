@@ -1,7 +1,7 @@
 import { gscClientA, gscClientB, guides } from "./shared";
-import type { ServicePageContent } from "./types";
+import type { SectionHeading, ServiceCore } from "./types";
 
-export const seoPage: ServicePageContent = {
+export const seoPage: ServiceCore = {
   slug: "seo-services",
   name: "SEO Services",
   serviceType: "Search engine optimization",
@@ -15,11 +15,8 @@ export const seoPage: ServicePageContent = {
   heroIntro:
     "Our SEO services help US small and mid-size businesses rank higher on Google for the searches that bring in paying customers. We fix the technical problems holding your site back, improve your pages and content, and build authority, then track every call, form and WhatsApp message so you can see what SEO actually earns.",
   ctaLabel: "Get My Free Growth Audit",
-  heroPanel: {
-    label: "Search growth program",
-    steps: ["Fix the site", "Match intent", "Build authority", "Track leads"],
-    outcome: "More calls and booked jobs from organic search",
-  },
+  ctaMicro: "A real person reviews your site, rankings and AI visibility, then walks you through the fixes on a call.",
+  sticky: "Stuck on page two of Google?",
   proofStrip: [
     { value: "5.92K clicks", label: "in 90 days for Client A" },
     { value: "10.3K clicks", label: "in 90 days for Client B" },
@@ -27,26 +24,29 @@ export const seoPage: ServicePageContent = {
   ],
   problem: {
     eyebrow: "Sound familiar?",
-    title: "You know SEO matters.",
-    accent: "It just isn't paying off.",
-    intro:
-      "Most business owners who come to us aren't new to SEO. They've tried it, paid for it or done it themselves, and they're still not getting the calls they expected. These are the four problems we hear most.",
+    title: "You've tried SEO.",
+    accent: "The phone still isn't ringing.",
+    intro: "Most owners who call us have tried SEO already. These are the four stories we hear most.",
     points: [
       {
-        title: "\"We're stuck on page two for the searches that matter.\"",
-        body: "You show up for your business name and a few odd phrases, but not for the services people actually search for in your area. Page two might as well be invisible, because very few people ever click that far.",
+        quote: "We're stuck on page two for the searches that actually matter.",
+        body: "You rank for your name, not \"emergency plumber near me\". Page two is invisible.",
+        fix: "We map every money keyword to the page that should win it.",
       },
       {
-        title: "\"We get traffic, but the phone doesn't ring.\"",
-        body: "Visitors arrive and leave without calling, booking or filling in a form. Often the traffic is for the wrong searches, or the pages don't make the next step obvious. Either way, traffic alone doesn't pay the bills.",
+        quote: "We get traffic. We don't get leads.",
+        body: "Visitors arrive and leave. Often they came for the wrong search, or the page buries the phone number under three scrolls of fluff.",
+        fix: "We target buyer-intent searches and make the next step obvious.",
       },
       {
-        title: "\"Our last agency sent rankings reports, not leads.\"",
-        body: "Monthly PDFs full of keyword positions look busy, but they don't tell you how many customers came from Google. If no one can connect the work to enquiries, you can't tell whether it's worth paying for.",
+        quote: "Our last agency sent rankings PDFs, not customers.",
+        body: "Green arrows look busy but don't show how many jobs came from Google.",
+        fix: "Every report ties back to calls, forms and booked jobs.",
       },
       {
-        title: "\"I don't know what's actually broken.\"",
-        body: "Slow pages, indexing errors, duplicate content and missing schema are invisible from the outside. Without a proper audit, you end up guessing, and guessing is an expensive way to do SEO.",
+        quote: "Honestly? I don't know what's broken.",
+        body: "Slow pages, indexing errors and missing schema are invisible from outside.",
+        fix: "A technical audit shows exactly what's holding you back, in plain English.",
       },
     ],
   },
@@ -54,108 +54,107 @@ export const seoPage: ServicePageContent = {
     eyebrow: "What's included",
     title: "Technical, content and links",
     accent: "in one plan.",
-    intro:
-      "Rankings come from several things working together: a site Google can crawl, pages that match what people search for, and enough authority to beat competitors. Every SEO plan covers all of it, with tracking so you can see the results in leads.",
+    intro: "Rankings come from three things working together: a site Google can crawl, pages that match what people search, and enough authority to beat competitors. Every plan covers all three, with tracking so you see results in leads.",
     items: [
-      {
-        icon: "schema",
-        title: "Technical audit and fixes",
-        body: "We find and fix the problems that hold rankings back, including page speed, indexing errors, crawl issues and missing or broken schema markup.",
-      },
-      {
-        icon: "strategy",
-        title: "Keyword and page strategy",
-        body: "We map the searches your customers use to the pages that should rank for them, so every important service has a page built to win it.",
-      },
-      {
-        icon: "search",
-        title: "On-page optimization",
-        body: "We improve titles, headings, copy and page structure so each page clearly answers the search it targets and gives visitors a reason to get in touch.",
-      },
-      {
-        icon: "content",
-        title: "Ongoing content production",
-        // TODO(owner): number of articles per month included in SEO plans.
-        body: "We plan and write service pages, location pages and helpful articles that answer real customer questions and build topical authority over time.",
-      },
-      {
-        icon: "citations",
-        title: "Internal linking",
-        body: "We connect related pages so authority flows to the pages that matter most and visitors can easily find the next thing they need.",
-      },
-      {
-        icon: "reviews",
-        title: "Link building and digital PR",
-        body: "We earn links and mentions from relevant, credible websites through outreach, partnerships and useful content, never through link schemes.",
-      },
-      {
-        icon: "analytics",
-        title: "Tracking and monthly reporting",
-        body: "We set up GA4 plus call and WhatsApp click tracking, then send a monthly report showing rankings, traffic, leads and the work we completed.",
-      },
+      { icon: "schema", title: "Technical audit and fixes", body: "Speed, Core Web Vitals, indexing, crawl and schema issues fixed by impact." },
+      { icon: "strategy", title: "Keyword and page strategy", body: "Customer searches mapped to the pages that should win them." },
+      { icon: "search", title: "On-page optimization", body: "Titles, headings and copy tuned to search intent and built to drive calls." },
+      // TODO(owner): number of articles per month included in SEO plans.
+      { icon: "content", title: "Ongoing content production", body: "Service, location and helpful pages that answer real customer questions." },
+      { icon: "citations", title: "Internal linking", body: "Authority routed to the pages that make money." },
+      { icon: "reviews", title: "Link building and digital PR", body: "Links earned from relevant, credible sites. Never link schemes." },
+      { icon: "analytics", title: "Tracking and monthly reporting", body: "GA4, call and WhatsApp tracking, plus a monthly report on leads and work done." },
     ],
   },
   timeline: {
     eyebrow: "How it works",
     title: "Your first 90 days",
     accent: "of SEO with us.",
-    intro:
-      "We start by measuring where you are and fixing what's broken, because new content won't rank on a site Google struggles to read. Then we build momentum month by month and review results against the baseline.",
+    intro: "Foundation first, then momentum month by month.",
     steps: [
-      {
-        period: "Days 1–30",
-        title: "Audit, tracking and technical fixes",
-        body: "We audit your site and competitors, set up call, form and WhatsApp tracking, and fix the technical issues with the biggest impact first.",
-      },
-      {
-        period: "Days 31–60",
-        title: "On-page work and first content",
-        body: "We optimize your most important service pages and publish the first new content based on the keyword and page strategy.",
-      },
-      {
-        period: "Days 61–90",
-        title: "Links, cadence and first review",
-        body: "We start link building, settle into a steady content cadence and walk you through a first results review: what moved, what didn't and what's next.",
-      },
+      { period: "Days 1–30", title: "Audit, tracking and fixes", body: "Site and competitor audit, call, form and WhatsApp tracking, and the highest-impact technical fixes." },
+      { period: "Days 31–60", title: "On-page work and first content", body: "Your most important service pages optimized and the first new content published from the keyword map." },
+      { period: "Days 61–90", title: "Links and first review", body: "Link building starts, content settles into a steady cadence, and we walk you through what moved and what's next." },
     ],
   },
   proof: {
     eyebrow: "Proof",
     title: "Two clients, side by side,",
     accent: "straight from Search Console.",
-    intro:
-      "These are real Google Search Console numbers for two unnamed clients over the same 90-day window, July 5 to October 3, 2026. No mock-ups, no projections: just the clicks and impressions Google recorded.",
+    intro: "Real Google Search Console numbers for two unnamed clients over the same 90 days, July 5 to October 3, 2026. No projections, no mock-ups.",
     items: [
       {
         ...gscClientA,
         body: [
-          "Client A earned 5.92K clicks from 1.17M impressions with an average position of 7.2, meaning many of its pages sit on the first page of Google.",
+          "5.92K clicks from 1.17M impressions with an average position of 7.2, meaning many of its pages sit on page one.",
           // TODO(owner): describe the work done for Client A if you want it shown.
         ],
       },
       {
         ...gscClientB,
         body: [
-          "Client B earned 10.3K clicks from 1.61M impressions with an average position of 8.1. We use the same Search Console data in our monthly reports, so you always see Google's own numbers.",
+          "10.3K clicks from 1.61M impressions with an average position of 8.1. Our monthly reports use the same Search Console data, so you always see Google's own numbers.",
           // TODO(owner): describe the work done for Client B if you want it shown.
         ],
       },
     ],
-    closing: "Both reports also track performance in Google's generative AI features, which our [AI SEO & GEO Services](/ai-seo-services) focus on.",
+    closing: "Both reports also track Google's generative AI features, the focus of our [AI SEO & GEO Services](/ai-seo-services).",
+  },
+  scenarios: {
+    eyebrow: "Who this is for",
+    title: "Real businesses,",
+    accent: "real search problems.",
+    intro: "If customers search Google before calling you, SEO should be a top lead source. Typical examples:",
+    items: [
+      {
+        icon: "pin",
+        business: "An HVAC company",
+        where: "Atlanta metro, 12 trucks",
+        situation: "Pays for marketplace leads; ranks on page two for \"AC repair near me\".",
+        goal: "Own the searches that bring summer repair calls.",
+        plan: "Service and city page structure, a speed overhaul and call tracking so every booked job is counted.",
+      },
+      {
+        icon: "shield",
+        business: "A family law firm",
+        where: "Charlotte, NC",
+        situation: "Lots of blog posts, few consultations, thin practice-area pages.",
+        goal: "More qualified consultation requests for divorce and custody cases.",
+        plan: "Consolidate overlapping content, rebuild practice-area pages around client questions and add attorney trust signals.",
+      },
+      {
+        icon: "profile",
+        business: "A med spa",
+        where: "Scottsdale, AZ",
+        situation: "Pretty page-builder site; treatment pages are slow and poorly indexed.",
+        goal: "Rank for treatment searches like \"Botox near me\" and fill the booking calendar.",
+        plan: "Technical fixes, one optimized page per treatment and FAQ content written within medical advertising rules.",
+      },
+      {
+        icon: "strategy",
+        business: "A B2B manufacturer",
+        where: "Ohio, ships nationwide",
+        situation: "Engineers search by part and spec; the site only ranks for its name.",
+        goal: "Show up for product and specification searches that lead to RFQs.",
+        plan: "Product category architecture, spec-rich pages with schema and links from industry associations.",
+      },
+    ],
+  },
+  midCta: {
+    title: "Want to know exactly why you're not ranking?",
+    body: "Speed, indexing, on-page SEO and AI readiness, reviewed by a real person.",
   },
   industries: {
     eyebrow: "Industries we do this for",
     title: "SEO for the businesses",
     accent: "we know well.",
-    intro:
-      "A law firm, a dental practice and a roofing company need very different keywords, pages and trust signals. We shape the plan around how customers in your industry search and decide.",
+    intro: "A law firm, a dental practice and a roofer need different keywords, pages and trust signals. We shape the plan around how your customers search and decide.",
   },
   comparison: {
     eyebrow: "Why Rank It Globally",
     title: "What makes our SEO",
     accent: "different.",
-    intro:
-      "Our founder delivered 150+ client engagements as a freelance SEO before starting the agency. We kept what clients valued most, direct access and honest reporting, and added an agency's ability to execute.",
+    intro: "Our founder delivered 150+ client engagements as a freelance SEO before starting the agency: direct access and honest reporting, with an agency's ability to execute.",
     rows: [
       { label: "Reporting tied to calls and leads", rig: "Calls, forms and WhatsApp tracked", agency: "Often rankings-only reports", freelancer: "Varies", diy: "Hard to set up yourself" },
       { label: "Technical + content + links in one plan", rig: "All three included", agency: "Often split into add-ons", freelancer: "Usually strongest in one area", diy: "Time-consuming to cover all three" },
@@ -201,9 +200,38 @@ export const seoPage: ServicePageContent = {
   guides: [guides.seoCost, guides.notShowingUp, guides.aiOverviews],
   relatedServices: ["/ai-seo-services", "/local-seo-services", "/cro-strategy"],
   finalCta: {
-    eyebrow: "Free Growth Audit",
     title: "See what's holding",
     accent: "your rankings back.",
-    body: "We'll review your website, Google visibility and AI search presence, then walk you through the fixes that matter most. Free, with no obligation.",
+    body: "We'll review your site, Google visibility and AI presence, then walk you through the key fixes.",
+    bullets: [
+      "Speed, indexing and technical health check",
+      "Your money keywords vs. the competitors outranking you",
+      "AI search readiness and a prioritized fix list",
+    ],
   },
+};
+
+// Page-specific sections.
+export const seoFunnel: SectionHeading & { stages: { value: string; label: string; note: string }[] } = {
+  eyebrow: "How SEO turns into revenue",
+  title: "Impressions are nice.",
+  accent: "Calls pay the bills.",
+  intro: "Search works like a funnel: people see you, some click, some get in touch. Here it is with Client B's real Search Console numbers, plus the step most agencies never measure.",
+  stages: [
+    { value: "1.61M", label: "Impressions", note: "Times Client B appeared in Google results in 90 days" },
+    { value: "10.3K", label: "Clicks", note: "People who chose Client B's result and visited" },
+    { value: "Tracked", label: "Calls, forms & WhatsApp", note: "The step we measure for every client, because it's the one that pays" },
+  ],
+};
+
+export const seoPipeline: SectionHeading & { stages: { title: string; question: string; breaks: string }[] } = {
+  eyebrow: "SEO 101, in 60 seconds",
+  title: "Before Google ranks you,",
+  accent: "three things must happen.",
+  intro: "Ranking isn't magic. Google has to find your pages, understand what they're about and trust them more than the alternatives. When rankings stall, one of these is usually broken.",
+  stages: [
+    { title: "Crawl", question: "Can Google find and load your pages?", breaks: "Slow hosting, blocked pages, broken links, missing sitemap" },
+    { title: "Understand", question: "Is it clear what each page is about?", breaks: "Vague headings, duplicate pages, no schema, thin service copy" },
+    { title: "Trust", question: "Why rank you over a competitor?", breaks: "Few quality links, no reviews, no expertise signals" },
+  ],
 };
