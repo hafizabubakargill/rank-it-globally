@@ -62,23 +62,11 @@ export function ServiceSchema({ page }: { page: ServiceCore }) {
 
 /* ---------- Page shell ---------- */
 
-// One logo-palette variant per page while the owner chooses a single palette.
-const previewPalettes: Record<ServiceCore["theme"], { id: string; name: string }> = {
-  ai: { id: "a", name: "Indigo Night" },
-  seo: { id: "b", name: "Charcoal & Gold" },
-  local: { id: "c", name: "Bold Indigo" },
-  web: { id: "d", name: "Charcoal & Indigo" },
-  ecommerce: { id: "e", name: "Warm Gold" },
-  cro: { id: "f", name: "Indigo Monochrome" },
-  reputation: { id: "g", name: "Charcoal, Gold Buttons" },
-};
 
 export function ServicePageShell({ page, children }: { page: ServiceCore; children: React.ReactNode }) {
   return (
-    <main className={`sv-page sv-pal-${previewPalettes[page.theme].id}`} id="main-content">
+    <main className="sv-page" id="main-content">
       <ServiceSchema page={page} />
-      {/* TODO(remove before launch): palette review label; keep only the chosen palette. */}
-      <p className="sv-pal-label">Palette {previewPalettes[page.theme].id.toUpperCase()} · {previewPalettes[page.theme].name}</p>
       {children}
       <StickyCta label={page.ctaLabel} text={page.sticky} whatsappHref={whatsappHref} />
     </main>
