@@ -35,8 +35,8 @@ function HeroPhone() {
         </div>
         <div className="loc-pack">
           <div className="loc-pack-row is-you"><strong>Your Business</strong><span>★★★★★ · Open now · 2.1 mi</span><em>Call</em></div>
-          <div className="loc-pack-row"><strong>Competitor Plumbing</strong><span>★★★★☆ · Closes 6pm</span></div>
-          <div className="loc-pack-row"><strong>Another Co.</strong><span>★★★★☆ · 4.8 mi</span></div>
+          <div className="loc-pack-row"><strong className="sv-blur">Riverside Rooter &amp; Plumbing</strong><span>★★★★☆ · Closes 6pm · 3.4 mi</span></div>
+          <div className="loc-pack-row"><strong className="sv-blur">Bayou City Drain Co.</strong><span>★★★★☆ · Open 24 hours · 4.8 mi</span></div>
         </div>
       </div>
       <div className="sv-glass loc-toast"><small>From your profile this week</small><strong>Calls · Directions · Bookings</strong></div>
@@ -81,7 +81,7 @@ function RankGrid() {
   return (
     <Illustration label="Illustration of a 7 by 7 map ranking grid, mostly red and orange before, mostly green after optimization" className="loc-grid-illo">
       <div className="loc-grids">
-        {[["Before", before], ["After 90 days (example)", after]].map(([label, data]) => (
+        {[["Before", before], ["The 90-day goal", after]].map(([label, data]) => (
           <div className="loc-grid-card" key={label as string}>
             <span>{label as string}</span>
             <div className="loc-grid">
@@ -105,7 +105,7 @@ function ProfileAnatomy() {
           <strong>Your Business</strong>
           <span className="loc-stars">★★★★★ <em>Plumber · Open 24 hours</em></span>
           <div className="loc-profile-btns"><b>Call</b><b>Directions</b><b>Book online</b></div>
-          <div className="loc-profile-photos"><i /><i /><i /><i /></div>
+          <div className="loc-profile-photos"><i>🔧</i><i>🚐</i><i>🚿</i><i>👷</i></div>
           <div className="loc-profile-post"><small>Update · 2 days ago</small>Same-day water heater installs this week.</div>
         </div>
       </Illustration>

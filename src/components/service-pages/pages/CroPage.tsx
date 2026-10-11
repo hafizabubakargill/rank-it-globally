@@ -23,18 +23,18 @@ function HeroHeatmap() {
   return (
     <Illustration label="Illustration of a web page with a heatmap overlay showing where visitors click and how far they scroll" className="cro-hero-visual">
       <div className="cro-page">
-        <div className="cro-page-nav"><b /><span /><span /><em>Call</em></div>
-        <b className="cro-h w90" /><b className="cro-h w60" />
-        <p className="cro-sub" />
+        <div className="cro-page-nav"><b>Lumière Med Spa</b><span>Treatments</span><span>Pricing</span><em>Call</em></div>
+        <h4 className="cro-h">Natural-looking Botox in Miami, from $11 per unit.</h4>
+        <p className="cro-sub">Board-certified injectors · Free consultation · Same-week appointments</p>
         <div className="cro-btn">Book my consultation</div>
-        <div className="cro-cards"><i /><i /><i /></div>
-        <div className="cro-form"><span /><span /><span /><span /></div>
+        <div className="cro-cards"><i>Botox</i><i>Fillers</i><i>Facials</i></div>
+        <div className="cro-form"><span>First name</span><span>Phone</span><span>Treatment</span><span>Preferred day</span></div>
         <span className="cro-heat cro-heat--1" /><span className="cro-heat cro-heat--2" /><span className="cro-heat cro-heat--3" /><span className="cro-heat cro-heat--4" />
         <span className="cro-cursor">➤</span>
         <div className="cro-scroll"><i /><small>Scroll depth</small></div>
       </div>
       <div className="sv-glass cro-ab">
-        <small>A/B test · example</small>
+        <small>A/B test · booking button</small>
         <div><span>A: &ldquo;Submit&rdquo;</span><b className="cro-ab-a" /></div>
         <div><span>B: &ldquo;Get my free quote&rdquo;</span><b className="cro-ab-b" /><em>Winner</em></div>
       </div>

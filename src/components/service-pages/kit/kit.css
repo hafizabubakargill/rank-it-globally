@@ -1,16 +1,40 @@
 /* ===== Service page kit: shared building blocks with per-page themes ===== */
 
 .sv-page {
-  --sv-ink: #0d0b2b;
-  --sv-ink-2: #1a1546;
-  --sv-accent: #8b5cf6;
-  --sv-accent-2: #22d3ee;
-  --sv-accent-ink: #6d28d9;
-  --sv-tint: #f3f0ff;
-  --sv-text: #16132f;
-  --sv-muted: #5d5878;
-  --sv-on-dark: #f5f3ff;
-  --sv-on-dark-muted: #c9c4e6;
+  /* Logo palette: indigo #6664E4, charcoal #212529, gold #E9D175, white. */
+  --p-indigo: #6664e4;
+  --p-indigo-700: #4b49c9;
+  --p-indigo-800: #3a389f;
+  --p-indigo-900: #23225e;
+  --p-indigo-300: #b3b2f2;
+  --p-indigo-100: #ededfc;
+  --p-indigo-50: #f6f6fe;
+  --p-charcoal: #212529;
+  --p-charcoal-800: #2c3136;
+  --p-charcoal-700: #343a40;
+  --p-charcoal-500: #6c757d;
+  --p-charcoal-200: #dee2e6;
+  --p-charcoal-100: #f1f3f5;
+  --p-charcoal-50: #f8f9fa;
+  --p-gold: #e9d175;
+  --p-gold-700: #7a6520;
+  --p-gold-100: #fbf5dc;
+
+  /* Semantic roles (set per palette variant below). */
+  --sv-ink: var(--p-indigo-900);
+  --sv-ink-2: #2f2e78;
+  --sv-accent: var(--p-indigo);
+  --sv-accent-ink: var(--p-indigo-700);
+  --sv-accent-2: var(--p-gold);
+  --sv-tint: var(--p-indigo-50);
+  --sv-alt: var(--p-indigo-100);
+  --sv-btn-bg: var(--p-indigo);
+  --sv-btn-text: #fff;
+  --sv-accent-text: #fff;
+  --sv-text: var(--p-charcoal);
+  --sv-muted: var(--p-charcoal-500);
+  --sv-on-dark: #fff;
+  --sv-on-dark-muted: #d4d4f3;
   --sv-radius: 18px;
   --sv-max: 1200px;
   position: relative;
@@ -19,13 +43,24 @@
   font-family: var(--fb);
 }
 
-.sv-theme-ai { --sv-ink: #0c0a26; --sv-ink-2: #1b1450; --sv-accent: #8b5cf6; --sv-accent-2: #22d3ee; --sv-accent-ink: #6d28d9; --sv-tint: #f1eeff; }
-.sv-theme-seo { --sv-ink: #0a1430; --sv-ink-2: #14245a; --sv-accent: #6366f1; --sv-accent-2: #a3e635; --sv-accent-ink: #4338ca; --sv-tint: #eef0ff; }
-.sv-theme-local { --sv-ink: #061a2b; --sv-ink-2: #0d3150; --sv-accent: #3b82f6; --sv-accent-2: #ff7a59; --sv-accent-ink: #1d4ed8; --sv-tint: #ecf4ff; }
-.sv-theme-web { --sv-ink: #121019; --sv-ink-2: #1f1b2e; --sv-accent: #14b8a6; --sv-accent-2: #f59e0b; --sv-accent-ink: #0f766e; --sv-tint: #ecfaf7; }
-.sv-theme-ecommerce { --sv-ink: #05201a; --sv-ink-2: #0b3a2e; --sv-accent: #10b981; --sv-accent-2: #facc15; --sv-accent-ink: #047857; --sv-tint: #ebfaf3; }
-.sv-theme-cro { --sv-ink: #1a0a14; --sv-ink-2: #3a1027; --sv-accent: #f97316; --sv-accent-2: #ec4899; --sv-accent-ink: #c2410c; --sv-tint: #fff3ec; }
-.sv-theme-reputation { --sv-ink: #1b0f22; --sv-ink-2: #34183f; --sv-accent: #f59e0b; --sv-accent-2: #c084fc; --sv-accent-ink: #b45309; --sv-tint: #fff7e8; }
+/* Seven ways to apply the logo palette, one per service page for review. */
+/* A · Indigo Night */
+.sv-pal-a { --sv-ink: var(--p-indigo-900); --sv-ink-2: #2f2e78; --sv-accent: var(--p-indigo); --sv-accent-ink: var(--p-indigo-700); --sv-accent-2: var(--p-gold); --sv-tint: var(--p-indigo-50); --sv-alt: var(--p-indigo-100); --sv-btn-bg: var(--p-indigo); --sv-btn-text: #fff; --sv-on-dark-muted: #d4d4f3; }
+/* B · Charcoal & Gold */
+.sv-pal-b { --sv-ink: var(--p-charcoal); --sv-ink-2: var(--p-charcoal-800); --sv-accent: var(--p-indigo); --sv-accent-ink: var(--p-indigo-700); --sv-accent-2: var(--p-gold); --sv-tint: var(--p-charcoal-50); --sv-alt: var(--p-gold-100); --sv-btn-bg: var(--p-gold); --sv-btn-text: var(--p-charcoal); --sv-on-dark-muted: #ced4da; }
+/* C · Bold Indigo */
+.sv-pal-c { --sv-ink: #5552d4; --sv-ink-2: #4b49c9; --sv-accent: var(--p-indigo); --sv-accent-ink: var(--p-indigo-700); --sv-accent-2: var(--p-gold); --sv-tint: var(--p-indigo-50); --sv-alt: var(--p-gold-100); --sv-btn-bg: var(--p-charcoal); --sv-btn-text: #fff; --sv-on-dark-muted: #e4e4fa; }
+/* D · Charcoal & Indigo */
+.sv-pal-d { --sv-ink: var(--p-charcoal); --sv-ink-2: var(--p-charcoal-800); --sv-accent: var(--p-indigo); --sv-accent-ink: var(--p-indigo-700); --sv-accent-2: var(--p-indigo-300); --sv-tint: var(--p-charcoal-100); --sv-alt: var(--p-indigo-100); --sv-btn-bg: var(--p-indigo); --sv-btn-text: #fff; --sv-on-dark-muted: #ced4da; }
+/* E · Warm Gold */
+.sv-pal-e { --sv-ink: var(--p-charcoal); --sv-ink-2: var(--p-charcoal-800); --sv-accent: var(--p-indigo); --sv-accent-ink: var(--p-indigo-700); --sv-accent-2: var(--p-gold); --sv-tint: var(--p-gold-100); --sv-alt: #fffdf5; --sv-btn-bg: var(--p-indigo); --sv-btn-text: #fff; --sv-on-dark-muted: #ced4da; }
+/* F · Indigo Monochrome */
+.sv-pal-f { --sv-ink: var(--p-indigo-800); --sv-ink-2: #4644b4; --sv-accent: var(--p-indigo); --sv-accent-ink: var(--p-indigo-700); --sv-accent-2: var(--p-indigo-300); --sv-tint: var(--p-indigo-100); --sv-alt: var(--p-indigo-50); --sv-btn-bg: var(--p-indigo-700); --sv-btn-text: #fff; --sv-on-dark-muted: #dcdcf8; }
+/* G · Charcoal, Gold Buttons */
+.sv-pal-g { --sv-ink: var(--p-charcoal); --sv-ink-2: var(--p-charcoal-800); --sv-accent: var(--p-gold); --sv-accent-ink: var(--p-indigo-700); --sv-accent-2: var(--p-gold); --sv-tint: var(--p-charcoal-50); --sv-alt: var(--p-indigo-50); --sv-btn-bg: var(--p-gold); --sv-btn-text: var(--p-charcoal); --sv-accent-text: var(--p-charcoal); --sv-on-dark-muted: #ced4da; }
+
+/* Temporary palette review label */
+.sv-pal-label { position: fixed; z-index: 350; top: 82px; right: 12px; margin: 0; padding: 0.4rem 0.75rem; border: 1px solid var(--p-charcoal-200); border-radius: 999px; background: #fff; color: var(--p-charcoal); font-size: 0.75rem; font-weight: 800; box-shadow: 0 6px 18px rgba(33, 37, 41, 0.15); }
 
 /* Hide the site-wide promo bar; service pages carry their own sticky CTA. */
 body:has(.sv-page) .sticky-bar { display: none !important; }
@@ -56,48 +91,23 @@ body:has(.sv-sticky.is-visible) .global-scroll-top { bottom: 96px !important; }
 }
 
 .sv-sec--ink {
-  background:
-    radial-gradient(60rem 30rem at 85% -10%, color-mix(in srgb, var(--sv-accent) 34%, transparent), transparent 70%),
-    radial-gradient(40rem 26rem at -10% 110%, color-mix(in srgb, var(--sv-accent-2) 22%, transparent), transparent 70%),
-    linear-gradient(160deg, var(--sv-ink), var(--sv-ink-2));
+  background: var(--sv-ink);
   color: var(--sv-on-dark);
 }
 
-.sv-sec--ink::before {
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-  background-image:
-    linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
-  background-size: 48px 48px;
-  mask-image: radial-gradient(ellipse at center, #000 30%, transparent 80%);
-  content: "";
-}
 
-.sv-sec--tint {
-  background:
-    radial-gradient(50rem 24rem at 100% 0%, color-mix(in srgb, var(--sv-accent) 14%, transparent), transparent 70%),
-    radial-gradient(40rem 22rem at 0% 100%, color-mix(in srgb, var(--sv-accent-2) 14%, transparent), transparent 70%),
-    var(--sv-tint);
-}
+.sv-sec--tint { background: var(--sv-tint); }
 
-.sv-sec--mesh {
-  background:
-    radial-gradient(36rem 22rem at 15% 10%, color-mix(in srgb, var(--sv-accent) 20%, transparent), transparent 70%),
-    radial-gradient(30rem 20rem at 85% 30%, color-mix(in srgb, var(--sv-accent-2) 22%, transparent), transparent 70%),
-    radial-gradient(40rem 26rem at 50% 110%, color-mix(in srgb, var(--sv-accent) 14%, transparent), transparent 70%),
-    #f6f5fb;
-}
+.sv-sec--mesh { background: var(--sv-alt); }
 
 .sv-sec--dots {
-  background-color: color-mix(in srgb, var(--sv-tint) 70%, #fbfaf7);
-  background-image: radial-gradient(color-mix(in srgb, var(--sv-accent-ink) 22%, transparent) 1px, transparent 1.4px);
+  background-color: var(--sv-tint);
+  background-image: radial-gradient(color-mix(in srgb, var(--sv-accent-ink) 18%, transparent) 1px, transparent 1.4px);
   background-size: 22px 22px;
 }
 
 .sv-sec--accent {
-  background: linear-gradient(120deg, var(--sv-accent-ink), color-mix(in srgb, var(--sv-accent-ink) 55%, var(--sv-ink)));
+  background: var(--sv-accent-ink);
   color: #fff;
 }
 
@@ -152,22 +162,15 @@ body:has(.sv-sticky.is-visible) .global-scroll-top { bottom: 96px !important; }
 }
 
 .sv-hl {
+  color: var(--sv-accent-ink);
   font-family: Georgia, serif;
   font-style: italic;
   font-weight: 400;
-  background: linear-gradient(110deg, var(--sv-accent-ink), var(--sv-accent));
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
 }
 
 .sv-sec--ink .sv-hl,
 .sv-sec--accent .sv-hl,
-.sv-hero .sv-hl {
-  background: linear-gradient(110deg, color-mix(in srgb, var(--sv-accent) 60%, #fff), var(--sv-accent-2));
-  -webkit-background-clip: text;
-  background-clip: text;
-}
+.sv-hero .sv-hl { color: var(--sv-accent-2); }
 
 .sv-head > p {
   margin: 1.1rem 0 0;
@@ -195,9 +198,9 @@ body:has(.sv-sticky.is-visible) .global-scroll-top { bottom: 96px !important; }
   gap: 0.6rem;
   padding: 0.85rem 1.5rem;
   border-radius: 12px;
-  background: linear-gradient(135deg, var(--sv-accent-ink), color-mix(in srgb, var(--sv-accent-ink) 60%, var(--sv-accent)));
-  box-shadow: 0 14px 34px color-mix(in srgb, var(--sv-accent-ink) 40%, transparent), inset 0 1px 0 rgba(255, 255, 255, 0.25);
-  color: #fff;
+  background: var(--sv-btn-bg);
+  box-shadow: 0 10px 24px rgba(33, 37, 41, 0.18);
+  color: var(--sv-btn-text);
   font-family: var(--fh);
   font-size: 0.98rem;
   font-weight: 800;
@@ -207,7 +210,7 @@ body:has(.sv-sticky.is-visible) .global-scroll-top { bottom: 96px !important; }
 
 .sv-btn:hover,
 .sv-btn:focus-visible {
-  box-shadow: 0 18px 40px color-mix(in srgb, var(--sv-accent-ink) 55%, transparent);
+  box-shadow: 0 14px 30px rgba(33, 37, 41, 0.24);
   transform: translateY(-2px);
 }
 
@@ -243,7 +246,7 @@ body:has(.sv-sticky.is-visible) .global-scroll-top { bottom: 96px !important; }
   color: #fff;
 }
 
-.sv-wa-icon { width: 19px; height: 19px; flex: 0 0 19px; fill: #25d366; }
+.sv-wa-icon { width: 19px; height: 19px; flex: 0 0 19px; fill: currentColor; }
 
 .sv-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 0.75rem; }
 .sv-micro { margin: 0.85rem 0 0; color: var(--sv-on-dark-muted); font-size: 0.82rem; }
@@ -254,24 +257,10 @@ body:has(.sv-sticky.is-visible) .global-scroll-top { bottom: 96px !important; }
   isolation: isolate;
   overflow: hidden;
   padding: clamp(2.5rem, 5vw, 4rem) 0 clamp(3.5rem, 7vw, 6rem);
-  background:
-    radial-gradient(55rem 32rem at 90% 0%, color-mix(in srgb, var(--sv-accent) 40%, transparent), transparent 70%),
-    radial-gradient(40rem 28rem at 0% 100%, color-mix(in srgb, var(--sv-accent-2) 24%, transparent), transparent 70%),
-    linear-gradient(165deg, var(--sv-ink), var(--sv-ink-2));
+  background: var(--sv-ink);
   color: var(--sv-on-dark);
 }
 
-.sv-hero::before {
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-  background-image:
-    linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
-  background-size: 56px 56px;
-  mask-image: linear-gradient(180deg, #000 10%, transparent 90%);
-  content: "";
-}
 
 .sv-hero-grid {
   display: grid;
@@ -357,10 +346,12 @@ body:has(.sv-sticky.is-visible) .global-scroll-top { bottom: 96px !important; }
   text-transform: uppercase;
 }
 
+.sv-blur { filter: blur(3.5px); user-select: none; }
+
 .sv-glass {
   border: 1px solid rgba(255, 255, 255, 0.14);
   border-radius: var(--sv-radius);
-  background: linear-gradient(160deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.04));
+  background: var(--sv-ink-2);
   box-shadow: 0 30px 70px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.12);
   backdrop-filter: blur(14px);
 }
@@ -427,6 +418,8 @@ body:has(.sv-sticky.is-visible) .global-scroll-top { bottom: 96px !important; }
 
 .sv-sec--ink .sv-pain-fix { border-color: rgba(255, 255, 255, 0.16); color: #fff !important; }
 .sv-pain-fix::before { color: var(--sv-accent); font-weight: 900; content: "→"; }
+.sv-sec--ink .sv-pain-quote::before,
+.sv-sec--ink .sv-pain-fix::before { color: var(--sv-accent-2); }
 
 /* ---------- Bento (what's included) ---------- */
 .sv-bento {
@@ -459,7 +452,7 @@ body:has(.sv-sticky.is-visible) .global-scroll-top { bottom: 96px !important; }
   margin-bottom: 1.1rem;
   place-items: center;
   border-radius: 13px;
-  background: linear-gradient(135deg, color-mix(in srgb, var(--sv-accent) 26%, transparent), color-mix(in srgb, var(--sv-accent-2) 22%, transparent));
+  background: var(--p-indigo-100);
   color: var(--sv-accent-ink);
 }
 
@@ -484,7 +477,7 @@ body:has(.sv-sticky.is-visible) .global-scroll-top { bottom: 96px !important; }
   right: 8%;
   left: 8%;
   height: 2px;
-  background: linear-gradient(90deg, var(--sv-accent), var(--sv-accent-2));
+  background: var(--sv-accent);
   content: "";
 }
 
@@ -499,7 +492,7 @@ body:has(.sv-sticky.is-visible) .global-scroll-top { bottom: 96px !important; }
   height: 40px;
   place-items: center;
   border-radius: 50%;
-  background: linear-gradient(135deg, var(--sv-accent-ink), var(--sv-accent));
+  background: var(--sv-accent-ink);
   box-shadow: 0 0 0 6px color-mix(in srgb, var(--sv-accent) 20%, transparent);
   color: #fff;
   font-family: var(--fh);
@@ -531,9 +524,7 @@ body:has(.sv-sticky.is-visible) .global-scroll-top { bottom: 96px !important; }
   align-items: center;
   padding: clamp(1.75rem, 4vw, 2.75rem);
   border-radius: 24px;
-  background:
-    radial-gradient(30rem 16rem at 100% 0%, color-mix(in srgb, var(--sv-accent-2) 40%, transparent), transparent 70%),
-    linear-gradient(120deg, var(--sv-ink), var(--sv-accent-ink));
+  background: var(--sv-ink);
   box-shadow: 0 30px 70px color-mix(in srgb, var(--sv-ink) 30%, transparent);
   color: #fff;
 }
@@ -616,7 +607,7 @@ body:has(.sv-sticky.is-visible) .global-scroll-top { bottom: 96px !important; }
   flex: 0 0 48px;
   place-items: center;
   border-radius: 14px;
-  background: linear-gradient(135deg, var(--sv-accent-ink), var(--sv-accent));
+  background: var(--sv-accent-ink);
   color: #fff;
 }
 
@@ -691,7 +682,7 @@ body:has(.sv-sticky.is-visible) .global-scroll-top { bottom: 96px !important; }
 .sv-compare tbody th { width: 27%; color: #fff; font-weight: 750; }
 .sv-compare td { color: var(--sv-on-dark-muted); }
 .sv-compare tbody tr:last-child > * { border-bottom: 0; }
-.sv-compare .sv-us { background: linear-gradient(180deg, color-mix(in srgb, var(--sv-accent) 26%, transparent), color-mix(in srgb, var(--sv-accent) 14%, transparent)); color: #fff; font-weight: 700; }
+.sv-compare .sv-us { background: rgba(255, 255, 255, 0.1); color: #fff; font-weight: 700; }
 .sv-compare thead .sv-us { color: #fff; }
 
 .sv-tick {
@@ -860,7 +851,7 @@ body:has(.sv-sticky.is-visible) .global-scroll-top { bottom: 96px !important; }
 .sv-sec--ink .sv-chip, .sv-hero .sv-chip { background: rgba(255, 255, 255, 0.1); color: #fff; }
 
 .sv-bar { height: 8px; border-radius: 999px; background: color-mix(in srgb, var(--sv-accent) 16%, transparent); }
-.sv-bar > i { display: block; height: 100%; border-radius: inherit; background: linear-gradient(90deg, var(--sv-accent), var(--sv-accent-2)); }
+.sv-bar > i { display: block; height: 100%; border-radius: inherit; background: var(--sv-accent); }
 
 .sv-split {
   display: grid;
@@ -913,7 +904,7 @@ body:has(.sv-sticky.is-visible) .global-scroll-top { bottom: 96px !important; }
 @media (max-width: 700px) {
   .sv-wrap { width: calc(100% - 2rem); }
   .sv-pain-grid, .sv-bento, .sv-scenarios, .sv-industries, .sv-guides, .sv-track, .sv-projects { grid-template-columns: 1fr; }
-  .sv-track::before { top: 8%; bottom: 8%; left: calc(1.4rem + 19px); right: auto; width: 2px; height: auto; background: linear-gradient(180deg, var(--sv-accent), var(--sv-accent-2)); }
+  .sv-track::before { top: 8%; bottom: 8%; left: calc(1.4rem + 19px); right: auto; width: 2px; height: auto; background: var(--sv-accent); }
   .sv-track li { padding: 1.2rem 1.2rem 1.2rem 4.4rem; }
   .sv-track-dot { top: 1.2rem; left: 1.2rem; }
   .sv-band { grid-template-columns: 1fr; }

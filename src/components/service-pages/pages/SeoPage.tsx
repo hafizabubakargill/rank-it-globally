@@ -22,7 +22,11 @@ import {
 import "./seo.css";
 
 function HeroSerp() {
-  const rows = ["Competitor A — Plumbing & Drains", "Competitor B — 24/7 Plumbers", "Directory listing — Top plumbers"];
+  const rows = [
+    ["austinplumbingpros.com", "Emergency Plumbing Services in Austin, TX | Open 24/7", "Licensed and insured plumbers serving Austin and Round Rock…"],
+    ["localdirectory.com › plumbers", "The 10 Best Plumbers in Austin, TX (Updated 2026)", "Compare reviews and prices from local plumbing companies…"],
+    ["drainheroes-atx.com", "Drain Cleaning & Water Heater Repair in Austin", "Same-day appointments available. Call for a free quote…"],
+  ];
   return (
     <Illustration label="Illustration of a Google results page where your business climbs from position 14 to the top three, with tracked calls" className="seo-hero-visual">
       <div className="sv-glass seo-serp">
@@ -33,11 +37,11 @@ function HeroSerp() {
           <span>Licensed plumbers on call tonight. Upfront pricing, same-day visits…</span>
           <em className="seo-climb">#14 → #2</em>
         </div>
-        {rows.map((row) => (
-          <div className="seo-result" key={row}>
-            <small>example.com</small>
-            <strong>{row}</strong>
-            <span className="seo-line" />
+        {rows.map(([site, title, snippet]) => (
+          <div className="seo-result" key={title}>
+            <small className="sv-blur">{site}</small>
+            <strong>{title}</strong>
+            <span>{snippet}</span>
           </div>
         ))}
       </div>

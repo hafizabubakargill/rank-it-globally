@@ -30,8 +30,8 @@ function HeroChat() {
           <p>Here are three practices nearby that accept Saturday walk-ins:</p>
           <ol>
             <li className="is-you"><b>Your Practice</b><span className="ai-cite">yourpractice.com</span></li>
-            <li><b>Another Dental Co.</b></li>
-            <li><b>Smile Studio</b></li>
+            <li><b className="sv-blur">Brushy Creek Dental</b><span className="ai-cite ai-cite--muted">directory</span></li>
+            <li><b className="sv-blur">Parkside Family Smiles</b></li>
           </ol>
         </div>
         <div className="ai-platforms">
@@ -54,8 +54,14 @@ function ShiftVisual() {
           <div className="sv-card ai-shift-col">
             <span className="ai-shift-label">Then</span>
             <div className="ai-serp">
-              {Array.from({ length: 6 }).map((_, index) => (
-                <div className="ai-serp-row" key={index}><i /><b style={{ width: `${82 - index * 7}%` }} /><b style={{ width: `${60 - index * 4}%` }} /></div>
+              {[
+                ["roundrockdental.com", "Family Dentist in Round Rock, TX | Walk-Ins Welcome"],
+                ["yelp-style directory", "THE 10 BEST Dentists in Round Rock (Updated 2026)"],
+                ["smilecare-tx.com", "Emergency & Family Dentistry | Same-Day Visits"],
+                ["healthgrades-style listing", "Top-Rated Dentists Near Round Rock, TX"],
+                ["brushycreekdental.com", "Brushy Creek Dental | New Patients Welcome"],
+              ].map(([site, title]) => (
+                <div className="ai-serp-row" key={title}><small className="sv-blur">{site}</small><span>{title}</span></div>
               ))}
             </div>
           </div>
@@ -63,8 +69,8 @@ function ShiftVisual() {
             <span className="ai-shift-label">Now</span>
             <div className="ai-answer">
               <p>✦ AI answer</p>
-              <b /><b /><b style={{ width: "70%" }} />
-              <div className="ai-answer-names"><span className="is-you">You?</span><span>Competitor</span><span>Competitor</span></div>
+              <span className="ai-answer-text">For Saturday walk-ins near Round Rock, these three practices come up most often in reviews and listings:</span>
+              <div className="ai-answer-names"><span className="is-you">Your practice?</span><span className="sv-blur">Parkside Smiles</span><span className="sv-blur">Creekview Dental</span></div>
             </div>
           </div>
         </div>

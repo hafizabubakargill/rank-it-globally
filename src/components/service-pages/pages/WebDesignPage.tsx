@@ -45,18 +45,18 @@ function Anatomy() {
     <div className="web-anatomy">
       <Illustration label="Illustration of a website homepage with numbered hotspots on the headline, trust badges, call to action, mobile layout and speed" className="web-wire-illo">
         <div className="web-wire">
-          <div className="web-wire-nav"><b /><span /><span /><span /><em>Call now</em></div>
+          <div className="web-wire-nav"><b>Northgate Plumbing</b><span>Services</span><span>Areas</span><span>Reviews</span><em>Call (512) 555-0134</em></div>
           <div className="web-wire-hero">
             <div>
               <i className="web-spot" data-n="1" />
-              <b className="w90" /><b className="w70" />
-              <p className="web-wire-sub" />
-              <div className="web-wire-cta"><i className="web-spot" data-n="3" /><span>Book a visit</span></div>
-              <div className="web-wire-trust"><i className="web-spot" data-n="2" /><em>★★★★★</em><em>Licensed</em><em>Insured</em></div>
+              <h4 className="web-wire-h">Emergency plumber in Austin, at your door in 60 minutes.</h4>
+              <p className="web-wire-sub">Licensed, upfront pricing, no weekend surcharge.</p>
+              <div className="web-wire-cta"><i className="web-spot" data-n="3" /><span>Book a same-day visit</span></div>
+              <div className="web-wire-trust"><i className="web-spot" data-n="2" /><em>★★★★★ 212 reviews</em><em>Licensed</em><em>Insured</em></div>
             </div>
-            <div className="web-wire-img" />
+            <div className="web-wire-img"><small>Average arrival</small><strong>47 min</strong><em>Across Austin &amp; Round Rock</em></div>
           </div>
-          <div className="web-wire-cards"><span /><span /><span /></div>
+          <div className="web-wire-cards"><span>Burst pipes</span><span>Water heaters</span><span>Drain cleaning</span></div>
           <i className="web-spot web-spot--phone" data-n="4" />
           <div className="web-wire-speed"><i className="web-spot" data-n="5" />Loads in under 2.5s</div>
         </div>
@@ -94,9 +94,9 @@ function Features() {
           ) : (
             <Illustration label="Illustration of a single landing page with one headline, proof, a short form and one button" className="web-lp-illo">
               <div className="web-lp">
-                <b className="w90" /><b className="w60" />
-                <div className="web-lp-proof"><em>★★★★★</em><em>Before / after</em></div>
-                <div className="web-lp-form"><span /><span /><strong>Get my quote</strong></div>
+                <h4 className="web-lp-h">Kitchen remodels in Nashville, finished in 6 weeks.</h4>
+                <div className="web-lp-proof"><em>★★★★★ Homeowner reviews</em><em>Before / after gallery</em></div>
+                <div className="web-lp-form"><span>Your name</span><span>Phone number</span><strong>Get my free quote</strong></div>
               </div>
             </Illustration>
           )}
@@ -166,7 +166,7 @@ export function WebDesignPage() {
     <ServicePageShell page={page}>
       <Hero page={page} visual={<HeroDevices />} />
 
-      <Section tone="ink">
+      <Section tone="tint">
         <Head heading={page.problem} />
         <PainCards problem={page.problem} />
       </Section>
