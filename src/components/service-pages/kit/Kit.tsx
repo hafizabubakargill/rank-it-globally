@@ -13,6 +13,7 @@ import { plainText, RichText } from "../RichText";
 import { StickyCta } from "./StickyCta";
 import "@/components/bellevue-services/bellevue-services.css";
 import "./kit.css";
+import "./chrome.css";
 
 const shareImage = "/assets/brand/favicon.png";
 
