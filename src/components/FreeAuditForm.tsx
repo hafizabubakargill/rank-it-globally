@@ -1,6 +1,6 @@
 "use client";
 
-import { FormEvent, useEffect, useMemo, useRef, useState } from "react";
+import { FormEvent, useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { calendlyUrl } from "@/content/publicPages";
 import { normalizeWebsite } from "@/lib/website";
@@ -35,15 +35,46 @@ type AuditFormValues = {
   message: string;
 };
 
-type CalendlyWidgetOptions = {
+type CalendlyPopupOptions = {
   url: string;
-  parentElement: HTMLElement;
-  prefill?: {
-    name?: string;
-    email?: string;
-    customAnswers?: Record<string, string>;
-  };
 };
+
+// Calendly's custom-question answers are positional (a1, a2, ...) and follow
+// the invitee questions on the "Free Website Audit & Growth Call" event:
+// a1 phone, a2 website, a3 what to audit, a4 biggest problem (not collected
+// on this form), a5 monthly budget, a6 message. If those questions are
+// reordered in Calendly, update this mapping. Prefill goes in the URL query
+// (Calendly's widget postMessage prefill did not populate the form), and
+// multi-select answers are newline-separated.
+const calendlyAuditChoices: Record<string, string> = {
+  "Local SEO / Google Business Profile": "SEO",
+};
+
+const calendlyBudgetChoices: Record<string, string> = {
+  "$500-$1,000": "$500\u2013$1,000",
+  "$1,000-$2,500": "$1,000\u2013$2,500",
+};
+
+function buildCalendlyUrl(values: AuditFormValues) {
+  const scope = Array.from(
+    new Set(values.auditScope.map((item) => calendlyAuditChoices[item] ?? item)),
+  );
+  const params: Record<string, string> = {
+    name: values.fullName,
+    email: values.businessEmail,
+    a1: values.phoneNumber,
+    a2: values.website,
+    a3: scope.join("\n"),
+    a5: calendlyBudgetChoices[values.budgetRange] ?? values.budgetRange,
+    a6: values.message,
+  };
+  const query = Object.entries(params)
+    .filter(([, value]) => value.trim())
+    .map(([key, value]) => `${key}=${encodeURIComponent(value.trim())}`)
+    .join("&");
+
+  return query ? `${calendlyUrl}?${query}` : calendlyUrl;
+}
 
 type CalendlyMessage = {
   event?: string;
@@ -57,7 +88,7 @@ type CalendlyMessage = {
 declare global {
   interface Window {
     Calendly?: {
-      initInlineWidget?: (options: CalendlyWidgetOptions) => void;
+      initPopupWidget?: (options: CalendlyPopupOptions) => void;
     };
   }
 }
@@ -88,7 +119,7 @@ export default function FreeAuditForm({
   submitLabel = "Get My Growth Audit",
 }: FreeAuditFormProps = {}) {
   const searchParams = useSearchParams();
-  const calendlyContainerRef = useRef<HTMLDivElement | null>(null);
+  const autoOpenedForRef = useRef<AuditFormValues | null>(null);
   const postedInviteesRef = useRef<Set<string>>(new Set());
   const [form, setForm] = useState<AuditFormValues>(() => ({
     ...emptyForm,
@@ -124,48 +155,23 @@ export default function FreeAuditForm({
     return () => window.removeEventListener("message", handleCalendlyMessage);
   }, []);
 
-  useEffect(() => {
-    if (state !== "success" || !submittedForm || !calendlyContainerRef.current) {
-      return;
-    }
-
-    let cancelled = false;
-
+  const openCalendlyPopup = useCallback((values: AuditFormValues) => {
     loadCalendlyWidget()
       .then(() => {
-        if (
-          cancelled ||
-          !window.Calendly?.initInlineWidget ||
-          !calendlyContainerRef.current
-        ) {
-          return;
-        }
-
-        calendlyContainerRef.current.innerHTML = "";
-        window.Calendly.initInlineWidget({
-          url: calendlyUrl,
-          parentElement: calendlyContainerRef.current,
-          prefill: {
-            name: submittedForm.fullName,
-            email: submittedForm.businessEmail,
-            customAnswers: {
-              a1: submittedForm.phoneNumber,
-              a2: submittedForm.website,
-              a3: submittedForm.auditScope.join(", "),
-              a4: submittedForm.budgetRange,
-              a5: submittedForm.message,
-            },
-          },
-        });
+        window.Calendly?.initPopupWidget?.({ url: buildCalendlyUrl(values) });
       })
       .catch((error) => {
         console.error("Calendly widget failed to load", error);
       });
+  }, []);
 
-    return () => {
-      cancelled = true;
-    };
-  }, [state, submittedForm]);
+  useEffect(() => {
+    if (state !== "success" || !submittedForm) return;
+    if (autoOpenedForRef.current === submittedForm) return;
+
+    autoOpenedForRef.current = submittedForm;
+    openCalendlyPopup(submittedForm);
+  }, [state, submittedForm, openCalendlyPopup]);
 
   const completedRequiredCount = useMemo(() => {
     const requiredValues = [
@@ -240,7 +246,7 @@ export default function FreeAuditForm({
       setState("success");
       setSubmittedForm(normalizedForm);
       setMessage(
-        data.message || "Thanks. Pick a time below and let's talk through it.",
+        data.message || "Thanks. Pick a time and let's talk through it.",
       );
     } catch (error) {
       setState("error");
@@ -258,14 +264,15 @@ export default function FreeAuditForm({
     <>
       {state === "success" ? (
         <div className="standalone-audit-result success" aria-live="polite">
-          <strong>Request received. Book your call below.</strong>
+          <strong>Request received. Choose a time for your call.</strong>
           <p>{message}</p>
-          <div className="standalone-calendly-panel">
-            <div
-              ref={calendlyContainerRef}
-              className="standalone-calendly-embed"
-            />
-          </div>
+          <button
+            className="standalone-calendly-open"
+            type="button"
+            onClick={() => submittedForm && openCalendlyPopup(submittedForm)}
+          >
+            Choose your time <span aria-hidden="true">→</span>
+          </button>
         </div>
       ) : null}
 
@@ -592,7 +599,7 @@ function getClientMissingFields(form: AuditFormValues) {
 
 function loadCalendlyWidget() {
   if (typeof window === "undefined") return Promise.resolve();
-  if (window.Calendly?.initInlineWidget) return Promise.resolve();
+  if (window.Calendly?.initPopupWidget) return Promise.resolve();
 
   return new Promise<void>((resolve, reject) => {
     if (!document.getElementById("calendly-widget-css")) {

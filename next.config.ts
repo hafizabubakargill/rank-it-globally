@@ -55,7 +55,7 @@ const nextConfig: NextConfig = {
       "default-src 'self'",
       "script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://*.googletagmanager.com https://assets.calendly.com https://*.calendly.com https://player.vimeo.com https://snap.licdn.com https://connect.facebook.net",
       "style-src 'self' 'unsafe-inline' https://assets.calendly.com",
-      "img-src 'self' data: blob: https://cdn.sanity.io https://i.vimeocdn.com https://*.vimeocdn.com https://*.google-analytics.com https://*.googletagmanager.com https://*.google.com https://*.gstatic.com https://*.ads.linkedin.com https://www.linkedin.com https://www.facebook.com https://*.facebook.com",
+      "img-src 'self' data: blob: https://assets.calendly.com https://cdn.sanity.io https://i.vimeocdn.com https://*.vimeocdn.com https://*.google-analytics.com https://*.googletagmanager.com https://*.google.com https://*.gstatic.com https://*.ads.linkedin.com https://www.linkedin.com https://www.facebook.com https://*.facebook.com",
       "font-src 'self' data:",
       "connect-src 'self' https://www.google-analytics.com https://region1.google-analytics.com https://*.google-analytics.com https://*.googletagmanager.com https://*.calendly.com https://api.calendly.com https://player.vimeo.com https://*.vimeo.com https://cdn.sanity.io https://*.sanity.io wss://*.sanity.io https://*.ads.linkedin.com https://www.linkedin.com https://www.facebook.com https://*.facebook.com",
       "frame-src https://calendly.com https://*.calendly.com https://player.vimeo.com https://www.facebook.com",

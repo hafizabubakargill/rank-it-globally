@@ -1959,16 +1959,30 @@ a.marketing-card:hover {
   font-family: var(--fh, Arial, sans-serif);
 }
 
-.standalone-calendly-panel {
-  margin-top: 1rem;
-  border: 1px solid rgba(102, 100, 228, 0.16);
-  border-radius: 12px;
-  background: #fff;
-  overflow: hidden;
+.standalone-calendly-open {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.9rem;
+  padding: 0.7rem 1.2rem;
+  border: 0;
+  border-radius: 10px;
+  background: #5552d4;
+  color: #fff;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.2s ease;
 }
 
-.standalone-calendly-embed {
-  min-height: 720px;
+.standalone-calendly-open:hover {
+  background: #4642b8;
+  transform: translateY(-1px);
+}
+
+.standalone-calendly-open:focus-visible {
+  outline: 2px solid #9b59ff;
+  outline-offset: 3px;
 }
 
 .standalone-audit-result.error {
@@ -1993,10 +2007,6 @@ a.marketing-card:hover {
 
   .audit-progress-heading span {
     max-width: 100%;
-  }
-
-  .standalone-calendly-embed {
-    min-height: 680px;
   }
 
   .audit-fieldset {

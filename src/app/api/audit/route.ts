@@ -119,7 +119,7 @@ export async function POST(request: Request) {
 
   return NextResponse.json({
     success: true,
-    message: "Thanks. Pick a time below and let's talk through it.",
+    message: "Thanks. Pick a time and let's talk through it.",
     lead: {
       website,
       email,
