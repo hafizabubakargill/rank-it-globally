@@ -13,7 +13,7 @@
       "itemOffered": {
         "@type": "Service",
         "name": "Landing Pages",
-        "description": "High-converting landing pages for campaigns, launches, and lead generation."
+        "description": "High-converting landing pages for offers, launches, and lead generation."
       }
     },
     {
@@ -46,22 +46,6 @@
         "@type": "Service",
         "name": "CRO Strategy",
         "description": "Conversion rate optimization strategy for turning more visitors into leads and sales."
-      }
-    },
-    {
-      "@type": "Offer",
-      "itemOffered": {
-        "@type": "Service",
-        "name": "Social Media",
-        "description": "Social media campaign planning and creative direction for growth-focused brands."
-      }
-    },
-    {
-      "@type": "Offer",
-      "itemOffered": {
-        "@type": "Service",
-        "name": "PPC Ads",
-        "description": "Paid advertising and landing page support for Google, Meta, and conversion campaigns."
       }
     },
     {

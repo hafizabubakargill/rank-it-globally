@@ -1,0 +1,214 @@
+/*
+ * Header and footer styling for the service pages only (palette B:
+ * charcoal, gold and logo indigo). Every rule is scoped with
+ * body:has(.sv-page), so the rest of the site keeps its current look.
+ */
+
+body:has(.sv-page) {
+  --chrome-ink: #212529;
+  --chrome-ink-700: #343a40;
+  --chrome-muted: #495057;
+  --chrome-line: #dee2e6;
+  --chrome-soft: #f8f9fa;
+  --chrome-indigo: #6664e4;
+  --chrome-indigo-700: #4b49c9;
+  --chrome-indigo-100: #ededfc;
+  --chrome-gold: #e9d175;
+  --chrome-gold-100: #fbf5dc;
+  background: var(--chrome-soft);
+}
+
+/* ---------- Header ---------- */
+body:has(.sv-page) nav {
+  border-bottom: 1px solid var(--chrome-line);
+  background: #fff;
+  box-shadow: 0 1px 0 rgba(33, 37, 41, 0.04), 0 8px 24px rgba(33, 37, 41, 0.06);
+  backdrop-filter: none;
+}
+
+body:has(.sv-page) .n-logo-t { color: var(--chrome-ink); }
+
+body:has(.sv-page) .n-logo-t span {
+  background: none;
+  color: var(--chrome-indigo);
+  -webkit-text-fill-color: var(--chrome-indigo);
+}
+
+body:has(.sv-page) .nk {
+  color: var(--chrome-ink-700);
+  font-size: 0.9375rem;
+  font-weight: 600;
+}
+
+body:has(.sv-page) .nk::after { height: 2px; background: var(--chrome-gold); }
+body:has(.sv-page) .nk:hover,
+body:has(.sv-page) .nk:focus-visible { color: var(--chrome-ink); }
+body:has(.sv-page) .services-nav-trigger > span { font-size: 0.9rem; }
+
+body:has(.sv-page) nav .cta-e,
+body:has(.sv-page) .mobile-nav-cta {
+  border-radius: 10px;
+  background: var(--chrome-gold);
+  box-shadow: none;
+  color: var(--chrome-ink) !important;
+  font-size: 0.9375rem;
+  font-weight: 800;
+}
+
+body:has(.sv-page) nav .cta-e { padding: 0.65rem 1.15rem; }
+body:has(.sv-page) nav .cta-e::before,
+body:has(.sv-page) nav .cta-e::after { display: none; }
+body:has(.sv-page) nav .cta-e:hover,
+body:has(.sv-page) .mobile-nav-cta:hover { background: #e2c65a; }
+
+/* Services mega menu */
+body:has(.sv-page) .services-mega-menu {
+  border-color: var(--chrome-line);
+  border-radius: 14px;
+  background: #fff;
+  box-shadow: 0 24px 60px rgba(33, 37, 41, 0.16);
+  color: var(--chrome-ink);
+  backdrop-filter: none;
+}
+
+body:has(.sv-page) .mega-menu-column-services { border-right-color: var(--chrome-line); }
+
+body:has(.sv-page) .mega-menu-heading {
+  color: var(--chrome-muted);
+  font-size: 0.8125rem;
+  letter-spacing: 0.12em;
+}
+
+body:has(.sv-page) .mega-menu-link { color: var(--chrome-ink); }
+body:has(.sv-page) .mega-menu-link strong { font-size: 0.9375rem; font-weight: 600; }
+
+body:has(.sv-page) .mega-menu-link:hover,
+body:has(.sv-page) .mega-menu-link:focus-visible {
+  background: var(--chrome-soft);
+  box-shadow: inset 3px 0 0 var(--chrome-gold);
+  color: var(--chrome-ink);
+}
+
+body:has(.sv-page) .mega-menu-icon,
+body:has(.sv-page) .mega-menu-column-industries .mega-menu-icon { color: var(--chrome-indigo-700); }
+
+body:has(.sv-page) .mega-menu-featured {
+  border-color: var(--chrome-line);
+  border-radius: 10px;
+  font-size: 0.9375rem;
+}
+
+body:has(.sv-page) .mega-menu-featured-purple { background: var(--chrome-gold-100); color: var(--chrome-ink); }
+body:has(.sv-page) .mega-menu-featured-purple:hover { background: #f6ecbf; }
+body:has(.sv-page) .mega-menu-featured-green { background: var(--chrome-indigo-100); color: var(--chrome-indigo-700); }
+body:has(.sv-page) .mega-menu-featured-green:hover { background: #e1e1fa; }
+
+/* Mobile menu */
+body:has(.sv-page) .mobile-menu-toggle {
+  border-color: var(--chrome-line);
+  color: var(--chrome-ink);
+}
+
+body:has(.sv-page) .mobile-menu-panel {
+  background: #fff;
+  backdrop-filter: none;
+}
+
+body:has(.sv-page) nav.mobile-open .mobile-menu-panel { border-color: var(--chrome-line); }
+
+body:has(.sv-page) .mobile-menu-panel a:not(.cta-e),
+body:has(.sv-page) .mobile-services-toggle {
+  color: var(--chrome-ink);
+  font-size: 1rem;
+}
+
+body:has(.sv-page) .mobile-menu-panel a:not(.cta-e):hover,
+body:has(.sv-page) .mobile-services-toggle:hover,
+body:has(.sv-page) .mobile-services-toggle:focus-visible { background: var(--chrome-soft); }
+
+body:has(.sv-page) .mobile-services-heading { color: var(--chrome-muted); font-size: 0.8125rem; }
+body:has(.sv-page) .mobile-menu-panel .mobile-services-list a { color: var(--chrome-ink-700) !important; font-size: 0.9375rem !important; }
+body:has(.sv-page) .mobile-service-icon { background: var(--chrome-indigo-100); color: var(--chrome-indigo-700); }
+
+/* ---------- Footer ---------- */
+body:has(.sv-page) .site-footer {
+  border-top: 4px solid var(--chrome-gold);
+  background: var(--chrome-soft);
+}
+
+body:has(.sv-page) .footer-brand-lockup { color: var(--chrome-ink); }
+
+body:has(.sv-page) .footer-brand-lockup strong {
+  background: none;
+  color: var(--chrome-indigo);
+  -webkit-text-fill-color: var(--chrome-indigo);
+}
+
+body:has(.sv-page) .footer-brand p {
+  color: var(--chrome-muted);
+  font-size: 1rem;
+}
+
+body:has(.sv-page) .footer-heading {
+  color: var(--chrome-ink);
+  font-size: 0.875rem;
+  letter-spacing: 0.1em;
+}
+
+body:has(.sv-page) .footer-link {
+  color: var(--chrome-ink-700);
+  font-size: 0.9375rem;
+  font-weight: 600;
+}
+
+body:has(.sv-page) .footer-link:hover,
+body:has(.sv-page) .footer-link:focus-visible { color: var(--chrome-indigo-700); }
+
+body:has(.sv-page) .footer-email {
+  color: var(--chrome-indigo-700);
+  font-size: 0.9375rem;
+}
+
+body:has(.sv-page) .footer-email-icon,
+body:has(.sv-page) .footer-social-icon {
+  border-color: var(--chrome-line);
+  box-shadow: none;
+  color: var(--chrome-ink);
+}
+
+body:has(.sv-page) .footer-email:hover .footer-email-icon,
+body:has(.sv-page) .footer-email:focus-visible .footer-email-icon { border-color: var(--chrome-ink); background: var(--chrome-ink); color: #fff; }
+
+body:has(.sv-page) .footer-social-link:hover .footer-social-icon,
+body:has(.sv-page) .footer-social-link:focus-visible .footer-social-icon { background: var(--chrome-ink); color: #fff; }
+
+body:has(.sv-page) .footer-whatsapp { color: var(--chrome-ink-700); }
+
+body:has(.sv-page) .footer-hostinger-badge { box-shadow: none; }
+
+body:has(.sv-page) .footer-bottom { border-top-color: var(--chrome-line); }
+
+body:has(.sv-page) .footer-bottom p,
+body:has(.sv-page) .footer-legal-links a {
+  color: var(--chrome-muted);
+  font-size: 0.875rem;
+}
+
+body:has(.sv-page) .footer-legal-links a:hover,
+body:has(.sv-page) .footer-legal-links a:focus-visible { color: var(--chrome-ink); }
+
+/* Scroll-to-top button */
+body:has(.sv-page) .global-scroll-top {
+  background: var(--chrome-ink);
+  box-shadow: 0 6px 18px rgba(33, 37, 41, 0.28);
+  color: var(--chrome-gold);
+}
+
+@media (min-width: 961px) {
+  body:has(.sv-page) .site-footer .footer-inner { grid-template-columns: minmax(220px, 1.1fr) minmax(270px, 1.35fr) repeat(4, minmax(110px, 0.65fr)); }
+}
+
+@media (max-width: 420px) {
+  body:has(.sv-page) .mobile-nav-cta { padding: 0.5rem 0.7rem; font-size: 0.875rem; }
+  body:has(.sv-page) .n-logo-t { white-space: nowrap; }
+}

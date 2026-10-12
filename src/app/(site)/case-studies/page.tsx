@@ -33,14 +33,6 @@ function getWorkTags(project: ProjectCard) {
     tags.push("SEO");
   }
 
-  if (/prana|beauty|habeora|moxe|newtiful|fortune|nail|social/.test(searchable)) {
-    tags.push("Social Media");
-  }
-
-  if (/landing|lead|conversion|finance|loan|ads|ppc|shopify/.test(searchable)) {
-    tags.push("Ads");
-  }
-
   if (
     project.category === "E-Commerce" ||
     /shopify|woocommerce|store|retail|product|dtc|e-commerce/.test(searchable)

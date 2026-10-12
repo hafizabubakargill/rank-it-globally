@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import HardHomeLink from "@/components/HardHomeLink";
+import { industryNavLinks, serviceNavLinks, type SiteNavIcon } from "@/content/siteNav";
 
 const homeLinks = [
   { href: "/about-us", label: "About" },
@@ -11,49 +12,16 @@ const homeLinks = [
   { href: "/contact-us", label: "Contact" },
 ];
 
-type MenuIcon =
-  | "grid"
-  | "building"
-  | "search"
-  | "pin"
-  | "social"
-  | "ads"
-  | "code"
-  | "cart"
-  | "design"
-  | "cro"
-  | "law"
-  | "medical"
-  | "tech"
-  | "home"
-  | "store"
-  | "tools";
+type MenuIcon = SiteNavIcon | "grid" | "building";
 
 type MegaMenuLink = {
   label: string;
   href: string;
   icon: MenuIcon;
-  available: boolean;
 };
 
-const serviceLinks: MegaMenuLink[] = [
-  { label: "Web development", href: "/web-development", icon: "code", available: true },
-  { label: "E-commerce development", href: "/ecommerce-development", icon: "cart", available: true },
-  { label: "UI/UX design", href: "/ui-ux-design", icon: "design", available: true },
-  { label: "SEO services", href: "/seo-services", icon: "search", available: true },
-  { label: "PPC / Google Ads", href: "/ppc-management", icon: "ads", available: true },
-  { label: "Social media marketing", href: "/social-media-marketing", icon: "social", available: true },
-  { label: "CRO strategy", href: "/cro-strategy", icon: "cro", available: true },
-];
-
-const industryLinks: MegaMenuLink[] = [
-  { label: "Law firm marketing", href: "/industries/law-firm-marketing", icon: "law", available: true },
-  { label: "Dental & medical marketing", href: "/industries/dental-medical-marketing", icon: "medical", available: true },
-  { label: "Tech startup marketing", href: "/industries/tech-startup-marketing", icon: "tech", available: true },
-  { label: "Real estate marketing", href: "/industries/real-estate-marketing", icon: "home", available: true },
-  { label: "E-commerce marketing", href: "/industries/ecommerce-marketing", icon: "store", available: true },
-  { label: "Home services marketing", href: "/industries/home-services-marketing", icon: "tools", available: true },
-];
+const serviceLinks: MegaMenuLink[] = serviceNavLinks;
+const industryLinks: MegaMenuLink[] = industryNavLinks;
 
 function ServiceMenuIcon({ name }: { name: MenuIcon }) {
   const paths: Record<MenuIcon, React.ReactNode> = {
@@ -61,11 +29,10 @@ function ServiceMenuIcon({ name }: { name: MenuIcon }) {
     building: <><path d="M5 21V5l7-3 7 3v16" /><path d="M3 21h18M9 7h1M14 7h1M9 11h1M14 11h1M9 15h1M14 15h1" /></>,
     search: <><circle cx="10.5" cy="10.5" r="6" /><path d="m15 15 5 5" /></>,
     pin: <><path d="M20 10c0 5-8 11-8 11S4 15 4 10a8 8 0 1 1 16 0Z" /><circle cx="12" cy="10" r="2.5" /></>,
-    social: <><rect x="4" y="4" width="16" height="16" rx="4" /><circle cx="12" cy="12" r="3.5" /><path d="M17.5 6.5h.01" /></>,
-    ads: <><path d="m4 13 12-6v10L4 13ZM16 10l4-1v6l-4-1M6 14l1 5h4l-2-4" /></>,
+    ai: <><path d="M12 3v3M12 18v3M3 12h3M18 12h3" /><circle cx="12" cy="12" r="5" /><path d="m9.5 12 1.6 1.6 3.4-3.7" /></>,
+    star: <><path d="m12 3 2.8 5.7 6.2.9-4.5 4.4 1.1 6.2-5.6-3-5.6 3 1.1-6.2L3 9.6l6.2-.9L12 3Z" /></>,
     code: <><path d="m8 5-5 7 5 7M16 5l5 7-5 7M14 3l-4 18" /></>,
     cart: <><path d="M3 4h2l2.2 10.2a2 2 0 0 0 2 1.6h7.9a2 2 0 0 0 1.9-1.4L21 8H7" /><circle cx="10" cy="20" r="1" /><circle cx="18" cy="20" r="1" /></>,
-    design: <><path d="m4 20 4.5-1 10-10a2.1 2.1 0 0 0-3-3l-10 10L4 20Z" /><path d="m13.5 8 3 3M4 4h7M4 8h4" /></>,
     cro: <><path d="M4 5h16M4 12h16M4 19h16" /><path d="m8 2 3 3-3 3M16 9l-3 3 3 3M8 16l3 3-3 3" /></>,
     law: <><path d="M12 3v18M5 7h14M7 7l-4 7h8L7 7ZM17 7l-4 7h8l-4-7ZM7 21h10" /></>,
     medical: <><path d="M8 3v5a4 4 0 0 0 8 0V3M5 3v6a7 7 0 0 0 14 0V3" /><path d="M12 16v1a4 4 0 0 0 8 0v-2" /><circle cx="20" cy="13" r="2" /></>,
@@ -84,10 +51,6 @@ function ServiceMenuIcon({ name }: { name: MenuIcon }) {
 
 function MegaMenuItem({ item, onNavigate }: { item: MegaMenuLink; onNavigate: () => void }) {
   const content = <><span className="mega-menu-icon"><ServiceMenuIcon name={item.icon} /></span><strong>{item.label}</strong></>;
-
-  if (!item.available) {
-    return <a className="mega-menu-link is-coming-soon" href="#" aria-disabled="true" onClick={(event) => event.preventDefault()}>{content}</a>;
-  }
 
   return <Link className="mega-menu-link" href={item.href} onClick={onNavigate}>{content}</Link>;
 }
@@ -199,7 +162,7 @@ export default function BlogNav() {
         </button>
         <div className={mobileServicesOpen ? "mobile-services-list is-open" : "mobile-services-list"} id="mobileServicesList">
           <p className="mobile-services-heading">By service</p>
-          {serviceLinks.map((item) => item.available ? <Link key={item.label} href={item.href} onClick={closeMenus}><span className="mobile-service-icon"><ServiceMenuIcon name={item.icon} /></span>{item.label}</Link> : <a key={item.label} href="#" aria-disabled="true" onClick={(event) => event.preventDefault()}><span className="mobile-service-icon"><ServiceMenuIcon name={item.icon} /></span>{item.label}</a>)}
+          {serviceLinks.map((item) => <Link key={item.label} href={item.href} onClick={closeMenus}><span className="mobile-service-icon"><ServiceMenuIcon name={item.icon} /></span>{item.label}</Link>)}
           <p className="mobile-services-heading mobile-industries-heading">By industry</p>
           {industryLinks.map((item) => <Link key={item.label} href={item.href} onClick={closeMenus}><span className="mobile-service-icon mobile-industry-icon"><ServiceMenuIcon name={item.icon} /></span>{item.label}</Link>)}
           <div className="mobile-mega-actions">

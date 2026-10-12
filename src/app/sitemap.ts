@@ -8,21 +8,21 @@ const siteUrl = "https://rankitglobally.com";
 const staticRoutes: MetadataRoute.Sitemap = [
   { url: siteUrl, changeFrequency: "weekly", priority: 1 },
   { url: `${siteUrl}/growth-audit`, changeFrequency: "weekly", priority: 0.9 },
+  { url: `${siteUrl}/ai-seo-services`, changeFrequency: "monthly", priority: 0.8 },
   { url: `${siteUrl}/seo-services`, changeFrequency: "monthly", priority: 0.8 },
-  {
-    url: `${siteUrl}/social-media-marketing`,
-    changeFrequency: "monthly",
-    priority: 0.8,
-  },
+  { url: `${siteUrl}/local-seo-services`, changeFrequency: "monthly", priority: 0.8 },
   { url: `${siteUrl}/web-development`, changeFrequency: "monthly", priority: 0.8 },
-  { url: `${siteUrl}/ppc-management`, changeFrequency: "monthly", priority: 0.8 },
   {
     url: `${siteUrl}/ecommerce-development`,
     changeFrequency: "monthly",
     priority: 0.8,
   },
-  { url: `${siteUrl}/ui-ux-design`, changeFrequency: "monthly", priority: 0.8 },
   { url: `${siteUrl}/cro-strategy`, changeFrequency: "monthly", priority: 0.8 },
+  {
+    url: `${siteUrl}/reputation-management`,
+    changeFrequency: "monthly",
+    priority: 0.8,
+  },
   { url: `${siteUrl}/industries`, changeFrequency: "monthly", priority: 0.8 },
   {
     url: `${siteUrl}/industries/dental-medical-marketing`,

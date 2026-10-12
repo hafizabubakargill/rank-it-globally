@@ -12,8 +12,6 @@ const workCategories = [
   "All Work",
   "Web Portfolio",
   "SEO",
-  "Social Media",
-  "Ads",
   "E-Commerce",
   "Local Services",
 ];

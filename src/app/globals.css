@@ -105,7 +105,7 @@ select {
 
 .blog-header h1 {
   font-family: var(--fh, Arial, sans-serif);
-  font-size: clamp(2.2rem, 3.2vw, 3.4rem);
+  font-size:clamp(2.2rem, 3.2vw, 3.4rem);
   line-height: 1.08;
   margin: 0 0 1rem;
 }
@@ -120,14 +120,14 @@ select {
   max-width: none;
   margin: 0 0 0.75rem;
   color: transparent;
-  font-size: 0.68rem;
+  font-size:0.875rem;
   line-height: 1;
 }
 
 .blog-header time,
 .blog-card time {
   color: var(--muted, #6b6880);
-  font-size: 0.78rem;
+  font-size:0.875rem;
 }
 
 .blog-list {
@@ -201,7 +201,7 @@ select {
 }
 
 .blog-card h2 {
-  font-size: 1.35rem;
+  font-size:1.35rem;
   margin: 0.4rem 0;
 }
 
@@ -315,7 +315,7 @@ select {
   border-left: 2px solid rgba(102, 100, 228, 0.18);
   color: var(--muted, #6b6880);
   font-family: var(--fh, Arial, sans-serif);
-  font-size: 0.82rem;
+  font-size:0.875rem;
   font-weight: 700;
   line-height: 1.4;
   padding: 0.52rem 0.25rem 0.52rem 0.75rem;
@@ -333,7 +333,7 @@ select {
 }
 
 .blog-toc-level-3 {
-  font-size: 0.76rem;
+  font-size:0.875rem;
   font-weight: 600;
   margin-left: 0.7rem;
 }
@@ -341,7 +341,7 @@ select {
 .blog-toc-empty {
   margin: 0;
   color: var(--muted, #6b6880);
-  font-size: 0.84rem;
+  font-size:0.875rem;
   line-height: 1.6;
 }
 
@@ -354,7 +354,7 @@ select {
 }
 
 .blog-body {
-  font-size: 1rem;
+  font-size:1.125rem;
   background: #fff;
   border: 1px solid var(--border-s, rgba(102, 100, 228, 0.18));
   border-radius: 8px;
@@ -376,13 +376,13 @@ select {
 .marketing-split h2,
 .marketing-process h2,
 .case-list-head h2 {
-  font-size: clamp(1.8rem, 3.2vw, 2.55rem);
+  font-size:clamp(1.8rem, 3.2vw, 2.55rem);
   line-height: 1.08;
 }
 
 .blog-body h3,
 .marketing-card h3 {
-  font-size: clamp(1.15rem, 1.8vw, 1.45rem);
+  font-size:clamp(1.265rem, 1.8vw, 1.45rem);
   line-height: 1.2;
 }
 
@@ -420,7 +420,7 @@ select {
   margin: 0;
   color: var(--white, #1a1630);
   font-family: var(--fh, Arial, sans-serif);
-  font-size: clamp(1.65rem, 2.8vw, 2.25rem);
+  font-size:clamp(1.65rem, 2.8vw, 2.25rem);
   line-height: 1.1;
 }
 
@@ -461,7 +461,7 @@ select {
 .blog-post-faq-icon {
   flex: 0 0 auto;
   color: var(--p, #5552d4);
-  font-size: 1.35rem;
+  font-size:1.35rem;
   line-height: 1;
   transition: transform 0.25s ease;
 }
@@ -506,7 +506,7 @@ select {
   border-spacing: 0;
   border-collapse: separate;
   color: var(--white, #1a1630);
-  font-size: 0.92rem;
+  font-size:1rem;
   line-height: 1.5;
 }
 
@@ -540,7 +540,7 @@ select {
   background: #171329;
   color: #fff;
   font-family: var(--fh, Arial, sans-serif);
-  font-size: 0.78rem;
+  font-size:0.875rem;
   font-weight: 800;
   letter-spacing: 0;
 }
@@ -591,7 +591,7 @@ select {
   .blog-table {
     display: block;
     min-width: 0;
-    font-size: 0.9rem;
+    font-size:1rem;
   }
 
   .blog-table caption {
@@ -655,7 +655,7 @@ select {
     content: attr(data-label);
     color: var(--muted, #6b6880);
     font-family: var(--fh, Arial, sans-serif);
-    font-size: 0.7rem;
+    font-size:0.875rem;
     font-weight: 900;
     letter-spacing: 0.08em;
     line-height: 1.35;
@@ -676,7 +676,7 @@ select {
   margin: 0 0 0.35rem;
   color: var(--p, #5552d4);
   font-family: var(--fh, Arial, sans-serif);
-  font-size: 0.68rem;
+  font-size:0.875rem;
   font-weight: 900;
   letter-spacing: 0.14em;
   text-transform: uppercase;
@@ -716,7 +716,7 @@ select {
   background: var(--grad2, linear-gradient(135deg, #3d1a8a, #6664e4, #9b59ff));
   color: #fff;
   font-family: var(--fh, Arial, sans-serif);
-  font-size: 2rem;
+  font-size:2rem;
   font-weight: 900;
 }
 
@@ -827,14 +827,14 @@ select {
 .blog-related-card h3 {
   margin: 0.35rem 0;
   font-family: var(--fh, Arial, sans-serif);
-  font-size: 1rem;
+  font-size:1.125rem;
   line-height: 1.25;
 }
 
 .blog-related-card p {
   margin: 0;
   color: var(--muted, #6b6880);
-  font-size: 0.86rem;
+  font-size:0.875rem;
   line-height: 1.65;
 }
 
@@ -921,7 +921,7 @@ select {
   margin: 0 0 0.5rem;
   color: var(--p, #5552d4);
   font-family: var(--fh, Arial, sans-serif);
-  font-size: clamp(3.5rem, 10vw, 7rem);
+  font-size:clamp(3.5rem, 10vw, 7rem);
   font-weight: 900;
   line-height: 0.9;
 }
@@ -929,7 +929,7 @@ select {
 .not-found-content h1 {
   margin: 0;
   font-family: var(--fh, Arial, sans-serif);
-  font-size: clamp(2rem, 5vw, 3.8rem);
+  font-size:clamp(2rem, 5vw, 3.8rem);
   line-height: 1.05;
 }
 
@@ -937,7 +937,7 @@ select {
   max-width: 590px;
   margin: 1.25rem auto 0;
   color: var(--muted, #6b6880);
-  font-size: 1rem;
+  font-size:1.125rem;
   line-height: 1.8;
 }
 
@@ -1021,7 +1021,7 @@ select {
 
 .portfolio-preview-header span {
   color: #6b6880;
-  font-size: 0.65rem;
+  font-size:0.875rem;
   font-weight: 700;
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -1031,7 +1031,7 @@ select {
   margin: 0.15rem 0 0;
   color: #1a1630;
   font-family: var(--fh, Arial, sans-serif);
-  font-size: 1.05rem;
+  font-size:1.125rem;
 }
 
 .portfolio-preview-actions {
@@ -1042,7 +1042,7 @@ select {
 
 .portfolio-preview-actions a {
   color: #5552d4;
-  font-size: 0.78rem;
+  font-size:0.875rem;
   font-weight: 800;
   text-decoration: none;
 }
@@ -1055,7 +1055,7 @@ select {
   background: #f4f3ff;
   color: #1a1630;
   cursor: pointer;
-  font-size: 1.45rem;
+  font-size:1.45rem;
   line-height: 1;
 }
 
@@ -1104,7 +1104,7 @@ select {
 
 .legal-header h1 {
   font-family: var(--fh, Arial, sans-serif);
-  font-size: clamp(2.2rem, 5vw, 4rem);
+  font-size:clamp(2.2rem, 5vw, 4rem);
   line-height: 1.05;
   margin: 0 0 1rem;
 }
@@ -1119,7 +1119,7 @@ select {
   display: inline-flex;
   margin-top: 1rem;
   color: var(--muted, #6b6880);
-  font-size: 0.78rem;
+  font-size:0.875rem;
 }
 
 .legal-card {
@@ -1139,7 +1139,7 @@ select {
 .legal-section h2 {
   color: var(--white, #1a1630);
   font-family: var(--fh, Arial, sans-serif);
-  font-size: 1.1rem;
+  font-size:1.21rem;
   margin: 0 0 0.7rem;
 }
 
@@ -1204,7 +1204,7 @@ select {
   background-clip: text;
   color: transparent;
   font-family: var(--fh, Arial, sans-serif);
-  font-size: 0.68rem;
+  font-size:0.875rem;
   font-weight: 800;
   letter-spacing: 0.18em;
   text-transform: uppercase;
@@ -1215,7 +1215,7 @@ select {
   max-width: 900px;
   margin: 0;
   font-family: var(--fh, Arial, sans-serif);
-  font-size: clamp(2.2rem, 3.2vw, 3.4rem);
+  font-size:clamp(2.2rem, 3.2vw, 3.4rem);
   line-height: 1.08;
   letter-spacing: 0;
 }
@@ -1225,7 +1225,7 @@ select {
   max-width: 690px;
   margin: 1.2rem 0 0;
   color: var(--muted, #6b6880);
-  font-size: clamp(1rem, 2vw, 1.18rem);
+  font-size:clamp(1.125rem, 2vw, 1.18rem);
   line-height: 1.8;
 }
 
@@ -1292,7 +1292,7 @@ select {
   background-clip: text;
   color: transparent;
   font-family: var(--fh, Arial, sans-serif);
-  font-size: clamp(2rem, 5vw, 3rem);
+  font-size:clamp(2rem, 5vw, 3rem);
   line-height: 1;
 }
 
@@ -1300,7 +1300,7 @@ select {
   display: block;
   margin-top: 0.45rem;
   color: var(--muted, #6b6880);
-  font-size: 0.82rem;
+  font-size:0.875rem;
   font-weight: 700;
 }
 
@@ -1318,14 +1318,14 @@ select {
 .case-list-head h2 {
   margin: 0;
   font-family: var(--fh, Arial, sans-serif);
-  font-size: clamp(1.8rem, 3.2vw, 2.55rem);
+  font-size:clamp(1.8rem, 3.2vw, 2.55rem);
   line-height: 1.08;
 }
 
 .marketing-copy p {
   margin: 0 0 1rem;
   color: var(--muted, #6b6880);
-  font-size: 1rem;
+  font-size:1.125rem;
   line-height: 1.85;
 }
 
@@ -1368,7 +1368,7 @@ a.marketing-card:hover {
 .marketing-card span {
   color: var(--p, #5552d4);
   font-family: var(--fh, Arial, sans-serif);
-  font-size: 0.68rem;
+  font-size:0.875rem;
   font-weight: 900;
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -1377,7 +1377,7 @@ a.marketing-card:hover {
 .marketing-card h2 {
   margin: 0.85rem 0 0.7rem;
   font-family: var(--fh, Arial, sans-serif);
-  font-size: 1.15rem;
+  font-size:1.265rem;
   line-height: 1.2;
 }
 
@@ -1427,7 +1427,7 @@ a.marketing-card:hover {
 
 .contact-card h3 {
   margin: 1.25rem 0 0.65rem;
-  font-size: clamp(1.08rem, 1.6vw, 1.3rem);
+  font-size:clamp(1.125rem, 1.6vw, 1.3rem);
   overflow-wrap: anywhere;
 }
 
@@ -1440,7 +1440,7 @@ a.marketing-card:hover {
 .contact-card-head > span:last-child {
   color: var(--p, #5552d4);
   font-family: var(--fh, Arial, sans-serif);
-  font-size: 0.72rem;
+  font-size:0.875rem;
   font-weight: 900;
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -1498,12 +1498,12 @@ a.marketing-card:hover {
   padding-top: 1.25rem;
   color: var(--p, #5552d4);
   font-family: var(--fh, Arial, sans-serif);
-  font-size: 0.86rem;
+  font-size:0.875rem;
   font-weight: 900;
 }
 
 .contact-card-action span {
-  font-size: 1rem;
+  font-size:1.125rem;
   letter-spacing: 0;
   transition: transform 0.2s ease;
 }
@@ -1621,7 +1621,7 @@ a.marketing-card:hover {
   border-radius: 999px;
   background: #fff;
   color: var(--muted, #6b6880);
-  font-size: 0.75rem;
+  font-size:0.875rem;
   font-weight: 800;
   padding: 0.55rem 0.75rem;
 }
@@ -1657,21 +1657,21 @@ a.marketing-card:hover {
   display: block;
   margin-top: 0.45rem;
   color: rgba(74, 72, 112, 0.72);
-  font-size: 0.75rem;
+  font-size:0.875rem;
   line-height: 1.5;
 }
 
 .audit-form-intro strong {
   color: var(--white, #1a1630);
   font-family: var(--fh, Arial, sans-serif);
-  font-size: 0.86rem;
+  font-size:0.875rem;
   font-weight: 900;
 }
 
 .audit-form-intro span {
   margin-top: 0.2rem;
   color: var(--muted, #6b6880);
-  font-size: 0.78rem;
+  font-size:0.875rem;
   line-height: 1.55;
 }
 
@@ -1690,7 +1690,7 @@ a.marketing-card:hover {
   padding: 0 0.45rem;
   color: var(--white, #1a1630);
   font-family: var(--fh, Arial, sans-serif);
-  font-size: 0.8rem;
+  font-size:0.875rem;
   font-weight: 900;
 }
 
@@ -1713,7 +1713,7 @@ a.marketing-card:hover {
   margin-bottom: 0.45rem;
   color: var(--muted, #6b6880);
   font-family: var(--fh, Arial, sans-serif);
-  font-size: 0.7rem;
+  font-size:0.875rem;
   font-weight: 900;
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -1724,7 +1724,7 @@ a.marketing-card:hover {
   margin-bottom: 0.65rem;
   color: var(--muted, #6b6880);
   font-family: var(--fh, Arial, sans-serif);
-  font-size: 0.7rem;
+  font-size:0.875rem;
   font-weight: 900;
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -1738,7 +1738,7 @@ a.marketing-card:hover {
   border-radius: 6px;
   background: #fff;
   color: var(--white, #1a1630);
-  font-size: 1rem;
+  font-size:1.125rem;
   line-height: 1.4;
   padding: 0.9rem 1rem;
   outline: none;
@@ -1795,7 +1795,7 @@ a.marketing-card:hover {
   background: #fff;
   color: var(--white, #1a1630);
   cursor: pointer;
-  font-size: 1rem;
+  font-size:1.125rem;
   line-height: 1.4;
   padding: 0.9rem 1rem;
   text-align: left;
@@ -1824,7 +1824,7 @@ a.marketing-card:hover {
   border-radius: 999px;
   background: rgba(102, 100, 228, 0.1);
   color: #5552d4;
-  font-size: 0.82rem;
+  font-size:0.875rem;
   font-weight: 900;
   flex: 0 0 auto;
   transition: transform 0.2s ease;
@@ -1859,7 +1859,7 @@ a.marketing-card:hover {
   background: transparent;
   color: var(--white, #1a1630);
   cursor: pointer;
-  font-size: 0.92rem;
+  font-size:1rem;
   font-weight: 800;
   line-height: 1.35;
   padding: 0.72rem 0.8rem;
@@ -1906,7 +1906,7 @@ a.marketing-card:hover {
   border-radius: 999px;
   background: #fff;
   color: #4a4870;
-  font-size: 0.78rem;
+  font-size:0.875rem;
   font-weight: 800;
   letter-spacing: 0;
   padding: 0.62rem 0.82rem;
@@ -2035,7 +2035,7 @@ a.marketing-card:hover {
   color: var(--white, #1a1630);
   cursor: pointer;
   font-family: var(--fh, Arial, sans-serif);
-  font-size: 0.75rem;
+  font-size:0.875rem;
   font-weight: 800;
   line-height: 1.1;
   padding: 0.6rem 0.85rem;
@@ -2118,7 +2118,7 @@ a.marketing-card:hover {
 .case-feature-copy span,
 .case-mini-card span {
   color: var(--p, #5552d4);
-  font-size: 0.66rem;
+  font-size:0.875rem;
   font-weight: 900;
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -2127,7 +2127,7 @@ a.marketing-card:hover {
 .case-feature-copy h2 {
   margin: 0.4rem 0 0.35rem;
   font-family: var(--fh, Arial, sans-serif);
-  font-size: 1.15rem;
+  font-size:1.265rem;
 }
 
 .case-feature-copy p {
@@ -2155,7 +2155,7 @@ a.marketing-card:hover {
   max-width: 820px;
   margin: 0;
   font-family: var(--fh, Arial, sans-serif);
-  font-size: clamp(1.8rem, 3.2vw, 2.55rem);
+  font-size:clamp(1.8rem, 3.2vw, 2.55rem);
   line-height: 1.08;
   letter-spacing: 0;
 }
@@ -2230,7 +2230,7 @@ a.marketing-card:hover {
   border-radius: 999px;
   background: rgba(102, 100, 228, 0.1);
   color: var(--p, #5552d4);
-  font-size: 0.62rem;
+  font-size:0.875rem;
   font-weight: 900;
   letter-spacing: 0.08em;
   padding: 0.34rem 0.52rem;
@@ -2240,19 +2240,19 @@ a.marketing-card:hover {
 .case-masonry-copy h3 {
   margin: 0;
   font-family: var(--fh, Arial, sans-serif);
-  font-size: 1.12rem;
+  font-size:1.232rem;
   line-height: 1.15;
 }
 
 .case-masonry-copy p {
   margin: 0;
   color: var(--muted, #6b6880);
-  font-size: 0.9rem;
+  font-size:1rem;
 }
 
 .case-masonry-copy strong {
   color: var(--white, #1a1630);
-  font-size: 0.9rem;
+  font-size:1rem;
   line-height: 1.45;
 }
 
@@ -2344,7 +2344,7 @@ a.marketing-card:hover {
   margin: 0;
   color: var(--white, #1a1630);
   font-family: var(--fh, Arial, sans-serif);
-  font-size: 1rem;
+  font-size:1.125rem;
   line-height: 1.25;
 }
 
@@ -2393,7 +2393,7 @@ a.marketing-card:hover {
 
   .marketing-hero h1,
   .audit-hero h1 {
-    font-size: clamp(2.35rem, 10vw, 3.6rem);
+    font-size:clamp(2.35rem, 10vw, 3.6rem);
     line-height: 1.03;
   }
 
@@ -2425,7 +2425,7 @@ a.marketing-card:hover {
     min-width: 116px;
     min-height: 44px;
     padding: 0.48rem 0.35rem;
-    font-size: 0.68rem;
+    font-size:0.875rem;
     scroll-snap-align: start;
   }
 
@@ -2491,7 +2491,7 @@ body:has(.lp-root) {
 }
 
 .lp-root h2 {
-  font-size: clamp(2.2rem, 4.2vw, 3.2rem);
+  font-size:clamp(2.2rem, 4.2vw, 3.2rem);
   font-weight: 800;
   line-height: 1.12;
   max-width: 780px;
@@ -2503,12 +2503,12 @@ body:has(.lp-root) {
 
 .lp-root .marketing-eyebrow {
   font-family: var(--lp-display);
-  font-size: 0.82rem;
+  font-size:0.875rem;
   letter-spacing: 0.14em;
 }
 
 .lp-root p {
-  font-size: 1.05rem;
+  font-size:1.125rem;
 }
 
 /* --- Logo mark: reuses the exact .n-logo* classes from the sitewide nav
@@ -2576,7 +2576,7 @@ body:has(.lp-root) {
 
 /* Slightly bigger than the sitewide default, unique to this page. */
 .lp-root .cta-e-lg {
-  font-size: 0.98rem;
+  font-size:1.0625rem;
   padding: 1.05rem 2.4rem;
 }
 
@@ -2621,7 +2621,7 @@ body:has(.lp-root) {
   background: rgba(10, 122, 74, 0.09);
   border: 1px solid rgba(10, 122, 74, 0.22);
   color: #0a7a4a;
-  font-size: 0.82rem;
+  font-size:0.875rem;
   font-weight: 700;
   line-height: 1.5;
   padding: 0.5rem 1.1rem;
@@ -2633,7 +2633,7 @@ body:has(.lp-root) {
 }
 
 .lp-hero-v2 h1 {
-  font-size: clamp(2.8rem, 5.6vw, 5rem);
+  font-size:clamp(2.8rem, 5.6vw, 5rem);
   font-weight: 800;
   line-height: 1.02;
   letter-spacing: -0.02em;
@@ -2641,7 +2641,7 @@ body:has(.lp-root) {
 }
 
 .lp-hero-sub {
-  font-size: 1.1rem;
+  font-size:1.21rem;
   color: var(--muted, #6b6880);
   line-height: 1.7;
   max-width: 560px;
@@ -2661,7 +2661,7 @@ body:has(.lp-root) {
   display: flex;
   align-items: baseline;
   gap: 0.45rem;
-  font-size: 0.88rem;
+  font-size:1rem;
   color: var(--white, #1a1630);
   font-weight: 600;
 }
@@ -2781,7 +2781,7 @@ body:has(.lp-root) {
 }
 
 .lp-case-category {
-  font-size: 0.68rem;
+  font-size:0.875rem;
   font-weight: 800;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -2791,13 +2791,13 @@ body:has(.lp-root) {
 
 .lp-case-row-copy h3 {
   font-family: var(--lp-display);
-  font-size: 1.65rem;
+  font-size:1.65rem;
   font-weight: 800;
   margin-bottom: 0.65rem;
 }
 
 .lp-case-summary {
-  font-size: 1rem;
+  font-size:1.125rem;
   color: var(--muted, #6b6880);
   line-height: 1.7;
   margin-bottom: 1.5rem;
@@ -2819,14 +2819,14 @@ body:has(.lp-root) {
   border: 1px solid rgba(10, 122, 74, 0.22);
   color: #0a7a4a;
   font-weight: 800;
-  font-size: 0.82rem;
+  font-size:0.875rem;
   padding: 0.35rem 0.7rem;
 }
 
 .lp-case-lift-chip small {
   font-weight: 600;
   color: var(--muted, #6b6880);
-  font-size: 0.66rem;
+  font-size:0.875rem;
   text-transform: uppercase;
   letter-spacing: 0.04em;
 }
@@ -2860,7 +2860,7 @@ body:has(.lp-root) {
 .lp-difference-col-label {
   display: block;
   font-family: var(--lp-display);
-  font-size: 0.72rem;
+  font-size:0.875rem;
   font-weight: 800;
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -2874,7 +2874,7 @@ body:has(.lp-root) {
 }
 
 .lp-difference-col li {
-  font-size: 1.05rem;
+  font-size:1.125rem;
   font-weight: 600;
   line-height: 1.5;
   padding-left: 1.9rem;
@@ -2958,13 +2958,13 @@ body:has(.lp-root) {
 
 .lp-difference-stat span {
   font-family: var(--lp-display);
-  font-size: 1.35rem;
+  font-size:1.35rem;
   font-weight: 900;
   color: #0a7a4a;
 }
 
 .lp-difference-stat small {
-  font-size: 0.68rem;
+  font-size:0.875rem;
   font-weight: 700;
   color: var(--muted, #6b6880);
   text-transform: uppercase;
@@ -2973,7 +2973,7 @@ body:has(.lp-root) {
 
 .lp-difference-note {
   margin-top: 1rem;
-  font-size: 0.85rem;
+  font-size:0.875rem;
   color: var(--muted, #6b6880);
   line-height: 1.6;
 }
@@ -3003,12 +3003,12 @@ body:has(.lp-root) {
 
 .lp-authority-card h3 {
   font-family: var(--lp-display);
-  font-size: 1.15rem;
+  font-size:1.265rem;
   margin-bottom: 0.6rem;
 }
 
 .lp-authority-card p {
-  font-size: 0.92rem;
+  font-size:1rem;
   color: var(--muted, #6b6880);
   line-height: 1.65;
 }
@@ -3043,7 +3043,7 @@ body:has(.lp-root) {
 }
 
 .lp-booking-field dt {
-  font-size: 0.68rem;
+  font-size:0.875rem;
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 0.06em;
@@ -3053,7 +3053,7 @@ body:has(.lp-root) {
 
 .lp-booking-field dd {
   margin: 0;
-  font-size: 1rem;
+  font-size:1.125rem;
   color: #23213a;
   line-height: 1.5;
   overflow-wrap: anywhere;
@@ -3065,7 +3065,7 @@ body:has(.lp-root) {
 
 .lp-booking-summary-fallback p {
   margin: 0 0 1rem;
-  font-size: 1rem;
+  font-size:1.125rem;
   color: var(--muted, #6b6880);
   line-height: 1.65;
 }
@@ -3161,13 +3161,13 @@ body:has(.lp-root) {
 .lp-turtle-list strong {
   display: block;
   font-family: var(--lp-display);
-  font-size: 1.1rem;
+  font-size:1.21rem;
   color: var(--white, #1a1630);
   margin-bottom: 0.3rem;
 }
 
 .lp-turtle-list p {
-  font-size: 0.9rem;
+  font-size:1rem;
   color: var(--muted, #6b6880);
   line-height: 1.6;
 }
@@ -3230,7 +3230,7 @@ body:has(.lp-root) {
   display: inline-flex;
   align-items: center;
   gap: 0.4rem;
-  font-size: 0.68rem;
+  font-size:0.875rem;
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 0.06em;
@@ -3264,7 +3264,7 @@ body:has(.lp-root) {
   background: var(--grad);
   color: #fff;
   font-family: var(--fh, Arial, sans-serif);
-  font-size: 0.68rem;
+  font-size:0.875rem;
   font-weight: 800;
   display: flex;
   align-items: center;
@@ -3277,12 +3277,12 @@ body:has(.lp-root) {
 
 .lp-final-cta-card h3 {
   font-family: var(--lp-display);
-  font-size: 1.15rem;
+  font-size:1.265rem;
   margin-bottom: 0.3rem;
 }
 
 .lp-final-cta-card p {
-  font-size: 0.85rem;
+  font-size:0.875rem;
   color: var(--muted, #6b6880);
   margin-bottom: 1.35rem;
 }
@@ -3394,7 +3394,7 @@ body:has(.lp-root) {
 }
 
 .lp-work-card-category {
-  font-size: 0.62rem;
+  font-size:0.875rem;
   font-weight: 800;
   letter-spacing: 0.06em;
   text-transform: uppercase;
@@ -3403,11 +3403,11 @@ body:has(.lp-root) {
 
 .lp-work-card-copy strong {
   font-family: var(--lp-display);
-  font-size: 0.92rem;
+  font-size:1rem;
 }
 
 .lp-work-card-copy span:last-child {
-  font-size: 0.8rem;
+  font-size:0.875rem;
   color: var(--muted, #6b6880);
 }
 
@@ -3485,7 +3485,7 @@ body:has(.lp-root) {
   display: block;
   text-align: center;
   font-family: var(--lp-display);
-  font-size: 0.78rem;
+  font-size:0.875rem;
   font-weight: 700;
   letter-spacing: 0.04em;
   color: var(--muted, #6b6880);
@@ -3534,7 +3534,7 @@ body:has(.lp-root) {
   background: none;
   border: none;
   font-family: var(--lp-display);
-  font-size: 0.98rem;
+  font-size:1.0625rem;
   font-weight: 700;
   color: var(--white, #1a1630);
   text-align: left;
@@ -3543,7 +3543,7 @@ body:has(.lp-root) {
 
 .lp-root .eastside-faq-icon {
   flex-shrink: 0;
-  font-size: 1.3rem;
+  font-size:1.3rem;
   font-weight: 400;
   color: #6664e4;
   transition: transform 0.25s ease;
@@ -3558,7 +3558,7 @@ body:has(.lp-root) {
 }
 
 .lp-root .eastside-faq-list p {
-  font-size: 0.92rem;
+  font-size:1rem;
   color: var(--muted, #6b6880);
   line-height: 1.7;
 }
@@ -3585,7 +3585,7 @@ body:has(.lp-root) {
   gap: 0.5rem;
   font-family: var(--fh, Arial, sans-serif);
   font-weight: 800;
-  font-size: 0.88rem;
+  font-size:1rem;
   color: var(--white, #1a1630);
 }
 
@@ -3597,7 +3597,7 @@ body:has(.lp-root) {
 
 .lp-footer-copy,
 .lp-footer-links {
-  font-size: 0.78rem;
+  font-size:0.875rem;
   color: var(--muted, #6b6880);
 }
 
@@ -3650,7 +3650,7 @@ body:has(.lp-root) {
     gap: 0.4rem;
     font-family: var(--lp-display);
     font-weight: 700;
-    font-size: 0.86rem;
+    font-size:0.875rem;
     color: #fff;
     text-decoration: none;
     padding: 0.7rem 0;
@@ -3664,10 +3664,16 @@ body:has(.lp-root) {
     border: none;
     background: rgba(255, 255, 255, 0.12);
     color: rgba(255, 255, 255, 0.75);
-    font-size: 0.8rem;
+    font-size:0.875rem;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
   }
 }
+
+/* Body copy sizing to match the service pages. */
+.case-masonry-copy p,
+.lp-authority-card p,
+.lp-hero-bullets li { font-size: 1.0625rem; }
+.lp-final-cta-card p { font-size: 1rem; }
