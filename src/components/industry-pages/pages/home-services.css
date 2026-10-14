@@ -1,0 +1,52 @@
+/* Home services: lead inbox hero and shared-vs-owned lead diagram */
+
+.hs-hero-visual { position: relative; padding: 0.5rem 0 5rem; }
+.hs-phone { width: min(330px, 88%); margin-left: auto; margin-right: 8%; padding: 1rem; border: 8px solid #000; border-radius: 36px; background: var(--p-charcoal-100); box-shadow: 0 40px 80px rgba(0, 0, 0, 0.45); color: var(--p-charcoal); }
+.hs-phone-bar { display: flex; justify-content: space-between; margin-bottom: 0.9rem; font-size: 0.875rem; }
+.hs-phone-bar span { color: var(--p-charcoal-500); }
+.hs-note { display: grid; gap: 0.2rem; margin-bottom: 0.7rem; padding: 0.85rem 0.95rem; border-radius: 16px; background: #fff; box-shadow: 0 8px 18px rgba(33, 37, 41, 0.08); }
+.hs-note small { color: var(--p-charcoal-500); font-size: 0.8125rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.04em; }
+.hs-note strong { font-family: var(--fh); font-size: 1rem; line-height: 1.3; }
+.hs-note span { color: var(--p-charcoal-500); font-size: 0.875rem; }
+.hs-note em { justify-self: start; margin-top: 0.3rem; padding: 0.15rem 0.55rem; border-radius: 999px; font-size: 0.8125rem; font-style: normal; font-weight: 800; }
+.hs-note--shared { opacity: 0.85; }
+.hs-note--shared em { background: var(--p-charcoal-200); color: var(--p-charcoal-700); }
+.hs-note--call { border: 2px solid var(--p-indigo); }
+.hs-note--call em { background: var(--p-gold); color: var(--p-charcoal); }
+.hs-call-btns { display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; margin-top: 0.6rem; }
+.hs-call-btns i { padding: 0.45rem; border-radius: 999px; background: var(--p-charcoal-200); font-size: 0.875rem; font-style: normal; font-weight: 800; text-align: center; }
+.hs-call-btns i:last-child { background: var(--p-indigo-700); color: #fff; animation: sv-pulse 2.4s ease-in-out infinite; }
+.hs-badge { position: absolute; z-index: 3; bottom: 0; left: 0; display: grid; gap: 0.15rem; width: 240px; padding: 0.85rem 1rem; color: #fff; animation: sv-float 7s ease-in-out infinite; }
+.hs-badge span { color: var(--p-gold); font-family: var(--fh); font-weight: 800; }
+.hs-badge strong { font-size: 0.9375rem; }
+.hs-badge small { color: var(--sv-on-dark-muted); font-size: 0.875rem; }
+
+/* Shared vs owned */
+.hs-math { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr); gap: clamp(1.5rem, 4vw, 3rem); align-items: center; }
+.hs-math-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.hs-math-col { display: grid; justify-items: center; gap: 0.9rem; padding: 1.4rem 1rem; border: 1px dashed rgba(255, 255, 255, 0.22); border-radius: 22px; }
+.hs-math-col.is-owned { border-style: solid; border-color: var(--p-gold); }
+.hs-home { display: grid; width: 64px; height: 64px; place-items: center; border-radius: 50%; background: rgba(255, 255, 255, 0.08); font-size: 1.9rem; }
+.hs-line { width: 2px; height: 46px; background: var(--p-gold); }
+.hs-fan { display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; width: 100%; }
+.is-owned .hs-fan { grid-template-columns: 1fr; justify-items: center; }
+.hs-fan i { padding: 0.55rem 0.4rem; border-radius: 12px; background: rgba(255, 255, 255, 0.08); color: var(--sv-on-dark-muted); font-size: 0.9375rem; font-style: normal; font-weight: 700; text-align: center; }
+.hs-fan i.is-you { background: var(--p-gold); color: var(--p-charcoal); }
+.is-owned .hs-fan i { min-width: 120px; }
+.hs-math-lists { display: grid; gap: 1rem; }
+.hs-math-list { padding: 1.3rem 1.4rem; }
+.hs-math-list h3 { margin: 0 0 0.6rem; font-family: var(--fh); }
+.hs-math-list ul { display: grid; gap: 0.45rem; margin: 0; padding: 0; list-style: none; }
+.hs-math-list li { color: var(--sv-on-dark-muted); }
+.hs-math-list li::before { margin-right: 0.5rem; color: var(--p-charcoal-200); content: "✕"; }
+.hs-math-list.is-owned { border-color: var(--p-gold); }
+.hs-math-list.is-owned li::before { color: var(--p-gold); content: "✓"; }
+
+@media (max-width: 980px) {
+  .hs-math { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 700px) {
+  .hs-phone { margin-inline: auto; }
+  .hs-badge { position: relative; bottom: auto; width: auto; margin-top: 0.9rem; }
+}

@@ -98,3 +98,16 @@ export type ServiceCore = {
   relatedServices: string[];
   finalCta: { title: string; accent: string; body: string; bullets: string[] };
 };
+
+// Fields the shared CTA, FAQ, guides and audit-form blocks read. Service pages
+// and industry pages both provide them.
+export type PageCommon = Pick<
+  ServiceCore,
+  "slug" | "ctaLabel" | "sticky" | "midCta" | "faqIntro" | "faqs" | "guides" | "relatedServices" | "finalCta"
+> & {
+  // Public path when it isn't "/<slug>", e.g. "/industries/<slug>".
+  path?: string;
+  theme?: ServiceTheme;
+  // Pre-selected "What do you want help with?" options on the audit form.
+  auditScope?: string[];
+};

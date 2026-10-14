@@ -34,10 +34,9 @@ export const serviceNavLinks: SiteNavLink[] = [
 ];
 
 export const industryNavLinks: SiteNavLink[] = [
-  { label: "Law firm marketing", href: "/industries/law-firm-marketing", icon: "law", description: "Practice-area visibility and more qualified consultations." },
-  { label: "Dental & medical marketing", href: "/industries/dental-medical-marketing", icon: "medical", description: "Local visibility and easier booking for practices and clinics." },
-  { label: "Tech startup marketing", href: "/industries/tech-startup-marketing", icon: "tech", description: "Positioning, search and conversion paths for evaluating buyers." },
-  { label: "Real estate marketing", href: "/industries/real-estate-marketing", icon: "home", description: "Neighborhood search and consultation paths for agents and teams." },
-  { label: "E-commerce marketing", href: "/industries/ecommerce-marketing", icon: "store", description: "Search, store experience and conversion for online brands." },
-  { label: "Home services marketing", href: "/industries/home-services-marketing", icon: "tools", description: "Map visibility, service-area pages and more direct calls." },
+  { label: "Home services marketing", href: "/industries/home-services-marketing", icon: "tools", description: "Map Pack calls that come to you, not shared leads." },
+  { label: "Dental & medical marketing", href: "/industries/dental-medical-marketing", icon: "medical", description: "Local and AI visibility for independent practices." },
+  { label: "Real estate marketing", href: "/industries/real-estate-marketing", icon: "home", description: "Neighborhood search that brings clients before portals do." },
+  { label: "E-commerce marketing", href: "/industries/ecommerce-marketing", icon: "store", description: "SEO, AI shopping and CRO to rely less on paid social." },
+  { label: "Tech startup marketing", href: "/industries/tech-startup-marketing", icon: "tech", description: "Get on AI shortlists and lower CAC without a team." },
 ];

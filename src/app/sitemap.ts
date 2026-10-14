@@ -40,11 +40,6 @@ const staticRoutes: MetadataRoute.Sitemap = [
     priority: 0.8,
   },
   {
-    url: `${siteUrl}/industries/law-firm-marketing`,
-    changeFrequency: "monthly",
-    priority: 0.8,
-  },
-  {
     url: `${siteUrl}/industries/real-estate-marketing`,
     changeFrequency: "monthly",
     priority: 0.8,

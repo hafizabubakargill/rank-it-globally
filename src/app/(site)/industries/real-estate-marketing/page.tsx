@@ -1,13 +1,9 @@
-import {
-  createIndustryMetadata,
-  IndustryPage,
-} from "@/components/industry-pages/IndustryPage";
-import { industryPages } from "@/content/industryPages";
+import { createIndustryMetadata } from "@/components/industry-pages/IndustryKit";
+import { RealEstatePage } from "@/components/industry-pages/pages/RealEstatePage";
+import { realEstatePage } from "@/content/industries/realEstate";
 
-const config = industryPages["real-estate-marketing"];
-
-export const metadata = createIndustryMetadata(config);
+export const metadata = createIndustryMetadata(realEstatePage);
 
 export default function RealEstateMarketingPage() {
-  return <IndustryPage config={config} />;
+  return <RealEstatePage />;
 }

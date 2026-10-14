@@ -205,10 +205,20 @@ body:has(.sv-page) .global-scroll-top {
 }
 
 @media (min-width: 961px) {
-  body:has(.sv-page) .site-footer .footer-inner { grid-template-columns: minmax(220px, 1.1fr) minmax(270px, 1.35fr) repeat(4, minmax(110px, 0.65fr)); }
+  body:has(.sv-page) .site-footer .footer-inner { grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.35fr) repeat(4, minmax(0, 0.65fr)); }
 }
 
 @media (max-width: 420px) {
   body:has(.sv-page) .mobile-nav-cta { padding: 0.5rem 0.7rem; font-size: 0.875rem; }
   body:has(.sv-page) .n-logo-t { white-space: nowrap; }
+}
+
+/* 320–360px phones: logo, CTA and menu button must all fit on one row. */
+@media (max-width: 360px) {
+  body:has(.sv-page) .nav-inner { gap: 0.5rem; padding-inline: 0.75rem; }
+  body:has(.sv-page) .n-logo { gap: 0.4rem; }
+  body:has(.sv-page) .n-logo img { width: 30px; height: 30px; }
+  body:has(.sv-page) .n-logo-t { font-size: 0.9375rem; }
+  body:has(.sv-page) .mobile-nav-actions { gap: 0.4rem; }
+  body:has(.sv-page) .mobile-nav-cta { padding: 0.45rem 0.55rem; font-size: 0.8125rem; }
 }

@@ -1,13 +1,9 @@
-import {
-  createIndustryMetadata,
-  IndustryPage,
-} from "@/components/industry-pages/IndustryPage";
-import { industryPages } from "@/content/industryPages";
+import { createIndustryMetadata } from "@/components/industry-pages/IndustryKit";
+import { DentalMedicalPage } from "@/components/industry-pages/pages/DentalMedicalPage";
+import { dentalMedicalPage } from "@/content/industries/dentalMedical";
 
-const config = industryPages["dental-medical-marketing"];
-
-export const metadata = createIndustryMetadata(config);
+export const metadata = createIndustryMetadata(dentalMedicalPage);
 
 export default function DentalMedicalMarketingPage() {
-  return <IndustryPage config={config} />;
+  return <DentalMedicalPage />;
 }
