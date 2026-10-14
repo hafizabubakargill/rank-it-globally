@@ -9,12 +9,8 @@ type VideoTestimonial = {
   initials: string;
 };
 
-// Same data as src/components/VideoTestimonials.tsx (homepage-only), forked
-// here because that component's click-to-play and slider controls are wired
-// up by vanilla JS in src/content/landingScripts.json, which is only
-// injected on the homepage route — not mounted on /conversion-upside. This
-// version is fully self-contained React, matching the pattern already used
-// by LpWorkSlider and CaseStudyLeadForm.
+// Client video testimonials, self-contained React (click to play, scroll
+// buttons). Used on the homepage and /conversion-upside.
 const testimonials: VideoTestimonial[] = [
   { id: "1200777849", name: "Bob Wouterson", role: "Verified Client", initials: "BW" },
   { id: "1200777848", name: "Robert Mars", role: "Verified Client", initials: "RM" },
@@ -23,7 +19,7 @@ const testimonials: VideoTestimonial[] = [
   { id: "1203056374", name: "Shiloh Mielke", role: "Dent Hail", initials: "SM" },
 ];
 
-export default function LpVideoTestimonials() {
+export default function LpVideoTestimonials({ showHeading = true }: { showHeading?: boolean }) {
   const [playingId, setPlayingId] = useState<string | null>(null);
   // The scroll container is .vsl-root (overflow-x: auto in CSS), not
   // .vsl-track — scrolling the track itself was a no-op, which is why the
@@ -40,11 +36,15 @@ export default function LpVideoTestimonials() {
 
   return (
     <div className="lp-video-testimonials">
-      <p className="marketing-eyebrow">Client stories</p>
-      <h2>
-        Don&apos;t take our word for it.{" "}
-        <span className="gtext">Hear from your peers.</span>
-      </h2>
+      {showHeading ? (
+        <>
+          <p className="marketing-eyebrow">Client stories</p>
+          <h2>
+            Don&apos;t take our word for it.{" "}
+            <span className="gtext">Hear from your peers.</span>
+          </h2>
+        </>
+      ) : null}
       <div className="vsl-root" ref={rootRef}>
         <div className="vsl-track">
           {testimonials.map((testimonial) => (

@@ -412,9 +412,9 @@ export function Compare({ heading, rows }: { heading: SectionHeading; rows: Comp
 
 /* ---------- FAQ ---------- */
 
-export function Faq({ page, tone = "tint" }: { page: PageCommon; tone?: "tint" | "mesh" | "dots" }) {
+export function Faq({ page, tone = "tint", id }: { page: PageCommon; tone?: "tint" | "mesh" | "dots"; id?: string }) {
   return (
-    <Section tone={tone}>
+    <Section tone={tone} id={id}>
       <div className="sv-faq-grid">
         <div className="sv-head">
           <p className="sv-eyebrow">Straight answers</p>

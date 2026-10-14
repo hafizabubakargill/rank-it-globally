@@ -1,0 +1,126 @@
+/* Homepage: search results hero, fit check, lead path, industries */
+
+.hm-page .sv-hero h1 { font-size: clamp(2.4rem, 4.8vw, 4.1rem); }
+
+/* Hero: one results page showing the AI Overview and the Maps pack */
+.hm-hero-visual { position: relative; padding: 0.5rem 0 1rem; }
+.hm-serp { width: min(470px, 100%); margin: 0 0 6rem auto; padding: 1.1rem; border-radius: 22px; background: #fff; box-shadow: 0 40px 80px rgba(0, 0, 0, 0.45); color: var(--p-charcoal); }
+.hm-bar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.85rem; padding: 0.6rem 1rem; border: 1px solid var(--p-charcoal-200); border-radius: 999px; font-size: 0.9375rem; }
+.hm-bar i { color: var(--p-indigo-700); font-style: normal; }
+.hm-ai { padding: 0.85rem 0.9rem; border: 2px solid var(--p-gold); border-radius: 16px; background: var(--p-gold-100); }
+.hm-ai small, .hm-maps small { color: var(--p-charcoal-500); font-size: 0.8125rem; font-weight: 800; letter-spacing: 0.05em; text-transform: uppercase; }
+.hm-ai p { margin: 0.35rem 0 0.5rem; font-size: 0.9375rem; line-height: 1.5; }
+.hm-cite { display: inline-block; padding: 0.15rem 0.55rem; border-radius: 999px; background: #fff; color: var(--p-indigo-800); font-size: 0.8125rem; font-weight: 700; }
+.hm-maps { display: grid; gap: 0.45rem; margin-top: 0.85rem; }
+.hm-place { display: flex; align-items: center; gap: 0.65rem; padding: 0.6rem 0.75rem; border: 1px solid var(--p-charcoal-200); border-radius: 12px; }
+.hm-place.is-you { border: 2px solid var(--p-indigo); }
+.hm-place b { display: grid; flex: 0 0 1.6rem; height: 1.6rem; place-items: center; border-radius: 50%; background: var(--p-charcoal); color: #fff; font-size: 0.875rem; }
+.hm-place.is-you b { background: var(--p-indigo-700); }
+.hm-place div { display: grid; flex: 1; gap: 0.1rem; }
+.hm-place strong { font-family: var(--fh); font-size: 1rem; }
+.hm-place span { color: var(--p-charcoal-500); font-size: 0.8125rem; }
+.hm-place em { padding: 0.3rem 0.7rem; border-radius: 999px; background: var(--p-indigo-700); color: #fff; font-size: 0.8125rem; font-style: normal; font-weight: 800; }
+.hm-lead { position: absolute; z-index: 3; bottom: 1.6rem; left: 0; display: grid; gap: 0.2rem; width: 250px; padding: 0.85rem 1rem; color: #fff; animation: sv-float 7s ease-in-out infinite; }
+.hm-lead small { color: var(--sv-on-dark-muted); font-size: 0.8125rem; font-weight: 800; text-transform: uppercase; }
+.hm-lead strong { font-size: 0.9375rem; line-height: 1.35; }
+.hm-lead span { color: var(--p-gold); font-size: 0.875rem; font-weight: 700; }
+
+/* Client logo strip sits flush under the hero */
+.hm-page .logobar-sec { padding: 1.25rem 0; background: #fff; border-bottom: 1px solid var(--p-charcoal-200); }
+.hm-page .logobar-label { margin: 0 0 0.75rem; color: var(--sv-muted); font-size: 0.875rem; font-weight: 700; letter-spacing: 0.08em; text-align: center; text-transform: uppercase; }
+
+/* Fit check */
+.hm-fit { display: grid; grid-template-columns: 1.2fr 1fr; gap: 1rem; max-width: 980px; margin-inline: auto; }
+.hm-fit-col { padding: 1.5rem; }
+.hm-fit-col h3 { margin: 0 0 0.9rem; font-family: var(--fh); }
+.hm-fit-col ul { display: grid; gap: 0.6rem; margin: 0 0 1.25rem; padding: 0; list-style: none; }
+.hm-fit-col li { position: relative; padding-left: 1.9rem; line-height: 1.55; }
+.hm-fit-col li::before { position: absolute; top: 0.05rem; left: 0; display: grid; width: 1.35rem; height: 1.35rem; place-items: center; border-radius: 50%; font-size: 0.8125rem; font-weight: 900; }
+.is-yes { border: 2px solid var(--p-gold) !important; }
+.is-yes li::before { background: var(--p-gold); color: var(--p-charcoal); content: "✓"; }
+.is-no li { color: var(--sv-muted); }
+.is-no li::before { background: var(--p-charcoal-100); color: var(--p-charcoal-500); content: "✕"; }
+.hm-fit-col .sv-btn { width: 100%; }
+
+/* Lead path + services */
+.hm-path { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0.5rem; margin: 0 0 1.25rem; padding: 0; list-style: none; }
+.hm-path li { display: flex; align-items: center; gap: 0.6rem; padding: 0.75rem 0.9rem; border-radius: 14px; background: var(--sv-ink); color: #fff; font-family: var(--fh); font-weight: 750; }
+.hm-path li:last-child { background: var(--p-gold); color: var(--p-charcoal); }
+.hm-path b { display: grid; flex: 0 0 1.6rem; height: 1.6rem; place-items: center; border-radius: 50%; background: rgba(255, 255, 255, 0.14); font-size: 0.875rem; }
+.hm-path li:last-child b { background: rgba(33, 37, 41, 0.12); }
+.hm-system { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; margin: 0; padding: 0; list-style: none; }
+.hm-system-card { display: flex; height: 100%; flex-direction: column; gap: 0.5rem; padding: 1.4rem; color: var(--sv-text); text-decoration: none; transition: transform 180ms ease, box-shadow 180ms ease; }
+.hm-system-card:hover, .hm-system-card:focus-visible { box-shadow: 0 18px 40px rgba(33, 37, 41, 0.14); transform: translateY(-3px); }
+.hm-system-card:focus-visible { outline: 3px solid var(--p-indigo); outline-offset: 3px; }
+.hm-system-card h3 { margin: 0.25rem 0 0; font-family: var(--fh); }
+.hm-system-card p { margin: 0; color: var(--sv-muted); line-height: 1.6; }
+.hm-more { margin-top: auto; padding-top: 0.4rem; color: var(--sv-accent-ink); font-weight: 800; }
+
+/* Proof */
+.hm-proof { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
+.hm-proof .sv-data { height: 100%; }
+.sv-sec--ink .sv-proof-closing { color: var(--sv-on-dark-muted); }
+
+/* Client stories: video slider + Clutch, inside one section */
+.hm-voices .lp-video-testimonials { margin-bottom: 2rem; }
+.hm-voices .clutch-section,
+.hm-voices section { background: transparent !important; padding-block: 0 !important; }
+
+/* Industries */
+.hm-ind { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 0.75rem; margin: 0; padding: 0; list-style: none; }
+.hm-ind-card { display: flex; height: 100%; flex-direction: column; gap: 0.4rem; padding: 1.1rem; color: var(--sv-text); text-decoration: none; transition: transform 180ms ease; }
+.hm-ind-card:hover, .hm-ind-card:focus-visible { transform: translateY(-3px); }
+.hm-ind-q { color: var(--sv-muted); font-size: 0.9375rem; font-style: italic; line-height: 1.4; }
+.hm-ind-arrow { color: var(--p-gold-700); font-weight: 800; }
+.hm-ind-card strong { margin-top: auto; font-family: var(--fh); font-size: 1.125rem; }
+.hm-note { margin: 1.1rem 0 0; color: var(--sv-muted); font-size: 1rem; }
+
+@media (max-width: 980px) {
+  .hm-ind { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .hm-system { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .hm-path { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (max-width: 700px) {
+  .hm-serp { margin-bottom: 0; }
+  .hm-lead { position: relative; bottom: auto; left: auto; width: auto; margin-top: 0.9rem; }
+  .hm-fit, .hm-proof, .hm-system { grid-template-columns: 1fr; }
+  .hm-ind { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+/* Five client videos in one compact row on desktop */
+@media (min-width: 900px) {
+  .hm-voices .lp-video-testimonials .vsl-track { grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 0.85rem; }
+}
+.hm-voices .lp-video-testimonials .vsl-root { margin-top: 0; }
+
+/* Legacy .cta-e buttons inside homepage widgets get the gold kit style */
+.hm-page .cta-e {
+  display: inline-flex;
+  min-height: 52px;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.85rem 1.5rem;
+  border-radius: 12px;
+  background: var(--sv-btn-bg);
+  box-shadow: 0 10px 24px rgba(33, 37, 41, 0.18);
+  color: var(--sv-btn-text) !important;
+  font-family: var(--fh);
+  font-size: 1.0625rem;
+  font-weight: 800;
+}
+.hm-page .cta-e::before,
+.hm-page .cta-e::after { display: none; }
+.hm-page .logobar-sec .logobar-label { display: block; color: var(--sv-muted) !important; -webkit-text-fill-color: currentColor; }
+.hm-page .logobar-sec .inner { padding-top: 0; padding-bottom: 0; }
+@media (min-width: 900px) { .hm-voices .vid-stars { display: none; } }
+
+@media (max-width: 700px) {
+  .hm-system { gap: 0.6rem; }
+  .hm-system-card { display: grid; grid-template-columns: auto 1fr; column-gap: 0.85rem; row-gap: 0.25rem; padding: 1rem; }
+  .hm-system-card .sv-bento-icon { grid-row: span 2; margin-bottom: 0; }
+  .hm-system-card h3 { margin: 0; font-size: 1.125rem; }
+  .hm-system-card p { font-size: 1rem; }
+  .hm-system-card .hm-more { display: none; }
+  .hm-path li { padding: 0.6rem 0.7rem; font-size: 0.9375rem; }
+}

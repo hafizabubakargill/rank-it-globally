@@ -1,9 +1,5 @@
-// Same 18 client logos and pure-CSS marquee as the homepage's
-// "CLIENT LOGO BAR" (src/content/landingBody.ts), rendered as real JSX here
-// instead of the homepage's dangerouslySetInnerHTML string. Reuses the
-// existing global .logobar-* classes (src/styles/landing.css) — the
-// marquee is a CSS animation, no vanilla-JS dependency, so it's safe on an
-// isolated /conversion-upside route.
+// Client logo marquee (pure CSS animation, global .logobar-* classes).
+// Used on the homepage and /conversion-upside.
 const clientLogos = [
   { file: "inline-01-30150d8c89.png", alt: "Van Isle Paint" },
   { file: "inline-02-68ee6cb6e6.png", alt: "Kaplan MD" },
@@ -25,14 +21,18 @@ const clientLogos = [
   { file: "inline-18-31d17b02a5.png", alt: "Catherine Maley" },
 ];
 
-export default function LpClientLogos() {
+export default function LpClientLogos({
+  label = "Trusted by 150+ brands across the US, UK, UAE & Canada",
+}: {
+  label?: string;
+}) {
   const track = [...clientLogos, ...clientLogos];
 
   return (
     <section className="logobar-sec lp-logobar-sec" aria-label="Client logos">
       <div className="inner">
         <p className="logobar-label">
-          Trusted by 150+ brands across the US, UK, UAE &amp; Canada
+          {label}
         </p>
       </div>
       <div className="logobar">
