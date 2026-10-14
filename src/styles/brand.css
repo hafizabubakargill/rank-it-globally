@@ -1,0 +1,308 @@
+/*
+ * Site-wide brand layer: gives every non-service page the service-page look
+ * (palette B: charcoal heroes, gold primary buttons, indigo pill eyebrows,
+ * Georgia italic accents, white cards). Loaded last by the (site) layout.
+ * Service and industry pages (.sv-page) already use the kit, so most rules
+ * skip them.
+ */
+
+:root {
+  --b-ink: #212529;
+  --b-ink-2: #2c3136;
+  --b-text: #212529;
+  --b-muted: #495057;
+  --b-on-dark: #fff;
+  --b-on-dark-muted: #d6dadf;
+  --b-line: rgba(33, 37, 41, 0.1);
+  --b-soft: #f8f9fa;
+  --b-alt: #fbf5dc;
+  --b-indigo: #6664e4;
+  --b-indigo-700: #4b49c9;
+  --b-indigo-100: #ededfc;
+  --b-gold: #e9d175;
+  --b-gold-hover: #e2c65a;
+}
+
+body { background: var(--b-soft); color: var(--b-text); }
+
+/* ---------- Primary buttons: gold, like .sv-btn ---------- */
+body:not(:has(.sv-page)) main .cta-e,
+body:not(:has(.sv-page)) .sticky-bar .cta-e,
+.legal-page .cta-e,
+.lp-sticky-cta-btn {
+  display: inline-flex;
+  min-height: 52px;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  padding: 0.85rem 1.5rem;
+  border: 0;
+  border-radius: 12px;
+  background: var(--b-gold);
+  box-shadow: 0 10px 24px rgba(33, 37, 41, 0.18);
+  color: var(--b-ink) !important;
+  font-family: var(--fh);
+  font-size: 1.0625rem;
+  font-weight: 800;
+  text-decoration: none;
+  transition: transform 180ms ease, box-shadow 180ms ease, background 180ms ease;
+}
+
+body:not(:has(.sv-page)) main .cta-e::before,
+body:not(:has(.sv-page)) main .cta-e::after,
+body:not(:has(.sv-page)) .sticky-bar .cta-e::before,
+body:not(:has(.sv-page)) .sticky-bar .cta-e::after { display: none; }
+
+body:not(:has(.sv-page)) main .cta-e:hover,
+body:not(:has(.sv-page)) main .cta-e:focus-visible,
+body:not(:has(.sv-page)) .sticky-bar .cta-e:hover {
+  background: var(--b-gold-hover);
+  box-shadow: 0 14px 30px rgba(33, 37, 41, 0.24);
+  transform: translateY(-2px);
+}
+
+body:not(:has(.sv-page)) main .cta-e:focus-visible { outline: 3px solid var(--b-indigo); outline-offset: 3px; }
+
+/* Secondary text links */
+.marketing-link { color: var(--b-indigo-700); }
+
+/* ---------- Eyebrows: indigo pill with dot, like .sv-eyebrow ---------- */
+.marketing-eyebrow,
+.sec-label,
+.nums-label,
+.mega-eyebrow {
+  display: inline-flex !important;
+  width: auto;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0 0 1rem;
+  padding: 0.35rem 0.75rem;
+  border: 1px solid rgba(75, 73, 201, 0.22);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.7) !important;
+  background-clip: border-box !important;
+  -webkit-background-clip: border-box !important;
+  color: var(--b-indigo-700) !important;
+  -webkit-text-fill-color: currentColor !important;
+  font-family: var(--fh);
+  font-size: 0.875rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.marketing-eyebrow::before,
+.sec-label::before,
+.nums-label::before {
+  width: 6px;
+  height: 6px;
+  flex: 0 0 6px;
+  border-radius: 50%;
+  background: var(--b-indigo);
+  box-shadow: 0 0 0 4px rgba(102, 100, 228, 0.22);
+  content: "";
+}
+
+/* ---------- Accent words: Georgia italic, like .sv-hl ---------- */
+.gtext,
+.hero h1 em,
+.statsx-h span,
+.scale-h span {
+  background: none !important;
+  color: var(--b-indigo-700) !important;
+  -webkit-text-fill-color: currentColor !important;
+  font-family: Georgia, serif;
+  font-style: italic;
+  font-weight: 400;
+}
+
+/* ---------- Charcoal heroes, full-bleed ---------- */
+.marketing-page { padding-top: 0; }
+
+.marketing-hero,
+.audit-hero {
+  position: relative;
+  padding: clamp(2.5rem, 5vw, 4rem) 0 clamp(2.5rem, 5vw, 4rem);
+  background: var(--b-ink);
+  box-shadow: 0 0 0 100vmax var(--b-ink);
+  clip-path: inset(0 -100vmax);
+  color: var(--b-on-dark);
+}
+
+.marketing-hero + *,
+.audit-hero + * { margin-top: clamp(2.5rem, 5vw, 4rem) !important; }
+
+.marketing-hero h1,
+.audit-hero h1,
+.legal-header h1 { color: var(--b-on-dark); font-size: clamp(2.5rem, 5.4vw, 4.2rem); letter-spacing: -0.03em; line-height: 1.02; }
+
+.marketing-hero p,
+.audit-hero p { color: var(--b-on-dark-muted); }
+
+.marketing-hero .marketing-eyebrow,
+.audit-hero .marketing-eyebrow,
+.hero .sec-label,
+.legal-header .marketing-eyebrow {
+  border-color: rgba(255, 255, 255, 0.18);
+  background: rgba(255, 255, 255, 0.07) !important;
+  color: #f2e3a8 !important;
+}
+
+.marketing-hero .gtext,
+.audit-hero .gtext,
+.hero .gtext,
+.hero h1 em,
+.legal-header .gtext,
+.cta-sec .gtext,
+.statsx-h span,
+.scale-h span,
+.sv-dark .gtext { color: var(--b-gold) !important; }
+
+.marketing-hero .marketing-link,
+.audit-hero .marketing-link { color: #fff; }
+
+/* Cards inside the audit hero stay light. */
+.audit-hero-card { color: var(--b-text); }
+.audit-hero-card p { color: var(--b-muted); }
+
+/* ---------- Cards: white, soft border, 18px radius, like .sv-card ---------- */
+.marketing-stats div,
+.marketing-card,
+.case-feature-card,
+.case-mini-card,
+.audit-hero-card,
+.contact-card,
+.blog-card,
+.legal-card {
+  border: 1px solid var(--b-line) !important;
+  border-radius: 18px !important;
+  background: #fff !important;
+  box-shadow: 0 12px 30px rgba(33, 37, 41, 0.07) !important;
+}
+
+.statsx-panel .statx-val,
+.statsx-panel .statx-suf { background: none !important; color: var(--b-gold) !important; -webkit-text-fill-color: currentColor !important; }
+.statsx-panel .statx-up { background: var(--b-gold) !important; color: var(--b-ink) !important; }
+.statsx-eyebrow { color: #f2e3a8 !important; }
+
+.cases-cta { border: 1px solid var(--b-line) !important; border-radius: 18px !important; background: #fff !important; }
+
+.marketing-stats strong,
+.sn {
+  background: none !important;
+  color: var(--b-indigo-700) !important;
+  -webkit-text-fill-color: currentColor !important;
+}
+
+/* ---------- Homepage ---------- */
+.hero {
+  min-height: 0;
+  padding: clamp(3rem, 6vw, 5rem) 0;
+  background: var(--b-ink) !important;
+  color: var(--b-on-dark);
+}
+
+.hero .orb1,
+.hero .orb2,
+.hc-grid { display: none; }
+
+.hero h1 { color: var(--b-on-dark) !important; font-size: clamp(2.4rem, 4.6vw, 3.9rem) !important; letter-spacing: -0.03em; line-height: 1.04 !important; }
+.hero .hero-sub,
+.hero p { color: var(--b-on-dark-muted) !important; }
+.hero .sn { color: var(--b-gold) !important; }
+.hero .slb { color: var(--b-on-dark-muted) !important; }
+.hero .h-stats { border-color: rgba(255, 255, 255, 0.14) !important; }
+.hero .cta-g { color: #fff !important; }
+
+/* Dark homepage panels use charcoal, not purple-black. */
+.cta-sec,
+.statsx-panel,
+.scale-panel,
+.cmp3-us,
+.cmp2-row.us,
+.cmt-us { background: var(--b-ink) !important; }
+
+.cta-sec .cta-spot-beam,
+.cta-sec .cta-spot-source,
+.cta-sec .cta-floor,
+.cta-sec .ca1,
+.cta-sec .ca2,
+.cta-sec .ca3,
+.cta-sec .cta-ln { display: none; }
+
+.txt-marq { background: var(--b-ink) !important; }
+
+/* Alternating section tones like the service pages. */
+.sec-alt { background: var(--b-alt) !important; }
+
+/* Site-wide promo bar */
+.sticky-bar { background: var(--b-ink) !important; color: #fff; }
+
+/* ---------- Legal pages ---------- */
+.legal-header {
+  position: relative;
+  padding: clamp(2.5rem, 5vw, 4rem) 0;
+  background: var(--b-ink);
+  box-shadow: 0 0 0 100vmax var(--b-ink);
+  clip-path: inset(0 -100vmax);
+  color: var(--b-on-dark);
+}
+
+.legal-header p,
+.legal-header time { color: var(--b-on-dark-muted) !important; }
+
+@media (max-width: 480px) {
+  body:not(:has(.sv-page)) main .cta-e { white-space: normal; text-align: center; }
+}
+
+/* Legal pages: back link and header share one charcoal band. */
+.legal-page { padding-top: 0; }
+.legal-inner > .blog-back {
+  display: flex;
+  margin: 0;
+  padding-top: 2rem;
+  background: var(--b-ink);
+  box-shadow: 0 0 0 100vmax var(--b-ink);
+  clip-path: inset(0 -100vmax);
+  color: #fff;
+}
+.legal-header { margin-bottom: 2.5rem; padding-top: 1.5rem; }
+.legal-header .sec-label { border-color: rgba(255, 255, 255, 0.18); background: rgba(255, 255, 255, 0.07) !important; color: #f2e3a8 !important; }
+
+/* Blog posts: back link, title and hero image sit on a charcoal band. */
+.blog-page:not(.marketing-page) { padding-top: 0; }
+.blog-article-head {
+  position: relative;
+  padding: 2rem 0 clamp(2rem, 4vw, 3rem);
+  background: var(--b-ink);
+  box-shadow: 0 0 0 100vmax var(--b-ink);
+  clip-path: inset(0 -100vmax);
+  color: #fff;
+}
+.blog-article-head + * { margin-top: clamp(2rem, 4vw, 3rem); }
+.blog-article-head .blog-back { color: #fff; }
+.blog-article-head .blog-header h1 { color: #fff; font-size: clamp(2.3rem, 4.6vw, 3.8rem); letter-spacing: -0.02em; }
+.blog-article-head .blog-header p,
+.blog-article-head .blog-header time { color: var(--b-on-dark-muted); }
+.blog-article-head .marketing-eyebrow { border-color: rgba(255, 255, 255, 0.18); background: rgba(255, 255, 255, 0.07) !important; color: #f2e3a8 !important; }
+.blog-hero-image { border-radius: 18px; }
+.blog-kicker { color: var(--b-indigo-700) !important; }
+.blog-related-card,
+.blog-toc,
+.blog-author,
+.blog-share { border-radius: 18px !important; border-color: var(--b-line) !important; }
+
+/* 404: charcoal panel with the gold primary action. */
+.not-found-page { background: var(--b-ink) !important; color: #fff; }
+.not-found-code { color: var(--b-gold) !important; }
+.not-found-content h1 { color: #fff; }
+.not-found-content > p:not(.not-found-code) { color: var(--b-on-dark-muted) !important; }
+.not-found-actions a {
+  min-height: 52px;
+  border: 1px solid rgba(255, 255, 255, 0.22) !important;
+  border-radius: 12px !important;
+  background: transparent !important;
+  color: #fff !important;
+  font-weight: 750;
+}
+.not-found-actions a.not-found-primary { border-color: var(--b-gold) !important; background: var(--b-gold) !important; color: var(--b-ink) !important; font-weight: 800; }

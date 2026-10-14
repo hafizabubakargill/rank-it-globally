@@ -120,24 +120,24 @@ export function AboutGrowthGraphic() {
       <svg viewBox="0 0 560 300" fill="none">
         <defs>
           <linearGradient id="aboutGrowthLine" x1="75" y1="210" x2="485" y2="90">
-            <stop stopColor="#5552D4" />
-            <stop offset="1" stopColor="#9B59FF" />
+            <stop stopColor="#4b49c9" />
+            <stop offset="1" stopColor="#6664e4" />
           </linearGradient>
           <linearGradient id="aboutGrowthFill" x1="280" y1="40" x2="280" y2="255">
-            <stop stopColor="#9B59FF" stopOpacity=".2" />
-            <stop offset="1" stopColor="#5552D4" stopOpacity=".02" />
+            <stop stopColor="#6664e4" stopOpacity=".2" />
+            <stop offset="1" stopColor="#4b49c9" stopOpacity=".02" />
           </linearGradient>
         </defs>
         <rect x="1" y="1" width="558" height="298" rx="22" fill="white" fillOpacity=".68" stroke="#6664E4" strokeOpacity=".16" />
         <path d="M54 244H506M54 196H506M54 148H506M54 100H506M102 56V244M198 56V244M294 56V244M390 56V244M486 56V244" stroke="#6664E4" strokeOpacity=".09" />
         <path d="M70 226C121 211 151 216 198 186C244 156 266 174 310 139C353 105 397 129 448 89C467 74 482 66 498 61V244H70V226Z" fill="url(#aboutGrowthFill)" />
         <path d="M70 226C121 211 151 216 198 186C244 156 266 174 310 139C353 105 397 129 448 89C467 74 482 66 498 61" stroke="url(#aboutGrowthLine)" strokeWidth="5" strokeLinecap="round" />
-        <circle cx="70" cy="226" r="8" fill="#fff" stroke="#5552D4" strokeWidth="4" />
+        <circle cx="70" cy="226" r="8" fill="#fff" stroke="#4b49c9" strokeWidth="4" />
         <circle cx="198" cy="186" r="8" fill="#fff" stroke="#6664E4" strokeWidth="4" />
-        <circle cx="310" cy="139" r="8" fill="#fff" stroke="#7B61E8" strokeWidth="4" />
-        <circle cx="448" cy="89" r="8" fill="#fff" stroke="#925CF8" strokeWidth="4" />
-        <circle cx="498" cy="61" r="10" fill="#9B59FF" stroke="#fff" strokeWidth="5" />
-        <g fill="#4A4870" fontFamily="Arial, sans-serif" fontSize="12" fontWeight="700">
+        <circle cx="310" cy="139" r="8" fill="#fff" stroke="#6664e4" strokeWidth="4" />
+        <circle cx="448" cy="89" r="8" fill="#fff" stroke="#6664e4" strokeWidth="4" />
+        <circle cx="498" cy="61" r="10" fill="#6664e4" stroke="#fff" strokeWidth="5" />
+        <g fill="#495057" fontFamily="Arial, sans-serif" fontSize="12" fontWeight="700">
           <text x="57" y="268">Audit</text>
           <text x="177" y="268">Clarity</text>
           <text x="284" y="268">Trust</text>

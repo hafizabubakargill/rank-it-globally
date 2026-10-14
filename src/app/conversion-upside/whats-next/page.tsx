@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import "@/styles/brand.css";
 import ConfettiBurst from "@/components/ConfettiBurst";
 import LpLogoMark from "@/components/LpLogoMark";
 import TrackScheduleEvent from "@/components/TrackScheduleEvent";

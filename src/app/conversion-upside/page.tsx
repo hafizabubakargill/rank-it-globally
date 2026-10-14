@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import "@/styles/brand.css";
 import Image from "next/image";
 import LpLogoMark from "@/components/LpLogoMark";
 import LpWorkSlider from "@/components/LpWorkSlider";
