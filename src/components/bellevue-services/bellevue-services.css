@@ -1,8 +1,8 @@
 .eastside-page {
-  --eastside-border: rgba(91, 73, 214, 0.16);
+  --eastside-border: rgba(75,73,201,0.16);
   --eastside-surface: rgba(255, 255, 255, 0.86);
-  --eastside-ink: #17142f;
-  --eastside-muted: #67627d;
+  --eastside-ink: #212529;
+  --eastside-muted: #5c636a;
   color: var(--eastside-ink);
 }
 
@@ -26,10 +26,10 @@
   overflow: hidden;
   min-height: 480px;
   padding: clamp(1.35rem, 3vw, 2.2rem);
-  border: 1px solid rgba(154, 132, 255, 0.24);
+  border: 1px solid rgba(102,100,228,0.24);
   border-radius: 8px;
-  background: linear-gradient(145deg, #291878, #130d3d);
-  box-shadow: 0 24px 60px rgba(33, 20, 91, 0.22);
+  background: #23225e;
+  box-shadow: 0 24px 60px rgba(44,49,54,0.22);
   color: #fff;
 }
 
@@ -77,14 +77,14 @@
   background:
     linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
     linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px),
-    linear-gradient(135deg, #17103f, #2f1b72 64%, #211251);
+    linear-gradient(#212529,#212529);
   background-size: 56px 56px, 56px 56px, auto;
   color: #fff;
 }
 
 .eastside-section--soft {
   background: rgba(255, 255, 255, 0.72);
-  box-shadow: inset 0 1px 0 rgba(91, 73, 214, 0.08), inset 0 -1px 0 rgba(91, 73, 214, 0.08);
+  box-shadow: inset 0 1px 0 rgba(75,73,201,0.08), inset 0 -1px 0 rgba(75,73,201,0.08);
 }
 
 .eastside-section--dark .eastside-section-heading h2,
@@ -94,19 +94,19 @@
 }
 
 .eastside-section--dark .eastside-section-heading h2 .gtext {
-  color: #d6caff;
+  color: #b3b2f2;
   font-family: Georgia, serif;
   font-style: italic;
-  -webkit-text-fill-color: #d6caff;
+  -webkit-text-fill-color: #b3b2f2;
 }
 
 .eastside-section--dark .marketing-eyebrow {
   background: none;
-  color: #cbbdff;
+  color: #b3b2f2;
 }
 
 .eastside-section--dark .eastside-section-heading > p:last-child {
-  color: #d7d0ed;
+  color: #dee2e6;
 }
 
 .eastside-section-heading {
@@ -148,8 +148,8 @@
   border: 1px solid var(--eastside-border);
   border-radius: 8px;
   background:
-    linear-gradient(145deg, rgba(255, 255, 255, 0.98), rgba(247, 245, 255, 0.9));
-  box-shadow: 0 14px 36px rgba(46, 33, 111, 0.07);
+    rgba(255, 255, 255, 0.98);
+  box-shadow: 0 14px 36px rgba(35,34,94,0.07);
   transition:
     border-color 180ms ease,
     box-shadow 180ms ease,
@@ -162,7 +162,7 @@
   right: 0;
   left: 0;
   height: 3px;
-  background: linear-gradient(90deg, #4d35c6, #9877ff 62%, transparent);
+  background: linear-gradient(90deg, #4b49c9, #6664e4 62%, transparent);
   content: "";
 }
 
@@ -172,7 +172,7 @@
   right: -56px;
   width: 142px;
   height: 142px;
-  border: 22px solid rgba(105, 78, 225, 0.055);
+  border: 22px solid rgba(75,73,201,0.055);
   border-radius: 50%;
   content: "";
   pointer-events: none;
@@ -180,8 +180,8 @@
 
 .eastside-service-card:hover,
 .eastside-service-card:focus-within {
-  border-color: rgba(91, 68, 211, 0.34);
-  box-shadow: 0 22px 48px rgba(46, 33, 111, 0.11);
+  border-color: rgba(75,73,201,0.34);
+  box-shadow: 0 22px 48px rgba(35,34,94,0.11);
   transform: translateY(-3px);
 }
 
@@ -192,10 +192,10 @@
   width: 50px;
   height: 50px;
   place-items: center;
-  border: 1px solid rgba(101, 77, 231, 0.2);
+  border: 1px solid rgba(102,100,228,0.2);
   border-radius: 8px;
-  background: linear-gradient(145deg, #f4f1ff, #e8e1ff);
-  color: #5c48dc;
+  background: #f8f9fa;
+  color: #4b49c9;
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.9);
 }
 
@@ -230,10 +230,10 @@
 .eastside-tag-list li,
 .eastside-chip-list li {
   padding: 0.45rem 0.62rem;
-  border: 1px solid rgba(99, 75, 226, 0.16);
+  border: 1px solid rgba(75,73,201,0.16);
   border-radius: 999px;
-  background: #f7f5ff;
-  color: #4d476a;
+  background: #f8f9fa;
+  color: #495057;
   font-size:0.875rem;
   font-weight: 650;
 }
@@ -255,8 +255,8 @@
   padding: clamp(1.25rem, 2.5vw, 2rem);
   border: 1px solid var(--eastside-border);
   border-radius: 8px;
-  background: linear-gradient(145deg, #fff, #f4f1ff);
-  box-shadow: 0 16px 38px rgba(46, 33, 111, 0.065);
+  background: #fff;
+  box-shadow: 0 16px 38px rgba(35,34,94,0.065);
 }
 
 .eastside-signal-card::after {
@@ -265,7 +265,7 @@
   bottom: -58px;
   width: 145px;
   height: 145px;
-  border: 24px solid rgba(111, 83, 230, 0.06);
+  border: 24px solid rgba(102,100,228,0.06);
   border-radius: 50%;
   content: "";
 }
@@ -278,10 +278,10 @@
   width: 38px;
   height: 38px;
   place-items: center;
-  border: 1px solid rgba(101, 77, 231, 0.18);
+  border: 1px solid rgba(102,100,228,0.18);
   border-radius: 8px;
-  background: rgba(236, 231, 255, 0.8);
-  color: #674fe0;
+  background: rgba(241,243,245,0.8);
+  color: #4b49c9;
   content: "01";
   font-size:0.875rem;
   font-weight: 800;
@@ -299,10 +299,10 @@
   align-items: center;
   margin-bottom: 1.1rem;
   padding: 0.3rem 0.55rem;
-  border: 1px solid rgba(101, 77, 231, 0.14);
+  border: 1px solid rgba(102,100,228,0.14);
   border-radius: 999px;
-  background: rgba(243, 239, 255, 0.85);
-  color: #735de3;
+  background: rgba(248,249,250,0.85);
+  color: #6664e4;
   font-size:0.875rem;
   font-weight: 750;
   letter-spacing: 0.09em;
@@ -342,8 +342,8 @@
   padding: 1.25rem;
   border: 1px solid var(--eastside-border);
   border-radius: 8px;
-  background: linear-gradient(150deg, #fff, #f8f6ff);
-  box-shadow: 0 14px 32px rgba(46, 33, 111, 0.055);
+  background: #fff;
+  box-shadow: 0 14px 32px rgba(35,34,94,0.055);
 }
 
 .eastside-workflow li:not(:last-child)::after {
@@ -351,7 +351,7 @@
   top: 29px;
   right: -0.62rem;
   z-index: 1;
-  color: #8069e9;
+  color: #6664e4;
   content: "→";
   font-weight: 800;
 }
@@ -364,10 +364,10 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  border: 1px solid rgba(101, 77, 231, 0.12);
+  border: 1px solid rgba(102,100,228,0.12);
   border-radius: 8px;
-  background: linear-gradient(145deg, #f0ecff, #e6deff);
-  color: #5b43d4;
+  background: #f8f9fa;
+  color: #4b49c9;
   font-size:1.35rem;
   font-weight: 800;
   line-height: 1;
@@ -375,7 +375,7 @@
 
 .eastside-workflow-number::before {
   margin-bottom: 0.28rem;
-  color: #7a68ca;
+  color: #6664e4;
   content: "Stage";
   font-size:0.875rem;
   letter-spacing: 0.06em;
@@ -413,10 +413,10 @@
   align-items: start;
   margin: clamp(3rem, 6vw, 5.5rem) auto 0;
   padding: clamp(2rem, 4vw, 3.25rem);
-  border: 1px solid rgba(91, 73, 214, 0.16);
+  border: 1px solid rgba(75,73,201,0.16);
   border-radius: 8px;
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.96), rgba(240, 236, 255, 0.9));
-  box-shadow: 0 18px 46px rgba(46, 33, 111, 0.08);
+  background: rgba(255, 255, 255, 0.96);
+  box-shadow: 0 18px 46px rgba(35,34,94,0.08);
 }
 
 .eastside-related-intro h2 {
@@ -452,7 +452,7 @@
   gap: 0.8rem;
   align-items: start;
   padding: 1rem;
-  border: 1px solid rgba(91, 73, 214, 0.14);
+  border: 1px solid rgba(75,73,201,0.14);
   border-radius: 8px;
   background: rgba(255, 255, 255, 0.82);
   color: var(--eastside-ink);
@@ -462,18 +462,18 @@
 
 .eastside-related-grid a:hover,
 .eastside-related-grid a:focus-visible {
-  border-color: rgba(91, 73, 214, 0.38);
-  box-shadow: 0 12px 26px rgba(46, 33, 111, 0.09);
+  border-color: rgba(75,73,201,0.38);
+  box-shadow: 0 12px 26px rgba(35,34,94,0.09);
   transform: translateY(-2px);
 }
 
 .eastside-related-grid a:focus-visible {
-  outline: 3px solid rgba(115, 86, 237, 0.28);
+  outline: 3px solid rgba(102,100,228,0.28);
   outline-offset: 2px;
 }
 
 .eastside-related-index {
-  color: #765ee8;
+  color: #6664e4;
   font-size:0.875rem;
   font-weight: 800;
   letter-spacing: 0.08em;
@@ -499,7 +499,7 @@
 }
 
 .eastside-related-arrow {
-  color: #765ee8;
+  color: #6664e4;
   font-weight: 800;
   transition: transform 180ms ease;
 }
@@ -522,8 +522,8 @@
   left: 0;
   height: 84px;
   background:
-    linear-gradient(120deg, rgba(47, 28, 139, 0.97), rgba(99, 72, 211, 0.9)),
-    #2f1c8b;
+    rgba(58,56,159,0.97),
+    #3a389f;
   content: "";
 }
 
@@ -542,7 +542,7 @@
 }
 
 .eastside-comparison-card {
-  border-top: 3px solid #755de5;
+  border-top: 3px solid #6664e4;
 }
 
 .eastside-faq-list {
@@ -581,7 +581,7 @@
 }
 
 .eastside-faq-list button:focus-visible {
-  outline: 3px solid rgba(115, 86, 237, 0.35);
+  outline: 3px solid rgba(102,100,228,0.35);
   outline-offset: 2px;
 }
 
@@ -594,7 +594,7 @@
 
 .eastside-faq-icon {
   flex: 0 0 auto;
-  color: #6b53e3;
+  color: #6664e4;
   font-size:1.375rem;
   transition: transform 180ms ease;
 }
@@ -611,7 +611,7 @@
   margin: clamp(2rem, 5vw, 4rem) auto 0;
   padding: clamp(2.5rem, 5vw, 4.5rem);
   border-radius: 8px;
-  background: linear-gradient(135deg, #1b104f, #472a98);
+  background: #2c3136;
   color: #fff;
   text-align: center;
 }
@@ -636,7 +636,7 @@
 .eastside-final-cta > p:not(.marketing-eyebrow) {
   max-width: 720px;
   margin: 1rem auto 0;
-  color: #d9d2f5;
+  color: #dee2e6;
   line-height: 1.7;
 }
 
@@ -655,7 +655,7 @@
   position: absolute;
   width: 44%;
   height: 90%;
-  border: 1px solid rgba(220, 210, 255, 0.22);
+  border: 1px solid rgba(241,243,245,0.22);
   border-radius: 50%;
 }
 

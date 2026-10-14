@@ -1,0 +1,223 @@
+/*
+ * Site-wide header and footer in palette B (charcoal, gold and logo
+ * indigo). Loaded by the (site) layout after the legacy landing styles.
+ */
+
+body {
+  --chrome-ink: #212529;
+  --chrome-ink-700: #343a40;
+  --chrome-muted: #495057;
+  --chrome-line: #dee2e6;
+  --chrome-soft: #f8f9fa;
+  --chrome-indigo: #6664e4;
+  --chrome-indigo-700: #4b49c9;
+  --chrome-indigo-100: #ededfc;
+  --chrome-gold: #e9d175;
+  --chrome-gold-100: #fbf5dc;
+  background: var(--chrome-soft);
+}
+
+/* ---------- Header ---------- */
+body nav {
+  border-bottom: 1px solid var(--chrome-line);
+  background: #fff;
+  box-shadow: 0 1px 0 rgba(33, 37, 41, 0.04), 0 8px 24px rgba(33, 37, 41, 0.06);
+  backdrop-filter: none;
+}
+
+body .n-logo-t { color: var(--chrome-ink); }
+
+body .n-logo-t span {
+  background: none;
+  color: var(--chrome-indigo);
+  -webkit-text-fill-color: var(--chrome-indigo);
+}
+
+body .nk {
+  color: var(--chrome-ink-700);
+  font-size: 0.9375rem;
+  font-weight: 600;
+}
+
+body .nk::after { height: 2px; background: var(--chrome-gold); }
+body .nk:hover,
+body .nk:focus-visible { color: var(--chrome-ink); }
+body .services-nav-trigger > span { font-size: 0.9rem; }
+
+body nav .cta-e,
+body .mobile-nav-cta {
+  border-radius: 10px;
+  background: var(--chrome-gold);
+  box-shadow: none;
+  color: var(--chrome-ink) !important;
+  font-size: 0.9375rem;
+  font-weight: 800;
+}
+
+body nav .cta-e { padding: 0.65rem 1.15rem; }
+body nav .cta-e::before,
+body nav .cta-e::after { display: none; }
+body nav .cta-e:hover,
+body .mobile-nav-cta:hover { background: #e2c65a; }
+
+/* Services mega menu */
+body .services-mega-menu {
+  border-color: var(--chrome-line);
+  border-radius: 14px;
+  background: #fff;
+  box-shadow: 0 24px 60px rgba(33, 37, 41, 0.16);
+  color: var(--chrome-ink);
+  backdrop-filter: none;
+}
+
+body .mega-menu-column-services { border-right-color: var(--chrome-line); }
+
+body .mega-menu-heading {
+  color: var(--chrome-muted);
+  font-size: 0.8125rem;
+  letter-spacing: 0.12em;
+}
+
+body .mega-menu-link { color: var(--chrome-ink); }
+body .mega-menu-link strong { font-size: 0.9375rem; font-weight: 600; }
+
+body .mega-menu-link:hover,
+body .mega-menu-link:focus-visible {
+  background: var(--chrome-soft);
+  box-shadow: inset 3px 0 0 var(--chrome-gold);
+  color: var(--chrome-ink);
+}
+
+body .mega-menu-icon,
+body .mega-menu-column-industries .mega-menu-icon { color: var(--chrome-indigo-700); }
+
+body .mega-menu-featured {
+  border-color: var(--chrome-line);
+  border-radius: 10px;
+  font-size: 0.9375rem;
+}
+
+body .mega-menu-featured-purple { background: var(--chrome-gold-100); color: var(--chrome-ink); }
+body .mega-menu-featured-purple:hover { background: #f6ecbf; }
+body .mega-menu-featured-green { background: var(--chrome-indigo-100); color: var(--chrome-indigo-700); }
+body .mega-menu-featured-green:hover { background: #e1e1fa; }
+
+/* Mobile menu */
+body .mobile-menu-toggle {
+  border-color: var(--chrome-line);
+  color: var(--chrome-ink);
+}
+
+body .mobile-menu-panel {
+  background: #fff;
+  backdrop-filter: none;
+}
+
+body nav.mobile-open .mobile-menu-panel { border-color: var(--chrome-line); }
+
+body .mobile-menu-panel a:not(.cta-e),
+body .mobile-services-toggle {
+  color: var(--chrome-ink);
+  font-size: 1rem;
+}
+
+body .mobile-menu-panel a:not(.cta-e):hover,
+body .mobile-services-toggle:hover,
+body .mobile-services-toggle:focus-visible { background: var(--chrome-soft); }
+
+body .mobile-services-heading { color: var(--chrome-muted); font-size: 0.8125rem; }
+body .mobile-menu-panel .mobile-services-list a { color: var(--chrome-ink-700) !important; font-size: 0.9375rem !important; }
+body .mobile-service-icon { background: var(--chrome-indigo-100); color: var(--chrome-indigo-700); }
+
+/* ---------- Footer ---------- */
+body .site-footer {
+  border-top: 4px solid var(--chrome-gold);
+  background: var(--chrome-soft);
+}
+
+body .footer-brand-lockup { color: var(--chrome-ink); }
+
+body .footer-brand-lockup strong {
+  background: none;
+  color: var(--chrome-indigo);
+  -webkit-text-fill-color: var(--chrome-indigo);
+}
+
+body .footer-brand p {
+  color: var(--chrome-muted);
+  font-size: 1rem;
+}
+
+body .footer-heading {
+  color: var(--chrome-ink);
+  font-size: 0.875rem;
+  letter-spacing: 0.1em;
+}
+
+body .footer-link {
+  color: var(--chrome-ink-700);
+  font-size: 0.9375rem;
+  font-weight: 600;
+}
+
+body .footer-link:hover,
+body .footer-link:focus-visible { color: var(--chrome-indigo-700); }
+
+body .footer-email {
+  color: var(--chrome-indigo-700);
+  font-size: 0.9375rem;
+}
+
+body .footer-email-icon,
+body .footer-social-icon {
+  border-color: var(--chrome-line);
+  box-shadow: none;
+  color: var(--chrome-ink);
+}
+
+body .footer-email:hover .footer-email-icon,
+body .footer-email:focus-visible .footer-email-icon { border-color: var(--chrome-ink); background: var(--chrome-ink); color: #fff; }
+
+body .footer-social-link:hover .footer-social-icon,
+body .footer-social-link:focus-visible .footer-social-icon { background: var(--chrome-ink); color: #fff; }
+
+body .footer-whatsapp { color: var(--chrome-ink-700); }
+
+body .footer-hostinger-badge { box-shadow: none; }
+
+body .footer-bottom { border-top-color: var(--chrome-line); }
+
+body .footer-bottom p,
+body .footer-legal-links a {
+  color: var(--chrome-muted);
+  font-size: 0.875rem;
+}
+
+body .footer-legal-links a:hover,
+body .footer-legal-links a:focus-visible { color: var(--chrome-ink); }
+
+/* Scroll-to-top button */
+body .global-scroll-top {
+  background: var(--chrome-ink);
+  box-shadow: 0 6px 18px rgba(33, 37, 41, 0.28);
+  color: var(--chrome-gold);
+}
+
+@media (min-width: 961px) {
+  body .site-footer .footer-inner { grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.35fr) repeat(4, minmax(0, 0.65fr)); }
+}
+
+@media (max-width: 420px) {
+  body .mobile-nav-cta { padding: 0.5rem 0.7rem; font-size: 0.875rem; }
+  body .n-logo-t { white-space: nowrap; }
+}
+
+/* 320–360px phones: logo, CTA and menu button must all fit on one row. */
+@media (max-width: 360px) {
+  body .nav-inner { gap: 0.5rem; padding-inline: 0.75rem; }
+  body .n-logo { gap: 0.4rem; }
+  body .n-logo img { width: 30px; height: 30px; }
+  body .n-logo-t { font-size: 0.9375rem; }
+  body .mobile-nav-actions { gap: 0.4rem; }
+  body .mobile-nav-cta { padding: 0.45rem 0.55rem; font-size: 0.8125rem; }
+}

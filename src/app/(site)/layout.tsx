@@ -4,6 +4,8 @@ import PortfolioPreview from "@/components/PortfolioPreview";
 import SiteFooter from "@/components/SiteFooter";
 import SmoothScroll from "@/components/SmoothScroll";
 import { organizationSchema } from "@/content/organization";
+import "@/styles/chrome.css";
+import "@/styles/brand.css";
 
 export default function SiteLayout({
   children,

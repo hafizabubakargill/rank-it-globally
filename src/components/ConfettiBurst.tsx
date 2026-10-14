@@ -4,7 +4,7 @@ import { useEffect, useRef } from "react";
 
 // Brand gradient purples (--grad2 in landing.css) plus the turtle-eye gold
 // for a spot of warm contrast, rather than a generic rainbow mix.
-const COLORS = ["#5552D4", "#9B59FF", "#3D1A8A", "#6664E4", "#E9D175"];
+const COLORS = ["#4b49c9", "#6664e4", "#3a389f", "#6664E4", "#E9D175"];
 const PARTICLE_COUNT = 140;
 const DURATION_MS = 3200;
 const FADE_MS = 600;

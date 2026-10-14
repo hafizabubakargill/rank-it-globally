@@ -1,7 +1,7 @@
 .bellevue-page {
-  --bellevue-border: rgba(91, 73, 214, 0.16);
+  --bellevue-border: rgba(75,73,201,0.16);
   --bellevue-surface: rgba(255, 255, 255, 0.82);
-  color: #17142f;
+  color: #212529;
 }
 
 .bellevue-hero {
@@ -26,9 +26,9 @@
   border: 1px solid var(--bellevue-border);
   border-radius: 8px;
   background:
-    linear-gradient(145deg, rgba(49, 29, 143, 0.98), rgba(18, 12, 56, 0.98)),
-    #181039;
-  box-shadow: 0 24px 60px rgba(33, 20, 91, 0.2);
+    rgba(58,56,159,0.98),
+    #212529;
+  box-shadow: 0 24px 60px rgba(44,49,54,0.2);
   color: #fff;
 }
 
@@ -84,7 +84,7 @@
 }
 
 .bellevue-process-list small {
-  color: #aaa0d6;
+  color: #6664e4;
   font-size:0.875rem;
   text-transform: uppercase;
 }
@@ -96,7 +96,7 @@
   place-items: center;
   border: 1px solid rgba(255, 255, 255, 0.24);
   border-radius: 50%;
-  color: #bcaaff;
+  color: #b3b2f2;
   font-size:0.875rem;
   font-weight: 700;
 }
@@ -113,7 +113,7 @@
   border: 1px solid rgba(255, 255, 255, 0.14);
   border-radius: 999px;
   background: rgba(255, 255, 255, 0.07);
-  color: #ded8fa;
+  color: #f1f3f5;
   font-size:0.875rem;
 }
 
@@ -136,7 +136,7 @@
   background:
     linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
     linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px),
-    linear-gradient(135deg, #17103f, #2f1b72 64%, #211251);
+    linear-gradient(#212529,#212529);
   background-size: 56px 56px, 56px 56px, auto;
   color: #fff;
 }
@@ -144,8 +144,8 @@
 .bellevue-section--soft {
   background: rgba(255, 255, 255, 0.72);
   box-shadow:
-    inset 0 1px 0 rgba(91, 73, 214, 0.08),
-    inset 0 -1px 0 rgba(91, 73, 214, 0.08);
+    inset 0 1px 0 rgba(75,73,201,0.08),
+    inset 0 -1px 0 rgba(75,73,201,0.08);
 }
 
 .bellevue-section--dark .bellevue-section-heading h2 {
@@ -153,25 +153,25 @@
 }
 
 .bellevue-section--dark .bellevue-section-heading h2 .gtext {
-  color: #d6caff;
+  color: #b3b2f2;
   font-family: Georgia, serif;
   font-style: italic;
-  -webkit-text-fill-color: #d6caff;
+  -webkit-text-fill-color: #b3b2f2;
 }
 
 .bellevue-section--dark .marketing-eyebrow {
   background: none;
-  color: #cbbdff;
+  color: #b3b2f2;
 }
 
 .bellevue-section--dark .bellevue-section-heading > p:last-child,
 .bellevue-section--dark .bellevue-cost-note {
-  color: #d7d0ed;
+  color: #dee2e6;
 }
 
 .bellevue-section--dark .bellevue-cost-note a,
 .bellevue-section--dark > .marketing-link {
-  color: #d6caff;
+  color: #b3b2f2;
 }
 
 .bellevue-section--dark .bellevue-timeline {
@@ -181,7 +181,7 @@
 .bellevue-section--dark .bellevue-timeline li {
   min-height: 250px;
   padding: 1.2rem;
-  border: 1px solid rgba(219, 208, 255, 0.16);
+  border: 1px solid rgba(241,243,245,0.16);
   border-radius: 8px;
   background: rgba(255, 255, 255, 0.075);
 }
@@ -191,8 +191,8 @@
 }
 
 .bellevue-section--dark .bellevue-timeline-marker {
-  border: 1px solid rgba(219, 208, 255, 0.22);
-  background: rgba(219, 208, 255, 0.1);
+  border: 1px solid rgba(241,243,245,0.22);
+  background: rgba(241,243,245,0.1);
   color: #fff;
 }
 
@@ -202,7 +202,7 @@
 }
 
 .bellevue-section--dark .bellevue-timeline p {
-  color: #d2cae7;
+  color: #ced4da;
 }
 
 .bellevue-section-heading {
@@ -213,7 +213,7 @@
 .bellevue-section-heading h2,
 .bellevue-final-cta h2 {
   margin: 0;
-  color: #17142f;
+  color: #212529;
   font-size:clamp(1.9rem, 3.25vw, 3.2rem);
   font-weight: 700;
   line-height: 1.08;
@@ -223,7 +223,7 @@
 .bellevue-final-cta > p:not(.marketing-eyebrow) {
   max-width: 760px;
   margin: 1rem 0 0;
-  color: #66617e;
+  color: #5c636a;
   font-size:clamp(1.125rem, 1.25vw, 1.12rem);
   line-height: 1.75;
 }
@@ -241,7 +241,7 @@
   border: 1px solid var(--bellevue-border);
   border-radius: 8px;
   background: var(--bellevue-surface);
-  box-shadow: 0 14px 36px rgba(46, 33, 111, 0.055);
+  box-shadow: 0 14px 36px rgba(35,34,94,0.055);
 }
 
 .bellevue-service-identity {
@@ -252,7 +252,7 @@
 
 .bellevue-service-identity h3 {
   margin: 1rem 0 0.6rem;
-  color: #17142f;
+  color: #212529;
   font-size:clamp(1.375rem, 2vw, 1.65rem);
   line-height: 1.2;
 }
@@ -262,10 +262,10 @@
   width: 50px;
   height: 50px;
   place-items: center;
-  border: 1px solid rgba(101, 77, 231, 0.2);
+  border: 1px solid rgba(102,100,228,0.2);
   border-radius: 8px;
-  background: #f2efff;
-  color: #5c48dc;
+  background: #f8f9fa;
+  color: #4b49c9;
 }
 
 .bellevue-service-icon svg {
@@ -274,7 +274,7 @@
 }
 
 .bellevue-stage {
-  color: #765ee8;
+  color: #6664e4;
   font-size:0.875rem;
   font-weight: 700;
   letter-spacing: 0.09em;
@@ -283,7 +283,7 @@
 
 .bellevue-service-body p {
   margin: 0 0 0.8rem;
-  color: #625e76;
+  color: #5c636a;
   line-height: 1.75;
 }
 
@@ -299,10 +299,10 @@
 .bellevue-service-body li,
 .bellevue-industry-list li {
   padding: 0.48rem 0.68rem;
-  border: 1px solid rgba(99, 75, 226, 0.16);
+  border: 1px solid rgba(75,73,201,0.16);
   border-radius: 999px;
-  background: #f7f5ff;
-  color: #4d476a;
+  background: #f8f9fa;
+  color: #495057;
   font-size:0.875rem;
   font-weight: 600;
 }
@@ -335,8 +335,8 @@
   flex-direction: column;
   min-height: 250px;
   background:
-    linear-gradient(145deg, rgba(255, 255, 255, 0.98), rgba(243, 240, 255, 0.9));
-  box-shadow: 0 16px 38px rgba(46, 33, 111, 0.07);
+    rgba(255, 255, 255, 0.98);
+  box-shadow: 0 16px 38px rgba(35,34,94,0.07);
 }
 
 .bellevue-market-grid article::after {
@@ -346,7 +346,7 @@
   bottom: -52px;
   width: 130px;
   height: 130px;
-  border: 22px solid rgba(111, 83, 230, 0.06);
+  border: 22px solid rgba(102,100,228,0.06);
   border-radius: 50%;
   pointer-events: none;
 }
@@ -363,10 +363,10 @@
   width: 48px;
   height: 48px;
   place-items: center;
-  border: 1px solid rgba(103, 77, 225, 0.2);
+  border: 1px solid rgba(75,73,201,0.2);
   border-radius: 8px;
-  background: #ece7ff;
-  color: #5c48dc;
+  background: #f1f3f5;
+  color: #4b49c9;
 }
 
 .bellevue-market-icon svg {
@@ -375,7 +375,7 @@
 }
 
 .bellevue-market-number {
-  color: rgba(80, 62, 172, 0.45);
+  color: rgba(75,73,201,0.45);
   font-size:0.875rem;
   font-weight: 800;
   letter-spacing: 0.12em;
@@ -385,7 +385,7 @@
   align-self: flex-start;
   margin-top: auto;
   padding-top: 1.35rem;
-  color: #674fe0;
+  color: #4b49c9;
   font-size:0.875rem;
   font-weight: 750;
   letter-spacing: 0.05em;
@@ -395,7 +395,7 @@
 .bellevue-market-grid strong,
 .bellevue-proof-grid strong {
   display: block;
-  color: #17142f;
+  color: #212529;
   font-size:1.125rem;
 }
 
@@ -403,7 +403,7 @@
 .bellevue-proof-grid p,
 .bellevue-timeline p {
   margin: 0.75rem 0 0;
-  color: #68637e;
+  color: #5c636a;
   line-height: 1.65;
 }
 
@@ -432,11 +432,11 @@
   width: 7px;
   height: 7px;
   border-radius: 50%;
-  background: #765ee8;
+  background: #6664e4;
 }
 
 .bellevue-proof-grid small {
-  color: #806be8;
+  color: #6664e4;
   font-size:0.875rem;
   font-weight: 700;
   letter-spacing: 0.08em;
@@ -452,12 +452,12 @@
   align-items: center;
   justify-content: center;
   border-radius: 8px;
-  background: #ece7ff;
-  color: #543ec7;
+  background: #f1f3f5;
+  color: #4b49c9;
 }
 
 .bellevue-timeline-marker small {
-  color: #7766c7;
+  color: #4b49c9;
   font-size:0.875rem;
   font-weight: 800;
   letter-spacing: 0.025em;
@@ -474,7 +474,7 @@
 .bellevue-timeline h3,
 .bellevue-proof-grid h3 {
   margin: 0.45rem 0 0;
-  color: #17142f;
+  color: #212529;
   font-size:1.232rem;
   line-height: 1.3;
 }
@@ -495,7 +495,7 @@
   height: 92px;
   margin-bottom: 1.25rem;
   overflow: hidden;
-  border: 1px solid rgba(89, 72, 177, 0.12);
+  border: 1px solid rgba(75,73,201,0.12);
   border-radius: 6px;
   background: #fff;
 }
@@ -520,11 +520,11 @@
 
 .bellevue-cost-note {
   margin: 1.75rem 0 0;
-  color: #68637e;
+  color: #5c636a;
 }
 
 .bellevue-cost-note a {
-  color: #5e49dc;
+  color: #4b49c9;
   font-weight: 700;
   text-decoration: underline;
   text-underline-offset: 0.2em;
@@ -557,7 +557,7 @@
   padding: 1rem 1.2rem;
   border: 0;
   background: transparent;
-  color: #17142f;
+  color: #212529;
   font: inherit;
   font-weight: 700;
   text-align: left;
@@ -566,20 +566,20 @@
 }
 
 .bellevue-faq-list button:focus-visible {
-  outline: 3px solid rgba(115, 86, 237, 0.35);
+  outline: 3px solid rgba(102,100,228,0.35);
   outline-offset: 2px;
 }
 
 .bellevue-faq-list article > div > p {
   margin: 0;
   padding: 0 1.2rem 1.2rem;
-  color: #68637e;
+  color: #5c636a;
   line-height: 1.7;
 }
 
 .bellevue-faq-icon {
   flex: 0 0 auto;
-  color: #6b53e3;
+  color: #6664e4;
   font-size:1.375rem;
   transition: transform 180ms ease;
 }
@@ -597,8 +597,8 @@
   padding: clamp(2rem, 5vw, 4.25rem);
   border-radius: 8px;
   background:
-    linear-gradient(135deg, rgba(26, 17, 77, 0.98), rgba(70, 43, 151, 0.96)),
-    #1a114d;
+    rgba(44,49,54,0.98),
+    #2c3136;
   color: #fff;
   text-align: center;
 }
@@ -618,7 +618,7 @@
   position: absolute;
   width: 180px;
   height: 180px;
-  border: 28px solid rgba(203, 188, 255, 0.07);
+  border: 28px solid rgba(179,178,242,0.07);
   border-radius: 50%;
 }
 
@@ -626,7 +626,7 @@
   content: "";
   position: absolute;
   inset: 20px;
-  border: 1px solid rgba(222, 212, 255, 0.13);
+  border: 1px solid rgba(241,243,245,0.13);
   border-radius: inherit;
 }
 
@@ -646,10 +646,10 @@
   width: 54px;
   height: 54px;
   place-items: center;
-  border: 1px solid rgba(222, 212, 255, 0.16);
+  border: 1px solid rgba(241,243,245,0.16);
   border-radius: 8px;
   background: rgba(255, 255, 255, 0.055);
-  color: rgba(222, 212, 255, 0.28);
+  color: rgba(241,243,245,0.28);
   transform: rotate(-8deg);
 }
 
@@ -685,15 +685,15 @@
   min-height: 30px;
   margin-bottom: 1rem;
   padding: 0.35rem 0.7rem;
-  border: 1px solid rgba(222, 212, 255, 0.2);
+  border: 1px solid rgba(241,243,245,0.2);
   border-radius: 999px;
   background: rgba(255, 255, 255, 0.075);
-  color: #e5dcff;
+  color: #f1f3f5;
   letter-spacing: 0.1em;
 }
 
 .bellevue-final-cta .gtext {
-  background: linear-gradient(100deg, #d3c1ff 0%, #ffffff 55%, #bd9cff 100%);
+  background: #b3b2f2;
   background-clip: text;
   -webkit-background-clip: text;
   color: transparent;
@@ -702,7 +702,7 @@
 
 .bellevue-final-cta > p:not(.marketing-eyebrow) {
   margin-inline: auto;
-  color: #d7d0ef;
+  color: #dee2e6;
 }
 
 .bellevue-final-cta .marketing-actions {
