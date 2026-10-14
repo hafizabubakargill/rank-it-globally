@@ -23,6 +23,12 @@ const nextConfig: NextConfig = {
         destination: "/",
         statusCode: 301,
       },
+      // Law firm industry page retired; local SEO is the closest live offer.
+      {
+        source: "/industries/law-firm-marketing",
+        destination: "/local-seo-services",
+        statusCode: 301,
+      },
       {
         source: "/ui-ux-design",
         destination: "/web-development#ui-ux",

@@ -968,3 +968,4 @@ body:has(.sv-sticky.is-visible) .global-scroll-top { bottom: 96px !important; }
   .sv-head { margin-bottom: 1.25rem; }
 }
 .sv-swipe-hint { display: none; margin: 0 0 0.75rem; color: var(--sv-muted); font-size: 0.9375rem; font-weight: 600; }
+@media (max-width: 700px) { .sv-swipe-hint { display: block; } }

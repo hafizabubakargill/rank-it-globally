@@ -1,0 +1,40 @@
+/* Tech startups: AI shortlist hero, search-to-page map */
+
+.ts-hero-visual { position: relative; padding: 0.5rem 0 1rem; }
+.ts-ai { width: min(470px, 100%); margin: 0 0 6rem auto; padding: 1.1rem 1.2rem 1.2rem; border-radius: 22px; background: #fff; box-shadow: 0 40px 80px rgba(0, 0, 0, 0.45); color: var(--p-charcoal); }
+.ts-ai-top { display: flex; align-items: center; gap: 0.35rem; margin-bottom: 0.9rem; font-size: 0.9375rem; }
+.ts-ai-top span { width: 10px; height: 10px; border-radius: 50%; background: var(--p-charcoal-200); }
+.ts-ai-top b { margin-left: 0.5rem; }
+.ts-q { margin: 0 0 0.9rem; padding: 0.75rem 0.9rem; border-radius: 14px; background: var(--p-charcoal-100); font-size: 0.9375rem; line-height: 1.45; }
+.ts-list { display: grid; gap: 0.45rem; margin: 0; padding: 0; list-style: none; }
+.ts-list li { display: flex; gap: 0.7rem; align-items: center; padding: 0.6rem 0.75rem; border: 1px solid var(--p-charcoal-200); border-radius: 12px; }
+.ts-list li.is-you { border: 2px solid var(--p-gold); background: var(--p-gold-100); }
+.ts-list b { display: grid; flex: 0 0 1.6rem; height: 1.6rem; place-items: center; border-radius: 8px; background: var(--p-charcoal); color: #fff; font-size: 0.875rem; }
+.ts-list li.is-you b { background: var(--p-indigo-700); }
+.ts-list div { display: grid; gap: 0.1rem; }
+.ts-list strong { font-family: var(--fh); font-size: 1rem; }
+.ts-list small { color: var(--p-charcoal-500); font-size: 0.8125rem; }
+.ts-cites { display: flex; flex-wrap: wrap; align-items: center; gap: 0.35rem; margin-top: 0.75rem; }
+.ts-cites small { color: var(--p-charcoal-500); font-size: 0.8125rem; font-weight: 800; text-transform: uppercase; }
+.ts-cites i { padding: 0.15rem 0.5rem; border-radius: 999px; background: var(--p-indigo-100); color: var(--p-indigo-800); font-size: 0.8125rem; font-style: normal; font-weight: 700; }
+.ts-crm { position: absolute; z-index: 3; bottom: 1.6rem; left: 0; display: grid; gap: 0.2rem; width: 240px; padding: 0.85rem 1rem; color: #fff; animation: sv-float 7s ease-in-out infinite; }
+.ts-crm small { color: var(--sv-on-dark-muted); font-size: 0.8125rem; font-weight: 800; text-transform: uppercase; }
+.ts-crm strong { color: var(--p-gold); font-size: 0.9375rem; }
+.ts-crm span { color: var(--sv-on-dark-muted); font-size: 0.875rem; }
+
+/* Search-to-page map */
+.ts-map { display: grid; gap: 0.5rem; }
+.ts-map-row { display: grid; grid-template-columns: 1.15fr 0.75fr 1.1fr; gap: 0.5rem; align-items: stretch; }
+.ts-map-head span { padding: 0 0.3rem; color: var(--sv-on-dark-muted); font-size: 0.875rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; }
+.ts-map-row:not(.ts-map-head) > span { display: flex; align-items: center; padding: 0.85rem 1rem; border-radius: 14px; line-height: 1.4; }
+.ts-query { background: rgba(255, 255, 255, 0.06); color: #fff; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 0.9375rem; }
+.ts-page { background: var(--p-gold); color: var(--p-charcoal); font-weight: 800; }
+.ts-why { border: 1px solid rgba(255, 255, 255, 0.14); color: var(--sv-on-dark-muted); }
+
+@media (max-width: 700px) {
+  .ts-ai { margin-bottom: 0; }
+  .ts-crm { position: relative; bottom: auto; left: auto; width: auto; margin-top: 0.9rem; }
+  .ts-map-head { display: none; }
+  .ts-map-row { grid-template-columns: 1fr; gap: 0; margin-bottom: 0.4rem; overflow: hidden; border: 1px solid rgba(255, 255, 255, 0.14); border-radius: 16px; }
+  .ts-map-row:not(.ts-map-head) > span { border: 0; border-radius: 0; }
+}

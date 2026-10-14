@@ -189,7 +189,7 @@ export const seoPage: ServiceCore = {
     {
       question: "Do you work with my industry?",
       answer:
-        "We work with US service businesses and online stores, especially [law firms](/industries/law-firm-marketing), [dental and medical practices](/industries/dental-medical-marketing), [home services](/industries/home-services-marketing), [real estate](/industries/real-estate-marketing), [e-commerce](/industries/ecommerce-marketing) and [tech startups](/industries/tech-startup-marketing). If your business is outside these industries, the free audit will show honestly whether we're the right fit before you commit to anything.",
+        "We work with US service businesses and online stores, especially law firms, [dental and medical practices](/industries/dental-medical-marketing), [home services](/industries/home-services-marketing), [real estate](/industries/real-estate-marketing), [e-commerce](/industries/ecommerce-marketing) and [tech startups](/industries/tech-startup-marketing). If your business is outside these industries, the free audit will show honestly whether we're the right fit before you commit to anything.",
     },
     {
       question: "What's the difference between SEO and AI SEO?",

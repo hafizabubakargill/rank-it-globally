@@ -1,0 +1,39 @@
+/* E-commerce: channel dependence dashboard, rented vs owned channels */
+
+.ec-hero-visual { position: relative; padding: 0.5rem 0 1rem; }
+.ec-dash { width: min(460px, 100%); margin: 0 0 6rem auto; padding: 1.2rem; border-radius: 22px; background: #fff; box-shadow: 0 40px 80px rgba(0, 0, 0, 0.45); color: var(--p-charcoal); }
+.ec-dash-top { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1rem; }
+.ec-dash-top b { font-family: var(--fh); font-size: 1.0625rem; }
+.ec-dash-top span { color: var(--p-charcoal-500); font-size: 0.875rem; }
+.ec-bars { display: grid; gap: 0.75rem; margin: 0; padding: 0; list-style: none; }
+.ec-bars li { display: grid; gap: 0.3rem; }
+.ec-bars span { font-size: 0.9375rem; font-weight: 650; }
+.ec-bars div { height: 14px; border-radius: 999px; background: var(--p-charcoal-100); overflow: hidden; }
+.ec-bars i { display: block; height: 100%; min-width: 10px; border-radius: inherit; background: var(--p-indigo); animation: ec-grow 1.2s ease both; transform-origin: left; }
+.ec-bars i.is-rented { background: var(--p-charcoal-700); }
+@keyframes ec-grow { from { transform: scaleX(0.2); } to { transform: scaleX(1); } }
+.ec-dash-note { margin-top: 1rem; padding: 0.6rem 0.8rem; border-radius: 12px; background: var(--p-gold-100); color: var(--p-gold-700); font-size: 0.9375rem; font-weight: 750; }
+.ec-alert { position: absolute; z-index: 3; bottom: 1.6rem; left: 0; display: grid; gap: 0.2rem; width: 240px; padding: 0.85rem 1rem; color: #fff; animation: sv-float 7s ease-in-out infinite; }
+.ec-alert small { color: var(--sv-on-dark-muted); font-size: 0.8125rem; font-weight: 800; text-transform: uppercase; }
+.ec-alert strong { font-size: 0.9375rem; }
+.ec-alert strong::before { margin-right: 0.35rem; color: var(--p-gold); content: "▲"; }
+.ec-alert span { color: var(--sv-on-dark-muted); font-size: 0.875rem; }
+
+/* Rented vs owned */
+.ec-mix { display: grid; grid-template-columns: 0.85fr 1.15fr; gap: 0.9rem; align-items: start; }
+.ec-mix-col { padding: 1.2rem; border: 1px dashed rgba(255, 255, 255, 0.24); border-radius: 20px; }
+.ec-mix-col.is-owned { border: 1px solid var(--p-gold); background: rgba(233, 209, 117, 0.08); }
+.ec-mix-col h3 { margin: 0 0 0.8rem; color: var(--sv-on-dark-muted); font-family: var(--fh); font-size: 1rem; letter-spacing: 0.1em; text-transform: uppercase; }
+.ec-mix-col.is-owned h3 { color: var(--p-gold); }
+.ec-mix-col ul { display: grid; gap: 0.55rem; margin: 0; padding: 0; list-style: none; }
+.ec-mix-col li { display: grid; gap: 0.15rem; padding: 0.75rem 0.85rem; border-radius: 12px; background: rgba(255, 255, 255, 0.06); }
+.ec-mix-col strong { color: #fff; font-size: 1.0625rem; }
+.ec-mix-col span { color: var(--sv-on-dark-muted); font-size: 0.9375rem; line-height: 1.45; }
+
+.ec-proof { align-items: start; }
+
+@media (max-width: 700px) {
+  .ec-dash { margin-bottom: 0; }
+  .ec-alert { position: relative; bottom: auto; left: auto; width: auto; margin-top: 0.9rem; }
+  .ec-mix { grid-template-columns: 1fr; }
+}

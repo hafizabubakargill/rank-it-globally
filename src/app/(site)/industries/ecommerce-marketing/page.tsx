@@ -1,13 +1,9 @@
-import {
-  createIndustryMetadata,
-  IndustryPage,
-} from "@/components/industry-pages/IndustryPage";
-import { industryPages } from "@/content/industryPages";
+import { createIndustryMetadata } from "@/components/industry-pages/IndustryKit";
+import { EcommercePage } from "@/components/industry-pages/pages/EcommercePage";
+import { ecommercePage } from "@/content/industries/ecommerce";
 
-const config = industryPages["ecommerce-marketing"];
-
-export const metadata = createIndustryMetadata(config);
+export const metadata = createIndustryMetadata(ecommercePage);
 
 export default function EcommerceMarketingPage() {
-  return <IndustryPage config={config} />;
+  return <EcommercePage />;
 }

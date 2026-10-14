@@ -1,0 +1,40 @@
+/* Dental & medical: AI answer hero, group vs independent matchup */
+
+.dm-hero-visual { position: relative; padding: 0.5rem 0 1rem; }
+.dm-chat { width: min(460px, 100%); margin: 0 0 7.5rem auto; padding: 1.1rem 1.2rem 1.2rem; border-radius: 22px; background: #fff; box-shadow: 0 40px 80px rgba(0, 0, 0, 0.45); color: var(--p-charcoal); }
+.dm-chat-top { display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.9rem; font-size: 0.9375rem; }
+.dm-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--p-indigo); box-shadow: 0 0 0 4px var(--p-indigo-100); }
+.dm-q { width: fit-content; max-width: 85%; margin: 0 0 0.8rem auto; padding: 0.7rem 0.9rem; border-radius: 16px 16px 4px 16px; background: var(--p-indigo-700); color: #fff; font-size: 0.9375rem; line-height: 1.45; }
+.dm-a { padding: 0.85rem; border-radius: 16px 16px 16px 4px; background: var(--p-charcoal-100); }
+.dm-a > p { margin: 0 0 0.6rem; font-size: 0.9375rem; }
+.dm-pick { display: grid; gap: 0.2rem; margin-bottom: 0.5rem; padding: 0.7rem 0.8rem; border-radius: 12px; background: #fff; }
+.dm-pick.is-you { border: 2px solid var(--p-gold); }
+.dm-pick strong { font-family: var(--fh); font-size: 1rem; }
+.dm-pick span { color: var(--p-charcoal-500); font-size: 0.875rem; }
+.dm-pick em { color: var(--p-charcoal-700); font-size: 0.875rem; }
+.dm-sources { display: flex; flex-wrap: wrap; align-items: center; gap: 0.35rem; margin-top: 0.6rem; }
+.dm-sources small { color: var(--p-charcoal-500); font-size: 0.8125rem; font-weight: 800; text-transform: uppercase; }
+.dm-sources i { padding: 0.15rem 0.5rem; border-radius: 999px; background: var(--p-indigo-100); color: var(--p-indigo-800); font-size: 0.8125rem; font-style: normal; font-weight: 700; }
+.dm-book { position: absolute; z-index: 3; bottom: 1.6rem; left: 0; display: grid; gap: 0.35rem; width: 230px; padding: 0.85rem 1rem; color: #fff; animation: sv-float 7s ease-in-out infinite; }
+.dm-book small { color: var(--sv-on-dark-muted); font-size: 0.8125rem; font-weight: 800; text-transform: uppercase; }
+.dm-book strong { font-size: 0.9375rem; }
+.dm-book div { display: flex; gap: 0.35rem; }
+.dm-book i { padding: 0.25rem 0.45rem; border-radius: 8px; background: rgba(255, 255, 255, 0.1); font-size: 0.8125rem; font-style: normal; font-weight: 700; }
+.dm-book i.is-on { background: var(--p-gold); color: var(--p-charcoal); }
+
+/* Matchup */
+.dm-match { display: grid; gap: 0.6rem; }
+.dm-match-head, .dm-match-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0.6rem; }
+.dm-match-head span { padding: 0 0.2rem; color: var(--sv-on-dark-muted); font-size: 0.875rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; }
+.dm-match-head span:last-child { color: var(--p-gold); }
+.dm-them, .dm-you { padding: 0.9rem 1rem; border-radius: 14px; line-height: 1.45; }
+.dm-them { background: rgba(255, 255, 255, 0.05); color: var(--sv-on-dark-muted); }
+.dm-you { border: 1px solid var(--p-gold); background: rgba(233, 209, 117, 0.1); color: #fff; font-weight: 650; }
+
+.dm-proof { align-items: start; }
+
+@media (max-width: 700px) {
+  .dm-chat { margin-bottom: 0; }
+  .dm-book { position: relative; bottom: auto; left: auto; width: auto; margin-top: 0.9rem; }
+  .dm-them, .dm-you { padding: 0.75rem; font-size: 1rem; }
+}

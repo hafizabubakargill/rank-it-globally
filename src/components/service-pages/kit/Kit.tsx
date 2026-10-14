@@ -8,7 +8,7 @@ import { EastsideIcon } from "@/components/bellevue-services/BellevueServiceShar
 import { organizationId, siteUrl, whatsappHref, whatsappLabel } from "@/content/organization";
 import { publicProjects } from "@/content/publicPages";
 import { industryNavLinks, serviceNavLinks, type SiteNavIcon } from "@/content/siteNav";
-import type { ComparisonRow, ProofItem, Scenario, SectionHeading, ServiceCore } from "@/content/services/types";
+import type { ComparisonRow, PageCommon, ProofItem, Scenario, SectionHeading, ServiceCore } from "@/content/services/types";
 import { plainText, RichText } from "../RichText";
 import { StickyCta } from "./StickyCta";
 import "@/components/bellevue-services/bellevue-services.css";
@@ -114,7 +114,7 @@ export function WhatsAppIcon() {
   );
 }
 
-export function Ctas({ page, light = false }: { page: ServiceCore; light?: boolean }) {
+export function Ctas({ page, light = false }: { page: Pick<PageCommon, "ctaLabel">; light?: boolean }) {
   return (
     <div className="sv-actions">
       <Link className={light ? "sv-btn sv-btn--light" : "sv-btn"} href="#audit">
@@ -237,7 +237,7 @@ export function Timeline({ steps }: { steps: ServiceCore["timeline"]["steps"] })
 
 /* ---------- CTA band ---------- */
 
-export function CtaBand({ page }: { page: ServiceCore }) {
+export function CtaBand({ page }: { page: PageCommon }) {
   return (
     <div className="sv-wrap sv-band-wrap">
       <aside className="sv-band" aria-label="Free audit offer">
@@ -354,12 +354,12 @@ function IndustryIcon({ name }: { name: SiteNavIcon }) {
   );
 }
 
-export function Industries({ heading, tone = "dots" }: { heading: SectionHeading; tone?: "dots" | "tint" | "mesh" }) {
+export function Industries({ heading, tone = "dots", exclude }: { heading: SectionHeading; tone?: "dots" | "tint" | "mesh"; exclude?: string }) {
   return (
     <Section tone={tone}>
       <Head heading={heading} />
       <ul className="sv-industries">
-        {industryNavLinks.map((industry) => (
+        {industryNavLinks.filter((industry) => industry.href !== exclude).map((industry) => (
           <li key={industry.href}>
             <Link href={industry.href}>
               <IndustryIcon name={industry.icon} />
@@ -413,7 +413,7 @@ export function Compare({ heading, rows }: { heading: SectionHeading; rows: Comp
 
 /* ---------- FAQ ---------- */
 
-export function Faq({ page, tone = "tint" }: { page: ServiceCore; tone?: "tint" | "mesh" | "dots" }) {
+export function Faq({ page, tone = "tint" }: { page: PageCommon; tone?: "tint" | "mesh" | "dots" }) {
   return (
     <Section tone={tone}>
       <div className="sv-faq-grid">
@@ -437,7 +437,7 @@ export function Faq({ page, tone = "tint" }: { page: ServiceCore; tone?: "tint" 
 
 /* ---------- Related guides ---------- */
 
-export function Guides({ page, tone = "mesh" }: { page: ServiceCore; tone?: "tint" | "mesh" | "dots" }) {
+export function Guides({ page, tone = "mesh" }: { page: PageCommon; tone?: "tint" | "mesh" | "dots" }) {
   const related = page.relatedServices
     .map((href) => serviceNavLinks.find((service) => service.href === href))
     .filter((service) => service !== undefined);
@@ -483,7 +483,7 @@ const auditScopeByTheme: Record<ServiceCore["theme"], string[]> = {
   reputation: ["Local SEO / Google Business Profile"],
 };
 
-export function FinalCta({ page }: { page: ServiceCore }) {
+export function FinalCta({ page }: { page: PageCommon }) {
   return (
     <Section tone="ink" id="audit" className="sv-final" labelledBy={`${page.slug}-final`}>
       <div className="sv-final-grid">
@@ -503,7 +503,7 @@ export function FinalCta({ page }: { page: ServiceCore }) {
         </div>
         <div className="sv-form-card">
           <Suspense fallback={<div className="standalone-audit-form audit-form-compact" />}>
-            <FreeAuditForm compact sourcePage={`/${page.slug}`} defaultScope={auditScopeByTheme[page.theme]} submitLabel={page.ctaLabel} />
+            <FreeAuditForm compact sourcePage={page.path ?? `/${page.slug}`} defaultScope={page.auditScope ?? (page.theme ? auditScopeByTheme[page.theme] : [])} submitLabel={page.ctaLabel} />
           </Suspense>
         </div>
       </div>

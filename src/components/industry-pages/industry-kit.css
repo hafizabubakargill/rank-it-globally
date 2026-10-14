@@ -1,0 +1,87 @@
+/* Industry pages: blocks that only industry pages use. Palette B tokens come
+   from the service-page kit (.sv-page). */
+
+/* Hero: what the audit covers */
+.in-chips { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 1.4rem 0 0; padding: 0; list-style: none; }
+.in-chips li { padding: 0.45rem 0.85rem; border: 1px solid rgba(255, 255, 255, 0.16); border-radius: 999px; background: rgba(255, 255, 255, 0.06); color: #fff; font-size: 0.9375rem; font-weight: 650; }
+.in-chips li::before { margin-right: 0.4rem; color: var(--sv-accent-2); content: "✓"; }
+
+.in-example-note { margin: 0.6rem 0 0; color: var(--sv-on-dark-muted); font-size: 0.875rem; text-align: right; }
+.sv-sec:not(.sv-sec--ink) .in-example-note { color: var(--sv-muted); }
+
+/* Sub-segments */
+.in-segments { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
+.in-segment { display: flex; flex-direction: column; padding: 1.4rem; }
+.in-segment-top { display: flex; align-items: center; gap: 0.85rem; margin-bottom: 0.9rem; }
+.in-segment-top h3 { margin: 0; font-family: var(--fh); }
+.in-segment-top small { color: var(--sv-muted); font-size: 0.9375rem; font-weight: 600; }
+.in-segment-pain { margin: 0; color: var(--sv-muted); line-height: 1.65; }
+.in-segment-fix { margin: auto 0 0; padding-top: 0.9rem; border-top: 1px dashed color-mix(in srgb, var(--sv-accent-ink) 22%, transparent); font-size: 1rem; font-weight: 650; }
+.in-segment-pain + .in-segment-fix { margin-top: 1rem; }
+.in-segment-fix::before { margin-right: 0.4rem; color: var(--sv-accent-ink); content: "→"; }
+
+/* Compliance rules */
+.in-rules { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; margin: 0; padding: 0; list-style: none; }
+.in-rules li { padding: 1.4rem 1.4rem 1.5rem; }
+.in-rule-n { display: inline-block; margin-bottom: 0.6rem; color: var(--sv-accent-2); font-family: var(--fh); font-size: 1rem; font-weight: 800; letter-spacing: 0.08em; }
+.in-rules h3 { margin: 0 0 0.5rem; font-family: var(--fh); }
+.in-rules p { margin: 0; color: var(--sv-on-dark-muted); line-height: 1.65; }
+.in-rules-note { max-width: 860px; margin: 1.5rem 0 0; color: var(--sv-on-dark-muted); font-size: 1rem; line-height: 1.6; }
+
+/* /industries hub cards */
+.in-hub-grid { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 1rem; margin: 0; padding: 0; list-style: none; }
+.in-hub-grid > li { grid-column: span 2; }
+.in-hub-grid > li:nth-child(n + 4) { grid-column: span 3; }
+.in-hub-card { display: flex; height: 100%; flex-direction: column; gap: 0.6rem; padding: 1.5rem; color: var(--sv-text); text-decoration: none; transition: transform 180ms ease, box-shadow 180ms ease; }
+.in-hub-card:hover, .in-hub-card:focus-visible { box-shadow: 0 18px 40px color-mix(in srgb, var(--sv-ink) 14%, transparent); transform: translateY(-3px); }
+.in-hub-card:focus-visible { outline: 3px solid var(--p-indigo); outline-offset: 3px; }
+.in-hub-card strong { font-family: var(--fh); font-size: 1.3rem; line-height: 1.2; }
+.in-hub-desc { color: var(--sv-muted); line-height: 1.6; }
+.in-hub-for { color: var(--sv-text); font-size: 0.9375rem; font-weight: 650; }
+.in-hub-more { margin-top: auto; padding-top: 0.5rem; color: var(--sv-accent-ink); font-weight: 800; }
+
+@media (max-width: 980px) {
+  .in-hub-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .in-hub-grid > li, .in-hub-grid > li:nth-child(n + 4) { grid-column: span 1; }
+  .in-hub-grid > li:last-child { grid-column: 1 / -1; }
+}
+@media (max-width: 700px) { .in-hub-grid { grid-template-columns: 1fr; } }
+
+/* Four other industries: one even row on desktop. */
+@media (min-width: 981px) {
+  .in-page .sv-industries:has(> li:nth-child(4):last-child) { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+}
+
+/* One named plan */
+.in-plan { display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr); gap: clamp(2rem, 5vw, 4rem); align-items: start; }
+.in-plan-card { padding: clamp(1.5rem, 3vw, 2.25rem); border: 2px solid var(--p-gold); border-radius: 24px; background: #fff; box-shadow: 0 24px 60px color-mix(in srgb, var(--sv-ink) 12%, transparent); }
+.in-plan-kicker { margin: 0 0 0.4rem; color: var(--p-gold-700); font-size: 0.875rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; }
+.in-plan-card h3 { margin: 0; font-family: var(--fh); font-size: clamp(1.6rem, 2.6vw, 2.1rem); line-height: 1.1; }
+.in-plan-summary { margin: 0.75rem 0 0; color: var(--sv-muted); line-height: 1.65; }
+.in-plan-card .sv-final-list { margin: 1.2rem 0; }
+.in-plan-card .sv-final-list li { color: var(--sv-text); }
+.in-plan-price { margin: 0 0 1.25rem; padding: 0.85rem 1rem; border-radius: 12px; background: var(--p-gold-100); font-size: 1rem; line-height: 1.55; }
+
+@media (max-width: 980px) {
+  .in-plan { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 700px) {
+  .in-rules { grid-template-columns: 1fr; }
+  .in-segments {
+    display: flex;
+    gap: 0.75rem;
+    margin-inline: -1rem;
+    padding: 0 1rem 0.75rem;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-padding-inline: 1rem;
+  }
+  .in-segments > * { flex: 0 0 86%; scroll-snap-align: start; }
+  .in-segments::after { flex: 0 0 1px; content: ""; }
+}
+
+/* Long CTA labels wrap on narrow phones instead of overflowing. */
+@media (max-width: 480px) {
+  .in-page .sv-btn { white-space: normal; text-align: center; }
+}
