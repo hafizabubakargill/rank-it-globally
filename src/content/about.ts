@@ -8,7 +8,7 @@ import type { PageCommon, SectionHeading, ServiceIcon } from "./services/types";
 export const aboutMeta = {
   title: "About Rank It Globally | AI SEO & Local SEO Agency, Brooklyn NY",
   description:
-    "Meet Rank It Globally: a Brooklyn-based AI SEO and local SEO agency co-founded by Haroon Shahbaz. How we work, what we believe and how we help businesses get found.",
+    "Meet Rank It Globally: a Brooklyn-based AI SEO and local SEO agency co-founded by Haroon Shahbaz and Hafiz Abubakar Gill. How we work, what we believe and how we help.",
 };
 
 export const aboutHero = {
@@ -27,19 +27,33 @@ export const aboutFacts = [
   { label: "Talk to us", value: "WhatsApp (786) 591-7846 · hello@rankitglobally.com" },
 ];
 
-export const founder = {
-  name: "Haroon Shahbaz",
-  role: "Co-founder",
-  photo: "https://cdn.sanity.io/images/tfcwge09/production/eb35effc456e298511fae8bd769dd81d4ddb8a6e-800x800.png?w=400&h=400&fit=crop&auto=format",
+export const founders = [
+  {
+    name: "Haroon Shahbaz",
+    role: "Co-founder",
+    focus: "Web design, development, SEO & strategy",
+    photo: "/assets/team/haroon-shahbaz.jpg",
+    bio: "Haroon leads strategy, SEO and web design and development. He works with clients across the US, UK, Canada, Australia and the UAE, and runs his own web properties too. Staying in the trenches keeps the thinking sharp.",
+  },
+  {
+    name: "Hafiz Abubakar Gill",
+    role: "Co-founder",
+    focus: "Custom solutions & technical builds",
+    photo: "/assets/team/hafiz-abubakar-gill.jpg",
+    bio: "Abubakar leads custom solutions and the technical side of every project: custom builds, integrations and the technical foundations that help a site load fast, get indexed and turn visitors into leads.",
+  },
+];
+
+export const story = {
   heading: {
     eyebrow: "Our story",
-    title: "Started by a hands-on SEO,",
-    accent: "built to stay that way.",
+    title: "Two co-founders,",
+    accent: "one hands-on team.",
     intro: "",
   } satisfies SectionHeading,
   paragraphs: [
-    "Before Rank It Globally was an agency, our founder delivered more than 150 client engagements as a freelance SEO. The agency keeps what clients valued about that: direct access to the person doing the work, and honest reporting, now with a team behind it to execute faster.",
-    "Haroon Shahbaz co-founded Rank It Globally with one goal: help businesses show up online and actually grow. He works with clients across the US, UK, Canada, Australia and the UAE, and runs his own web properties too. Staying in the trenches keeps the thinking sharp.",
+    "Rank It Globally grew out of more than 150 freelance client engagements. The agency keeps what clients valued about that: direct access to the people doing the work, and honest reporting, now with a team behind it to execute faster.",
+    "Haroon Shahbaz and Hafiz Abubakar Gill co-founded Rank It Globally with one goal: help businesses show up online and actually grow. Haroon brings strategy, SEO and web design; Abubakar brings custom solutions and the technical depth to build what a plan needs.",
     "Search has changed more in the last two years than in the ten before. Customers now ask Google's AI Overviews and ChatGPT who to call. Our job is to make sure the answer is you.",
   ],
 };
