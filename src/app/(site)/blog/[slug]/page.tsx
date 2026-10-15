@@ -3,6 +3,7 @@ import { PortableText } from "@portabletext/react";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { BlogCta, blogCtaMarker } from "@/components/BlogCta";
 import { BlogPostFaqs, type BlogPostFaq } from "@/components/BlogPostFaqs";
 import {
   ResponsiveBlogTable,
@@ -37,6 +38,17 @@ type TableOfContentsItem = {
 type HeadingValue = {
   _key?: string;
 };
+
+// Plain text of a Portable Text body, used to skip the CTA when an editor has
+// already pasted the same copy into the post.
+function bodyText(body: unknown[]) {
+  return body
+    .map((block) => {
+      const children = (block as HeadingBlock).children;
+      return Array.isArray(children) ? children.map((child) => child.text ?? "").join("") : "";
+    })
+    .join(" ");
+}
 
 export async function generateMetadata({
   params,
@@ -255,6 +267,7 @@ export default async function BlogPostPage({ params }: PageProps) {
                 />
               </div>
             ) : null}
+            {Array.isArray(post.body) && !bodyText(post.body).includes(blogCtaMarker) ? <BlogCta /> : null}
             {visibleFaqs.length ? <BlogPostFaqs faqs={visibleFaqs} /> : null}
             {post.author?.name ? (
               <section className="blog-author" id="author" aria-label="Author">
