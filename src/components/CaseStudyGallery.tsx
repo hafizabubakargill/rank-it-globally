@@ -33,12 +33,6 @@ export default function CaseStudyGallery({
   return (
     <>
       <section className="case-masonry-section" aria-label="Rank It Globally work">
-        <div className="case-list-head">
-          <p className="marketing-eyebrow">Work wall</p>
-          <h2>
-            Browse projects across <span className="gtext">web, SEO, social, and ads.</span>
-          </h2>
-        </div>
         <div className="case-filter-section" aria-label="Case study categories">
           <div className="case-category-row case-category-row-featured">
             {workCategories.map((category) => (

@@ -255,9 +255,9 @@ export function CtaBand({ page }: { page: PageCommon }) {
 /* ---------- Proof ---------- */
 
 export function DataCard({ item }: { item: ProofItem }) {
+  if (item.screenshot) return <ScreenshotCard item={item} />;
   return (
     <article className="sv-card sv-data">
-      {/* Shows the real numbers until the unedited screenshot is added (see TODOs in shared.ts). */}
       <span className="sv-data-source">{item.source}</span>
       <dl aria-label={item.alt}>
         {item.stats.map((stat) => (
@@ -270,6 +270,32 @@ export function DataCard({ item }: { item: ProofItem }) {
       <h3>{item.title}</h3>
       {item.body.map((paragraph) => <p key={paragraph}><RichText text={paragraph} /></p>)}
       {item.footnote ? <p className="sv-data-foot">{item.footnote}</p> : null}
+    </article>
+  );
+}
+
+// A real, unedited report screenshot in a browser-style frame. The image opens
+// full size in a new tab so every number can be read.
+export function ScreenshotCard({ item }: { item: ProofItem }) {
+  const shot = item.screenshot!;
+  return (
+    <article className="sv-shot">
+      <div className="sv-shot-bar" aria-hidden="true">
+        <span /><span /><span />
+        <em>search.google.com/search-console · Performance</em>
+      </div>
+      <a className="sv-shot-img" href={shot.src} target="_blank" rel="noopener noreferrer">
+        <Image src={shot.src} alt={item.alt} width={shot.width} height={shot.height} sizes="(max-width: 980px) 100vw, 50vw" />
+        <span className="sv-shot-zoom">View full size ↗</span>
+      </a>
+      <div className="sv-shot-foot">
+        <h3>{item.title}</h3>
+        <ul aria-label="Key numbers">
+          {item.stats.map((stat) => <li key={stat.label}><b>{stat.value}</b> {stat.label}</li>)}
+        </ul>
+        {item.body.map((paragraph) => <p key={paragraph}><RichText text={paragraph} /></p>)}
+        <p className="sv-shot-source">{item.source} · Unedited screenshot</p>
+      </div>
     </article>
   );
 }
@@ -412,9 +438,9 @@ export function Compare({ heading, rows }: { heading: SectionHeading; rows: Comp
 
 /* ---------- FAQ ---------- */
 
-export function Faq({ page, tone = "tint" }: { page: PageCommon; tone?: "tint" | "mesh" | "dots" }) {
+export function Faq({ page, tone = "tint", id }: { page: PageCommon; tone?: "tint" | "mesh" | "dots"; id?: string }) {
   return (
-    <Section tone={tone}>
+    <Section tone={tone} id={id}>
       <div className="sv-faq-grid">
         <div className="sv-head">
           <p className="sv-eyebrow">Straight answers</p>

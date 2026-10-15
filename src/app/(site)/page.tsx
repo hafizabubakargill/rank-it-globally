@@ -1,72 +1,19 @@
 import type { Metadata } from "next";
-import LandingClient from "@/components/LandingClient";
-import PortfolioSection from "@/components/PortfolioSection";
-import VideoTestimonials from "@/components/VideoTestimonials";
-import { homepageFaqs } from "@/content/faqs";
-import {
-  landingBodyBeforePortfolio,
-} from "@/content/landingBody";
-import {
-  landingBodyAfterVideoTestimonials,
-  landingBodyBeforeVideoTestimonials,
-} from "@/content/landingSegments";
-import baseSchema from "@/content/schema.json";
-import scripts from "@/content/landingScripts.json";
+import { HomePage } from "@/components/home/HomePage";
+import { homeMeta } from "@/content/home";
+import { siteUrl } from "@/content/organization";
+
+const shareImage = "/assets/brand/favicon.png";
 
 export const metadata: Metadata = {
-  title: "Rank It Globally | AI SEO & Web Design Agency",
-  alternates: {
-    canonical: "https://rankitglobally.com/",
-  },
+  title: { absolute: homeMeta.title },
+  description: homeMeta.description,
+  alternates: { canonical: `${siteUrl}/` },
+  robots: { index: true, follow: true },
+  openGraph: { type: "website", url: `${siteUrl}/`, title: homeMeta.title, description: homeMeta.description, siteName: "Rank It Globally", images: [shareImage] },
+  twitter: { card: "summary_large_image", site: "@rankitglobally", title: homeMeta.title, description: homeMeta.description, images: [shareImage] },
 };
 
 export default function Home() {
-  const schemaItems = [
-    baseSchema,
-    {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      mainEntity: homepageFaqs.map((faq) => ({
-        "@type": "Question",
-        name: faq.question,
-        acceptedAnswer: {
-          "@type": "Answer",
-          text: faq.answer,
-        },
-      })),
-    },
-  ];
-
-  return (
-    <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaItems) }}
-      />
-      <main id="main-content" suppressHydrationWarning>
-        <div
-          className="landing-html-fragment"
-          suppressHydrationWarning
-          dangerouslySetInnerHTML={{ __html: landingBodyBeforePortfolio }}
-        />
-        <PortfolioSection />
-        <div
-          className="landing-html-fragment"
-          suppressHydrationWarning
-          dangerouslySetInnerHTML={{
-            __html: landingBodyBeforeVideoTestimonials,
-          }}
-        />
-        <VideoTestimonials />
-        <div
-          className="landing-html-fragment"
-          suppressHydrationWarning
-          dangerouslySetInnerHTML={{
-            __html: landingBodyAfterVideoTestimonials,
-          }}
-        />
-      </main>
-      <LandingClient scripts={scripts} />
-    </>
-  );
+  return <HomePage />;
 }

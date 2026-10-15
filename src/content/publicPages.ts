@@ -31,12 +31,6 @@ export const auditChecks = [
   "Conversion leaks that stop visitors from becoming leads",
 ];
 
-export const proofStats = [
-  { value: "150+", label: "projects completed" },
-  { value: "4.9★", label: "average client rating" },
-  { value: "98%", label: "client satisfaction" },
-];
-
 export const agencyValues = [
   {
     title: "Built for search behavior now",
@@ -52,9 +46,3 @@ export const agencyValues = [
   },
 ];
 
-export const processSteps = [
-  "Audit the current site, competitors, search visibility, and conversion path.",
-  "Map the highest-intent pages, offers, and calls to action before design starts.",
-  "Build clean, fast pages with SEO structure and conversion copy baked in.",
-  "Launch, measure, and keep improving based on leads, bookings, and revenue signals.",
-];
