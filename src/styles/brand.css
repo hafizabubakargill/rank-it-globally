@@ -66,7 +66,7 @@ body:not(:has(.sv-page)) main .cta-e:focus-visible { outline: 3px solid var(--b-
 /* Secondary text links */
 .marketing-link { color: var(--b-indigo-700); }
 
-/* ---------- Eyebrows: indigo pill with dot, like .sv-eyebrow ---------- */
+/* ---------- Eyebrows: charcoal chip with a gold spark, like .sv-eyebrow ---------- */
 .marketing-eyebrow,
 .sec-label,
 .nums-label,
@@ -74,33 +74,39 @@ body:not(:has(.sv-page)) main .cta-e:focus-visible { outline: 3px solid var(--b-
   display: inline-flex !important;
   width: auto;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.55rem;
   margin: 0 0 1rem;
-  padding: 0.35rem 0.75rem;
-  border: 1px solid rgba(75, 73, 201, 0.22);
+  padding: 0.42rem 0.95rem 0.42rem 0.5rem;
+  border: 0;
   border-radius: 999px;
-  background: rgba(255, 255, 255, 0.7) !important;
+  background: var(--b-ink) !important;
   background-clip: border-box !important;
   -webkit-background-clip: border-box !important;
-  color: var(--b-indigo-700) !important;
+  box-shadow: 0 8px 20px rgba(33, 37, 41, 0.16);
+  color: #fff !important;
   -webkit-text-fill-color: currentColor !important;
   font-family: var(--fh);
-  font-size: 0.875rem;
+  font-size: 0.8125rem;
   font-weight: 800;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.12em;
+  line-height: 1.2;
   text-transform: uppercase;
 }
 
 .marketing-eyebrow::before,
 .sec-label::before,
 .nums-label::before {
-  width: 6px;
-  height: 6px;
-  flex: 0 0 6px;
+  display: grid;
+  width: 1.35rem;
+  height: 1.35rem;
+  flex: 0 0 1.35rem;
+  place-items: center;
   border-radius: 50%;
-  background: var(--b-indigo);
-  box-shadow: 0 0 0 4px rgba(102, 100, 228, 0.22);
-  content: "";
+  background: var(--b-gold);
+  color: var(--b-ink);
+  content: "✦";
+  font-size: 0.75rem;
+  letter-spacing: 0;
 }
 
 /* ---------- Accent words: Georgia italic, like .sv-hl ---------- */
@@ -142,11 +148,18 @@ body:not(:has(.sv-page)) main .cta-e:focus-visible { outline: 3px solid var(--b-
 .marketing-hero .marketing-eyebrow,
 .audit-hero .marketing-eyebrow,
 .hero .sec-label,
-.legal-header .marketing-eyebrow {
-  border-color: rgba(255, 255, 255, 0.18);
-  background: rgba(255, 255, 255, 0.07) !important;
-  color: #f2e3a8 !important;
+.legal-header .marketing-eyebrow,
+.legal-header .sec-label,
+.blog-article-head .marketing-eyebrow {
+  background: var(--b-gold) !important;
+  box-shadow: none;
+  color: var(--b-ink) !important;
 }
+
+.marketing-hero .marketing-eyebrow::before,
+.audit-hero .marketing-eyebrow::before,
+.legal-header .sec-label::before,
+.blog-article-head .marketing-eyebrow::before { background: var(--b-ink); color: var(--b-gold); }
 
 .marketing-hero .gtext,
 .audit-hero .gtext,
@@ -267,7 +280,6 @@ body:not(:has(.sv-page)) main .cta-e:focus-visible { outline: 3px solid var(--b-
   color: #fff;
 }
 .legal-header { margin-bottom: 2.5rem; padding-top: 1.5rem; }
-.legal-header .sec-label { border-color: rgba(255, 255, 255, 0.18); background: rgba(255, 255, 255, 0.07) !important; color: #f2e3a8 !important; }
 
 /* Blog posts: back link, title and hero image sit on a charcoal band. */
 .blog-page:not(.marketing-page) { padding-top: 0; }
@@ -284,7 +296,6 @@ body:not(:has(.sv-page)) main .cta-e:focus-visible { outline: 3px solid var(--b-
 .blog-article-head .blog-header h1 { color: #fff; font-size: clamp(2.3rem, 4.6vw, 3.8rem); letter-spacing: -0.02em; }
 .blog-article-head .blog-header p,
 .blog-article-head .blog-header time { color: var(--b-on-dark-muted); }
-.blog-article-head .marketing-eyebrow { border-color: rgba(255, 255, 255, 0.18); background: rgba(255, 255, 255, 0.07) !important; color: #f2e3a8 !important; }
 .blog-hero-image { border-radius: 18px; }
 .blog-kicker { color: var(--b-indigo-700) !important; }
 .blog-related-card,

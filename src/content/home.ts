@@ -139,7 +139,7 @@ export const homeFit = {
 
 export const homeSystem: SectionHeading & {
   steps: string[];
-  items: { icon: ServiceIcon; title: string; body: string; href: string }[];
+  items: { icon: ServiceIcon; title: string; body: string; href: string; points?: string[] }[];
 } = {
   eyebrow: "Organic lead generation",
   title: "One system to get you found,",
@@ -147,9 +147,9 @@ export const homeSystem: SectionHeading & {
   intro: "Every service feeds the same goal: more customers finding you through search and getting in touch.",
   steps: ["They search", "You're found", "You're trusted", "They contact you"],
   items: [
-    { icon: "ai", title: "AI SEO & GEO", body: "Get named in Google's AI Overviews, ChatGPT and Perplexity when customers ask for what you do.", href: "/ai-seo-services" },
-    { icon: "pin", title: "Local SEO & Google Business Profile", body: "Rank in the Google Maps top 3 and turn your profile into a source of calls and bookings.", href: "/local-seo-services" },
-    { icon: "search", title: "SEO", body: "Reach page one for the searches that bring paying customers, not just traffic.", href: "/seo-services" },
+    { icon: "ai", title: "AI SEO & GEO", body: "Get named in Google's AI Overviews, ChatGPT and Perplexity when customers ask for what you do.", href: "/ai-seo-services", points: ["Google AI Overviews", "ChatGPT & Perplexity", "Schema & citations"] },
+    { icon: "pin", title: "Local SEO & Google Business Profile", body: "Rank in the Google Maps top 3 and turn your profile into a source of calls and bookings.", href: "/local-seo-services", points: ["Maps top 3", "Profile optimization", "Reviews & citations"] },
+    { icon: "search", title: "SEO", body: "Reach page one for the searches that bring paying customers, not just traffic.", href: "/seo-services", points: ["Technical fixes", "Pages that rank", "Lead tracking"] },
     { icon: "reviews", title: "Reviews & reputation", body: "More 5-star reviews, earned within Google's rules, and replies that win trust.", href: "/reputation-management" },
     { icon: "mobile", title: "A website that converts", body: "Fast, clear pages built to turn visitors from search into calls and enquiries.", href: "/web-development" },
     { icon: "cro", title: "Conversion optimization", body: "More leads from the traffic you already have, with every change measured.", href: "/cro-strategy" },
@@ -166,17 +166,17 @@ export const homeProof = {
   items: [gscClientA, gscClientB],
 };
 
-export const homeIndustries: SectionHeading & { items: { search: string; name: string; href: string }[] } = {
+export const homeIndustries: SectionHeading & { items: { search: string; name: string; href: string; icon: ServiceIcon; line: string }[] } = {
   eyebrow: "Who we help",
   title: "If customers search for it,",
   accent: "we'll put you in front of them.",
   intro: "We go deepest in these industries. Each page explains what's changing for businesses like yours and how we'd help.",
   items: [
-    { search: "plumber near me open now", name: "Home services", href: "/industries/home-services-marketing" },
-    { search: "family dentist taking new patients", name: "Dental & medical", href: "/industries/dental-medical-marketing" },
-    { search: "best realtor in my neighborhood", name: "Real estate", href: "/industries/real-estate-marketing" },
-    { search: "best running shoes for flat feet", name: "E-commerce", href: "/industries/ecommerce-marketing" },
-    { search: "best scheduling software for clinics", name: "Tech startups", href: "/industries/tech-startup-marketing" },
+    { search: "plumber near me open now", name: "Home services", href: "/industries/home-services-marketing", icon: "pin", line: "Calls that come to you, not shared leads." },
+    { search: "family dentist taking new patients", name: "Dental & medical", href: "/industries/dental-medical-marketing", icon: "shield", line: "Win patients from the group chains." },
+    { search: "best realtor in my neighborhood", name: "Real estate", href: "/industries/real-estate-marketing", icon: "profile", line: "Clients who find you before the portals." },
+    { search: "best running shoes for flat feet", name: "E-commerce", href: "/industries/ecommerce-marketing", icon: "cart", line: "Sales that don't depend on ad spend." },
+    { search: "best scheduling software for clinics", name: "Tech startups", href: "/industries/tech-startup-marketing", icon: "ai", line: "Get on the shortlist when buyers ask AI." },
   ],
 };
 

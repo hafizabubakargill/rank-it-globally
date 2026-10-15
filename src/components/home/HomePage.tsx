@@ -72,29 +72,37 @@ function HomeSchema() {
   return <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />;
 }
 
+// Built from a real client's Google Business Profile (Dents, Hail & Detail,
+// Denver: 4.9 stars, 384 reviews, Book Online). The AI answer wording and the
+// lead card are illustrative, and the caption says so.
 function HeroResults() {
   return (
     <ExampleIllustration
-      label="Illustration of a Google search for a roofer near me: the AI Overview recommends your business, your business is first in the Google Maps results, and a new call comes in from Google"
+      label="Illustration of a Google search for hail damage repair in Denver: the AI Overview and the first Maps result show Dents, Hail & Detail, a real client with a 4.9-star rating from 384 Google reviews, and a new booking comes in"
       className="hm-hero-visual"
+      note="Built from a real client's Google profile."
     >
       <div className="hm-serp">
-        <div className="hm-bar"><span>best roofer near me</span><i>⌕</i></div>
+        <div className="hm-bar"><span>hail damage repair denver</span><i>⌕</i></div>
         <div className="hm-ai">
           <small>AI Overview</small>
-          <p><b>Your Business</b> is a well-reviewed local roofer known for fast storm repairs and clear quotes.</p>
-          <span className="hm-cite">Cited: yourbusiness.com</span>
+          <p>For hail and paintless dent repair in Denver, <b>Dents, Hail &amp; Detail</b> is a highly rated option, with strong reviews and online booking.</p>
+          <span className="hm-cite">Sources: Google reviews · business website</span>
         </div>
         <div className="hm-maps">
           <small>Places</small>
-          <div className="hm-place is-you"><b>1</b><div><strong>Your Business</strong><span>★★★★★ · Open now · Roofer</span></div><em>Call</em></div>
-          <div className="hm-place"><b>2</b><div><strong className="sv-blur">Summit Roofing Co.</strong><span>★★★★☆ · Closes 5 PM</span></div></div>
+          <div className="hm-place is-you">
+            <b>1</b>
+            <div><strong>Dents, Hail &amp; Detail</strong><span><em className="hm-stars">4.9 ★★★★★</em> (384) · Denver, CO</span></div>
+            <em className="hm-book">Book online</em>
+          </div>
+          <div className="hm-place"><b>2</b><div><strong className="sv-blur">Front Range Dent Pros</strong><span>4.3 ★★★★☆ (41)</span></div></div>
         </div>
       </div>
       <div className="sv-glass hm-lead">
-        <small>New lead · from Google</small>
-        <strong>&ldquo;Can you look at my roof this week?&rdquo;</strong>
-        <span>No ad spend on this one</span>
+        <small>New booking · from Google</small>
+        <strong>&ldquo;Hail repair estimate for my truck&rdquo;</strong>
+        <span>Found through search, not an ad</span>
       </div>
     </ExampleIllustration>
   );
@@ -117,19 +125,33 @@ function Fit() {
 }
 
 function SystemGrid() {
+  const featured = homeSystem.items.filter((item) => item.points);
+  const more = homeSystem.items.filter((item) => !item.points);
   return (
     <>
       <ol className="hm-path" aria-label="How search turns into a lead">
         {homeSystem.steps.map((step, index) => <li key={step}><b>{index + 1}</b>{step}</li>)}
       </ol>
-      <ul className="hm-system">
-        {homeSystem.items.map((item) => (
+      <ul className="hm-money">
+        {featured.map((item) => (
           <li key={item.href}>
-            <Link className="sv-card hm-system-card" href={item.href}>
-              <span className="sv-bento-icon" aria-hidden="true"><EastsideIcon name={item.icon} /></span>
+            <Link className="hm-money-card" href={item.href}>
+              <span className="hm-money-icon" aria-hidden="true"><EastsideIcon name={item.icon} /></span>
               <h3>{item.title}</h3>
               <p>{item.body}</p>
-              <span className="hm-more">Learn more <span aria-hidden="true">→</span></span>
+              <ul className="hm-money-points">{item.points?.map((point) => <li key={point}>{point}</li>)}</ul>
+              <span className="hm-money-cta">Explore {item.title.split(" & ")[0]} <span aria-hidden="true">→</span></span>
+            </Link>
+          </li>
+        ))}
+      </ul>
+      <ul className="hm-more-services">
+        {more.map((item) => (
+          <li key={item.href}>
+            <Link className="hm-mini-card" href={item.href}>
+              <span className="hm-mini-icon" aria-hidden="true"><EastsideIcon name={item.icon} /></span>
+              <span className="hm-mini-copy"><strong>{item.title}</strong><span>{item.body}</span></span>
+              <span className="hm-mini-arrow" aria-hidden="true">→</span>
             </Link>
           </li>
         ))}
@@ -143,10 +165,15 @@ function IndustryList() {
     <ul className="hm-ind">
       {homeIndustries.items.map((item) => (
         <li key={item.href}>
-          <Link className="sv-card hm-ind-card" href={item.href}>
-            <span className="hm-ind-q">&ldquo;{item.search}&rdquo;</span>
-            <span className="hm-ind-arrow" aria-hidden="true">→ you</span>
-            <strong>{item.name}</strong>
+          <Link className="hm-ind-card" href={item.href}>
+            <span className="hm-ind-top">
+              <span className="hm-ind-icon" aria-hidden="true"><EastsideIcon name={item.icon} /></span>
+              <strong>{item.name}</strong>
+            </span>
+            <span className="hm-ind-search"><i aria-hidden="true">⌕</i>{item.search}</span>
+            <span className="hm-ind-you" aria-hidden="true">↳ Your business, first</span>
+            <span className="hm-ind-line">{item.line}</span>
+            <span className="hm-ind-cta">See how we help <span aria-hidden="true">→</span></span>
           </Link>
         </li>
       ))}
@@ -212,7 +239,7 @@ export function HomePage() {
         <ClutchReviews ctaHref="#audit" ctaLabel={page.ctaLabel} />
       </Section>
 
-      <Section tone="mesh">
+      <Section tone="ink" className="hm-ind-sec">
         <Head heading={homeIndustries} />
         <IndustryList />
         <p className="hm-note">Not listed? If customers search online for what you do, the free audit will show whether we can help.</p>
