@@ -1,0 +1,20 @@
+/* Blog post CTA box (end of article). */
+.blog-cta {
+  margin: 2rem 0 0;
+  padding: 16px 20px;
+  border-left: 4px solid #8b5cf6;
+  border-radius: 4px;
+  background: #2d2b3a;
+  color: #e2e8f0;
+  font-family: inherit;
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+.blog-cta p { margin: 0; color: inherit; font-size: inherit; line-height: inherit; }
+
+/* Lighter purple than the border so the link passes WCAG AA on #2d2b3a. */
+.blog-cta a { color: #a78bfa; font-weight: 700; text-decoration: underline; text-underline-offset: 3px; }
+.blog-cta a:hover,
+.blog-cta a:focus-visible { color: #c4b5fd; }
+.blog-cta a:focus-visible { outline: 2px solid #c4b5fd; outline-offset: 2px; }

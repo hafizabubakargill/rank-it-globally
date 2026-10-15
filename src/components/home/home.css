@@ -37,33 +37,6 @@
 }
 .sv-sec--ink .sv-proof-closing { color: var(--sv-on-dark-muted); }
 
-/* Client stories: five videos in one row on desktop, then Clutch */
-.hm-voices .lp-video-testimonials { margin-bottom: 1.5rem; }
-.hm-voices .lp-video-testimonials .vsl-root { margin-top: 0; }
-.hm-voices section { padding-block: 0 !important; background: transparent !important; }
-@media (min-width: 900px) {
-  .hm-voices .lp-video-testimonials .vsl-track { grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 0.85rem; }
-  .hm-voices .vid-stars { display: none; }
-}
-
-/* Legacy .cta-e buttons inside homepage widgets get the gold kit style */
-.hm-page .cta-e {
-  display: inline-flex;
-  min-height: 52px;
-  align-items: center;
-  gap: 0.6rem;
-  padding: 0.85rem 1.5rem;
-  border-radius: 12px;
-  background: var(--sv-btn-bg);
-  box-shadow: 0 10px 24px rgba(33, 37, 41, 0.18);
-  color: var(--sv-btn-text) !important;
-  font-family: var(--fh);
-  font-size: 1.0625rem;
-  font-weight: 800;
-}
-.hm-page .cta-e::before,
-.hm-page .cta-e::after { display: none; }
-
 /* Industries: dark section, search-bar cards */
 .hm-ind { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 1rem; margin: 0; padding: 0; list-style: none; }
 .hm-ind > li { grid-column: span 2; }
