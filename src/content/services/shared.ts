@@ -23,7 +23,6 @@ const gscPeriod = "Google Search Console · Jul 5 – Oct 3, 2026";
 const gscFooter =
   'Google\'s own footer on this report: "Get more details on your site\'s performance in generative AI features on Google Search."';
 
-// TODO(owner): add real screenshot (GSC Client A performance report), unedited.
 export const gscClientA: ProofItem = {
   title: "Client A: 5.92K clicks in 90 days",
   source: gscPeriod,
@@ -33,12 +32,12 @@ export const gscClientA: ProofItem = {
     { label: "Average CTR", value: "0.5%" },
     { label: "Average position", value: "7.2" },
   ],
-  alt: "Google Search Console performance report for Client A, July 5 to October 3, 2026: 5.92K clicks, 1.17M impressions, 0.5% average CTR and an average position of 7.2.",
+  alt: "Google Search Console performance report for Client A, July 5 to October 3, 2026: 5.92K clicks, 1.17M impressions, 0.5% average CTR and an average position of 7.2, with daily clicks and impressions trending up across the period.",
+  screenshot: { src: "/assets/proof/gsc-client-a.png", width: 1600, height: 550 },
   footnote: gscFooter,
   body: [],
 };
 
-// TODO(owner): add real screenshot (GSC Client B performance report), unedited.
 export const gscClientB: ProofItem = {
   title: "Client B: 10.3K clicks in 90 days",
   source: gscPeriod,
@@ -48,7 +47,8 @@ export const gscClientB: ProofItem = {
     { label: "Average CTR", value: "0.6%" },
     { label: "Average position", value: "8.1" },
   ],
-  alt: "Google Search Console performance report for Client B, July 5 to October 3, 2026: 10.3K clicks, 1.61M impressions, 0.6% average CTR and an average position of 8.1.",
+  alt: "Google Search Console performance report for Client B, July 5 to October 3, 2026: 10.3K clicks, 1.61M impressions, 0.6% average CTR and an average position of 8.1, with daily clicks rising sharply from mid-August.",
+  screenshot: { src: "/assets/proof/gsc-client-b.png", width: 1600, height: 533 },
   footnote: gscFooter,
   body: [],
 };

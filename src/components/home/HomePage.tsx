@@ -4,7 +4,7 @@ import LpClientLogos from "@/components/LpClientLogos";
 import LpVideoTestimonials from "@/components/LpVideoTestimonials";
 import { EastsideIcon } from "@/components/bellevue-services/BellevueServiceShared";
 import { plainText, RichText } from "@/components/service-pages/RichText";
-import { Compare, CtaBand, Ctas, DataCard, Faq, FinalCta, Guides, Head, Section, Timeline } from "@/components/service-pages/kit/Kit";
+import { Compare, Ctas, DataCard, Faq, FinalCta, Guides, Head, Section, Timeline } from "@/components/service-pages/kit/Kit";
 import { StickyCta } from "@/components/service-pages/kit/StickyCta";
 import { HeroEngine } from "./HeroEngine";
 import { ServiceExplorer } from "./ServiceExplorer";
@@ -182,8 +182,6 @@ export function HomePage() {
         <Head heading={homeSystem} center />
         <ServiceExplorer services={homeSystem.items} />
       </Section>
-
-      <CtaBand page={page} />
 
       <Section tone="mesh">
         <Head heading={homeProof.heading} />

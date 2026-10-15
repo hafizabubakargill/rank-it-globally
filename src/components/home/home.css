@@ -27,8 +27,14 @@
 .hm-fit-col .sv-btn { width: 100%; }
 
 /* Proof */
-.hm-proof { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
-.hm-proof .sv-data { height: 100%; }
+.hm-proof { display: grid; gap: 1.25rem; }
+@media (min-width: 900px) {
+  .hm-proof .sv-shot { display: grid; grid-template-columns: minmax(0, 1.85fr) minmax(0, 1fr); grid-template-rows: auto 1fr; }
+  .hm-proof .sv-shot-bar { grid-column: 1; }
+  .hm-proof .sv-shot-img { grid-column: 1; align-self: center; }
+  .hm-proof .sv-shot-foot { grid-column: 2; grid-row: 1 / span 2; align-content: center; border-top: 0; border-left: 1px solid var(--p-charcoal-100); padding: 1.5rem; }
+  .hm-proof .sv-shot-foot h3 { font-size: 1.5rem; }
+}
 .sv-sec--ink .sv-proof-closing { color: var(--sv-on-dark-muted); }
 
 /* Client stories: five videos in one row on desktop, then Clutch */

@@ -170,7 +170,7 @@ export const homeProof = {
     eyebrow: "Proof",
     title: "Real clients,",
     accent: "real search growth.",
-    intro: "Real Google Search Console numbers for two unnamed clients over the same 90 days. Clients stay unnamed until we have written permission to share them.",
+    intro: "Unedited Google Search Console reports for two clients over the same 90 days. Clients stay unnamed until we have written permission to share them.",
   } satisfies SectionHeading,
   items: [gscClientA, gscClientB],
 };
