@@ -93,7 +93,7 @@ export const homeProblem: SectionHeading & { points: { quote: string; body: stri
   title: "If you're not in the answer,",
   accent: "you're not in the running.",
   intro:
-    "Customers still search for what you do. But Google now shows an AI Overview and a map of three businesses before any website, and more people simply ask ChatGPT. In a [2025 Pew Research Center study](https://www.pewresearch.org/short-reads/2025/07/22/google-users-are-less-likely-to-click-on-links-when-an-ai-summary-appears-in-the-results/), people clicked a regular search result on 8% of visits when an AI summary appeared, against 15% without one. If your business isn't named in those answers, you lose the customer before they see your site.",
+    "Customers still search for what you do. But Google now shows an AI Overview and a map of three businesses before any website, and more people simply ask ChatGPT. If your business isn't named in those answers, you lose the customer before they see your site.",
   points: [
     {
       quote: "We do great work. Nobody can find us online.",
@@ -116,6 +116,15 @@ export const homeProblem: SectionHeading & { points: { quote: string; body: stri
       fix: "We make your business easy for AI to find, understand and cite.",
     },
   ],
+};
+
+export const homeClickStudy = {
+  title: "When an AI summary appears, fewer people click through to websites",
+  rows: [
+    { label: "Google results without an AI summary", value: 15 },
+    { label: "Google results with an AI summary", value: 8 },
+  ],
+  source: "[Pew Research Center, 2025](https://www.pewresearch.org/short-reads/2025/07/22/google-users-are-less-likely-to-click-on-links-when-an-ai-summary-appears-in-the-results/): share of visits where people clicked a regular search result.",
 };
 
 export const homeFit = {
@@ -150,9 +159,9 @@ export const homeSystem: SectionHeading & {
     { icon: "ai", title: "AI SEO & GEO", body: "Get named in Google's AI Overviews, ChatGPT and Perplexity when customers ask for what you do.", href: "/ai-seo-services", points: ["Google AI Overviews", "ChatGPT & Perplexity", "Schema & citations"] },
     { icon: "pin", title: "Local SEO & Google Business Profile", body: "Rank in the Google Maps top 3 and turn your profile into a source of calls and bookings.", href: "/local-seo-services", points: ["Maps top 3", "Profile optimization", "Reviews & citations"] },
     { icon: "search", title: "SEO", body: "Reach page one for the searches that bring paying customers, not just traffic.", href: "/seo-services", points: ["Technical fixes", "Pages that rank", "Lead tracking"] },
-    { icon: "reviews", title: "Reviews & reputation", body: "More 5-star reviews, earned within Google's rules, and replies that win trust.", href: "/reputation-management" },
-    { icon: "mobile", title: "A website that converts", body: "Fast, clear pages built to turn visitors from search into calls and enquiries.", href: "/web-development" },
-    { icon: "cro", title: "Conversion optimization", body: "More leads from the traffic you already have, with every change measured.", href: "/cro-strategy" },
+    { icon: "reviews", title: "Reviews & reputation", body: "More 5-star reviews, earned within Google's rules, and replies that win trust.", href: "/reputation-management", points: ["Review requests", "Replies in your voice", "Policy-safe"] },
+    { icon: "mobile", title: "A website that converts", body: "Fast, clear pages built to turn visitors from search into calls and enquiries.", href: "/web-development", points: ["Fast pages", "Tap-to-call", "SEO-ready build"] },
+    { icon: "cro", title: "Conversion optimization", body: "More leads from the traffic you already have, with every change measured.", href: "/cro-strategy", points: ["A/B tests", "Form fixes", "Measured results"] },
   ],
 };
 
