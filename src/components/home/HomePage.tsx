@@ -20,7 +20,7 @@ import {
   homeSystem,
   homeTimeline,
 } from "@/content/home";
-import { organizationAddress, organizationId, organizationSchema, siteUrl, whatsappHref } from "@/content/organization";
+import { organizationId, organizationSchema, siteUrl, whatsappHref } from "@/content/organization";
 import "@/components/industry-pages/industry-kit.css";
 import "./home.css";
 
@@ -36,7 +36,6 @@ function HomeSchema() {
       email: "hello@rankitglobally.com",
       logo: organizationSchema.logo,
       image: organizationSchema.logo,
-      address: organizationAddress,
       areaServed: { "@type": "Country", name: "United States" },
       contactPoint: {
         "@type": "ContactPoint",

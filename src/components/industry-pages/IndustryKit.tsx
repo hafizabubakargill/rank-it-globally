@@ -5,7 +5,7 @@ import { Ctas, Head } from "@/components/service-pages/kit/Kit";
 import { StickyCta } from "@/components/service-pages/kit/StickyCta";
 import { plainText, RichText } from "@/components/service-pages/RichText";
 import type { IndustryCore } from "@/content/industries/types";
-import { organizationAddress, organizationId, organizationSchema, siteUrl, whatsappHref } from "@/content/organization";
+import { organizationId, organizationSchema, siteUrl, whatsappHref } from "@/content/organization";
 import "./industry-kit.css";
 
 const shareImage = "/assets/brand/favicon.png";
@@ -37,7 +37,6 @@ export function IndustrySchema({ page }: { page: IndustryCore }) {
       email: "hello@rankitglobally.com",
       logo: organizationSchema.logo,
       image: organizationSchema.logo,
-      address: organizationAddress,
       areaServed: { "@type": "Country", name: "United States" },
       contactPoint: {
         "@type": "ContactPoint",

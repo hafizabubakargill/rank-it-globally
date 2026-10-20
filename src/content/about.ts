@@ -1,14 +1,14 @@
-// About page copy. Facts only: the co-founder bio comes from the live blog's
-// author profile (Sanity), the address from the owner's brief, and the Clutch
-// rating from clutch.co/profile/rank-it-globally.
+// About page copy. Facts only: co-founder names, roles and photos come from
+// the owner, and the Clutch rating from clutch.co/profile/rank-it-globally.
+// No address or location is shown (owner decision).
 
 import { guides } from "./services/shared";
 import type { PageCommon, SectionHeading, ServiceIcon } from "./services/types";
 
 export const aboutMeta = {
-  title: "About Rank It Globally | AI SEO & Local SEO Agency, Brooklyn NY",
+  title: "About Rank It Globally | AI SEO & Local SEO Agency",
   description:
-    "Meet Rank It Globally: a Brooklyn-based AI SEO and local SEO agency co-founded by Haroon Shahbaz and Hafiz Abubakar Gill. How we work, what we believe and how we help.",
+    "Meet Rank It Globally: an AI SEO and local SEO agency co-founded by Haroon Shahbaz and Hafiz Abubakar Gill. How we work, what we believe and how we help.",
 };
 
 export const aboutHero = {
@@ -16,11 +16,10 @@ export const aboutHero = {
   h1Lead: "We help good businesses become",
   h1Accent: "the answer customers find.",
   intro:
-    "Rank It Globally is an AI SEO and local SEO agency based in Brooklyn, New York. We get businesses recommended on Google, Google Maps and AI answers, and we measure our work in the calls, bookings and enquiries it brings in.",
+    "Rank It Globally is an AI SEO and local SEO agency. We get businesses recommended on Google, Google Maps and AI answers, and we measure our work in the calls, bookings and enquiries it brings in.",
 };
 
 export const aboutFacts = [
-  { label: "Based in", value: "Brooklyn, New York" },
   { label: "What we do", value: "AI SEO, local SEO, GEO and conversion-ready websites" },
   { label: "Who we work with", value: "Businesses whose customers search before they buy" },
   { label: "Verified reviews", value: "5.0 on Clutch (3 reviews)", href: "https://clutch.co/profile/rank-it-globally" },
@@ -108,8 +107,8 @@ export const aboutPage: PageCommon = {
   faqIntro: "Quick answers about who we are and how we work.",
   faqs: [
     {
-      question: "Where is Rank It Globally based?",
-      answer: "We're based in Brooklyn, New York, and work with businesses remotely. Most of our clients are in the US.",
+      question: "Do you work with businesses remotely?",
+      answer: "Yes. We work with every client remotely, over WhatsApp, email and video calls. Most of our clients are in the US.",
     },
     {
       question: "Who will I work with?",
