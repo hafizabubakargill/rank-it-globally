@@ -10,6 +10,7 @@ import {
   type ResponsiveTableValue,
 } from "@/components/ResponsiveBlogTable";
 import { getPost, getRelatedPosts, urlForImage } from "@/sanity/client";
+import { parseCustomSchema } from "@/sanity/lib/customSchema";
 
 type PageProps = {
   params: Promise<{
@@ -39,6 +40,19 @@ type HeadingValue = {
   _key?: string;
 };
 
+function wordCountOf(body: unknown) {
+  if (!Array.isArray(body)) return 0;
+  return (bodyText(body).match(/[\p{L}\p{N}'’-]+/gu) || []).length;
+}
+
+// Focus keyword first, then secondary keywords, without duplicates.
+function postKeywords(seo?: { focusKeyword?: string; secondaryKeywords?: string[] }) {
+  const all = [seo?.focusKeyword, ...(seo?.secondaryKeywords || [])]
+    .map((keyword) => keyword?.trim())
+    .filter((keyword): keyword is string => Boolean(keyword));
+  return Array.from(new Map(all.map((keyword) => [keyword.toLowerCase(), keyword])).values());
+}
+
 // Plain text of a Portable Text body, used to skip the CTA when an editor has
 // already pasted the same copy into the post.
 function bodyText(body: unknown[]) {
@@ -63,28 +77,38 @@ export async function generateMetadata({
   }
 
   const postUrl = `https://rankitglobally.com/blog/${post.slug}`;
-  const heroImageUrl = post.mainImage
-    ? urlForImage(post.mainImage).width(1400).fit("max").auto("format").url()
+  const seoTitle = post.seo?.title?.trim() || `${post.title} | Rank It Globally`;
+  const description = post.seo?.description?.trim() || post.excerpt;
+  const socialImage = post.seo?.image || post.mainImage;
+  const socialImageUrl = socialImage
+    ? urlForImage(socialImage).width(1200).height(630).fit("crop").auto("format").url()
     : undefined;
+  const socialTitle = post.seo?.ogTitle?.trim() || post.seo?.title?.trim() || post.title;
+  const socialDescription = post.seo?.ogDescription?.trim() || description;
+  const keywords = postKeywords(post.seo);
 
   return {
-    title: post.seo?.title || `${post.title} | Rank It Globally`,
-    description: post.seo?.description || post.excerpt,
-    alternates: { canonical: postUrl },
+    title: { absolute: seoTitle },
+    description,
+    keywords: keywords.length ? keywords : undefined,
+    alternates: { canonical: post.seo?.canonicalUrl?.trim() || postUrl },
+    robots: post.seo?.noIndex ? { index: false, follow: true } : { index: true, follow: true },
     openGraph: {
       type: "article",
       url: postUrl,
-      title: post.seo?.title || post.title,
-      description: post.seo?.description || post.excerpt,
+      title: socialTitle,
+      description: socialDescription,
       publishedTime: post.publishedAt,
-      modifiedTime: post._updatedAt || post.publishedAt,
-      images: heroImageUrl ? [{ url: heroImageUrl }] : undefined,
+      modifiedTime: post.updatedAt || post._updatedAt || post.publishedAt,
+      authors: post.author?.name ? [post.author.name] : undefined,
+      tags: keywords.length ? keywords : undefined,
+      images: socialImageUrl ? [{ url: socialImageUrl, width: 1200, height: 630, alt: post.mainImageAlt || post.title }] : undefined,
     },
     twitter: {
       card: "summary_large_image",
-      title: post.seo?.title || post.title,
-      description: post.seo?.description || post.excerpt,
-      images: heroImageUrl ? [heroImageUrl] : undefined,
+      title: socialTitle,
+      description: socialDescription,
+      images: socialImageUrl ? [socialImageUrl] : undefined,
     },
   };
 }
@@ -100,7 +124,9 @@ export default async function BlogPostPage({ params }: PageProps) {
     .filter((value): value is string => Boolean(value));
   const relatedPosts = await getRelatedPosts(post.slug, categorySlugs);
   const postUrl = `https://rankitglobally.com/blog/${post.slug}`;
-  const description = post.seo?.description || post.excerpt;
+  const description = post.seo?.description?.trim() || post.excerpt;
+  const keywords = postKeywords(post.seo);
+  const customSchema = parseCustomSchema(post.customSchema).value || [];
   const authorUrl = post.author?.url || `${postUrl}#author`;
   const heroImageUrl = post.mainImage
     ? urlForImage(post.mainImage)
@@ -117,14 +143,18 @@ export default async function BlogPostPage({ params }: PageProps) {
     (faq): faq is BlogPostFaq => Boolean(faq.question?.trim() && faq.answer?.trim()),
   );
   const schemaData = {
-    "@type": "BlogPosting",
+    "@type": post.articleType || "BlogPosting",
     "@id": `${postUrl}#article`,
     url: postUrl,
     headline: post.title,
     description,
     image: heroImageUrl ? [heroImageUrl] : undefined,
     datePublished: post.publishedAt,
-    dateModified: post._updatedAt || post.publishedAt,
+    dateModified: post.updatedAt || post._updatedAt || post.publishedAt,
+    keywords: keywords.length ? keywords.join(", ") : undefined,
+    articleSection: post.categories?.map((category) => category.title).filter(Boolean)[0],
+    wordCount: wordCountOf(post.body) || undefined,
+    inLanguage: "en-US",
     author: post.author?.name
       ? {
           "@type": "Person",
@@ -168,9 +198,27 @@ export default async function BlogPostPage({ params }: PageProps) {
         })),
       }
     : null;
+  const howToSteps = (post.howTo?.steps || []).filter((step) => step.name?.trim() && step.text?.trim());
+  const howToSchema =
+    post.howTo?.enabled && howToSteps.length
+      ? {
+          "@type": "HowTo",
+          "@id": `${postUrl}#howto`,
+          name: post.howTo.name?.trim() || post.title,
+          description,
+          image: heroImageUrl ? [heroImageUrl] : undefined,
+          totalTime: post.howTo.totalTime ? `PT${post.howTo.totalTime}M` : undefined,
+          step: howToSteps.map((step, index) => ({
+            "@type": "HowToStep",
+            position: index + 1,
+            name: step.name,
+            text: step.text,
+          })),
+        }
+      : null;
   const structuredData = {
     "@context": "https://schema.org",
-    "@graph": [schemaData, breadcrumbSchema, ...(faqSchema ? [faqSchema] : [])],
+    "@graph": [schemaData, breadcrumbSchema, ...(faqSchema ? [faqSchema] : []), ...(howToSchema ? [howToSchema] : []), ...customSchema],
   };
   const shareLinks = buildShareLinks(postUrl, post.title);
 
@@ -238,6 +286,27 @@ export default async function BlogPostPage({ params }: PageProps) {
                           {children}
                         </h3>
                       ),
+                      h4: ({ children }) => <h4>{children}</h4>,
+                    },
+                    marks: {
+                      link: ({ children, value }) => {
+                        const href = typeof value?.href === "string" ? value.href : "";
+                        if (!href) return <>{children}</>;
+                        const external = /^https?:\/\//i.test(href) && !/^https?:\/\/(www\.)?rankitglobally\.com/i.test(href);
+                        const rel = [value?.blank ? "noopener noreferrer" : "", value?.nofollow ? "nofollow" : ""].filter(Boolean).join(" ");
+                        if (!external && href.startsWith("/")) return <Link href={href}>{children}</Link>;
+                        return (
+                          <a href={href} target={value?.blank ? "_blank" : undefined} rel={rel || undefined}>
+                            {children}
+                          </a>
+                        );
+                      },
+                      internalLink: ({ children, value }) =>
+                        typeof value?.slug === "string" && value.slug ? (
+                          <Link href={`/blog/${value.slug}`}>{children}</Link>
+                        ) : (
+                          <>{children}</>
+                        ),
                     },
                     types: {
                       responsiveTable: ({ value }) => (
@@ -247,6 +316,7 @@ export default async function BlogPostPage({ params }: PageProps) {
                       ),
                       image: ({ value }) =>
                         value ? (
+                          <figure className="blog-body-figure">
                           <img
                             className="blog-body-image"
                             src={urlForImage(value)
@@ -261,6 +331,10 @@ export default async function BlogPostPage({ params }: PageProps) {
                             }
                             loading="lazy"
                           />
+                          {typeof value.caption === "string" && value.caption.trim() ? (
+                            <figcaption>{value.caption}</figcaption>
+                          ) : null}
+                          </figure>
                         ) : null,
                     },
                   }}
