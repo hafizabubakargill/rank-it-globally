@@ -60,6 +60,7 @@ const staticRoutes: MetadataRoute.Sitemap = [
 type SitemapPost = {
   slug: string;
   publishedAt?: string;
+  updatedAt?: string;
   _updatedAt?: string;
 };
 
@@ -76,9 +77,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   try {
     posts = await client.fetch<SitemapPost[]>(
-      groq`*[_type == "post" && defined(slug.current)] | order(publishedAt desc) {
+      groq`*[_type == "post" && defined(slug.current) && seo.noIndex != true] | order(publishedAt desc) {
         "slug": slug.current,
         publishedAt,
+        updatedAt,
         _updatedAt
       }`,
       {},
@@ -92,7 +94,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...routes,
     ...posts.map((post) => ({
       url: `${siteUrl}/blog/${post.slug}`,
-      lastModified: post._updatedAt || post.publishedAt || now,
+      lastModified: post.updatedAt || post._updatedAt || post.publishedAt || now,
       changeFrequency: "monthly" as const,
       priority: 0.7,
     })),

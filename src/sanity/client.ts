@@ -52,9 +52,26 @@ export type BlogPost = BlogPostListItem & {
     question?: string;
     answer?: string;
   }>;
+  updatedAt?: string;
+  mainImageAlt?: string;
+  articleType?: "BlogPosting" | "Article" | "NewsArticle" | "TechArticle";
+  howTo?: {
+    enabled?: boolean;
+    name?: string;
+    totalTime?: number;
+    steps?: Array<{ _key?: string; name?: string; text?: string }>;
+  };
+  customSchema?: string;
   seo?: {
+    focusKeyword?: string;
+    secondaryKeywords?: string[];
     title?: string;
     description?: string;
+    ogTitle?: string;
+    ogDescription?: string;
+    image?: SanityImageSource;
+    canonicalUrl?: string;
+    noIndex?: boolean;
   };
 };
 
@@ -91,8 +108,19 @@ export async function getPost(slug: string) {
       "mainImage": mainImage {asset},
       author->{name, "slug": slug.current, url, image, bio},
       categories[]->{_id, title, "slug": slug.current},
-      body,
+      body[]{
+        ...,
+        markDefs[]{
+          ...,
+          _type == "internalLink" => { "slug": @.reference->slug.current }
+        }
+      },
       faqs[]{_key, question, answer},
+      updatedAt,
+      "mainImageAlt": mainImage.alt,
+      articleType,
+      howTo,
+      customSchema,
       seo
     }`,
     { slug },
