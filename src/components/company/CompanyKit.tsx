@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { plainText } from "@/components/service-pages/RichText";
 import type { PageCommon } from "@/content/services/types";
-import { organizationAddress, organizationId, organizationSchema, siteUrl } from "@/content/organization";
+import { organizationId, organizationSchema, siteUrl } from "@/content/organization";
 import "./company.css";
 
 const shareImage = "/assets/brand/favicon.png";
@@ -45,7 +45,6 @@ export function CompanySchema({
       email: "hello@rankitglobally.com",
       logo: organizationSchema.logo,
       image: organizationSchema.logo,
-      address: organizationAddress,
       areaServed: { "@type": "Country", name: "United States" },
       sameAs: [...organizationSchema.sameAs, "https://clutch.co/profile/rank-it-globally"],
     },
