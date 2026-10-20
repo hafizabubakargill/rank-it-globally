@@ -39,8 +39,10 @@ export function wordCount(text: string) {
   return (text.match(/[\p{L}\p{N}'’-]+/gu) || []).length;
 }
 
+// Lowercase, straight apostrophes and no possessive "'s", so "Google's AI
+// Overviews" matches the keyword "google ai overviews".
 function normalise(text = "") {
-  return text.toLowerCase().replace(/[’']/g, "'").replace(/\s+/g, " ").trim();
+  return text.toLowerCase().replace(/[’']/g, "'").replace(/'s\b/g, "").replace(/\s+/g, " ").trim();
 }
 
 function slugify(text = "") {
@@ -83,7 +85,13 @@ export function analyse(input: SeoInput): Check[] {
   const body = input.body || [];
   const text = bodyText(body);
   const words = wordCount(text);
-  const firstParagraph = body.find((block) => block._type === "block" && (!block.style || block.style === "normal") && blockText(block).trim());
+  // The intro is the first real paragraph: skip short labels ("Key
+  // Takeaways:") and author bylines.
+  const firstParagraph = body.find((block) => {
+    if (block._type !== "block" || (block.style && block.style !== "normal")) return false;
+    const text = blockText(block).trim();
+    return wordCount(text) >= 12 && !/^by\s/i.test(text);
+  });
   const subheadings = body.filter((block) => block._type === "block" && /^h[2-4]$/.test(block.style || ""));
   const bodyImages = body.filter((block) => block._type === "image");
   const links = linkCounts(body);
