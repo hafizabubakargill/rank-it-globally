@@ -12,15 +12,6 @@ export const metadata: Metadata = {
   title: "Rank It Globally | AI SEO & Web Design Agency",
   description:
     "We build websites that rank on AI search, dominate Google, and turn clicks into clients. Get your Growth Audit - no obligation.",
-  keywords: [
-    "web design agency",
-    "conversion optimization",
-    "landing pages",
-    "Shopify development",
-    "WordPress websites",
-    "SEO",
-    "e-commerce",
-  ],
   robots: {
     index: true,
     follow: true,
