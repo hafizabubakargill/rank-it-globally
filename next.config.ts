@@ -49,6 +49,14 @@ const nextConfig: NextConfig = {
         destination: "/growth-audit",
         permanent: true,
       },
+      // Pages from the previous WordPress site that Search Console still
+      // reports as 404. Each goes to its closest live page.
+      { source: "/home", destination: "/", statusCode: 301 },
+      { source: "/start-ranking", destination: "/growth-audit", statusCode: 301 },
+      { source: "/e-commerce", destination: "/ecommerce-development", statusCode: 301 },
+      { source: "/custom-solutions", destination: "/web-development", statusCode: 301 },
+      { source: "/creative-designing", destination: "/web-development", statusCode: 301 },
+      { source: "/projects", destination: "/case-studies", statusCode: 301 },
       {
         source: "/sitemap_index.xml",
         destination: "/sitemap.xml",
