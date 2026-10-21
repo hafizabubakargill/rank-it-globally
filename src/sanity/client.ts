@@ -94,6 +94,30 @@ export async function getPosts() {
   );
 }
 
+// A Media library file as the blog page needs it: its public link
+// (/media/<slug>.<ext>), type, size and the details used for VideoObject.
+const mediaProjection = groq`{
+  title,
+  description,
+  "slug": slug.current,
+  "extension": file.asset->extension,
+  "mimeType": file.asset->mimeType,
+  "size": file.asset->size,
+  "createdAt": _createdAt,
+  thumbnail
+}`;
+
+export type MediaFileRef = {
+  title?: string;
+  description?: string;
+  slug?: string;
+  extension?: string;
+  mimeType?: string;
+  size?: number;
+  createdAt?: string;
+  thumbnail?: SanityImageSource;
+};
+
 export async function getPost(slug: string) {
   if (!hasSanityConfig) return null;
 
@@ -112,8 +136,10 @@ export async function getPost(slug: string) {
         ...,
         markDefs[]{
           ...,
-          _type == "internalLink" => { "slug": @.reference->slug.current }
-        }
+          _type == "internalLink" => { "slug": @.reference->slug.current },
+          _type == "fileLink" => { "media": @.file->${mediaProjection} }
+        },
+        _type in ["videoEmbed", "fileCard"] => { "media": file->${mediaProjection} }
       },
       faqs[]{_key, question, answer},
       updatedAt,

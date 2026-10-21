@@ -131,6 +131,30 @@ The score is 2 points per green check and 1 per amber, as a percentage. To add o
 |---|---|---|
 | 30–31 | Growth audit leads and landing page leads from the site forms | `src/sanity/structure.ts`; schemas in `auditLead.ts` and `lpLead.ts` (unchanged) |
 
+## 14. Media library (PDFs, documents, videos)
+
+Upload a file once, then link to it or embed it from any post. Every file gets a public link on our own domain: `https://rankitglobally.com/media/<slug>.<ext>`.
+
+**How editors use it**
+
+1. Go to **Media library › All files › +**. Add a title, upload the file and click **Generate** next to the URL slug, then **Publish**. The green **Public link** box shows the link, with a **Copy link** button.
+2. In a post, select some text and click the **Link to a file (PDF, doc, video)** button in the toolbar. Pick the file, or click **Create** to upload a new one without leaving the post. Choose **Open in a new tab** or **Download instead of opening**.
+3. To show a file as a box with a button, insert a **Download card** from the article's **+** menu.
+4. To embed a video, insert a **Video** block. Paste a YouTube link, or pick an uploaded video. This also adds `VideoObject` structured data.
+
+| Feature | File | Output on the live page |
+|---|---|---|
+| Media file document: title, file, slug, public link, description, thumbnail, noindex | `src/sanity/schemaTypes/mediaFile.ts`; link box in `src/sanity/components/MediaUrlInput.tsx` | — |
+| Sidebar: Media library › All files / PDFs & documents / Videos & audio | `src/sanity/structure.ts` | — |
+| File link in the article text | `fileLink` annotation in `blockContent.ts` | `marks.fileLink` in `blog/[slug]/page.tsx`. Counts as an internal link in the SEO analysis |
+| Video block (YouTube or uploaded) | `videoEmbed` in `blockContent.ts` | `BlogVideo` in `src/components/BlogMedia.tsx`. Adds a `VideoObject` to the JSON-LD (`videoSchemas()`), also listed in the Schema tab summary |
+| Download card | `fileCard` in `blockContent.ts` | `BlogFileCard` in `BlogMedia.tsx`; styles `.blog-file-card` in `globals.css` |
+| Public file URL | `src/app/media/[file]/route.ts` | Streams the file from Sanity's CDN with the right content type, `?download` saves it instead of opening it, and video seeking (Range requests) works. Files set to "Hide from Google" get `X-Robots-Tag: noindex` |
+
+The GROQ query in `client.ts` (`mediaProjection`) adds each referenced file's slug, extension, type, size and thumbnail to the post. YouTube embeds use `youtube-nocookie.com`, which is allowed in the CSP `frame-src` in `next.config.ts`.
+
+**Limits:** keep uploads under about 100 MB. Put longer videos on YouTube and use the Video block. Don't rename a file's slug after posts link to it, or the old link will return 404.
+
 ---
 
 ## Checking changes

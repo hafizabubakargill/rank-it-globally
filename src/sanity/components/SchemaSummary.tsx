@@ -18,6 +18,8 @@ export function SchemaSummary(_props: StringInputProps) {
   const articleType = (useFormValue(["articleType"]) as string | undefined) || "BlogPosting";
   const faqs = (useFormValue(["faqs"]) as Array<{ question?: string; answer?: string }> | undefined) || [];
   const howTo = useFormValue(["howTo"]) as { enabled?: boolean; steps?: unknown[] } | undefined;
+  const body = (useFormValue(["body"]) as Array<{ _type?: string }> | undefined) || [];
+  const videoCount = body.filter((block) => block._type === "videoEmbed").length;
   const custom = useFormValue(["customSchema"]) as string | undefined;
   const parsedCustom = parseCustomSchema(custom);
   const faqCount = faqs.filter((faq) => faq.question?.trim() && faq.answer?.trim()).length;
@@ -28,6 +30,7 @@ export function SchemaSummary(_props: StringInputProps) {
     { ok: true, label: "Breadcrumbs (BreadcrumbList)", note: "Home › Blog › this post." },
     { ok: faqCount > 0, label: "FAQ (FAQPage)", note: faqCount ? `${faqCount} question${faqCount > 1 ? "s" : ""} from Article FAQs.` : "Add Article FAQs to include it." },
     { ok: Boolean(howTo?.enabled && stepCount), label: "How-to steps (HowTo)", note: howTo?.enabled ? `${stepCount} step${stepCount === 1 ? "" : "s"}.` : "Turn on How-to steps to include it." },
+    { ok: videoCount > 0, label: "Video (VideoObject)", note: videoCount ? `${videoCount} video${videoCount > 1 ? "s" : ""} from Video blocks in the article.` : "Add a Video block to the article to include it." },
     {
       ok: Boolean(parsedCustom.value),
       label: "Custom schema",

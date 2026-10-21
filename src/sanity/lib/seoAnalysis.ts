@@ -68,7 +68,7 @@ export function linkCounts(body: Block[] = []) {
   let external = 0;
   for (const block of body) {
     for (const def of block.markDefs || []) {
-      if (def._type === "internalLink") internal += 1;
+      if (def._type === "internalLink" || def._type === "fileLink") internal += 1;
       else if (def._type === "link" && def.href) {
         if (def.href.startsWith("/") || /^https?:\/\/(www\.)?rankitglobally\.com/i.test(def.href)) internal += 1;
         else external += 1;
