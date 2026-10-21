@@ -4,6 +4,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { BlogCta, blogCtaMarker } from "@/components/BlogCta";
+import { BlogFileCard, BlogVideo, videoSchemas, type FileCardValue, type VideoEmbedValue } from "@/components/BlogMedia";
 import { BlogPostFaqs, type BlogPostFaq } from "@/components/BlogPostFaqs";
 import {
   ResponsiveBlogTable,
@@ -11,6 +12,7 @@ import {
 } from "@/components/ResponsiveBlogTable";
 import { getPost, getRelatedPosts, urlForImage } from "@/sanity/client";
 import { parseCustomSchema } from "@/sanity/lib/customSchema";
+import { mediaPath } from "@/sanity/lib/media";
 
 type PageProps = {
   params: Promise<{
@@ -216,9 +218,10 @@ export default async function BlogPostPage({ params }: PageProps) {
           })),
         }
       : null;
+  const videoSchema = videoSchemas(post.body, postUrl, post.publishedAt, heroImageUrl);
   const structuredData = {
     "@context": "https://schema.org",
-    "@graph": [schemaData, breadcrumbSchema, ...(faqSchema ? [faqSchema] : []), ...(howToSchema ? [howToSchema] : []), ...customSchema],
+    "@graph": [schemaData, breadcrumbSchema, ...(faqSchema ? [faqSchema] : []), ...(howToSchema ? [howToSchema] : []), ...videoSchema, ...customSchema],
   };
   const shareLinks = buildShareLinks(postUrl, post.title);
 
@@ -307,8 +310,24 @@ export default async function BlogPostPage({ params }: PageProps) {
                         ) : (
                           <>{children}</>
                         ),
+                      fileLink: ({ children, value }) => {
+                        const href = mediaPath(value?.media?.slug, value?.media?.extension);
+                        if (!href) return <>{children}</>;
+                        return (
+                          <a
+                            href={value?.download ? `${href}?download` : href}
+                            target={value?.blank && !value?.download ? "_blank" : undefined}
+                            rel={value?.blank && !value?.download ? "noopener" : undefined}
+                            download={value?.download ? true : undefined}
+                          >
+                            {children}
+                          </a>
+                        );
+                      },
                     },
                     types: {
+                      videoEmbed: ({ value }) => <BlogVideo value={value as VideoEmbedValue} />,
+                      fileCard: ({ value }) => <BlogFileCard value={value as FileCardValue} />,
                       responsiveTable: ({ value }) => (
                         <ResponsiveBlogTable
                           value={value as ResponsiveTableValue}
